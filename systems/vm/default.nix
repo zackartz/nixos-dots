@@ -2,28 +2,19 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Bootloader.
-  boot.loader.systemd-boot.enable = false;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  boot.supportedFilesystems = [ "ntfs" ];
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/vda";
+  boot.loader.grub.useOSProber = true;
 
   imports = [ ../common/zack.nix ./hardware.nix ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  boot.loader.grub = {
-    devices = [ "nodev" ];
-    enable = true;
-    efiSupport = true;
-    version = 2;
-    useOSProber = false;
-  };
-
-  networking.hostName = "mars"; # Define your hostname.
+  networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -67,9 +58,6 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.opengl.enable = true;
-
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -90,6 +78,8 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -98,7 +88,6 @@
   environment.systemPackages = with pkgs; [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
-    xclip
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

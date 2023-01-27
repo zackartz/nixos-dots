@@ -10,7 +10,9 @@
       firefox
       kate
       #  thunderbird
+      discord
     ];
+    shell = pkgs.zsh;
   };
 
   home-manager.users.zack = { pkgs, ... }: {
@@ -20,6 +22,34 @@
       nerdfonts
       fzf
     ]);
+
+    programs.zsh = {
+      enable = true;
+      zplug = {
+        enable = true;
+        plugins = [
+          { name = "zsh-users/zsh-autosuggestions"; }
+          { name = "zsh-users/zsh-syntax-highlighting"; }
+          { name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 ]; }
+        ];
+      };
+      plugins = [
+        {
+          name = "p10k-config";
+          src = ./p10k-config;
+          file = ".p10k.zsh";
+        }
+      ];
+      shellAliases = {
+        "upd" = "sudo nixos-rebuild switch --flake ~/.files#mars";
+      };
+    };
+
+    programs.git = {
+      enable = true;
+      userName = "zackartz";
+      userEmail = "zackmyers@lavabit.com";
+    };
 
     programs.neovim = {
       enable = true;
