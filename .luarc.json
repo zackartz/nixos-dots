@@ -1,0 +1,20 @@
+{
+    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+    "Lua.workspace.library": [
+        "/nix/store/cgknhfarvx6m56v1ggg69g272njz4saz-vim-pack-dir",
+        "/home/zack/.config/nvim",
+        "/home/zack/.local/share/nvim/site",
+        "/home/zack/.local/share/nvim/site/pack/packer/start/alpha-nvim",
+        "/home/zack/.local/share/nvim/site/pack/packer/start/friendly-snippets",
+        "/home/zack/.local/share/nvim/site/pack/packer/start/hotpot.nvim",
+        "/home/zack/.local/share/nvim/site/pack/packer/start/leap.nvim",
+        "/home/zack/.local/share/nvim/site/pack/packer/start/vim-repeat",
+        "/home/zack/.local/share/nvim/site/pack/packer/opt/nvim-lspconfig",
+        "/home/zack/.local/share/nvim/site/pack/packer/opt/matchparen.nvim",
+        "/home/zack/.local/share/nvim/site/pack/packer/opt/packer.nvim",
+        "/nix/store/hhyajwm83gagrc6vpbanrarkg9h9cqq4-neovim-unwrapped-0.8.2/share/nvim/runtime",
+        "/nix/store/hhyajwm83gagrc6vpbanrarkg9h9cqq4-neovim-unwrapped-0.8.2/lib/nvim",
+        "/home/zack/.config/nvim/after",
+        "${3rd}/luassert/library"
+    ]
+}

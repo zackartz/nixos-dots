@@ -15,6 +15,8 @@
 
 (set! guifont "BlexMono Nerd Font:h12")
 
+(vim.highlight Normal "guibg=none")
+
 ;; The let option sets global, or `vim.g` options. 
 ;; Heres an example with localleader, setting it to <space>m
 

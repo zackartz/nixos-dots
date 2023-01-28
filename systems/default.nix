@@ -1,12 +1,14 @@
-{
-  nixpkgs,
-  self,
-  ...
-}: let
+{ nixpkgs
+, self
+, ...
+}:
+let
   inputs = self.inputs;
   hmModule = inputs.home-manager.nixosModules.home-manager;
-in {
-  mars = nixpkgs.lib.nixosSystem { # replace GAMER-PC with your pc name
+in
+{
+  mars = nixpkgs.lib.nixosSystem {
+    # replace GAMER-PC with your pc name
     system = "x86_64-linux";
     specialArgs = {
       inherit inputs;
@@ -15,10 +17,12 @@ in {
     modules = [
       ./mars
       ./mars/hardware.nix
+      inputs.hyprland.nixosModules.default
       hmModule
     ];
   };
-  vm = nixpkgs.lib.nixosSystem { # replace GAMER-PC with your pc name
+  vm = nixpkgs.lib.nixosSystem {
+    # replace GAMER-PC with your pc name
     system = "x86_64-linux";
     specialArgs = {
       inherit inputs;

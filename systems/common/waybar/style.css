@@ -1,0 +1,255 @@
+* {
+  font-family: IBM Plex Mono, Material\-Design\-Iconic\-Font;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+@define-color black0 #0f0f0f;
+@define-color black1 #191919;
+@define-color black2 #262626;
+@define-color blue #a5b4cb;
+@define-color white0 #cacaca;
+@define-color white1 #bfbfbf;
+@define-color white2 #a0a0a0;
+@define-color gray #4c4c4c;
+@define-color red #c49ea0;
+@define-color green #9ec49f;
+
+window#waybar {
+  background-color: transparent;
+  color: @white0;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+  margin: 10px;
+}
+
+button {
+  /* Use box-shadow instead of border so the text isn't offset */
+  /* Avoid rounded borders under each button name */
+  border: none;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+  background: inherit;
+}
+
+#workspaces {
+  background-color: @black0;
+  border-radius: 6px;
+  padding: 0 5px;
+  margin: 5px 0px 5px 5px;
+}
+
+#workspaces button {
+  padding: 0 5px;
+  background-color: transparent;
+  color: @white0;
+}
+
+#workspaces button:hover {
+  color: @blue;
+}
+
+#workspaces button.active {
+  color: @blue;
+}
+
+#workspaces button.urgent {
+  background-color: @red;
+}
+
+#taskbar button {
+  background-color: @black0;
+  border-radius: 6px;
+  padding: 0 10px;
+  margin: 5px;
+  color: @white0;
+}
+
+#taskbar button.active {
+  background-color: @blue;
+  color: @black0;
+}
+
+#taskbar button.minimized {
+  background-color: @white0;
+  color: @black0;
+}
+
+#window {
+  background-color: @black0;
+  border-radius: 6px;
+  padding: 0 10px;
+  margin: 5px 0px;
+}
+
+#idle_inhibitor {
+  padding: 0 10px;
+  color: @white0;
+  background-color: @black0;
+  border-radius: 6px;
+  margin: 5px 0px;
+}
+
+#idle_inhibitor.activated {
+  background-color: @white0;
+  color: @black0;
+}
+
+#pulseaudio {
+  background-color: @black0;
+  color: @white0;
+  border-radius: 6px;
+  padding: 0 10px;
+  margin: 5px 0px;
+}
+
+#pulseaudio.muted {
+  background-color: @black0;
+  color: @gray;
+}
+
+#network {
+  background-color: @black0;
+  color: @white0;
+  border-radius: 6px;
+  padding: 0 10px;
+  margin: 5px 0px;
+}
+
+#network.disconnected {
+  color: @gray;
+}
+
+#cpu {
+  background-color: @black0;
+  color: @white0;
+  padding: 0 10px;
+  border-radius: 6px;
+  margin: 5px 0px;
+}
+
+#memory {
+  background-color: @black0;
+  color: @white0;
+  padding: 0 10px;
+  border-radius: 6px;
+  margin: 5px 0px;
+}
+
+#backlight {
+  background-color: @black0;
+  color: @white0;
+  border-radius: 6px;
+  padding: 0 10px;
+  margin: 5px 0px;
+}
+
+#keyboard-state {
+  background: @black0;
+  color: @white0;
+  padding: 0 10px;
+  border-radius: 6px;
+  margin: 5px 0px;
+}
+
+#keyboard-state > label {
+  padding: 0 5px;
+}
+
+#keyboard-state > label.locked {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+#battery {
+  font-family: Roboto Condensed;
+  background-color: @black0;
+  color: @white0;
+  padding: 0 10px;
+  border-radius: 6px;
+  margin: 5px 0px;
+}
+
+#battery.charging,
+#battery.plugged {
+  color: @green;
+}
+
+@keyframes blink {
+  to {
+    color: @white0;
+  }
+}
+
+#battery.critical:not(.charging) {
+  background-color: @red;
+  color: @white0;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#clock {
+  padding: 0 10px;
+  background-color: @black0;
+  border-radius: 6px;
+  color: @white0;
+  margin: 5px 5px 5px 0px;
+}
+
+#clock > .tooltip {
+  background-color: @black0;
+}
+
+#tray {
+  background-color: @black0;
+  border-radius: 6px;
+  padding: 0 10px;
+
+  margin: 5px 0px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: @red;
+}
+
+#custom-spotify-title {
+  background-color: @black0;
+  border-radius: 6px;
+  color: @white0;
+  padding: 0 10px;
+
+  margin: 5px 0px;
+}
+
+#custom-spotify-prev {
+  background-color: @black0;
+  border-radius: 6px;
+  color: @white0;
+  padding: 0 10px;
+  margin: 5px 0px;
+}
+
+#custom-spotify-toggle {
+  background-color: @black0;
+  border-radius: 6px;
+  color: @white0;
+  padding: 0 10px;
+  margin: 5px 0px;
+}
+
+#custom-spotify-next {
+  background-color: @black0;
+  border-radius: 6px;
+  color: @white0;
+  padding: 0 10px;
+  margin: 5px 0px;
+}
