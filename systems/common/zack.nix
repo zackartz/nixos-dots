@@ -51,6 +51,19 @@ in
       });
     })
     (import ./overlays/discord.nix)
+    (final: prev: {
+      sf-mono-liga-bin = prev.stdenvNoCC.mkDerivation rec {
+      pname = "sf-mono-liga-bin";
+      version = "dev";
+      src = inputs.sf-mono-liga-src;
+      dontConfigure = true;
+      installPhase = ''
+          mkdir -p $out/share/fonts/opentype
+          cp -R $src/*.otf $out/share/fonts/opentype/
+        '';
+      };
+    })
+    inputs.neovim.overlay
   ];
 
   virtualisation.docker.enable = true;
@@ -74,6 +87,10 @@ in
     MOZ_ENABLE_WAYLAND = "1";
   };
 
+  fonts = {
+    fonts = with pkgs; [ sf-mono-liga-bin ];
+  };
+
   environment.systemPackages = with pkgs; [
     dbus-hyprland-environment
     python3
@@ -88,6 +105,16 @@ in
       exec = "discord";
       desktopName = "Discord";
     })
+
+    tree-sitter
+    nodejs
+    ripgrep
+    fd
+    unzip
+    neovim
+    rust-analyzer
+    sumneko-lua-language-server
+    rustup
   ];
 
   programs.hyprland.enable = true;
@@ -188,26 +215,24 @@ in
 
     # programs.xwayland.enable = true;
 
-    programs.neovim = {
-      enable = true;
-      extraPackages = (with pkgs ;[
-        tree-sitter
-        nodejs
-        ripgrep
-        fd
-        unzip
-        #bash-language-server
-      ]);
-    };
+    # programs.neovim = {
+    #   enable = true;
+    #   extraPackages = (with pkgs ;[
+    #     tree-sitter
+    #     nodejs
+    #     ripgrep
+    #     fd
+    #     unzip
+    #     rust-analyzer
+    #     sumneko-lua-language-server
+    #     rust-analyzer
+    #     rustup
+    #     #bash-language-server
+    #   ]);
+    # };
 
     xdg.configFile.nvim = {
-      source = pkgs.buildEnv {
-        name = "nyoom";
-        paths = [
-          inputs.nyoom-src
-          { outPath = ./config; meta.priority = 4; }
-        ];
-      };
+      source = ./config;
       recursive = true;
     };
 

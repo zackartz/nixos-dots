@@ -6,16 +6,19 @@
     nur.url = "github:nix-community/NUR";
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
     flake-utils.url = "github:numtide/flake-utils";
-    nyoom-src = {
-      url = "github:nyoom-engineering/nyoom.nvim";
-      flake = false;
-    };
 
     hyprland.url = "github:hyprwm/Hyprland";
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    neovim.url = "github:neovim/neovim?dir=contrib";
+
+    sf-mono-liga-src = {
+      url = "github:shaunsingh/SFMono-Nerd-Font-Ligaturized";
+      flake = false;
     };
   };
 
