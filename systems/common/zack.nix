@@ -63,7 +63,7 @@ in
         '';
       };
     })
-    inputs.neovim.overlay
+    # inputs.neovim.overlay
   ];
 
   virtualisation.docker.enable = true;
@@ -111,13 +111,24 @@ in
     ripgrep
     fd
     unzip
-    neovim
     rust-analyzer
     sumneko-lua-language-server
     rustup
+    pinentry-gtk2
   ];
 
+  # programs.neovim = {
+  #   enable = true;
+  #   defaultEditor = true;
+  # };
   programs.hyprland.enable = true;
+
+  services.pcscd.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryFlavor = "gtk2";
+    enableSSHSupport = true;
+  };
 
   services.pipewire = {
     enable = true;
@@ -232,7 +243,12 @@ in
     # };
 
     xdg.configFile.nvim = {
-      source = ./config;
+      source = ./NvChad;
+      recursive = true;
+    };
+
+    xdg.configFile."nvim/lua/custom" = {
+      source = ./nvim-cfg;
       recursive = true;
     };
 

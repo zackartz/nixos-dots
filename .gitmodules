@@ -1,0 +1,7 @@
+[submodule "systems/common/NvChad"]
+	path = systems/common/NvChad
+	url = https://github.com/NvChad/NvChad.git
+[submodule "systems/common/nvim-cfg"]
+	path = systems/common/nvim-cfg
+	url = https://github.com/zackartz/nvim-cfg.git
+	branch = nvchad
