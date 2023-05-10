@@ -1,0 +1,145 @@
+{
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "height": 35, // Waybar height (to be removed for auto height)
+    "width": 2560, // Waybar width
+    "spacing": 10, // Gaps between modules
+    "mode": "dock",
+    "exclusive": true,
+    "passthrough": false,
+    "fixed-center": true,
+    "gtk-layer-shell": true,
+
+
+    // Choose the order of the modules
+    "modules-left": ["wlr/workspaces", "wlr/taskbar", "custom/spotify-title", "custom/spotify-prev", "custom/spotify-toggle", "custom/spotify-next"],
+    "modules-center": [],
+    "modules-right": ["idle_inhibitor", "pulseaudio", "custom/ip-addr", "network", "tray", "memory", "cpu", "clock"],
+
+    // Modules configuration
+    "wlr/workspaces": {
+        "format": "{icon}",
+        "on-click": "activate",
+        "format-icons": {
+            "urgent": "",
+            "active": "",
+            "default": ""
+        },
+        "sort-by-number": true
+    },
+    "wlr/taskbar": {
+        "format": "{icon} {name}",
+        "icon-size": 14,
+        "icon-theme": "sakura",
+        "tooltip-format": "{title}",
+        "on-click": "activate",
+        "on-click-middle": "close",
+        "all-outputs": false
+    },
+    "hyprland/window": {
+        "format": "{}",
+        "separate-outputs": true
+    },
+    "keyboard-state": {
+        "numlock": true,
+        "capslock": true,
+        "format": "{name} {icon}",
+        "format-icons": {
+            "locked": "",
+            "unlocked": ""
+        }
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        "icon-size": 16,
+        "spacing": 10
+    },
+    "clock": {
+        "timezone": "Pacific/Honolulu",
+        "format": "{:%I:%M:%S %p }",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d }",
+        "interval": 1
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+    "memory": {
+        "format": "{}% "
+    },
+    "backlight": {
+        "format": "{percent}% {icon}",
+        "format-icons": ["", "", "", "", "", "", ""],
+        "on-scroll-up": "xbacklight -inc 5",
+        "on-scroll-down": "xbacklight -dec 5"
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon} ",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "{essid} ",
+        "format-ethernet": "{bandwidthDownBits} ↓ {bandwidthUpBits} ↑",
+        "tooltip-format": "{ifname} {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ",
+        "format-alt": "{ifname} ({signalStrength}%) ",
+        "interval": 1
+    },
+    "pulseaudio": {
+        "scroll-step": 5,
+        "format": "{volume}% {icon}  {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": "ﱝ {icon} {format_source}",
+        "format-muted": "{format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "custom/spotify-title": {
+        "format": " {}",
+        "exec": "$HOME/.config/waybar/scripts/media info"
+    },
+    "custom/spotify-prev": {
+        "format": "",
+        "on-click": "$HOME/.config/waybar/scripts/media prev"
+    },
+    "custom/ip-addr": {
+      "format": "{}",
+      "exec": "$HOME/.config/waybar/scripts/ip-addr"
+    },
+    "custom/spotify-toggle": {
+        "format": "{}",
+        "exec": "$HOME/.config/waybar/scripts/media icon",
+        "on-click": "$HOME/.config/waybar/scripts/media toggle"
+    },
+    "custom/spotify-next": {
+        "format": "",
+        "on-click": "$HOME/.config/waybar/scripts/media next"
+    },
+}
+

@@ -1,0 +1,170 @@
+#!/bin/sh
+
+player="spotify"
+
+function has_player() {
+    if playerctl -p $player status &> /dev/null;then
+        [[ $(playerctl -p $player status) = "Stopped" ]] && return 1 || return 0
+    else
+        return 1
+    fi
+}
+
+function title() {
+    if has_player;then
+        local title=$(playerctl -p $player metadata title)
+        length=$(echo ${#title})
+        if [[ $length -gt 20 ]]; then
+            title=$(echo "$title" | cut -c 1-20)
+            title=$(python -c "print('${title}' + '...')")
+        fi
+        echo $title | sed -r 's/&/&amp;/g'
+    else
+        echo "Nothing Playing"
+    fi
+}
+
+function artist() {
+    if has_player;then
+        local artist=$(playerctl -p $player metadata artist | sed -r 's/&/&amp;/g') 
+        length=$(echo ${#artist})
+        if [[ $length -gt 20 ]]; then
+            artist=$(echo "$artist" | cut -c 1-20)
+            artist=$(python -c "print('${artist}' + '...')")
+        fi
+        echo $artist
+    else
+        echo "Offline"
+    fi
+}
+
+function info() {
+    echo "$(title)  $(artist)"
+    playerctl -p $player --follow metadata title | while read -r _; do
+        echo "$(title)  $(artist)"
+    done
+}
+
+function icon() {
+    [[ has_player && "$status" = "Playing" ]] && echo "" || echo ""
+    playerctl -p $player --follow status | while read -r status; do
+        [[ has_player && "$status" = "Playing" ]] && echo "" || echo ""
+    done
+}
+
+function toggle() {
+    if has_player; then
+        playerctl -p $player play-pause
+    fi
+}
+
+function play() {
+    if has_player;then
+        playerctl -p $player play
+    fi
+}
+
+function pause() {
+    if has_player;then
+        playerctl -p $player pause
+    fi
+}
+
+function stop() {
+    if has_player;then
+        playerctl -p $player stop
+    fi
+}
+
+function next() {
+    if has_player;then
+        playerctl -p $player next
+    fi
+}
+
+function prev() {
+    if has_player;then
+        playerctl -p $player previous
+    fi
+}
+
+function shuffle() {
+    if has_player; then
+        playerctl -p $player shuffle toggle
+    fi
+}
+
+function shufflecolor() {
+    echo "#414868"
+    playerctl -p $player --follow shuffle | while read -r shuffle; do
+        if has_player; then
+            case $shuffle in
+                "Off") echo "#414868";;
+                "On") echo "#7aa2f7";;
+            esac
+        else
+            echo "#414868"
+        fi
+    done
+}
+
+function loop() {
+    if has_player; then
+        case $(playerctl -p $player loop) in
+            "None") playerctl -p $player loop Track;;
+            "Track") playerctl -p $player loop Playlist;;
+            "Playlist") playerctl -p $player loop None;;
+        esac
+    fi
+}
+
+function loopicon() {
+    echo ""
+    playerctl -p $player --follow loop | while read -r loop; do
+        if has_player; then
+            case $loop in
+                "None") echo "";;
+                "Track") echo "";;
+                "Playlist") echo "";;
+            esac
+        else
+            echo ""
+        fi
+    done
+}
+
+function loopcolor() {
+    echo "#414868"
+    playerctl -p $player --follow loop | while read -r loop; do
+        if has_player; then
+            case $loop in
+                "None") echo "#414868";;
+                "Track") echo "#7aa2f7";;
+                "Playlist") echo "#7aa2f7";;
+            esac
+        else
+            echo "#414868"
+        fi
+    done
+}
+
+case "$1" in
+    "title") title;;
+    "artist") artist;;
+    "info") info;;
+    "toggle") toggle;;
+    "icon") icon;;
+    "play") play;;
+    "pause") pause;;
+    "stop") stop;;
+    "prev") prev;;
+    "next") next;;
+    "forward") forward;;
+    "backward") backward;;
+    "shuffle") shuffle;;
+    "shufflecolor") shufflecolor;;
+    "loop") loop;;
+    "loopicon") loopicon;;
+    "loopcolor") loopcolor;;
+    *) echo "Unrecognized command";;
+esac

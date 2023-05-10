@@ -1,0 +1,42 @@
+[buildPlans.iosevka-custom-sans]
+family = "Iosevka Sans"
+spacing = "fontconfig-mono"
+serifs = "sans"
+no-cv-ss = true
+export-glyph-names = true
+
+  [buildPlans.iosevka-custom-sans.variants]
+  inherits = "ss03"
+
+    [buildPlans.iosevka-custom-sans.variants.design]
+    capital-b = "standard-serifless"
+    b = "toothed"
+    brace = "curly"
+    percent = "rings-segmented-slash"
+    bar = "natural-slope"
+    lig-ltgteq = "slanted"
+    lig-neq = "slightly-slanted"
+    lig-equal-chain = "without-notch"
+    lig-hyphen-chain = "without-notch"
+    lig-single-arrow-bar = "without-notch"
+
+[buildPlans.iosevka-custom-serif]
+family = "Iosevka Custom Serif"
+spacing = "normal"
+serifs = "slab"
+no-cv-ss = true
+export-glyph-names = true
+
+  [buildPlans.iosevka-custom-serif.variants]
+  inherits = "ss03"
+
+    [buildPlans.iosevka-custom-serif.variants.design]
+    capital-b = "standard-serifless"
+    brace = "curly"
+    percent = "rings-segmented-slash"
+    bar = "natural-slope"
+    lig-ltgteq = "slanted"
+    lig-neq = "slightly-slanted"
+    lig-equal-chain = "without-notch"
+    lig-hyphen-chain = "without-notch"
+    lig-single-arrow-bar = "without-notch"
