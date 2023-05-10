@@ -1,4 +1,4 @@
-{ pkgs, inputs, lib, config, ... }:
+{ pkgs, inputs, lib, ... }:
 
 let
   dbus-hyprland-environment = pkgs.writeTextFile {
@@ -8,8 +8,7 @@ let
 
     text = ''
       dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=hyprland
-      systemctl --user stop pipewire xdg-desktop-portal xdg-desktop-portal-wlr
-      systemctl --user start pipewire xdg-desktop-portal xdg-desktop-portal-wlr
+      systemctl --user start pipewire xdg-desktop-portal xdg-desktop-portal-hyprland
     '';
   };
 
@@ -43,6 +42,10 @@ let
       license = licenses.gpl3;
     };
   };
+
+  discord-wrapped = pkgs.writeShellScriptBin "discord" ''
+    exec ${pkgs.discord}/bin/discord --enable-features=UseOzonePlatform --ozone-platform=wayland
+  '';
 in
 {
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -70,9 +73,13 @@ in
       unzip
       wlogout
       playerctl
-      (pkgs.writeShellScriptBin "discord" ''
-        exec ${pkgs.discord}/bin/discord --enable-features=UseOzonePlatform --ozone-platform=wayland
-      '')
+      (pkgs.symlinkJoin {
+        name = "discord";
+        paths = [
+          discord-wrapped
+          pkgs.discord
+        ];
+      })
       ncmpcpp
     ];
     shell = pkgs.zsh;
@@ -105,9 +112,16 @@ in
     dbus-hyprland-environment
     python3
     virt-manager
+    grim
+    slurp
+    xdg-desktop-portal-hyprland
   ];
 
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+
+    nvidiaPatches = true;
+  };
 
   nixpkgs.overlays = [
     inputs.iosevka.overlay
@@ -124,10 +138,6 @@ in
   services.dbus.enable = true;
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-wlr
-    ];
   };
 
   fonts = {
@@ -137,7 +147,6 @@ in
       noto-fonts-emoji
 
       iosevka-custom-sans.nerd-font
-      iosevka-custom-sans.normal
     ];
 
     fontconfig = {
@@ -306,7 +315,7 @@ in
       {
         enable = true;
         font = {
-          name = "Iosevka Nerd Font Mono";
+          name = "Iosevka Sans Nerd Font Mono";
         };
         theme = "Rosé Pine";
         settings = {
