@@ -253,11 +253,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-NxK+zDCan17l8t8tIpuPoe837mGqs3Qhl7dcAQ1H+2k=",
-        "path": "/nix/store/fw0ci3xzk1hkd4pnjdllgvy2bi2bdavw-source/iosevka",
+        "path": "/nix/store/g7hycznmillkm340m55kjlvlik8n3lw1-source/iosevka",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/fw0ci3xzk1hkd4pnjdllgvy2bi2bdavw-source/iosevka",
+        "path": "/nix/store/g7hycznmillkm340m55kjlvlik8n3lw1-source/iosevka",
         "type": "path"
       }
     },
