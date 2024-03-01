@@ -1,3 +1,3 @@
 {
-imports = [ ./zsh/default.nix ];
+  imports = [./zsh/default.nix];
 }

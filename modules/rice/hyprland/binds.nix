@@ -25,7 +25,7 @@ in {
       [
         ''${mod},RETURN,exec,kitty''
 
-        "${mod},R,exec,wofi"
+        "${mod},D,exec,wofi -show drun"
         "${mod},Q,killactive"
         "${mod},P,pseudo"
 
