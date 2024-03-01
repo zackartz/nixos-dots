@@ -9,8 +9,8 @@
     "plugin:borders-plus-plus" = {
       add_borders = 1;
 
-      "col.border_1" = "rgb(${love})";
-      "col.border_2" = "rgb(${foam})";
+      "col.border_1" = "rgb(${muted})";
+      "col.border_2" = "rgb(${love})";
 
       border_size_1 = 4;
       border_size_2 = 8;
