@@ -27,6 +27,7 @@ in {
 
         "${mod},D,exec,wofi --show drun"
         "${mod},Q,killactive"
+        "${mod},M,exit"
         "${mod},P,pseudo"
 
         "${mod},H,movefocus,l"
