@@ -28,7 +28,7 @@ with theme.colors; {
     style = ''
            * {
              font-family: Iosevka Semibold;
-      font-size: 14px;
+      font-size: 16px;
              color: #${text};
              background: transparent;
            }
@@ -38,7 +38,7 @@ with theme.colors; {
              margin: auto;
              padding: 10px;
              border-radius: 20px;
-             border: 5px solid #${love};
+             border: 4px solid #${love};
            }
 
            #input {
