@@ -31,7 +31,7 @@ with pkgs; {
   agpl = "curl https://www.gnu.org/licenses/agpl-3.0.txt -o LICENSE";
   g = "git";
   n = "nix";
-  r = "~/rebuild";
+  r = "rebuild";
   mnt = "udisksctl mount -b";
   umnt = "udisksctl unmount -b";
   burn = "pkill -9";
