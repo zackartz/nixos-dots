@@ -13,6 +13,7 @@
     inputs.nixvim.homeManagerModules.nixvim
     ../rice/hyprland
     ../rice/gtk.nix
+    ../rice/kitty.nix
     ../shell
   ];
 
@@ -97,15 +98,6 @@
   #
   home.sessionVariables = {
     EDITOR = "nvim";
-  };
-
-  programs.kitty = {
-    enable = true;
-    font = {
-      name = "Iosevka Nerd Font Mono";
-      size = 14;
-    };
-    theme = "Ayu Mirage";
   };
 
   programs.nixvim = ./vim.nix;
