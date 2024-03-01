@@ -61,6 +61,7 @@
     pkgs.dconf
     pkgs.wl-clipboard
     pkgs.swaybg
+    pkgs.btop
     pkgs.zoom-us
 
     # # You can also create simple shell scripts directly inside your
