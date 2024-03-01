@@ -13,6 +13,7 @@
     inputs.nixvim.homeManagerModules.nixvim
     ../rice/hyprland
     ../rice/gtk.nix
+    ../shell
   ];
 
   nixpkgs = {
