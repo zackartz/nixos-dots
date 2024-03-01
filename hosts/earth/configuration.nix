@@ -5,6 +5,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   imports = [
@@ -83,6 +84,10 @@
 
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"]; # or "nvidiaLegacy470 etc.
+
+  environment.variables = {
+    WLR_RENDERER_ALLOW_SOFTWARE = "1";
+  };
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 

@@ -15,6 +15,7 @@
     ../rice/gtk.nix
     ../rice/kitty.nix
     ../rice/waybar
+    ../rice/dunst.nix
     ../shell
   ];
 

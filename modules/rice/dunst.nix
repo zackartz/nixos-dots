@@ -21,8 +21,8 @@ in {
     };
     settings = with theme.colors; {
       global = {
-        frame_color = "#${pink}95";
-        separator_color = x pink;
+        frame_color = "#${rose}95";
+        separator_color = x rose;
         width = 220;
         height = 280;
         offset = "0x15";
@@ -44,23 +44,23 @@ in {
         transparency = 10;
         progress_bar = true;
         progress_bar_frame_width = 0;
-        highlight = x pink;
+        highlight = x rose;
       };
       fullscreen_delay_everything.fullscreen = "delay";
       urgency_low = {
-        background = "#${base}83";
-        foreground = x text;
+        background = "#${subtle}83";
+        foreground = x muted;
         timeout = 5;
       };
       urgency_normal = {
-        background = "#${base}83";
+        background = "#${subtle}83";
         foreground = "#c6d0f5";
         timeout = 6;
       };
       urgency_critical = {
-        background = "#${base}83";
+        background = "#${subtle}83";
         foreground = x text;
-        frame_color = "#${red}80";
+        frame_color = "#${pine}80";
         timeout = 0;
       };
     };
