@@ -76,7 +76,10 @@
     };
 
     extraPlugins = with pkgs.vimPlugins; [
-      overseer-nvim
+      {
+        plugin = overseer-nvim;
+        config = ''lua require('overseer').setup()'';
+      }
     ];
 
     extraConfigLua = ''
