@@ -68,7 +68,6 @@
     pkgs.zoom-us
     pkgs.pavucontrol
     pkgs.wlogout
-    pkgs.swaylock
     inputs.kb-gui.packages.${pkgs.system}.kb
 
     # # You can also create simple shell scripts directly inside your
