@@ -71,6 +71,20 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    (pkgs.writeShellScriptBin "rebuild" ''
+      #!/usr/bin/env bash
+      set -e
+      pushd ~/nixos/
+      alejandra . &>/dev/null
+      git diff -U0 **/*.nix
+      git add .
+      echo "[REBUILD]: rebuilding nixos"
+      sudo nixos-rebuild switch --flake ~/nixos#earth &>nixos-switch.log || (cat nixos-switch.log | grep --color error && false)
+      gen=$(nixos-rebuild list-generations | grep current)
+      git commit -am "$gen"
+      git push origin main
+      popd
+    '')
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
