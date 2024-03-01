@@ -64,6 +64,7 @@
     pkgs.btop
     pkgs.zoom-us
     pkgs.pavucontrol
+    inputs.kb-gui.packages.${pkgs.system}.kb
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your

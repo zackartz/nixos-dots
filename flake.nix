@@ -28,6 +28,10 @@
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    kb-gui = {
+      url = "github:zackartz/kb-gui";
+    };
   };
 
   outputs = {
