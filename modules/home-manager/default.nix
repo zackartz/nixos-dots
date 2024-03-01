@@ -137,7 +137,6 @@
     };
     Service = {
       ExecStart = "${inputs.kb-gui.packages.${pkgs.system}.kb}";
-      User = "root";
     };
   };
 
