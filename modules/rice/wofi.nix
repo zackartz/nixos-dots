@@ -27,7 +27,7 @@ with theme.colors; {
 
     style = ''
       * {
-        font-family: Iosevka Mono;
+        font-family: Iosevka;
         color: #${text};
         background: transparent;
       }
