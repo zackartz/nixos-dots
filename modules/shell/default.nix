@@ -1,0 +1,3 @@
+{
+imports = [ ./zsh/default.nix ];
+}
