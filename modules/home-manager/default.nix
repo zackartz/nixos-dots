@@ -101,7 +101,10 @@
 
   programs.kitty = {
     enable = true;
-    font = {name = "Iosevka Nerd Font Mono";};
+    font = {
+      name = "Iosevka Nerd Font Mono";
+      size = 14;
+    };
     theme = "Ayu Mirage";
   };
 
