@@ -66,7 +66,7 @@ in {
         "custom/search" = {
           format = " ";
           tooltip = false;
-          on-click = "${pkgs.tofi}/bin/tofi-drun";
+          on-click = "${pkgs.wofi}/bin/wofi --show drun";
         };
 
         "custom/weather" = {
