@@ -14,6 +14,7 @@
     ../rice/hyprland
     ../rice/gtk.nix
     ../rice/kitty.nix
+    ../rice/waybar
     ../shell
   ];
 
