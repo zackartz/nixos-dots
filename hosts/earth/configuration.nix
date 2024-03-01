@@ -154,6 +154,8 @@
     packages = with pkgs; [
       firefox
       kate
+      rio
+      telegram-desktop
       kitty
       #  thunderbird
     ];
