@@ -16,7 +16,7 @@
       name = "Papirus";
     };
     font = {
-      name = "Inter";
+      name = "Iosevka";
       size = 11;
     };
     gtk3.extraConfig = {
