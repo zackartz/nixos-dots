@@ -17,8 +17,8 @@
       apply_sens_to_raw = 0;
 
       # active border color
-      # "col.active_border" = "rgb(${rose}) rgb(${pine}) rgb(${love}) rgb(${iris}) 90deg";
-      # "col.inactive_border" = "rgb(${muted})";
+      "col.active_border" = "rgb(${rose})";
+      "col.inactive_border" = "rgb(${muted})";
     };
 
     input = {
@@ -48,6 +48,24 @@
       shadow_range = 20;
       shadow_render_power = 5;
       "col.shadow" = "rgba(292c3cee)";
+    };
+
+    misc = {
+      # disable redundant renders
+      disable_splash_rendering = true;
+      force_default_wallpaper = 0;
+      disable_hyprland_logo = true;
+
+      vfr = true;
+
+      # window swallowing
+      enable_swallow = true; # hide windows that spawn other windows
+      swallow_regex = "^(foot)$";
+
+      # dpms
+      mouse_move_enables_dpms = true; # enable dpms on mouse/touchpad action
+      key_press_enables_dpms = true; # enable dpms on keyboard action
+      disable_autoreload = true; # autoreload is unnecessary on nixos, because the config is readonly anyway
     };
 
     xwayland = {

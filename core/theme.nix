@@ -1,4 +1,4 @@
-{...}: {
+{
   x = c: "#${c}";
 
   colors = rec {
@@ -18,4 +18,6 @@
     "highlightmed" = "ff403d52";
     "highlighthigh" = "ff524f67";
   };
+
+  wallpaper = ./wall.png;
 }
