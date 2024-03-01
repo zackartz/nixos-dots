@@ -30,7 +30,7 @@
 
       # active border color
       "col.active_border" = "rgb(${rose})";
-      "col.inactive_border" = "rgb(${pine})";
+      "col.inactive_border" = "rgb(${muted})";
     };
 
     input = {
