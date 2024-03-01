@@ -54,6 +54,10 @@
         action = "<cmd>lua _lazygit_toggle()<CR>";
         key = "<leader>gg";
       }
+      {
+        action = "<cmd>ToggleTerm<CR>";
+        key = "<leader>h";
+      }
     ];
 
     plugins.nvim-cmp = {
