@@ -11,6 +11,9 @@
 
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
+
+    ./swayidle.nix
+
     ../rice/hyprland
     ../rice/gtk.nix
     ../rice/kitty.nix
