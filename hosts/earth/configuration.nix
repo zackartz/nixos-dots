@@ -55,30 +55,6 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  services.pipewire.extraConfig = {
-    pipewire = {
-      pw-modules = [
-        {
-          name = "module-loopback";
-          args = {
-            source = "alsa_input.pci-0000_0d_00.4.analog-stereo";
-            sink = "alsa_input.pci-0000_0d_00.4.analog-stereo";
-          };
-        }
-      ];
-    };
-
-    # } = [
-    #   {
-    #     name = "module-loopback";
-    #     args = {
-    #       source = "alsa_input.pci-0000_0d_00.4.analog-stereo";
-    #       sink = "alsa_input.pci-0000_0d_00.4.analog-stereo";
-    #     };
-    #   }
-    # ];
-  };
-
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
