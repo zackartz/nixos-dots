@@ -17,8 +17,6 @@ in {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.default;
 
-    plugins = [inputs.hyprland-plugins.packages."${pkgs.system}".borders-plus-plus];
-
     systemd = {
       variables = ["--all"];
       extraCommands = [
