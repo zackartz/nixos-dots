@@ -121,6 +121,12 @@
     EDITOR = "nvim";
   };
 
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+    options = ["--cmd cd"];
+  };
+
   programs.nixvim = ./vim.nix;
 
   # Let Home Manager install and manage itself.
