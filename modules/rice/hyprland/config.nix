@@ -31,15 +31,14 @@
 
     decoration = {
       # fancy corners
-      rounding = 7;
+      rounding = 12;
       # blur
       blur = {
         enabled = true;
         size = 3;
-        passes = 3;
+        passes = 6;
         ignore_opacity = false;
         new_optimizations = 1;
-        xray = true;
         contrast = 0.7;
         brightness = 0.8;
       };
