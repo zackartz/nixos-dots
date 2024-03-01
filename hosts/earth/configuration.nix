@@ -31,6 +31,8 @@
   # Set your time zone.
   time.timeZone = "America/New_York";
 
+  boot.supportedFilesystems = ["ntfs"];
+
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
