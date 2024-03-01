@@ -33,11 +33,11 @@ with theme.colors; {
       }
 
       #window {
-        background: #${muted};
+        background: #${surface};
         margin: auto;
         padding: 10px;
         border-radius: 20px;
-        border: 5px solid #${rose};
+        border: 5px solid #${love};
       }
 
       #input {
@@ -60,7 +60,7 @@ with theme.colors; {
       }
 
       #entry:selected {
-        background-color: #${gold};
+        background-color: #${subtle};
       }
 
       #text {
