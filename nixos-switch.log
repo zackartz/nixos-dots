@@ -3,6 +3,5 @@ setting up /etc...
 reloading user units for zack...
 dbus-update-activation-environment: error: unable to connect to D-Bus: Unable to autolaunch a dbus-daemon without a $DISPLAY for X11
 /etc/profile: line 18: gnome-keyring-daemon: command not found
-Agent pid 4937
+Agent pid 7123
 restarting sysinit-reactivation.target
-the following new units were started: libvirtd.service, sysinit-reactivation.target, systemd-tmpfiles-resetup.service
