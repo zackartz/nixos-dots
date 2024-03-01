@@ -140,7 +140,10 @@
   home-manager = {
     extraSpecialArgs = {inherit inputs;};
     users = {
-      "zack" = import ../../modules/home-manager;
+      "zack" = {
+        imports = [../../modules/home-manager];
+        _module.args.theme = import ../../core/theme.nix;
+      };
     };
   };
 

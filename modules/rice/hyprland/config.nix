@@ -1,6 +1,6 @@
 # home.nix
-{
-  wayland.windowManager.hyprland.settings = {
+{theme, ...}: {
+  wayland.windowManager.hyprland.settings = with theme.colors; {
     exec-once = [
       "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
     ];
@@ -15,6 +15,10 @@
 
       # whether to apply the sensitivity to raw input (e.g. used by games where you aim using your mouse)
       apply_sens_to_raw = 0;
+
+      # active border color
+      # "col.active_border" = "rgb(${rose}) rgb(${pine}) rgb(${love}) rgb(${iris}) 90deg";
+      # "col.inactive_border" = "rgb(${muted})";
     };
 
     input = {

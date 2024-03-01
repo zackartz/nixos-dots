@@ -30,10 +30,7 @@ in {
         "${mod},M,exit"
         "${mod},P,pseudo"
 
-        "${mod},H,movefocus,l"
-        "${mod},L,movefocus,r"
-        "${mod},K,movefocus,u"
-        "${mod},J,movefocus,d"
+        "${mod},J,togglesplit,d"
 
         "${mod},T,togglegroup," # group focused window
         "${modshift},G,changegroupactive," # switch within the active group
