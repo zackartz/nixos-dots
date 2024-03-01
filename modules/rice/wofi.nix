@@ -1,4 +1,5 @@
-{
+{theme, ...}:
+with theme.colors; {
   programs.wofi = {
     enable = true;
     settings = {
@@ -27,16 +28,16 @@
     style = ''
       * {
         font-family: Iosevka Mono;
-        color: #e5e9f0;
+        color: #${text};
         background: transparent;
       }
 
       #window {
-        background: rgba(41, 46, 66, 0.5);
+        background: #${muted};
         margin: auto;
         padding: 10px;
         border-radius: 20px;
-        border: 5px solid #b072d1;
+        border: 5px solid #${rose};
       }
 
       #input {
@@ -59,7 +60,7 @@
       }
 
       #entry:selected {
-        background-color: #2e3440;
+        background-color: #${gold};
       }
 
       #text {
