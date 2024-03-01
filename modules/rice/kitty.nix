@@ -6,7 +6,7 @@
       size = 14;
     };
     settings = {
-      window_padding_width = 4;
+      window_padding_width = 8;
     };
     theme = "Ayu Mirage";
   };
