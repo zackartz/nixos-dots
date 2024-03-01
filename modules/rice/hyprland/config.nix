@@ -6,6 +6,18 @@
       "pw-loopback -C \"alsa_input.pci-0000_0d_00.4.analog-stereo\""
     ];
 
+    "plugin:borders-plus-plus" = {
+      add_borders = 1;
+
+      "col.border_1" = "rgb(${love})";
+      "col.border_2" = "rgb(${foam})";
+
+      border_size_1 = 4;
+      border_size_2 = 4;
+
+      natural_rounding = "yes";
+    };
+
     general = {
       # gaps
       gaps_in = 6;
