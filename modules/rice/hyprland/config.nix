@@ -12,7 +12,7 @@
       "col.border_1" = "rgb(${muted})";
       "col.border_2" = "rgb(${love})";
 
-      border_size_1 = 4;
+      border_size_1 = 6;
 
       natural_rounding = "yes";
     };
