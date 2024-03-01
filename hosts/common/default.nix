@@ -34,6 +34,7 @@
   networking.networkmanager.enable = true;
 
   security.polkit.enable = true;
+  security.pam.services.swaylock = {};
 
   # Set your time zone.
   time.timeZone = "America/New_York";
