@@ -136,7 +136,7 @@
       WantedBy = ["default.target"];
     };
     Service = {
-      ExecStart = "${inputs.kb-gui.packages.${pkgs.system}.kb}";
+      ExecStart = "${inputs.kb-gui.packages.${pkgs.system}.kb}/bin/kb";
     };
   };
 
