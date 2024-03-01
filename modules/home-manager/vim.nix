@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   config = {
     enable = true;
 
@@ -74,6 +74,10 @@
         "<CR>" = "cmp.mapping.confirm({ select = true })";
       };
     };
+
+    extraPlugins = with pkgs.vimPlugins; [
+      overseer-nvim
+    ];
 
     extraConfigLua = ''
       local Terminal  = require('toggleterm.terminal').Terminal
