@@ -9,7 +9,7 @@
     "plugin:borders-plus-plus" = {
       add_borders = 1;
 
-      "col.border_1" = "rgb(${rose})";
+      "col.border_1" = "rgb(${love})";
       "col.border_2" = "rgb(${love})";
 
       border_size_1 = 6;
