@@ -14,6 +14,7 @@
   '';
 in {
   programs.swaylock = {
+    enable = true;
     package = pkgs.swaylock-effects;
     settings = with theme.colors; {
       clock = true;
@@ -29,21 +30,21 @@ in {
       inside-color = "00000000";
       key-hl-color = "f2cdcd";
       separator-color = "00000000";
-      text-color = pink;
+      text-color = text;
       text-caps-lock-color = "";
-      line-ver-color = yellow;
-      ring-ver-color = rosewater;
+      line-ver-color = love;
+      ring-ver-color = rose;
       inside-ver-color = base;
       text-ver-color = text;
-      ring-wrong-color = red;
-      text-wrong-color = red;
+      ring-wrong-color = foam;
+      text-wrong-color = foam;
       inside-wrong-color = base;
       inside-clear-color = base;
       text-clear-color = text;
-      ring-clear-color = blue;
+      ring-clear-color = iris;
       line-clear-color = base;
       line-wrong-color = base;
-      bs-hl-color = red;
+      bs-hl-color = foam;
       line-uses-ring = false;
       grace = 2;
       grace-no-mouse = true;
