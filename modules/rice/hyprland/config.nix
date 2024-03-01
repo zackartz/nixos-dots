@@ -13,7 +13,7 @@
       "col.border_2" = "rgb(${foam})";
 
       border_size_1 = 4;
-      border_size_2 = 4;
+      border_size_2 = 8;
 
       natural_rounding = "yes";
     };
