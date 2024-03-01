@@ -13,6 +13,14 @@
     ./hardware-configuration.nix
     ./nvidia.nix
     ../../env/wayland
+    ({
+      options,
+      lib,
+      ...
+    }:
+      lib.mkIf (options ? virtualisation.memorySize) {
+        users.users.zack.password = "foo";
+      })
   ];
 
   # Bootloader.

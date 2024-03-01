@@ -32,6 +32,7 @@ with pkgs; {
   g = "git";
   n = "nix";
   r = "rebuild";
+  vm = "nixos-rebuild build-vm --flake ~/nixos#earth";
   mnt = "udisksctl mount -b";
   umnt = "udisksctl unmount -b";
   burn = "pkill -9";
