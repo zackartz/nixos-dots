@@ -26,46 +26,47 @@ with theme.colors; {
     };
 
     style = ''
-      * {
-        font-family: Iosevka;
-        color: #${text};
-        background: transparent;
-      }
+           * {
+             font-family: Iosevka Semibold;
+      font-size: 14px;
+             color: #${text};
+             background: transparent;
+           }
 
-      #window {
-        background: #${surface};
-        margin: auto;
-        padding: 10px;
-        border-radius: 20px;
-        border: 5px solid #${love};
-      }
+           #window {
+             background: #${surface};
+             margin: auto;
+             padding: 10px;
+             border-radius: 20px;
+             border: 5px solid #${love};
+           }
 
-      #input {
-        padding: 10px;
-        margin-bottom: 10px;
-        border-radius: 15px;
-      }
+           #input {
+             padding: 10px;
+             margin-bottom: 10px;
+             border-radius: 15px;
+           }
 
-      #outer-box {
-        padding: 20px;
-      }
+           #outer-box {
+             padding: 20px;
+           }
 
-      #img {
-        margin-right: 6px;
-      }
+           #img {
+             margin-right: 6px;
+           }
 
-      #entry {
-        padding: 10px;
-        border-radius: 15px;
-      }
+           #entry {
+             padding: 10px;
+             border-radius: 15px;
+           }
 
-      #entry:selected {
-        background-color: #${subtle};
-      }
+           #entry:selected {
+             background-color: #${subtle};
+           }
 
-      #text {
-        margin: 2px;
-      }
+           #text {
+             margin: 2px;
+           }
     '';
   };
 }
