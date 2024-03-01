@@ -26,6 +26,8 @@
 
   networking.networkmanager.unmanaged = ["enp6s0"];
 
+  security.polkit.enable = true;
+
   # Set your time zone.
   time.timeZone = "America/New_York";
 
