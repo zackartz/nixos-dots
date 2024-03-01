@@ -37,6 +37,7 @@
     };
   };
 
+  services.udev.extraRules = ''KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0660", GROUP="plugdev"'';
   # Enable networking
   networking.networkmanager.enable = true;
 
@@ -145,11 +146,13 @@
 
   programs.zsh.enable = true;
 
+  users.groups.plugdev = {};
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.zack = {
     isNormalUser = true;
     description = "zack";
-    extraGroups = ["networkmanager" "wheel" "docker" "libvirt"];
+    extraGroups = ["networkmanager" "wheel" "docker" "libvirt" "plugdev"];
     shell = pkgs.zsh;
     packages = with pkgs; [
       firefox
