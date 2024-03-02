@@ -23,7 +23,7 @@ in {
       global = {
         frame_color = "#${rose}95";
         separator_color = x rose;
-        width = 220;
+        width = 440;
         height = 280;
         offset = "0x15";
         font = "Lexend 12";
