@@ -38,7 +38,7 @@
       verbosity = "INFO";
       media_minimum_duration = 10;
       sink_whitelist = [
-        {name = "Scarlett Solo (3rd Gen.) Headphones / Line 1-2";}
+        {name = "([Ss]carlett).*";}
       ];
       node_blacklist = [
         {name = "spotify";}
