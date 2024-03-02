@@ -34,6 +34,12 @@
       enable = true;
     };
 
+    plugins.nvim-jdtls = {
+      enable = true;
+      data = "/home/zack/.cache/jdtls/workspace";
+      configuration = "/home/zack/.cache/jdtls/config";
+    };
+
     plugins.lsp = {
       enable = true;
       servers = {
@@ -45,7 +51,6 @@
           installCargo = false;
         };
         nil_ls.enable = true;
-        java-language-server.enable = true;
       };
       keymaps = {
         lspBuf = {
