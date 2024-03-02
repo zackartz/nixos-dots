@@ -32,11 +32,6 @@
     kb-gui = {
       url = "github:zackartz/kb-gui";
     };
-
-    wayland-pipewire-idle-inhibit = {
-      url = "github:rafaelrc7/wayland-pipewire-idle-inhibit";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {

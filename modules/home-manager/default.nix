@@ -11,7 +11,6 @@
 
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
-    inputs.wayland-pipewire-idle-inhibit.homeModules.default
 
     ./swayidle.nix
 
@@ -28,22 +27,6 @@
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;
-    };
-  };
-
-  services.wayland-pipewire-idle-inhibit = {
-    enable = true;
-    systemdTarget = "sway-session.target";
-    settings = {
-      verbosity = "INFO";
-      media_minimum_duration = 10;
-      sink_whitelist = [
-        {name = "([Ss]carlett).*";}
-      ];
-      node_blacklist = [
-        {name = "spotify";}
-        {app_name = "Music Player Daemon";}
-      ];
     };
   };
 
@@ -89,6 +72,7 @@
     pkgs.prismlauncher
     pkgs.obs-studio
     inputs.kb-gui.packages.${pkgs.system}.kb
+    pkgs.sway-audio-idle-inhibit
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
