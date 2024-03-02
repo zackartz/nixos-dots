@@ -38,11 +38,6 @@
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"]; # or "nvidiaLegacy470 etc.
 
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-  };
-
   environment.systemPackages = with pkgs; [
     alvr
     BeatSaberModManager
