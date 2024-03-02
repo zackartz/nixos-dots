@@ -20,6 +20,8 @@
       enableGitStatus = true;
     };
 
+    plugins.gitsigns.enable = true;
+
     colorschemes.rose-pine.enable = true;
     options = {
       number = true;
