@@ -48,17 +48,17 @@ in {
       };
       fullscreen_delay_everything.fullscreen = "delay";
       urgency_low = {
-        background = "#${subtle}83";
+        background = "#${subtle}f2";
         foreground = x muted;
         timeout = 5;
       };
       urgency_normal = {
-        background = "#${subtle}83";
+        background = "#${subtle}f2";
         foreground = "#c6d0f5";
         timeout = 6;
       };
       urgency_critical = {
-        background = "#${subtle}83";
+        background = "#${subtle}f2";
         foreground = x text;
         frame_color = "#${pine}80";
         timeout = 0;
