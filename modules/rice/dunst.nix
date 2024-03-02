@@ -49,12 +49,12 @@ in {
       fullscreen_delay_everything.fullscreen = "delay";
       urgency_low = {
         background = "#${subtle}f2";
-        foreground = x muted;
+        foreground = x text;
         timeout = 5;
       };
       urgency_normal = {
         background = "#${subtle}f2";
-        foreground = "#c6d0f5";
+        foreground = x text;
         timeout = 6;
       };
       urgency_critical = {
