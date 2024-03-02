@@ -70,6 +70,7 @@
     pkgs.pavucontrol
     pkgs.wlogout
     pkgs.prismlauncher
+    pkgs.obs-studio
     inputs.kb-gui.packages.${pkgs.system}.kb
 
     # # You can also create simple shell scripts directly inside your
