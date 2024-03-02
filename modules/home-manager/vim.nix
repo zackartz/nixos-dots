@@ -24,6 +24,7 @@
     options = {
       number = true;
       relativenumber = true;
+      clipboard = "unnamedplus";
     };
     globals.mapleader = " ";
 
