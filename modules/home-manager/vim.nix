@@ -36,8 +36,14 @@
 
     plugins.nvim-jdtls = {
       enable = true;
-      data = "/home/zack/.cache/jdtls/workspace";
-      configuration = "/home/zack/.cache/jdtls/config";
+
+      cmd = [
+        "$\{pkgs.jdt-language-server}/bin/jdtls"
+        "-data"
+        "/home/zack/.cache/jdtls/workspace"
+        "-configuration"
+        "/home/zack/.cache/jdtls/config"
+      ];
     };
 
     plugins.lsp = {
