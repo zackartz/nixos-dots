@@ -4,6 +4,7 @@
     exec-once = [
       "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
       "pw-loopback -C \"alsa_input.pci-0000_0d_00.4.analog-stereo\""
+      "sway-audio-idle-inhibit"
     ];
 
     general = {
