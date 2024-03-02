@@ -34,17 +34,17 @@
       enable = true;
     };
 
-    plugins.nvim-jdtls = {
-      enable = true;
-
-      cmd = [
-        "${pkgs.jdt-language-server}/bin/jdtls"
-        "-data"
-        "/home/zack/.cache/jdtls/workspace"
-        "-configuration"
-        "/home/zack/.cache/jdtls/config"
-      ];
-    };
+    # plugins.nvim-jdtls = {
+    #   enable = true;
+    #
+    #   cmd = [
+    #     "${pkgs.jdt-language-server}/bin/jdtls"
+    #     "-data"
+    #     "/home/zack/.cache/jdtls/workspace"
+    #     "-configuration"
+    #     "/home/zack/.cache/jdtls/config"
+    #   ];
+    # };
 
     plugins.lsp = {
       enable = true;
@@ -96,6 +96,9 @@
       mappingPresets = ["insert"];
       mapping = {
         "<CR>" = "cmp.mapping.confirm({ select = true })";
+        "<C-space>" = "cmp.mapping.complete()";
+        "<C-b>" = "cmp.mapping.scroll_docs(-4)";
+        "<C-f>" = "cmp.mapping.scroll_docs(4)";
       };
     };
 
