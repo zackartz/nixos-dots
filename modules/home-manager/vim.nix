@@ -42,6 +42,7 @@
           installCargo = false;
         };
         nil_ls.enable = true;
+        java-language-server.enable = true;
       };
       keymaps = {
         lspBuf = {
