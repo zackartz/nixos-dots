@@ -11,6 +11,7 @@
 
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
+    inputs.wayland-pipewire-idle-inhibit.homeModules.default
 
     ./swayidle.nix
 
@@ -27,6 +28,22 @@
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;
+    };
+  };
+
+  services.wayland-pipewire-idle-inhibit = {
+    enable = true;
+    systemdTarget = "sway-session.target";
+    settings = {
+      verbosity = "INFO";
+      media_minimum_duration = 10;
+      sink_whitelist = [
+        {name = "Scarlett Solo (3rd Gen.) Headphones / Line 1-2";}
+      ];
+      node_blacklist = [
+        {name = "spotify";}
+        {app_name = "Music Player Daemon";}
+      ];
     };
   };
 
