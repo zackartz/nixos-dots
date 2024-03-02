@@ -43,6 +43,10 @@
     remotePlay.openFirewall = true;
   };
 
+  environment.systemPackages = with pkgs; [
+    alvr
+  ];
+
   hardware.nvidia = {
     # Modesetting is required.
     modesetting.enable = true;
