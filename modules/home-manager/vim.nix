@@ -38,7 +38,7 @@
       enable = true;
 
       cmd = [
-        "$\{pkgs.jdt-language-server}/bin/jdtls"
+        "${pkgs.jdt-language-server}/bin/jdtls"
         "-data"
         "/home/zack/.cache/jdtls/workspace"
         "-configuration"
