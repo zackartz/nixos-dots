@@ -73,6 +73,7 @@
     pkgs.obs-studio
     inputs.kb-gui.packages.${pkgs.system}.kb
     pkgs.sway-audio-idle-inhibit
+    pkgs.hyprshot
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -85,10 +86,9 @@
       set -e
       pushd ~/nixos/
       alejandra . &>/dev/null
-      git diff -U0 **/*.nix
       git add .
       echo "[REBUILD]: rebuilding nixos"
-      sudo nixos-rebuild switch --flake ~/nixos#earth &>nixos-switch.log || (cat nixos-switch.log | grep --color error && false)
+      sudo nixos-rebuild switch --flake ~/nixos#earth
       gen=$(nixos-rebuild list-generations | grep current)
       git commit -am "$gen"
       git push origin main
