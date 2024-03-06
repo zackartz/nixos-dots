@@ -88,7 +88,6 @@
     pkgs.hyprshot
 
     pkgs.ungoogled-chromium
-    pkgs.vscodium
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -155,6 +154,11 @@
     enable = true;
     enableZshIntegration = true;
     options = ["--cmd cd"];
+  };
+
+  # i use vscode for light java stuff -- PLEASE GOD USE NEOVIM INSTEAD
+  programs.vscode = {
+    enable = true;
   };
 
   systemd.user.services.kb-gui = {
