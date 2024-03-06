@@ -27,6 +27,11 @@
       number = true;
       relativenumber = true;
       clipboard = "unnamedplus";
+
+      tabstop = 2;
+      shiftwidth = 2;
+      expandtab = true;
+      softtabstop = 2;
     };
     globals.mapleader = " ";
 
