@@ -156,11 +156,6 @@
     options = ["--cmd cd"];
   };
 
-  # i use vscode for light java stuff -- PLEASE GOD USE NEOVIM INSTEAD
-  programs.vscode = {
-    enable = true;
-  };
-
   systemd.user.services.kb-gui = {
     Unit = {
       Description = "KB Time/Date thing";
