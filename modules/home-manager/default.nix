@@ -108,6 +108,12 @@
       git push origin main
       popd
     '')
+    (pkgs.writeShellScriptBin "work" ''
+      #!${pkgs.bash}/bin/bash
+      cd work/
+      nix shell nixpkgs#openvpn
+      openvpn zack_myers.ovpn
+    '')
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
