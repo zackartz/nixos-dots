@@ -100,6 +100,8 @@
     WLR_RENDERER_ALLOW_SOFTWARE = "1";
   };
 
+  environment.sessionVariables.DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
+
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Enable touchpad support (enabled default in most desktopManager).
