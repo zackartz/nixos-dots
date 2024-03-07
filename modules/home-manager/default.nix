@@ -86,6 +86,7 @@
     inputs.kb-gui.packages.${pkgs.system}.kb
     pkgs.sway-audio-idle-inhibit
     pkgs.hyprshot
+    pkgs.jetbrains.idea-community
 
     pkgs.ungoogled-chromium
 
