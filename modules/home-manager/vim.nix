@@ -22,7 +22,7 @@
 
     plugins.gitsigns.enable = true;
 
-    colorschemes.rose-pine.enable = true;
+    colorschemes.dracula.enable = true;
     options = {
       number = true;
       relativenumber = true;
