@@ -92,7 +92,7 @@
     plugins.cmp = {
       enable = true;
       autoEnableSources = true;
-      extraOptions = {
+      settings = {
         sources = [
           {name = "nvim_lsp";}
           {name = "path";}
