@@ -89,21 +89,23 @@
       }
     ];
 
-    plugins.nvim-cmp = {
+    plugins.cmp = {
       enable = true;
       autoEnableSources = true;
-      sources = [
-        {name = "nvim_lsp";}
-        {name = "path";}
-        {name = "buffer";}
-      ];
-      snippet = {expand = "luasnip";};
-      mappingPresets = ["insert"];
-      mapping = {
-        "<CR>" = "cmp.mapping.confirm({ select = true })";
-        "<C-space>" = "cmp.mapping.complete()";
-        "<C-b>" = "cmp.mapping.scroll_docs(-4)";
-        "<C-f>" = "cmp.mapping.scroll_docs(4)";
+      extraOptions = {
+        sources = [
+          {name = "nvim_lsp";}
+          {name = "path";}
+          {name = "buffer";}
+        ];
+        snippet = {expand = "luasnip";};
+        mappingPresets = ["insert"];
+        mapping = {
+          "<CR>" = "cmp.mapping.confirm({ select = true })";
+          "<C-space>" = "cmp.mapping.complete()";
+          "<C-b>" = "cmp.mapping.scroll_docs(-4)";
+          "<C-f>" = "cmp.mapping.scroll_docs(4)";
+        };
       };
     };
 
