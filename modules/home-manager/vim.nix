@@ -22,7 +22,11 @@
 
     plugins.gitsigns.enable = true;
 
-    colorschemes.dracula.enable = true;
+    # colorschemes.dracula.enable = true;
+    # colorschemes.catppuccin.enable = true;
+    colorschemes.kanagawa.enable = true;
+    # colorschemes.oxocarbon.enable = true;
+    # colorschemes.tokyonight.enable = true;
     options = {
       number = true;
       relativenumber = true;
