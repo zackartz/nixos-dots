@@ -91,6 +91,14 @@
         action = "<cmd>ToggleTerm<CR>";
         key = "<leader>h";
       }
+      {
+        action = "<cmd>OverseerRun<CR>";
+        key = "<F36>";
+      }
+      {
+        action = "<cmd>OverseerToggle<CR>";
+        key = "<S-F36>";
+      }
     ];
 
     plugins.cmp = {
