@@ -97,7 +97,7 @@
       }
       {
         action = "<cmd>OverseerToggle<CR>";
-        key = "<S-<F36>>";
+        key = "<F48>";
       }
     ];
 
