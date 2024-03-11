@@ -3,7 +3,10 @@
     enable = true;
 
     plugins = {
-      lualine.enable = true;
+      lualine = {
+        enable = true;
+        sections.lualine_x = ["overseer"];
+      };
       telescope.enable = true;
       treesitter.enable = true;
       luasnip.enable = true;
@@ -128,7 +131,7 @@
       }
       {
         plugin = overseer-nvim;
-        config = ''lua require('overseer').setup()'';
+        config = ''lua require('overseer').setup({ task_list = { direction = "bottom" } })'';
       }
     ];
 
