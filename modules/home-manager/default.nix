@@ -37,9 +37,9 @@
   };
 
   xdg.mimeApps.defaultApplications = {
-    "text/html" = "firefox";
-    "x-scheme-handler/http" = "firefox";
-    "x-scheme-handler/https" = "firefox";
+    "text/html" = "firefox.desktop";
+    "x-scheme-handler/http" = "firefox.desktop";
+    "x-scheme-handler/https" = "firefox.desktop";
   };
 
   # This value determines the Home Manager release that your configuration is
