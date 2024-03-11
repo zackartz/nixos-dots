@@ -123,6 +123,10 @@
 
     extraPlugins = with pkgs.vimPlugins; [
       {
+        plugin = dressing-nvim;
+        config = ''lua require('dressing').setup()'';
+      }
+      {
         plugin = overseer-nvim;
         config = ''lua require('overseer').setup()'';
       }
