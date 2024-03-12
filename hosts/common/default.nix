@@ -117,7 +117,7 @@
   users.users.zack = {
     isNormalUser = true;
     description = "zack";
-    extraGroups = ["networkmanager" "wheel" "docker" "libvirt" "plugdev"];
+    extraGroups = ["networkmanager" "wheel" "docker" "libvirtd" "plugdev"];
     shell = pkgs.zsh;
     packages = with pkgs; [
       firefox
