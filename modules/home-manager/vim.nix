@@ -276,18 +276,7 @@
     extraPlugins = with pkgs.vimPlugins; [
       {
         plugin = dressing-nvim;
-        config = ''          lua function config()
-                    local theme = require("telescope.themes").get_dropdown()
-
-                    theme.layout_config = { width = 60, height = 17 }
-
-                    require("dressing").setup({
-                      input = { enabled = false },
-                      select = { backend = { "telescope" }, telescope = theme }
-                    })
-                    end
-                    config()
-        '';
+        config = ''lua require("dressing").setup()'';
       }
       {
         plugin = overseer-nvim;
