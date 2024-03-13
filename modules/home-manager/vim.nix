@@ -103,6 +103,8 @@
       };
     };
 
+    plugins.notify.enable = true;
+
     plugins.gitsigns.enable = true;
 
     # colorschemes.dracula.enable = true;
