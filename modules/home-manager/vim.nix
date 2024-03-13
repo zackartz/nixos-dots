@@ -252,6 +252,9 @@
             };
           };
         };
+        whitespace = {
+          remove_blankline_trail = true;
+        };
         indent = {char = "▏";};
       };
     };
