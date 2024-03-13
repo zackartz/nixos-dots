@@ -240,19 +240,19 @@
             "neo-tree"
             "TelescopePrompt"
           ];
-          scope = {
-            show_start = false;
-            show_end = false;
-            highlight = ["@keyword"];
-            char = "▏";
-            include = {
-              node_type = {
-                lua = ["table_constructor"];
-              };
+        };
+        scope = {
+          show_start = false;
+          show_end = false;
+          highlight = ["@keyword"];
+          char = "▏";
+          include = {
+            node_type = {
+              lua = ["table_constructor"];
             };
           };
-          indent = {char = "▏";};
         };
+        indent = {char = "▏";};
       };
     };
 
