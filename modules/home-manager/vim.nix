@@ -119,6 +119,7 @@
     # colorschemes.oxocarbon.enable = true;
     colorschemes.tokyonight = {
       enable = true;
+      style = "night";
       onColors = ''        function(colors)
               colors.gitSigns.add = colors.green
               colors.gitSigns.change = colors.blue
@@ -266,6 +267,7 @@
                    hl["DropBarKind" .. value] = { link = "DropBarKind" }
                  end
         end'';
+      transparent = true;
     };
     options = {
       number = true;
