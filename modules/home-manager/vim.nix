@@ -25,6 +25,59 @@
     plugins.neo-tree = {
       enable = true;
       enableGitStatus = true;
+      closeIfLastWindow = true;
+      autoCleanAfterSessionRestore = true;
+      window = {
+        width = 30;
+      };
+      filesystem = {
+        followCurrentFile.enabled = true;
+        hijackNetrwBehavior = "open_current";
+        useLibuvFileWatcher = true;
+      };
+      defaultComponentConfigs = {
+        icon = {
+          folderEmpty = "";
+          default = "󰈙";
+        };
+        indent = {
+          padding = 0;
+          indentSize = 1;
+        };
+        modified = {
+          symbol = "󰧞";
+        };
+        name = {
+          useGitStatusColors = true;
+        };
+        gitStatus = {
+          symbols = {
+            deleted = "D";
+            renamed = "R";
+            modified = "M";
+            added = "A";
+            untracked = "U";
+            ignored = "";
+            staged = "";
+            unstaged = "!";
+            conflict = "C";
+          };
+        };
+        diagnostics = {
+          symbols = {
+            hint = "";
+            info = "󰋽";
+            warn = "";
+            error = "󰅚";
+          };
+          highlights = {
+            hint = "DiagnosticSignHint";
+            info = "DiagnosticSignInfo";
+            warn = "DiagnosticSignWarn";
+            error = "DiagnosticSignError";
+          };
+        };
+      };
     };
 
     plugins.gitsigns.enable = true;
