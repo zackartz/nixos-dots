@@ -447,13 +447,9 @@
             local tokyonight = require("lualine.themes.tokyonight")
 
 
-
-      local icons = {}
       local sources = {}
 
-      local fmt = function(icon, text, space) return M.icons[icon] .. string.rep(" ", space or 1) .. text end
-
-      icons = {
+      local icons = {
         Vim = "",
         Config = "",
         Normal = "󰡛",
@@ -558,6 +554,8 @@
         BookmarkSearch = "󰺄",
         Download = "󰇚",
       }
+
+      local fmt = function(icon, text, space) return icons[icon] .. string.rep(" ", space or 1) .. text end
 
       sources.mode = {
         "mode",
