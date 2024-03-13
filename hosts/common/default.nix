@@ -41,6 +41,8 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  services.gnome3.gnome-keyring.enable = true;
+
   security.polkit.enable = true;
   security.pam.services.swaylock = {};
 
