@@ -3,7 +3,7 @@
     udiskie.enable = true;
     gpg-agent = {
       enable = true;
-      pinentryFlavor = "gnome3";
+      pinentryFlavor = "gnome2";
       enableSshSupport = true;
       enableZshIntegration = true;
     };

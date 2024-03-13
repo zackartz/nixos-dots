@@ -4,10 +4,6 @@
     enable = true;
     userName = "zack";
     userEmail = "zackmyers@lavabit.com";
-    signing = {
-      key = "056CFD15A9F99B0E";
-      signByDefault = false;
-    };
     ignores = [
       ".cache/"
       ".DS_Store"
