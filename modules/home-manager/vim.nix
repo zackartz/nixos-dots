@@ -108,6 +108,11 @@
     plugins.gitsigns.enable = true;
     plugins.crates-nvim.enable = true;
 
+    plugins.dap = {
+      enable = true;
+      extensions.dap-ui.enable = true;
+    };
+
     # colorschemes.dracula.enable = true;
     # colorschemes.catppuccin.enable = true;
     # colorschemes.kanagawa.enable = true;
@@ -427,7 +432,6 @@
       }
       {
         plugin = nui-nvim;
-        config = ''lua require('nui').setup()'';
       }
     ];
 

@@ -40,7 +40,7 @@
 
   services.openssh = {
     enable = true;
-    passwordAuthentication = true;
+    PasswordAuthentication = true;
   };
 
   environment.systemPackages = with pkgs; [
