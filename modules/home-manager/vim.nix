@@ -96,7 +96,7 @@
       };
       presets = {
         bottom_search = false;
-        command_palatte = true;
+        command_palette = true;
         long_message_to_split = true;
         inc_rename = false;
         lsp_doc_border = "rounded";
@@ -423,6 +423,10 @@
       {
         plugin = overseer-nvim;
         config = ''lua require('overseer').setup({ task_list = { direction = "bottom" } })'';
+      }
+      {
+        plugin = nui-nvim;
+        config = ''lua require('nui').setup()'';
       }
     ];
 
