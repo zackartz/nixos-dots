@@ -267,7 +267,6 @@
                    hl["DropBarKind" .. value] = { link = "DropBarKind" }
                  end
         end'';
-      transparent = true;
     };
     options = {
       number = true;
