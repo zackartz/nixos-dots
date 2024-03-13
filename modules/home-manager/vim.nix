@@ -433,6 +433,9 @@
       {
         plugin = nui-nvim;
       }
+      {
+        plugin = lualine-nvim;
+      }
     ];
 
     extraConfigLua = ''
