@@ -87,6 +87,7 @@
     pkgs.sway-audio-idle-inhibit
     pkgs.hyprshot
     pkgs.jetbrains.idea-community
+    pkgs.jetbrains.datagrip
 
     pkgs.ungoogled-chromium
 
