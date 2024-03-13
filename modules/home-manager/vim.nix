@@ -305,6 +305,10 @@
         plugin = overseer-nvim;
         config = ''lua require('overseer').setup({ task_list = { direction = "bottom" } })'';
       }
+      {
+        plugin = dropbar-nvim;
+        config = ''lua require('dropbar').setup({ icons = { enable = true, kinds = { use_devicons = false, symbols = { File = "", Folder = "" } }} })'';
+      }
     ];
 
     extraConfigLua = ''
