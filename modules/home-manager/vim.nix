@@ -7,10 +7,10 @@
     enable = true;
 
     plugins = {
-      lualine = {
-        enable = true;
-        sections.lualine_x = ["overseer"];
-      };
+      # lualine = {
+      #   enable = true;
+      #   sections.lualine_x = ["overseer"];
+      # };
       telescope.enable = true;
       treesitter.enable = true;
       luasnip.enable = true;
@@ -436,12 +436,300 @@
     ];
 
     extraConfigLua = ''
-      local Terminal  = require('toggleterm.terminal').Terminal
-      local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
+            local Terminal  = require('toggleterm.terminal').Terminal
+            local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
 
-      function _lazygit_toggle()
-        lazygit:toggle()
-      end
+            function _lazygit_toggle()
+              lazygit:toggle()
+            end
+
+            local colors = require("tokyonight.colors")
+            local tokyonight = require("lualine.themes.tokyonight")
+
+
+
+      local icons = {}
+      local sources = {}
+
+      local fmt = function(icon, text, space) return M.icons[icon] .. string.rep(" ", space or 1) .. text end
+
+      icons = {
+        Vim = "",
+        Config = "",
+        Normal = "󰡛",
+        Insert = "󰌌",
+        Terminal = "",
+        Visual = "󰉸",
+        Command = "",
+        Save = "󰳻",
+        NotSaved = "󱙃",
+        Restore = "",
+        Trash = "",
+        Fedora = "",
+        Lua = "",
+        Github = "",
+        Git = "󰊢",
+        GitDiff = "",
+        GitBranch = "",
+        GitCommit = "",
+        Add = "󰐕",
+        Modified = "󰜥",
+        Removed = "󰍴",
+        DiffRemoved = "",
+        Error = "󰅚",
+        Info = "󰋽",
+        Warn = "",
+        Hint = "",
+        Package = "󰏖",
+        FileTree = "󰙅",
+        Folder = "",
+        EmptyFolder = "",
+        FolderClock = "󰪻",
+        FolderOpened = "",
+        File = "",
+        NewFile = "",
+        DefaultFile = "󰈙",
+        Color = "",
+        ColorPicker = "󰴱",
+        ColorOn = "󰌁",
+        ColorOff = "󰹊",
+        Swap = "󰓡",
+        Minimap = "",
+        Window = "",
+        Windows = "",
+        Ellipsis = "…",
+        Search = "",
+        TextSearch = "󱩾",
+        TabSearch = "󱦞",
+        FileSearch = "󰱼",
+        Clear = "",
+        Braces = "󰅩",
+        Exit = "",
+        Debugger = "",
+        Breakpoint = "",
+        History = "",
+        Check = "󰄵",
+        SmallDot = "󰧞",
+        Dots = "󰇘",
+        Install = "",
+        Help = "󰋖",
+        Clipboard = "󰅌",
+        Indent = "",
+        LineWrap = "󰖶",
+        Comment = "󱋄",
+        Close = "󰅘",
+        Open = "󰏋",
+        Toggle = "󰔡",
+        Stop = "",
+        Restart = "",
+        CloseMultiple = "󰱞",
+        NextBuffer = "󰮱,",
+        PrevBuffer = "󰮳",
+        FoldClose = "",
+        FoldOpen = "",
+        Popup = "󰕛",
+        Vertical = "",
+        Horizontal = "",
+        Markdown = "󰽛",
+        Up = "",
+        Down = "",
+        Left = "",
+        Right = "",
+        Variable = "",
+        Symbol = "",
+        Stack = "",
+        Format = "󰉣",
+        Edit = "󰤌",
+        Fix = "",
+        Run = "󰐍",
+        Twilight = "󰖚",
+        Recording = "󰑋",
+        Notification = "󰍢",
+        NotificationDismiss = "󱙍",
+        NotificationLog = "󰍩",
+        Code = "",
+        DropDown = "󰁊",
+        Web = "󰖟",
+        Dependencies = "",
+        Update = "󰚰",
+        Database = "",
+        Pin = "",
+        Book = "󰂽",
+        BookmarkSearch = "󰺄",
+        Download = "󰇚",
+      }
+
+      sources.mode = {
+        "mode",
+        fmt = function(name)
+          local map = {
+            NORMAL = icons.Normal,
+            INSERT = icons.Insert,
+            TERMINAL = icons.Terminal,
+            VISUAL = icons.Visual,
+            ["V-LINE"] = icons.Visual,
+            ["V-BLOCK"] = icons.Visual,
+            ["O-PENDING"] = icons.Ellipsis,
+            COMMAND = icons.Command,
+            REPLACE = icons.Edit,
+            SELECT = icons.Visual,
+          }
+          local icon = map[name] and map[name] or icons.Vim
+          return icon .. " " .. name
+        end,
+        color = function()
+          local colors = require("tokyonight.colors")
+          local mode = vim.fn.mode()
+          local map = {
+            n = colors.default.blue,
+            i = colors.default.green,
+            c = colors.default.yellow,
+            t = colors.default.cyan,
+            R = colors.default.red,
+            v = colors.default.magenta,
+            V = colors.default.magenta,
+            s = colors.default.magenta,
+            S = colors.default.magenta,
+          }
+          return {
+            fg = map[mode] or colors.default.magenta,
+            bg = colors.night.bg,
+          }
+        end,
+      }
+
+      sources.branch = {
+        "branch",
+        icon = icons.GitBranch,
+        color = function()
+          local colors = require("tokyonight.colors")
+          return { bg = colors.night.bg }
+        end,
+      }
+
+      sources.diff = {
+        "diff",
+        symbols = {
+          added = fmt("Add", ""),
+          modified = fmt("Modified", ""),
+          removed = fmt("Removed", ""),
+        },
+        color = function()
+          local colors = require("tokyonight.colors")
+          return { bg = colors.night.bg }
+        end,
+      }
+
+      sources.filetype = { "filetype" }
+
+      sources.diagnostics = {
+        "diagnostics",
+        color = function()
+          local colors = require("tokyonight.colors")
+          return { bg = colors.night.bg }
+        end,
+      }
+
+      sources.encoding = {
+        "encoding",
+        color = function()
+          local colors = require("tokyonight.colors")
+          return { fg = colors.default.blue, bg = colors.night.bg }
+        end,
+      }
+
+      sources.fileformat = {
+        "fileformat",
+        color = function()
+          local colors = require("tokyonight.colors")
+          return { fg = colors.default.blue, bg = colors.night.bg }
+        end,
+      }
+
+      sources.indentation = {
+        "indentation",
+        fmt = function()
+          local type = vim.bo[0].expandtab and "spaces" or "tabs"
+          local value = vim.bo[0].shiftwidth
+          return type .. ": " .. value
+        end,
+        color = function()
+          local colors = require("tokyonight.colors")
+          return { fg = colors.default.blue, bg = colors.night.bg }
+        end,
+      }
+
+      sources.progress = {
+        "progress",
+        fmt = function(location) return vim.trim(location) end,
+        color = function()
+          local colors = require("tokyonight.colors")
+          return { fg = colors.default.purple, bg = colors.night.bg }
+        end,
+      }
+
+      sources.location = {
+        "location",
+        fmt = function(location) return vim.trim(location) end,
+        color = function()
+          local colors = require("tokyonight.colors")
+          return { fg = colors.default.purple, bg = colors.night.bg }
+        end,
+      }
+
+      sources.macro = {
+        function() return vim.fn.reg_recording() end,
+        icon = icons.Recording,
+        color = function()
+          local colors = require("tokyonight.colors")
+          return { fg = colors.default.red }
+        end,
+      }
+
+      sources.lsp = {
+        function()
+          local bufnr = vim.api.nvim_get_current_buf()
+          local clients = vim.lsp.get_clients({ bufnr = bufnr })
+          if next(clients) == nil then return "" end
+          local attached_clients = vim.tbl_map(function(client) return client.name end, clients)
+          return table.concat(attached_clients, ", ")
+        end,
+        icon = icons.Braces,
+        color = function()
+          local colors = require("tokyonight.colors")
+          return { fg = colors.default.comment, bg = colors.night.bg }
+        end,
+      }
+
+      sources.gap = {
+        function() return " " end,
+        color = function()
+          local colors = require("tokyonight.colors")
+          return { bg = colors.night.bg }
+        end,
+        padding = 0,
+      }
+
+            local opts = {
+              options = {
+                component_separators = { left = "", right = "" },
+                section_separators = { left = "", right = "" },
+              },
+              sections = {
+                lualine_a = { sources.mode },
+                lualine_b = { sources.branch, sources.diff },
+                lualine_c = { sources.filetype, sources.macro },
+                lualine_x = { sources.lsp, sources.diagnostics },
+                lualine_y = { sources.indentation, sources.encoding, sources.fileformat },
+                lualine_z = { sources.progress, sources.location },
+              },
+            };
+
+            vim.opt.laststatus = 3
+            tokyonight.normal.c.bg = colors.night.bg
+            opts.options.theme = tokyonight
+
+            require("lualine").setup(opts)
     '';
   };
 }
