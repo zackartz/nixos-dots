@@ -106,6 +106,7 @@
     plugins.notify.enable = true;
 
     plugins.gitsigns.enable = true;
+    plugins.crates-nvim.enable = true;
 
     # colorschemes.dracula.enable = true;
     # colorschemes.catppuccin.enable = true;
