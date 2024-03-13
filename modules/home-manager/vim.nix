@@ -193,6 +193,29 @@
 
     plugins.bufferline = {
       enable = true;
+      diagnostics = "nvim_lsp";
+      diagnosticsUpdateInInsert = true;
+      diagnosticsIndicator = null;
+      offsets = [
+        {
+          filetype = "neo-tree";
+          text = " NeoTree";
+          text_align = "left";
+          separator = "│";
+        }
+        {
+          filetype = "dapui_watches";
+          text = " DapUI";
+          text_align = "left";
+          separator = "|";
+        }
+        {
+          filetype = "dbui";
+          text = " DbUI";
+          text_align = "left";
+          separator = "|";
+        }
+      ];
     };
 
     # plugins.nvim-jdtls = {
