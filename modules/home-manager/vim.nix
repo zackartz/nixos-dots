@@ -340,11 +340,11 @@
     extraPlugins = with pkgs.vimPlugins; [
       {
         plugin = dressing-nvim;
-        config = ''require("dressing").setup()'';
+        config = ''lua require("dressing").setup()'';
       }
       {
         plugin = overseer-nvim;
-        config = ''require('overseer').setup({ task_list = { direction = "bottom" } })'';
+        config = ''lua require('overseer').setup({ task_list = { direction = "bottom" } })'';
       }
     ];
 
