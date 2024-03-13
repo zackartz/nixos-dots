@@ -93,6 +93,8 @@
     pkgs.mongodb-compass
     pkgs.postman
 
+    pkgs.openvpn
+
     pkgs.parsec-bin
 
     # # You can also create simple shell scripts directly inside your
