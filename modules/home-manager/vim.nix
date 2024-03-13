@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   config = {
     enable = true;
 
@@ -218,6 +222,43 @@
       ];
     };
 
+    plugins.indent-blankline = {
+      enable = true;
+      extraOptions = {
+        exclude = {
+          buftypes = [
+            "nofile"
+            "terminal"
+          ];
+          filetypes = [
+            "help"
+            "startify"
+            "aerial"
+            "alpha"
+            "dashboard"
+            "neogitstatus"
+            "neo-tree"
+            "TelescopePrompt"
+          ];
+          scope = {
+            show_start = false;
+            show_end = false;
+            highlight = ["@keyword"];
+            char = "▏";
+            include = {
+              node_type = {
+                lua = ["table_constructor"];
+              };
+            };
+          };
+          whitespace = {
+            remove_blankline_trail = true;
+          };
+          indent = {char = "▏";};
+        };
+      };
+    };
+
     # plugins.nvim-jdtls = {
     #   enable = true;
     #
@@ -304,10 +345,6 @@
       {
         plugin = overseer-nvim;
         config = ''lua require('overseer').setup({ task_list = { direction = "bottom" } })'';
-      }
-      {
-        plugin = dropbar-nvim;
-        config = ''lua require('dropbar').setup({ icons = { enable = true, kinds = { use_devicons = false, symbols = { File = "", Folder = "" } }} })'';
       }
     ];
 
