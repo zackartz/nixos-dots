@@ -409,7 +409,11 @@
           {name = "path";}
           {name = "buffer";}
         ];
-        snippet = {expand = "luasnip";};
+        snippet = {
+          expand = ''            function(args)
+              require('luasnip').lsp_expand(args.body)
+            end'';
+        };
         mappingPresets = ["insert"];
         mapping = {
           "<C-Space>" = "cmp.mapping.complete()";
