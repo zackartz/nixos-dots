@@ -1,9 +1,13 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   services = {
     udiskie.enable = true;
     gpg-agent = {
       enable = true;
-      pinentryFlavor = "gnome2";
+      pinentryPackage = lib.mkForce pkgs.pinentry-gnome3;
       enableSshSupport = true;
       enableZshIntegration = true;
     };
