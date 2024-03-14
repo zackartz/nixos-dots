@@ -362,6 +362,8 @@
           installRustc = false;
           installCargo = false;
         };
+        svelte.enable = true;
+        tailwindcss.enable = true;
         nil_ls.enable = true;
       };
       keymaps = {
