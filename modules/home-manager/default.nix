@@ -105,7 +105,7 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
     (pkgs.writeShellScriptBin "rebuild" ''
-      #!/usr/bin/env bash
+      #!${pkgs.bash}/bin/bash
       set -e
       pushd ~/nixos/
       alejandra . &>/dev/null
