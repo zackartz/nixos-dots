@@ -5,5 +5,6 @@
       terminal = "kitty";
       startup = [{command = "firefox";}];
     };
+    extraOptions = ["--unsupported-gpu"];
   };
 }
