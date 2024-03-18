@@ -23,6 +23,8 @@
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
+  networking.nameservers = ["1.1.1.1" "1.0.0.1"];
+
   virtualisation.vmVariant = {
     # following configuration is added only when building VM with build-vm
     virtualisation = {
