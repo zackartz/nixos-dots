@@ -14,7 +14,8 @@
 
     ./swayidle.nix
 
-    ../rice/hyprland
+    # ../rice/hyprland
+    ../rice/sway
     ../rice/gtk.nix
     ../rice/kitty.nix
     ../rice/waybar

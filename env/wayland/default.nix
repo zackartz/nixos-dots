@@ -6,7 +6,7 @@
   imports = [./fonts.nix];
 
   environment.etc."greetd/environments".text = ''
-    Hyprland
+    sway
   '';
 
   services = {
@@ -14,7 +14,7 @@
       enable = true;
       settings = rec {
         initial_session = {
-          command = "Hyprland";
+          command = "sway";
           user = "zack";
         };
         default_session = initial_session;
@@ -58,9 +58,10 @@
   xdg.portal = {
     enable = true;
     config.common.default = "*";
+    wlr.enable = true;
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-hyprland
+      # pkgs.xdg-desktop-portal-hyprland
     ];
   };
 
