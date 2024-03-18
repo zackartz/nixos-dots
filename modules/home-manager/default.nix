@@ -112,7 +112,7 @@
       alejandra . &>/dev/null
       git add .
       echo "[REBUILD]: rebuilding nixos"
-      sudo nixos-rebuild switch --flake ~/nixos#earth
+      sudo nixos-rebuild switch --flake ~/nixos#earth --max-jobs=4
       gen=$(nixos-rebuild list-generations | grep current)
       git commit -am "$gen"
       git push origin main
