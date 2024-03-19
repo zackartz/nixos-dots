@@ -149,7 +149,7 @@
     };
   };
 
-  home.file.".config/nvim/nvconfig.lua" = {
+  home.file.".config/nvim/lua/nvconfig.lua" = {
     source = ./nvconfig.lua;
   };
 
