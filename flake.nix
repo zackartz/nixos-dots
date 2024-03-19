@@ -32,6 +32,10 @@
     kb-gui = {
       url = "github:zackartz/kb-gui";
     };
+
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+    };
   };
 
   outputs = {
@@ -41,6 +45,9 @@
   } @ inputs: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
+    overlays = [
+      inputs.neovim-nightly-overlay.overlay
+    ];
   in {
     nixosConfigurations.earth = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
