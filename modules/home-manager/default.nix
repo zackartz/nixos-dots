@@ -149,6 +149,10 @@
     };
   };
 
+  home.file.".config/nvim/nvconfig.lua" = {
+    source = ./nvconfig.lua;
+  };
+
   programs.nixvim = ./vim.nix;
 
   # Let Home Manager install and manage itself.

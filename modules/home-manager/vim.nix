@@ -301,6 +301,8 @@
       local Terminal  = require('toggleterm.terminal').Terminal
       local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
 
+      vim.g.base46_cache = vim.fn.stdpath('data') .. '/base46_cache/'
+
       function _lazygit_toggle()
         lazygit:toggle()
       end
