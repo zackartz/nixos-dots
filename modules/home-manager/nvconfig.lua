@@ -102,3 +102,5 @@ M.base46 = {
     "whichkey",
   },
 }
+
+return M
