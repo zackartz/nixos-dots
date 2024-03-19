@@ -149,11 +149,14 @@
     };
   };
 
-  home.file.".config/nvim/lua/nvconfig.lua" = {
-    source = ./nvconfig.lua;
+  home.file.".config/nvim" = {
+    source = builtins.fetchGit {
+      url = "https://github.com/luckasRanarison/nvimrc";
+      rev = "87c72e79fcc9a2dda9fd04211a946bba78f9f70b";
+    };
   };
 
-  programs.nixvim = ./vim.nix;
+  # programs.nixvim = ./vim.nix;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
