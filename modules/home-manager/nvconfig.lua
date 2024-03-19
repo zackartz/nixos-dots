@@ -102,5 +102,3 @@ M.base46 = {
     "whichkey",
   },
 }
-
-return vim.tbl_deep_extend("force", M, require "chadrc")
