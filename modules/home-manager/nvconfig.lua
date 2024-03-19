@@ -8,7 +8,7 @@ M.ui = {
   changed_themes = {},
   theme_toggle = { "rosepine", "one_light" },
   theme = "rosepine", -- default theme
-  transparency = false,
+  transparency = true,
 
   cmp = {
     icons = true,
