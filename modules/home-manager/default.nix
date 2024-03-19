@@ -13,6 +13,7 @@
     inputs.nixvim.homeManagerModules.nixvim
 
     ./swayidle.nix
+    ./vim
 
     ../rice/hyprland
     # ../rice/sway
@@ -103,8 +104,6 @@
     pkgs.parsec-bin
     pkgs.filezilla
 
-    pkgs.neovim-nightly
-
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
     # # environment:
@@ -151,13 +150,6 @@
     };
     Service = {
       ExecStart = "${inputs.kb-gui.packages.${pkgs.system}.kb}/bin/kb";
-    };
-  };
-
-  home.file.".config/nvim" = {
-    source = builtins.fetchGit {
-      url = "https://github.com/luckasRanarison/nvimrc";
-      rev = "87c72e79fcc9a2dda9fd04211a946bba78f9f70b";
     };
   };
 
