@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  inputs,
   ...
 }:
 with lib; let
@@ -22,6 +23,7 @@ in {
   programs.waybar = {
     enable = true;
     style = import ./style.nix;
+    package = inputs.waybar.packages.x86_64-linux.waybar;
     systemd = {
       enable = true;
       target = "hyprland-session.target";
