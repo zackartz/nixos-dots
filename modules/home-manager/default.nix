@@ -13,7 +13,7 @@
     inputs.nixvim.homeManagerModules.nixvim
 
     ./swayidle.nix
-    ./vim/default.nix
+    #./vim/default.nix
 
     ../rice/hyprland
     # ../rice/sway
