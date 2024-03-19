@@ -53,7 +53,6 @@ return {
         "yaml",
         "sql",
         "query",
-        "icelang",
         "java",
         "http",
         "rasi",
