@@ -298,21 +298,21 @@
     ];
 
     extraConfigLua = ''
-      local Terminal  = require('toggleterm.terminal').Terminal
-      local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
+            local Terminal  = require('toggleterm.terminal').Terminal
+            local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
 
-      vim.g.base46_cache = vim.fn.stdpath('data') .. '/base46_cache/'
+            vim.g.base46_cache = vim.fn.stdpath('data') .. '/base46_cache/'
 
-      function _lazygit_toggle()
-        lazygit:toggle()
+            function _lazygit_toggle()
+              lazygit:toggle()
+            end
+
+
+      local integrations = require("nvconfig").base46.integrations
+
+      for _, name in ipairs(integrations) do
+        dofile(vim.g.base46_cache .. name)
       end
-
-
-local integrations = require("nvconfig").base46.integrations
-
-for _, name in ipairs(integrations) do
-  dofile(vim.g.base46_cache .. name)
-end
     '';
   };
 }
