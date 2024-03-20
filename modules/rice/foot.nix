@@ -28,8 +28,7 @@
         bright7 = "e0def4"; # bright white (Text)
       };
       csd = {
-        font = "Iosevka Nerd Font Mono";
-        size = 14;
+        font = "Iosevka Nerd Font Mono:size=14";
         border-width = 25;
       };
     };
