@@ -33,10 +33,6 @@
       url = "github:zackartz/kb-gui";
     };
 
-    neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
-    };
-
     waybar = {
       url = "github:Alexays/Waybar";
     };

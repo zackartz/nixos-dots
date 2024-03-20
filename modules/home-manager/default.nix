@@ -30,9 +30,9 @@
       allowUnfree = true;
       allowUnfreePredicate = _: true;
     };
-    overlays = [
-      inputs.neovim-nightly-overlay.overlay
-    ];
+    #    overlays = [
+    #      inputs.neovim-nightly-overlay.overlay
+    #    ];
   };
 
   nix.gc = {
