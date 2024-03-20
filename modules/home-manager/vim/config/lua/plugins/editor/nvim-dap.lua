@@ -18,6 +18,7 @@ return {
       },
     },
     { "rcarriga/nvim-dap-ui", opts = {} },
+{ "nvim-neotest/nvim-nio" },
     {
       "theHamsta/nvim-dap-virtual-text",
       opts = {
