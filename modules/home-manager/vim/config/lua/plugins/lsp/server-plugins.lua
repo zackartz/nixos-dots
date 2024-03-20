@@ -15,35 +15,9 @@ return {
       })
     end,
   },
-  {
-    "simrat39/rust-tools.nvim",
-    ft = "rust",
-    config = function()
-      require("rust-tools").setup({
-        tools = {
-          inlay_hints = {
-            auto = false,
-          },
-        },
-        server = {
-          settings = {
-            ["rust-analyzer"] = {
-              cargo = {
-                features = "all",
-              },
-              checkOnSave = {
-                features = "all",
-              },
-            },
-          },
-        },
-        dap = {
-          adapter = require("rust-tools.dap").get_codelldb_adapter(
-            "/home/luckas/.local/share/nvim/mason/packages/codelldb/extension/adapter/codelldb",
-            "/home/luckas/.local/share/nvim/mason/packages/codelldb/extension/lldb/lib/liblldb.so"
-          ),
-        },
-      })
-    end,
-  },
+{
+  'mrcjkb/rustaceanvim',
+  version = '^4', -- Recommended
+  ft = { 'rust' },
+}
 }
