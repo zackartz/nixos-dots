@@ -29,7 +29,8 @@
       };
       csd = {
         font = "Iosevka Nerd Font Mono";
-        pad = "8x8";
+        size = 14;
+        border-width = 25;
       };
     };
   };
