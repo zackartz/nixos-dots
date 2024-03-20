@@ -6,6 +6,7 @@
         color = "191724 e0def4";
       };
       colors = {
+        alpha = "0.75";
         background = "191724";
         foreground = "e0def4";
         regular0 = "26233a"; # black (Overlay)
@@ -28,6 +29,7 @@
       };
       csd = {
         font = "Iosevka Nerd Font Mono";
+        pad = "8x8";
       };
     };
   };
