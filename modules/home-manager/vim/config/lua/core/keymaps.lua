@@ -29,6 +29,9 @@ return {
     [l("uI")] = { f.set_indent_type, fmt("Indent", "Set indentation type") },
     [l("us")] = { cmd("nohlsearch"), fmt("Clear", "Clear search highlights") },
 
+
+    ["<F36>"] = { cmd("OverseerRun"), "Overseer Run" },
+    ["<F48>"] = { cmd("OverseerToggle"), "Overseer Toggle" },
     -- Neotree
     [l("e")] = { cmd("Neotree toggle"), fmt("FileTree", "Toggle Neotree") },
 
