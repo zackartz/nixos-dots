@@ -1,3 +1,0 @@
-{
-  programs.wezterm.enable = true;
-}

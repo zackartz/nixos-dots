@@ -23,7 +23,7 @@ return {
 		fillchars = "eob: ",
 		modeline = false,
 		conceallevel = 2,
-		mouse = "",
+		mouse = "a",
 		clipboard = "unnamedplus",
 	},
 
