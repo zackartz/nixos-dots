@@ -16,7 +16,7 @@
     ./vim/default.nix
 
     ../rice/hyprland
-    # ../rice/sway
+    ../rice/sway
     ../rice/gtk.nix
     ../rice/kitty.nix
     ../rice/waybar
