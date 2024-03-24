@@ -109,6 +109,8 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+
+    pkgs.killall
     (pkgs.writeShellScriptBin "rebuild" ''
       #!${pkgs.bash}/bin/bash
       set -e
