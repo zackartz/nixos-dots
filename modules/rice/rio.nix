@@ -55,7 +55,7 @@
       };
 
       window = {
-        background-opacity = 0.75;
+        # background-opacity = 0.75;
       };
     };
   };
