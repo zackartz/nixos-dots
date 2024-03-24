@@ -19,6 +19,7 @@
     ../rice/kitty.nix
     ../rice/waybar
     ../rice/dunst.nix
+    ../rice/rio.nix
     ../rice/wofi.nix
     ../shell
   ];

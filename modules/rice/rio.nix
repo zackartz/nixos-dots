@@ -1,5 +1,5 @@
 {
-  programas.rio = {
+  programs.rio = {
     enable = true;
     settings = {
       colors = {
