@@ -29,11 +29,30 @@
       fonts = {
         size = 14;
 
-        family = "Iosevka";
+        regular = {
+          family = "Iosevka";
+          style = "normal";
+          weight = 500;
+        };
+        bold = {
+          family = "Iosevka";
+          style = "normal";
+          weight = 600;
+        };
+        italic = {
+          family = "Iosevka";
+          style = "italic";
+          weight = 500;
+        };
+        bold-italic = {
+          family = "Iosevka";
+          style = "italic";
+          weight = 600;
+        };
       };
 
       window = {
-        background-opacity = 0.8;
+        background-opacity = 0.65;
       };
     };
   };
