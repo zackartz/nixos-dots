@@ -52,7 +52,7 @@
       };
 
       window = {
-        # background-opacity = 0.65;
+        background-opacity = 0.8;
       };
     };
   };
