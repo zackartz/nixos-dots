@@ -2,6 +2,7 @@
   programs.rio = {
     enable = true;
     settings = {
+      padding-x = 10;
       colors = {
         background = "#1a1b26";
         foreground = "#e0def4";
