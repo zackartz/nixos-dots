@@ -3,7 +3,7 @@
     enable = true;
     settings = {
       colors = {
-        background = "#191724";
+        background = "#1a1b26";
         foreground = "#e0def4";
         selection-background = "#e0def4";
         selection-foreground = "#191724";
@@ -27,7 +27,7 @@
       };
 
       fonts = {
-        size = 32;
+        size = 24;
 
         regular = {
           family = "Iosevka";
