@@ -27,7 +27,7 @@
       };
 
       fonts = {
-        size = 14;
+        size = 32;
 
         regular = {
           family = "Iosevka";
@@ -52,7 +52,7 @@
       };
 
       window = {
-        background-opacity = 0.65;
+        # background-opacity = 0.65;
       };
     };
   };
