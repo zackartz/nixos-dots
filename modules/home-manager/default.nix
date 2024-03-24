@@ -10,8 +10,6 @@
   home.homeDirectory = "/home/zack";
 
   imports = [
-    inputs.nixvim.homeManagerModules.nixvim
-
     ./swayidle.nix
     ./vim/default.nix
 
