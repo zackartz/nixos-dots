@@ -32,22 +32,22 @@
         regular = {
           family = "Iosevka";
           style = "normal";
-          weight = 500;
+          weight = 600;
         };
         bold = {
           family = "Iosevka";
           style = "normal";
-          weight = 600;
+          weight = 800;
         };
         italic = {
           family = "Iosevka";
           style = "italic";
-          weight = 500;
+          weight = 600;
         };
         bold-italic = {
           family = "Iosevka";
           style = "italic";
-          weight = 600;
+          weight = 800;
         };
       };
 
