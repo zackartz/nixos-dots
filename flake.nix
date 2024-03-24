@@ -35,6 +35,10 @@
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
     };
+
+    rio-term = {
+      url = "github:raphamorim/rio";
+    };
   };
 
   outputs = {
