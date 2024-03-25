@@ -29,7 +29,7 @@
       };
 
       fonts = {
-        size = 24;
+        size = 18;
 
         # family = "Iosevka Nerd Font Mono";
         regular = {
