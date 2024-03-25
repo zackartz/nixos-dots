@@ -31,27 +31,27 @@
       fonts = {
         size = 24;
 
-        family = "Iosevka Nerd Font Mono";
-        # regular = {
-        #   family = "Iosevka";
-        #   style = "normal";
-        #   weight = 600;
-        # };
-        # bold = {
-        #   family = "Iosevka";
-        #   style = "normal";
-        #   weight = 800;
-        # };
-        # italic = {
-        #   family = "Iosevka";
-        #   style = "italic";
-        #   weight = 600;
-        # };
-        # bold-italic = {
-        #   family = "Iosevka";
-        #   style = "italic";
-        #   weight = 800;
-        # };
+        # family = "Iosevka Nerd Font Mono";
+        regular = {
+          family = "Iosevka Nerd Font Mono";
+          style = "normal";
+          weight = 600;
+        };
+        bold = {
+          family = "Iosevka Nerd Font Mono";
+          style = "normal";
+          weight = 800;
+        };
+        italic = {
+          family = "Iosevka Nerd Font Mono";
+          style = "italic";
+          weight = 600;
+        };
+        bold-italic = {
+          family = "Iosevka Nerd Font Mono";
+          style = "italic";
+          weight = 800;
+        };
       };
 
       window = {
