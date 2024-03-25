@@ -37,7 +37,7 @@
     };
 
     rio-term = {
-      url = "github:raphamorim/rio";
+      url = "github:zackartz/rio";
     };
   };
 
