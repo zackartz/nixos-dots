@@ -554,11 +554,11 @@
         "systems": "systems_6"
       },
       "locked": {
-        "lastModified": 1711327484,
-        "narHash": "sha256-FK+273OZj10zmOkdznew/19XKLH7ifwyHAD4OYErksw=",
+        "lastModified": 1711387645,
+        "narHash": "sha256-3Kxs6XlKwGo2HVutBqQ4GymT/0+X3b/Z/zTc94545mc=",
         "owner": "zackartz",
         "repo": "rio",
-        "rev": "e5b177eeb904a5e531fb658d3caf770f27740bd4",
+        "rev": "d348bd8abb96ae8bfe30d7d01e36c406193cb9ce",
         "type": "github"
       },
       "original": {
