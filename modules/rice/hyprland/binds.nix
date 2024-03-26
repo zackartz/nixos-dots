@@ -23,7 +23,7 @@ in {
   wayland.windowManager.hyprland.settings = {
     bind =
       [
-        ''${mod},RETURN,exec,rio''
+        ''${mod},RETURN,exec,kitty''
 
         "${mod},D,exec,wofi --show drun"
         "${mod},Q,killactive"
