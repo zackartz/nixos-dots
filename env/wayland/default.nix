@@ -5,21 +5,25 @@
 }: {
   imports = [./fonts.nix];
 
-  environment.etc."greetd/environments".text = ''
-    Hyprland
-  '';
+  # environment.etc."greetd/environments".text = ''
+  #   Hyprland
+  # '';
 
   services = {
-    greetd = {
+    #   greetd = {
+    #     enable = true;
+    #     settings = rec {
+    #       initial_session = {
+    #         command = "Hyprland";
+    #         user = "zack";
+    #       };
+    #       default_session = initial_session;
+    #     };
+    #   };
+    xserver.displayManager.gdm = {
       enable = true;
-      settings = rec {
-        initial_session = {
-          command = "Hyprland";
-          user = "zack";
-        };
-        default_session = initial_session;
-      };
     };
+    xserver.desktopManager.gnome.enable = true;
   };
 
   environment = {
@@ -60,7 +64,7 @@
     config.common.default = "*";
     wlr.enable = true;
     extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
+      # pkgs.xdg-desktop-portal-gtk
       # pkgs.xdg-desktop-portal-hyprland
     ];
   };

@@ -13,9 +13,9 @@
     ./swayidle.nix
     ./vim/default.nix
 
-    ../rice/hyprland
+    # ../rice/hyprland
     ../rice/sway
-    ../rice/gtk.nix
+    # ../rice/gtk.nix
     ../rice/kitty.nix
     ../rice/waybar
     ../rice/dunst.nix
