@@ -16,6 +16,10 @@
       "result"
       "result-*"
     ];
+    signing = {
+      key = "5B53E53A9A514DBA";
+      signByDefault = true;
+    };
     extraConfig = {
       init = {defaultBranch = "main";};
       delta = {
