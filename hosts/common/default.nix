@@ -39,6 +39,8 @@
     options = "--delete-older-than 30d";
   };
 
+  nix.trustedUsers = ["root" "zack"];
+
   services.udev.extraRules = ''KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0660", GROUP="plugdev"'';
   # Enable networking
   networking.networkmanager.enable = true;
