@@ -7,7 +7,10 @@
 
       output = {
         DP-1 = {
-          mode = "2560x1440@239.972Hz";
+          mode = "2560x1440@240Hz";
+        };
+        HDMI-A-1 = {
+          mode = "disable";
         };
       };
     };
