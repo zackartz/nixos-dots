@@ -6,7 +6,7 @@
   imports = [./fonts.nix];
 
   environment.etc."greetd/environments".text = ''
-    Hyprland
+    sway
   '';
 
   services = {
@@ -61,6 +61,7 @@
     wlr.enable = true;
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-wlr
       # pkgs.xdg-desktop-portal-hyprland
     ];
   };
