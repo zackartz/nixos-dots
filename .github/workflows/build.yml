@@ -37,7 +37,7 @@ jobs:
       - name: "Install Cachix ❄️"
         uses: cachix/cachix-action@v14
         with:
-          name: zackartz-nix-config
+          name: zackartz
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
          
         
