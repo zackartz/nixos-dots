@@ -43,7 +43,7 @@ in {
         "${mod},mouse_down,workspace,e+1" # move to the next ws
         "${mod},mouse_up,workspace,e-1" # move to the previous ws
 
-        "${mod},Print,exec, pauseshot"
+        "${mod},Print,exec, hyprshot -m region --clipboard-only"
         ",Print,exec, grim - | wl-copy"
         "${modshift},O,exec,wl-ocr"
 
