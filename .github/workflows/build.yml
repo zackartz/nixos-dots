@@ -37,10 +37,12 @@ jobs:
       - name: "Install Cachix ❄️"
         uses: cachix/cachix-action@v14
         with:
-          name: shades-nixos-config
+          name: zackartz-nix-config
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
          
         
       - name: "Build NixOS config ❄️"
+        env:
+          CACHIX_SIGNING_KEY: "${{ secrets.CACHIX_SIGNING_KEY }}"
         run: |
           nix build .\#nixosConfigurations."earth".config.system.build.toplevel 
