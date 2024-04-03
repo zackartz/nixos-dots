@@ -39,7 +39,11 @@
     options = "--delete-older-than 30d";
   };
 
-  nix.settings.trusted-users = ["root" "zack"];
+  nix.settings = {
+    trusted-users = ["root" "zack"];
+    substituters = ["https://hyprland.cachix.org" "https://zackartz.cachix.org" "https://cache.nixos.org"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" "zackartz.cachix.org-1:nrEfVZF8MVX0Lnt73KwYzH2kwDzFuAoR5VPjuUd4R30="];
+  };
 
   services.udev.extraRules = ''KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0660", GROUP="plugdev"'';
   # Enable networking
