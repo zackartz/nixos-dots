@@ -94,6 +94,7 @@
     pkgs.jetbrains.datagrip
 
     pkgs.ungoogled-chromium
+    pkgs.google-chrome # fuck
 
     pkgs.mongodb-compass
     pkgs.postman
