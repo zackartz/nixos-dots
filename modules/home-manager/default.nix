@@ -71,7 +71,6 @@
     pkgs.discord
     pkgs.slack
     (pkgs.nerdfonts.override {fonts = ["Iosevka"];})
-    pkgs.rustup
     pkgs.git
     pkgs.lazygit
     pkgs.spotify
