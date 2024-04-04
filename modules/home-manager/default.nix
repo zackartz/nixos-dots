@@ -13,6 +13,8 @@
     ./swayidle.nix
     ./vim/default.nix
 
+    ./gerbera.nix
+
     ../rice/hyprland
     ../rice/sway
     ../rice/gtk.nix
