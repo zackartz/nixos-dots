@@ -48,6 +48,10 @@
     };
   };
 
+  users.users.minidlna = {
+    extraGroups = ["users"];
+  };
+
   # services.openssh = {
   #   enable = true;
   #   PasswordAuthentication = true;
