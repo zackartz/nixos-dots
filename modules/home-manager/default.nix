@@ -103,6 +103,7 @@
     pkgs.parsec-bin
     pkgs.filezilla
     pkgs.steam
+    pkgs.gerbera
 
     pkgs.devenv
     pkgs.ghidra
