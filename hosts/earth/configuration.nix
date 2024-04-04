@@ -45,6 +45,7 @@
       notify_interval = 60;
       friendly_name = "ZACKPC";
       media_dir = ["A,/home/zack/Music"];
+      inotify = "yes";
     };
   };
 
