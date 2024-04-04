@@ -38,6 +38,16 @@
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"]; # or "nvidiaLegacy470 etc.
 
+  services.minidlna = {
+    enable = true;
+    openFirewall = true;
+    settings = {
+      notify_interval = 60;
+      friendly_name = "ZACKPC";
+      media_dir = ["/home/zack/Music/"];
+    };
+  };
+
   # services.openssh = {
   #   enable = true;
   #   PasswordAuthentication = true;
