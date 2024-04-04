@@ -4,6 +4,6 @@
 
 my customized versions of other's dotfiles
 
-major credits to [siiodmy](https://github.com/sioodmy/dotfiles) and [luckasRanarison](https://github.com/luckasRanarison/nvimrc).
+major credits to [sioodmy](https://github.com/sioodmy/dotfiles) and [luckasRanarison](https://github.com/luckasRanarison/nvimrc).
 
 could not have done this without their work :)
