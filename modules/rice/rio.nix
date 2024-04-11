@@ -31,7 +31,7 @@
       fonts = {
         size = 18;
 
-        family = "Iosevka Nerd Font Mono";
+        family = "Iosevka";
         # regular = {
         #   family = "Iosevka Nerd Font Mono";
         #   style = "normal";
@@ -55,7 +55,7 @@
       };
 
       window = {
-        # background-opacity = 0.75;
+        background-opacity = 0.75;
       };
     };
   };
