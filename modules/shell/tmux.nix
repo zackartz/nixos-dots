@@ -2,7 +2,7 @@
   dreamsofcode-io-catppuccin-tmux =
     pkgs.tmuxPlugins.mkTmuxPlugin
     {
-      pluginName = "dreamsofcode-io-catppuccin-tmux";
+      pluginName = "catppuccin";
       version = "unstable-2023-01-06";
       src = pkgs.fetchFromGitHub {
         owner = "dreamsofcode-io";
