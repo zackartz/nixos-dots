@@ -16,7 +16,7 @@
     while inotifywait -e close_write $1; do pandoc $@; done
   '';
 in {
-  imports = [./zsh ./zsh/tools.nix ./git.nix ./starship.nix];
+  imports = [./zsh ./zsh/tools.nix ./tmux.nix ./git.nix ./starship.nix];
 
   home.packages = with pkgs; [
     texlive
