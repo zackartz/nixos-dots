@@ -1,14 +1,14 @@
 {pkgs, ...}: let
-  tmux-super-fingers =
+  dreamsofcode-io-catppuccin-tmux =
     pkgs.tmuxPlugins.mkTmuxPlugin
     {
-      pluginName = "tmux-super-fingers";
+      pluginName = "dreamsofcode-io-catppuccin-tmux";
       version = "unstable-2023-01-06";
       src = pkgs.fetchFromGitHub {
-        owner = "artemave";
-        repo = "tmux_super_fingers";
-        rev = "2c12044984124e74e21a5a87d00f844083e4bdf7";
-        sha256 = "sha256-cPZCV8xk9QpU49/7H8iGhQYK6JwWjviL29eWabuqruc=";
+        owner = "dreamsofcode-io";
+        repo = "catppuccin-tmux";
+        rev = "b4e0715356f820fc72ea8e8baf34f0f60e891718";
+        sha256 = "sha256-FJHM6LJkiAwxaLd5pnAoF3a7AE1ZqHWoCpUJE0ncCA8=";
       };
     };
 in {
@@ -17,6 +17,10 @@ in {
     shell = "${pkgs.zsh}/bin/zsh";
     historyLimit = 100000;
     plugins = with pkgs; [
+      {
+        plugin = dreamsofcode-io-catppuccin-tmux;
+        extraConfig = "";
+      }
       tmuxPlugins.sensible
       tmuxPlugins.vim-tmux-navigator
     ];
