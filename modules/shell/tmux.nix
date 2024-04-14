@@ -18,6 +18,7 @@ in {
     historyLimit = 100000;
     plugins = with pkgs; [
       tmuxPlugins.sensible
+      tmuxPlugins.vim-tmux-navigator
     ];
     extraConfig = ''
 
