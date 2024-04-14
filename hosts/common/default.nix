@@ -135,6 +135,7 @@
       rio
       telegram-desktop
       kitty
+      mailspring
       #  thunderbird
     ];
   };
