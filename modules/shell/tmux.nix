@@ -21,7 +21,14 @@ in {
       tmuxPlugins.vim-tmux-navigator
     ];
     extraConfig = ''
+      set-option -sa terminal-overrides ",xterm*:Tc"
 
+      unbind C-b
+      set -g prefix C-Space
+      bind C-Space send-prefix
+
+      bind -n M-H previous-window
+      bind -n M-L next-window
     '';
   };
 }
