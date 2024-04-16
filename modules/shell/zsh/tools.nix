@@ -53,7 +53,7 @@
         theme = "catppuccin-frappe";
       };
       themes = {
-        catppuccin-mocha = {
+        catppuccin-frappe = {
           src = pkgs.fetchFromGitHub {
             owner = "catppuccin";
             repo = "bat";
