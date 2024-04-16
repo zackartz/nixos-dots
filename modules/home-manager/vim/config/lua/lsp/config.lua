@@ -25,18 +25,6 @@ M.set_keymaps = function(client, bufnr)
 end
 
 require("lspconfig").tsserver.setup({})
-local handlers = require("lsp.handlers") -- Adjust the path as necessary
 
-local function setup_all_servers()
-	for server, setup_fn in pairs(handlers) do
-		if type(setup_fn) == "function" then
-			-- Call the setup function for each server
-			setup_fn()
-			print("Setup LSP server:", server) -- Optional: for debugging
-		end
-	end
-end
-
-setup_all_servers()
 
 return M

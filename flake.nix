@@ -82,7 +82,7 @@
         buildInputs = [
           pkgs.nil
           pkgs.stylua
-          pkgs.nodePackages.coc-sumneko-lua
+          pkgs.lua-language-server
           pkgs.luajitPackages.lua-lsp
         ];
       };
