@@ -8,6 +8,7 @@ return {
 			debug = false,
 			sources = {
 				null_ls.builtins.formatting.prettierd,
+				null_ls.builtins.formatting.alejandra,
 				null_ls.builtins.formatting.stylua,
 				null_ls.builtins.formatting.rustfmt.with({
 					extra_args = { "--edition=2021" },
