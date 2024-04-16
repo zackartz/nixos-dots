@@ -83,6 +83,7 @@
           pkgs.nil
           pkgs.stylua
           pkgs.nodePackages.coc-sumneko-lua
+          pkgs.luajitPackages.lua-lsp
         ];
       };
     });
