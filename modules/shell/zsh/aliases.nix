@@ -32,6 +32,7 @@ with pkgs; {
   g = "git";
   n = "nix";
   r = "rebuild";
+  dataloader = "ssh -i ~/data_loader_key.pem ec2-user@ec2-34-219-249-201.us-west-2.compute.amazonaws.com";
   vm = "nixos-rebuild build-vm --flake ~/nixos#earth";
   mnt = "udisksctl mount -b";
   umnt = "udisksctl unmount -b";
