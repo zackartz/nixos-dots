@@ -26,10 +26,10 @@ in {
     initExtra = let
       sources = with pkgs; [
         "${zsh-nix-shell}/share/zsh-nix-shell/nix-shell.plugin.zsh"
-        # "${zsh-history}/share/zsh/init.zsh"
+        "${zsh-history}/share/zsh/init.zsh"
         "${zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh"
         "${zsh-f-sy-h}/share/zsh/site-functions/F-Sy-H.plugin.zsh"
-        "${zsh-autocomplete}/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
+        # "${zsh-autocomplete}/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
         "${zsh-you-should-use}/share/zsh/plugins/you-should-use/you-should-use.plugin.zsh"
         "${zsh-navigation-tools}/share/zsh/site-functions/zsh-navigation-tools.plugin.zsh"
       ];
