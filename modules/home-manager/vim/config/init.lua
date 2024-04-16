@@ -25,7 +25,6 @@ local function setup_all_servers()
 		if type(setup_fn) == "function" then
 			-- Call the setup function for each server
 			setup_fn()
-			print("Setup LSP server:", server) -- Optional: for debugging
 		end
 	end
 end
