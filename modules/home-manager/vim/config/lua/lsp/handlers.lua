@@ -25,12 +25,6 @@ M.lua_ls = make_config("lua_ls", {
 			diagnostics = {
 				globals = { "vim" },
 			},
-			workspace = {
-				library = {
-					"/usr/local/share/nvim/runtime/lua",
-					"~/.local/share/nvim/lazy/neodev.nvim/types/stable",
-				},
-			},
 		},
 	},
 })
