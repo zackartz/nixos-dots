@@ -23,30 +23,30 @@ in {
       ignoreSpace = true;
     };
 
-    initExtra = let
-      sources = with pkgs; [
-        "${zsh-nix-shell}/share/zsh-nix-shell/nix-shell.plugin.zsh"
-        # "${zsh-history}/share/zsh/init.zsh"
-        "${zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh"
-        "${zsh-f-sy-h}/share/zsh/site-functions/F-Sy-H.plugin.zsh"
-        "${zsh-autocomplete}/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
-        "${zsh-you-should-use}/share/zsh/plugins/you-should-use/you-should-use.plugin.zsh"
-        "${zsh-navigation-tools}/share/zsh/site-functions/zsh-navigation-tools.plugin.zsh"
-      ];
-
-      source = map (source: "source ${source}") sources;
-
-      plugins = concatStringsSep "\n" ([
-          "${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin"
-        ]
-        ++ source);
-    in ''
-      ${plugins}
-
-      bindkey "^[[1;3C" forward-word
-      bindkey "^[[1;3D" backward-word
-    '';
-
+    # initExtra = let
+    #   sources = with pkgs; [
+    #     "${zsh-nix-shell}/share/zsh-nix-shell/nix-shell.plugin.zsh"
+    #     # "${zsh-history}/share/zsh/init.zsh"
+    #     "${zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh"
+    #     "${zsh-f-sy-h}/share/zsh/site-functions/F-Sy-H.plugin.zsh"
+    #     "${zsh-autocomplete}/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
+    #     "${zsh-you-should-use}/share/zsh/plugins/you-should-use/you-should-use.plugin.zsh"
+    #     "${zsh-navigation-tools}/share/zsh/site-functions/zsh-navigation-tools.plugin.zsh"
+    #   ];
+    #
+    #   source = map (source: "source ${source}") sources;
+    #
+    #   plugins = concatStringsSep "\n" ([
+    #       "${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin"
+    #     ]
+    #     ++ source);
+    # in ''
+    #   ${plugins}
+    #
+    #   bindkey "^[[1;3C" forward-word
+    #   bindkey "^[[1;3D" backward-word
+    # '';
+    #
     plugins = [
       {
         name = "zsh-tmux";
