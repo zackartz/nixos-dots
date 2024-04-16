@@ -1,5 +1,5 @@
 return {
-  g = {
-    mapleader = " ",
-  },
+	g = {
+		mapleader = " ",
+	},
 }

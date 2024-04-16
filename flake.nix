@@ -48,11 +48,14 @@
     rio-term = {
       url = "github:zackartz/rio";
     };
+
+    systems.url = "github:nix-systems/default";
   };
 
   outputs = {
     self,
     nixpkgs,
+    systems,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -60,6 +63,11 @@
     overlays = [
       inputs.neovim-nightly-overlay.overlay
     ];
+    eachSystem = f:
+      nixpkgs.lib.genAttrs (import systems) (
+        system:
+          f nixpkgs.legacyPackages.${system}
+      );
   in {
     nixosConfigurations.earth = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
@@ -68,5 +76,15 @@
         inputs.home-manager.nixosModules.default
       ];
     };
+
+    devShells = eachSystem (pkgs: {
+      default = pkgs.mkShell {
+        buildInputs = [
+          pkgs.nil
+          pkgs.stylua
+          pkgs.nodePackages.coc-sumneko-lua
+        ];
+      };
+    });
   };
 }

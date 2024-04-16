@@ -1,5 +1,5 @@
 return {
-  "mrshmllow/document-color.nvim",
-  lazy = true,
-  opts = {},
+	"mrshmllow/document-color.nvim",
+	lazy = true,
+	opts = {},
 }
