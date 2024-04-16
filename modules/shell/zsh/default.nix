@@ -26,7 +26,7 @@ in {
     initExtra = let
       sources = with pkgs; [
         "${zsh-nix-shell}/share/zsh-nix-shell/nix-shell.plugin.zsh"
-        "${zsh-history}/share/zsh/init.zsh"
+        # "${zsh-history}/share/zsh/init.zsh"
         "${zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh"
         "${zsh-f-sy-h}/share/zsh/site-functions/F-Sy-H.plugin.zsh"
         "${zsh-autocomplete}/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
@@ -46,6 +46,19 @@ in {
       bindkey "^[[1;3C" forward-word
       bindkey "^[[1;3D" backward-word
     '';
+
+    plugins = [
+      {
+        name = "zsh-tmux";
+        file = "zsh-tmux.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "laggardkernel";
+          repo = "zsh-tmux";
+          rev = "v1.1.0";
+          sha256 = "149zh2rm59blr2q458a5irkfh82y3dwdich60s9670kl3cl5h2m1";
+        };
+      }
+    ];
 
     dirHashes = {
       music = "$HOME/Music";
