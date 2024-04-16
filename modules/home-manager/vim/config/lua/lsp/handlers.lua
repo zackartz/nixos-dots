@@ -56,4 +56,6 @@ M.clangd = make_config("clangd", {
 	},
 })
 
+M.tsserver = make_config("tsserver", {})
+
 return M
