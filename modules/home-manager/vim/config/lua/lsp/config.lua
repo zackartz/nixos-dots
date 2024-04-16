@@ -25,5 +25,6 @@ M.set_keymaps = function(client, bufnr)
 end
 
 require("lspconfig").tsserver.setup({})
+require("lsp.handlers")
 
 return M
