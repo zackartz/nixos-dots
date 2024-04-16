@@ -29,29 +29,29 @@ M.lua_ls = make_config("lua_ls", {
 	},
 })
 
-M.cssls = make_config("cssls", {
-	settings = {
-		css = {
-			validate = true,
-			lint = {
-				unknownAtRules = "ignore",
-			},
-		},
-	},
-})
-
-M.tailwindcss = make_config("tailwindcss", {
-	on_attach = function()
-		local bufnr = vim.api.nvim_get_current_buf()
-		require("document-color").buf_attach(bufnr)
-	end,
-})
-
-M.clangd = make_config("clangd", {
-	cmd = {
-		"clangd",
-		"--offset-encoding=utf-16",
-	},
-})
+-- M.cssls = make_config("cssls", {
+-- settings = {
+-- 	css = {
+-- 		validate = true,
+-- 		lint = {
+-- 			unknownAtRules = "ignore",
+-- 		},
+-- 	},
+-- },
+-- })
+--
+-- M.tailwindcss = make_config("tailwindcss", {
+-- on_attach = function()
+-- 	local bufnr = vim.api.nvim_get_current_buf()
+-- 	require("document-color").buf_attach(bufnr)
+-- end,
+-- })
+--
+-- M.clangd = make_config("clangd", {
+-- cmd = {
+-- 	"clangd",
+-- 	"--offset-encoding=utf-16",
+-- },
+-- })
 
 return M
