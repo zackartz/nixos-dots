@@ -3,7 +3,9 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  inherit (builtins) concatStringsSep;
+in {
   home.sessionVariables.STARSHIP_CACHE = "${config.xdg.cacheHome}/starship";
 
   programs.zsh = {
@@ -21,7 +23,26 @@
       ignoreSpace = true;
     };
 
-    initExtra = ''
+    initExtra = let
+      sources = with pkgs; [
+        "${zsh-nix-shell}/share/zsh-nix-shell/nix-shell.plugin.zsh"
+        "${zsh-history}/share/zsh/init.zsh"
+        "${zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh"
+        "${zsh-f-sy-h}/share/zsh/site-functions/F-Sy-H.plugin.zsh"
+        "${zsh-autocomplete}/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
+        "${zsh-you-should-use}/share/zsh/plugins/you-should-use/you-should-use.plugin.zsh"
+        "${zsh-navigation-tools}/share/zsh/site-functions/zsh-navigation-tools.plugin.zsh"
+      ];
+
+      source = map (source: "source ${source}") sources;
+
+      plugins = concatStringsSep "\n" ([
+          "${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin"
+        ]
+        ++ source);
+    in ''
+      ${plugins}
+
       bindkey "^[[1;3C" forward-word
       bindkey "^[[1;3D" backward-word
     '';
@@ -32,35 +53,5 @@
     };
 
     shellAliases = import ./aliases.nix {inherit pkgs lib config;};
-    plugins = [
-      {
-        name = "zsh-nix-shell";
-        src = pkgs.zsh-nix-shell;
-      }
-      {
-        name = "zsh-history";
-        src = pkgs.zsh-history;
-      }
-      {
-        name = "zsh-fzf-tab";
-        src = pkgs.zsh-fzf-tab;
-      }
-      {
-        name = "zsh-f-sy-h";
-        src = pkgs.zsh-f-sy-h;
-      }
-      {
-        name = "zsh-autocomplete";
-        src = pkgs.zsh-autocomplete;
-      }
-      {
-        name = "zsh-you-should-use";
-        src = pkgs.zsh-you-should-use;
-      }
-      {
-        name = "zsh-navigation-tools";
-        src = pkgs.zsh-navigation-tools;
-      }
-    ];
   };
 }
