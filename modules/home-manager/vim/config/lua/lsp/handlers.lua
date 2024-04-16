@@ -1,13 +1,13 @@
 local M = {}
 
 local make_config = function(name, config)
-	local capabilities = vim.lsp.protocol.make_client_capabilities()
-	capabilities.textDocument.completion.completionItem.snippetSupport = true
-	capabilities.textDocument.colorProvider = { dynamicRegistration = true }
-	local extended_config = vim.tbl_extend("error", { capabilities = capabilities }, config)
+	-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+	-- capabilities.textDocument.completion.completionItem.snippetSupport = true
+	-- capabilities.textDocument.colorProvider = { dynamicRegistration = true }
+	-- local extended_config = vim.tbl_extend("error", { capabilities = capabilities }, config)
 
 	return function()
-		require("lspconfig")[name].setup(extended_config)
+		require("lspconfig")[name].setup(config)
 	end
 end
 
