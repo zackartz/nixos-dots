@@ -45,6 +45,8 @@ in {
     # download from yt and other websites
     yt-dlp
 
+    zsh-history
+
     # man pages for tiktok attention span mfs
     tealdeer
 
