@@ -8,8 +8,6 @@
 
   programs.zsh = {
     enable = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
     sessionVariables = {
       LC_ALL = "en_US.UTF-8";
       ZSH_AUTOSUGGEST_USE_ASYNC = "true";
@@ -22,6 +20,11 @@
       ignoreDups = true;
       ignoreSpace = true;
     };
+
+    initExtra = ''
+      bindkey "^[[1;3C" forward-word
+      bindkey "^[[1;3D" backward-word
+    '';
 
     dirHashes = {
       music = "$HOME/Music";
