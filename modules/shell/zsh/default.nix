@@ -34,12 +34,30 @@
         name = "zsh-nix-shell";
         src = pkgs.zsh-nix-shell;
       }
-      # zsh-history
-      # zsh-fzf-tab
-      # zsh-f-sy-h
-      # zsh-autocomplete
-      # zsh-you-should-use
-      # zsh-navigation-tools
+      {
+        name = "zsh-history";
+        src = pkgs.zsh-history;
+      }
+      {
+        name = "zsh-fzf-tab";
+        src = pkgs.zsh-fzf-tab;
+      }
+      {
+        name = "zsh-f-sy-h";
+        src = pkgs.zsh-f-sy-h;
+      }
+      {
+        name = "zsh-autocomplete";
+        src = pkgs.zsh-autocomplete;
+      }
+      {
+        name = "zsh-you-should-use";
+        src = pkgs.zsh-you-should-use;
+      }
+      {
+        name = "zsh-navigation-tools";
+        src = pkgs.zsh-navigation-tools;
+      }
     ];
   };
 }
