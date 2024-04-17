@@ -17,6 +17,7 @@ return {
 				enabled = true,
 				style = "nvchad",
 			},
+			which_key = true,
 			native_lsp = {
 				enabled = true,
 				virtual_text = {
