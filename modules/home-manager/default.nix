@@ -72,7 +72,6 @@
     pkgs.slack
     (pkgs.nerdfonts.override {fonts = ["Iosevka"];})
     pkgs.git
-    pkgs.lazygit
     pkgs.spotify
     pkgs.neovide
     pkgs.wofi
@@ -80,7 +79,6 @@
     pkgs.dconf
     pkgs.wl-clipboard
     pkgs.swaybg
-    pkgs.btop
     pkgs.zoom-us
     pkgs.pavucontrol
     pkgs.wlogout
@@ -148,6 +146,21 @@
     enableZshIntegration = true;
     options = ["--cmd cd"];
   };
+
+  # programs.btop = {
+  #   enable = true;
+  #   catppuccin.enable = true;
+  # };
+  #
+  # programs.lazygit = {
+  #   enable = true;
+  #   catppuccin.enable = true;
+  # };
+  #
+  # programs.fzf = {
+  #   enable = true;
+  #   catppuccin.enable = true;
+  # };
 
   systemd.user.services.kb-gui = {
     Unit = {

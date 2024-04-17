@@ -18,6 +18,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    catppuccin.url = "github:catppuccin/nix";
+
     hyprland = {
       url = "github:hyprwm/Hyprland/";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -73,6 +75,7 @@
       specialArgs = {inherit inputs;};
       modules = [
         ./hosts/earth/configuration.nix
+        # inputs.catppuccin.homeManagerModules.catppuccin
         inputs.home-manager.nixosModules.default
       ];
     };
