@@ -10,7 +10,7 @@ return {
 
 		vim.opt.laststatus = 3
 		tokyonight.normal.c.bg = colors.night.bg
-		opts.options.theme = tokyonight
+		opts.options.theme = "catppuccin"
 
 		require("lualine").setup(opts)
 	end,
