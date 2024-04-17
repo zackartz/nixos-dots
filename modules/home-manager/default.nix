@@ -104,6 +104,8 @@
 
     pkgs.openvpn
 
+    pkgs.nh
+
     pkgs.parsec-bin
     pkgs.filezilla
     pkgs.steam
