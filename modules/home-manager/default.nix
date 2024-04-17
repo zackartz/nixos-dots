@@ -44,7 +44,7 @@
     options = "--delete-older-than 30d";
   };
 
-  catppuccin.flavour = "macchiato";
+  catppuccin.flavour = "mocha";
 
   xdg.mimeApps.defaultApplications = {
     "text/html" = "firefox.desktop";
