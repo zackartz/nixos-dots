@@ -52,7 +52,7 @@
     };
 
     sessionVariables = {
-      XCURSOR_SIZE = "16";
+      XCURSOR_SIZE = "32";
       GTK_USE_PORTAL = "1";
     };
   };

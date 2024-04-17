@@ -11,14 +11,14 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    catppuccin.url = "github:catppuccin/nix";
+    catppuccin.url = "github:zackartz/nix-catppuccin";
 
     hyprland = {
       url = "github:hyprwm/Hyprland/";
@@ -75,7 +75,6 @@
       specialArgs = {inherit inputs;};
       modules = [
         ./hosts/earth/configuration.nix
-        # inputs.catppuccin.homeManagerModules.catppuccin
         inputs.home-manager.nixosModules.default
       ];
     };

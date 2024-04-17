@@ -22,6 +22,8 @@
     ../rice/rio.nix
     ../rice/wofi.nix
     ../shell
+
+    inputs.catppuccin.homeManagerModules.catppuccin
   ];
 
   nixpkgs = {
@@ -34,11 +36,15 @@
     ];
   };
 
+  gtk.catppuccin.cursor.enable = false;
+
   nix.gc = {
     automatic = true;
     frequency = "weekly";
     options = "--delete-older-than 30d";
   };
+
+  catppuccin.flavour = "macchiato";
 
   xdg.mimeApps.defaultApplications = {
     "text/html" = "firefox.desktop";

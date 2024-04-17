@@ -6,7 +6,9 @@
       size = 14;
     };
 
-    # catppuccin.enable = true;
+    catppuccin.enable = true;
+
+    # theme = "catppuccin";
 
     settings = {
       window_padding_width = 8;
@@ -41,6 +43,4 @@
       # color15 = "#acb0d0";
     };
   };
-  # theme = "rosepine";
-  # };
 }
