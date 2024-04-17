@@ -6,7 +6,7 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function(_, opts)
 		local colors = require("tokyonight.colors")
-		local tokyonight = require("lualine.themes.tokyonight")
+		local tokyonight = require("lualine.themes.catppuccin")
 
 		vim.opt.laststatus = 3
 		tokyonight.normal.c.bg = colors.night.bg
