@@ -58,7 +58,7 @@ return {
 						background = { fg = mocha.text },
 					},
 					latte = {
-						background = { fg = "#000000" },
+						background = { fg = mocha.bg },
 					},
 				},
 			}),

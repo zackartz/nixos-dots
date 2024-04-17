@@ -12,7 +12,7 @@
 
     settings = {
       window_padding_width = 8;
-      background_opacity = "0.75";
+      background_opacity = "0.8";
 
       # foreground = "#a9b1d6";
       # background = "#1a1b26";
