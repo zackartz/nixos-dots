@@ -5,11 +5,11 @@ return {
 	event = { "BufReadPost", "BufNewFile" },
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function(_, opts)
-		local colors = require("tokyonight.colors")
-		local tokyonight = require("lualine.themes.catppuccin")
-
-		vim.opt.laststatus = 3
-		tokyonight.normal.c.bg = colors.night.bg
+		-- local colors = require("tokyonight.colors")
+		-- local tokyonight = require("lualine.themes.catppuccin")
+		--
+		-- vim.opt.laststatus = 3
+		-- tokyonight.normal.c.bg = colors.night.bg
 		opts.options.theme = "catppuccin"
 
 		require("lualine").setup(opts)

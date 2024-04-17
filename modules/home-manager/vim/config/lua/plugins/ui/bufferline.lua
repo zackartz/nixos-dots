@@ -4,6 +4,7 @@ return {
 	"akinsho/bufferline.nvim",
 	event = { "BufReadPost", "BufNewFile" },
 	dependencies = "nvim-tree/nvim-web-devicons",
+	after = "catppuccin",
 	opts = {
 		options = {
 			diagnostics = "nvim_lsp",
@@ -33,15 +34,34 @@ return {
 		},
 	},
 	config = function(_, opts)
-		local colors = require("tokyonight.colors")
+		-- local colors = require("tokyonight.colors")
+		--
+		-- vim.opt.showtabline = 2
+		-- opts.highlights = {
+		-- 	background = { bg = colors.night.bg },
+		-- 	close_button = { bg = colors.night.bg },
+		-- 	separator = { fg = colors.night.bg, bg = colors.night.bg },
+		-- 	offset_separator = { bg = colors.night.bg },
+		-- 	pick = { bg = colors.night.bg },
+		-- }
 
-		vim.opt.showtabline = 2
-		opts.highlights = {
-			background = { bg = colors.night.bg },
-			close_button = { bg = colors.night.bg },
-			separator = { fg = colors.night.bg, bg = colors.night.bg },
-			offset_separator = { bg = colors.night.bg },
-			pick = { bg = colors.night.bg },
+		local mocha = require("catppuccin.palettes").get_palette("mocha")
+
+		opts = {
+			highlights = require("catppuccin.groups.integrations.bufferline").get({
+				styles = { "italic", "bold" },
+				custom = {
+					all = {
+						fill = { bg = "#000000" },
+					},
+					mocha = {
+						background = { fg = mocha.text },
+					},
+					latte = {
+						background = { fg = "#000000" },
+					},
+				},
+			}),
 		}
 
 		require("bufferline").setup(opts)
