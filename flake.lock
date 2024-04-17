@@ -4,14 +4,14 @@
       "locked": {
         "lastModified": 1713323853,
         "narHash": "sha256-EfUm65RRsoch0tpfHZtEyqo+iWIYhuSX39U/fi0/4WU=",
-        "owner": "zackartz",
-        "repo": "nix-catppuccin",
+        "owner": "catppuccin",
+        "repo": "nix",
         "rev": "372decb578f3187d7aad837885ed98e73e8abd60",
         "type": "github"
       },
       "original": {
-        "owner": "zackartz",
-        "repo": "nix-catppuccin",
+        "owner": "catppuccin",
+        "repo": "nix",
         "type": "github"
       }
     },

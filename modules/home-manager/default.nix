@@ -147,26 +147,28 @@
     EDITOR = "nvim";
   };
 
+  xdg.enable = true;
+
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
     options = ["--cmd cd"];
   };
 
-  # programs.btop = {
-  #   enable = true;
-  #   catppuccin.enable = true;
-  # };
-  #
-  # programs.lazygit = {
-  #   enable = true;
-  #   catppuccin.enable = true;
-  # };
-  #
-  # programs.fzf = {
-  #   enable = true;
-  #   catppuccin.enable = true;
-  # };
+  programs.btop = {
+    enable = true;
+    catppuccin.enable = true;
+  };
+
+  programs.lazygit = {
+    enable = true;
+    catppuccin.enable = true;
+  };
+
+  programs.fzf = {
+    enable = true;
+    catppuccin.enable = true;
+  };
 
   systemd.user.services.kb-gui = {
     Unit = {

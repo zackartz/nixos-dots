@@ -18,7 +18,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    catppuccin.url = "github:zackartz/nix-catppuccin";
+    catppuccin.url = "github:catppuccin/nix";
 
     hyprland = {
       url = "github:hyprwm/Hyprland/";

@@ -29,6 +29,8 @@ in {
       set-option -sa terminal-overrides ",xterm*:Tc"
       set -g mouse on
 
+      set -g @catppuccin-flavor 'macchiato'
+
       set -g base-index 1
       set -g pane-base-index 1
       set-window-option -g pane-base-index 1
