@@ -1,4 +1,15 @@
 {
+  pkgs,
+  lib,
+  theme,
+  ...
+}: let
+  mkService = lib.recursiveUpdate {
+    Unit.PartOf = ["graphical-session.target"];
+    Unit.After = ["graphical-session.target"];
+    Install.WantedBy = ["graphical-session.target"];
+  };
+in {
   wayland.windowManager.sway = {
     enable = true;
     # package = pkgs.swayfx;
@@ -28,5 +39,15 @@
       };
     };
     extraOptions = ["--unsupported-gpu"];
+  };
+
+  systemd.user.services = {
+    swaybg = mkService {
+      Unit.Description = "Wallpaper chooser";
+      Service = {
+        ExecStart = "${lib.getExe pkgs.swaybg} -i ${theme.wallpaper}";
+        Restart = "always";
+      };
+    };
   };
 }
