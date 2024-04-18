@@ -6,7 +6,7 @@
   imports = [./fonts.nix];
 
   environment.etc."greetd/environments".text = ''
-    Hyprland
+    sway
   '';
 
   services = {
@@ -14,7 +14,7 @@
       enable = true;
       settings = rec {
         initial_session = {
-          command = "Hyprland";
+          command = "sway --unsupported-gpu";
           user = "zack";
         };
         default_session = initial_session;
