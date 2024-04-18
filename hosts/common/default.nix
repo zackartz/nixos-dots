@@ -47,7 +47,6 @@
 
   services.udev.extraRules = ''KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0660", GROUP="plugdev"'';
   # Enable networking
-  networking.networkmanager.enable = true;
 
   services.gnome.gnome-keyring.enable = true;
 
@@ -84,23 +83,6 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
-
   # Enable OpenGL
   hardware.opengl = {
     enable = true;
@@ -110,6 +92,10 @@
 
   environment.variables = {
     WLR_RENDERER_ALLOW_SOFTWARE = "1";
+  };
+
+  environment.sessionVariables = {
+    FLAKE = "/home/zack/nixos/";
   };
 
   environment.sessionVariables.DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
@@ -122,33 +108,6 @@
   programs.zsh.enable = true;
 
   users.groups.plugdev = {};
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.zack = {
-    isNormalUser = true;
-    description = "zack";
-    extraGroups = ["networkmanager" "wheel" "docker" "libvirtd" "plugdev"];
-    shell = pkgs.zsh;
-    packages = with pkgs; [
-      firefox
-      kate
-      rio
-      telegram-desktop
-      kitty
-      mailspring
-      #  thunderbird
-    ];
-  };
-
-  home-manager = {
-    extraSpecialArgs = {inherit inputs;};
-    users = {
-      "zack" = {
-        imports = [../../modules/home-manager];
-        _module.args.theme = import ../../core/theme.nix;
-      };
-    };
-  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

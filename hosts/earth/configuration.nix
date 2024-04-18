@@ -25,12 +25,30 @@
       })
   ];
 
+  # Enable sound with pipewire.
+  sound.enable = true;
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
+
+    # use the example session manager (no others are packaged yet so this is enabled by default,
+    # no need to redefine it in your config for now)
+    #media-session.enable = true;
+  };
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "earth"; # Define your hostname.
 
+  networking.networkmanager.enable = true;
   networking.networkmanager.unmanaged = ["enp6s0"];
 
   boot.supportedFilesystems = ["ntfs"];
@@ -92,6 +110,47 @@
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.beta;
+  };
+
+  specialisation = {
+    nvidiaProduction.configuration = {
+      hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.production;
+      environment.etc."specialisation".text = "nvidiaProduction";
+    };
+    nvidiaStable.configuration = {
+      hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+      environment.etc."specialisation".text = "nvidiaStable";
+    };
+  };
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.zack = {
+    isNormalUser = true;
+    description = "zack";
+    extraGroups = ["networkmanager" "wheel" "docker" "libvirtd" "plugdev"];
+    shell = pkgs.zsh;
+    packages = with pkgs; [
+      firefox
+      kate
+      rio
+      telegram-desktop
+      kitty
+      mailspring
+      #  thunderbird
+    ];
+  };
+
+  home-manager = {
+    extraSpecialArgs = {inherit inputs;};
+    users = {
+      "zack" = {
+        imports = [../../modules/home-manager/default.nix];
+        _module.args.theme = import ../../core/theme.nix;
+
+        home.username = "zack";
+        home.homeDirectory = "/home/zack";
+      };
+    };
   };
 
   programs.virt-manager.enable = true;

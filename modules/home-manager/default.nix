@@ -4,11 +4,6 @@
   inputs,
   ...
 }: {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home.username = "zack";
-  home.homeDirectory = "/home/zack";
-
   imports = [
     ./swayidle.nix
     ./vim/default.nix
@@ -104,6 +99,8 @@
 
     pkgs.openvpn
 
+    pkgs.nix-output-monitor
+
     pkgs.nh
 
     pkgs.parsec-bin
@@ -131,7 +128,7 @@
       alejandra . &>/dev/null
       git add .
       echo "[REBUILD]: rebuilding nixos"
-      sudo nixos-rebuild switch --flake ~/nixos#earth --max-jobs 4
+      nh os switch
       gen=$(nixos-rebuild list-generations | grep current)
       git commit -am "$gen"
       git push origin main

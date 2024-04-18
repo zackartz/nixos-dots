@@ -79,6 +79,17 @@
       ];
     };
 
+    nixosConfigurations.live = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = {inherit inputs;};
+      modules = [
+        "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-plasma5.nix"
+        "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
+        ./hosts/live/configuration.nix
+        inputs.home-manager.nixosModules.default
+      ];
+    };
+
     devShells = eachSystem (pkgs: {
       default = pkgs.mkShell {
         buildInputs = [
