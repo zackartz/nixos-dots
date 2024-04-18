@@ -51,6 +51,7 @@
   networking.networkmanager.enable = true;
   networking.networkmanager.unmanaged = ["enp6s0"];
 
+  boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.supportedFilesystems = ["ntfs"];
 
   # Load nvidia driver for Xorg and Wayland
@@ -102,7 +103,7 @@
     # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
     # Only available from driver 515.43.04+
     # Currently alpha-quality/buggy, so false is currently the recommended setting.
-    open = false;
+    open = true;
 
     # Enable the Nvidia settings menu,
     # accessible via `nvidia-settings`.

@@ -21,8 +21,6 @@
       })
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_zen;
-
   networking.nameservers = ["1.1.1.1" "1.0.0.1"];
 
   virtualisation.vmVariant = {
