@@ -94,6 +94,8 @@
     pkgs.ungoogled-chromium
     pkgs.google-chrome # fuck
 
+    pkgs.thunderbird
+
     pkgs.mongodb-compass
     pkgs.postman
 
