@@ -121,6 +121,10 @@
       hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
       environment.etc."specialisation".text = "nvidiaStable";
     };
+    nvidiaVulkanBeta.configuration = {
+      hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
+      environment.etc."specialisation".text = "nvidiaVulkanBeta";
+    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
