@@ -8,6 +8,10 @@
       startup = [{command = "firefox";}];
 
       input = {
+        "Logitech USB Receiver Keyboard" = {
+          accel_profile = "flat";
+          pointer_accel = "0.5";
+        };
         "Logitech USB Receiver" = {
           accel_profile = "flat";
           pointer_accel = "0.5";
