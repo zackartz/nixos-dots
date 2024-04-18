@@ -18,6 +18,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     catppuccin.url = "github:catppuccin/nix";
 
     hyprland = {
@@ -60,11 +65,6 @@
     systems,
     ...
   } @ inputs: let
-    system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
-    overlays = [
-      inputs.neovim-nightly-overlay.overlay
-    ];
     eachSystem = f:
       nixpkgs.lib.genAttrs (import systems) (
         system:
@@ -83,7 +83,7 @@
       system = "x86_64-linux";
       specialArgs = {inherit inputs;};
       modules = [
-        # "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-plasma5.nix"
+        "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-plasma5.nix"
         "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
         ./hosts/live/configuration.nix
         inputs.home-manager.nixosModules.default
