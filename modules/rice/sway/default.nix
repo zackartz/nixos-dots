@@ -1,15 +1,18 @@
 {
-  inputs,
-  pkgs,
-  ...
-}: {
   wayland.windowManager.sway = {
     enable = true;
     # package = pkgs.swayfx;
     catppuccin.enable = true;
-    config = rec {
+    config = {
       terminal = "kitty";
       startup = [{command = "firefox";}];
+
+      input = {
+        "Logitech USB Receiver" = {
+          accel_profile = "flat";
+          pointer_accel = "0.5";
+        };
+      };
 
       output = {
         DP-1 = {
