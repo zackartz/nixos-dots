@@ -18,14 +18,16 @@ in {
       terminal = "kitty";
       startup = [{command = "firefox";}];
 
+      menu = "wofi --show drun";
+
       input = {
         "Logitech USB Receiver Keyboard" = {
           accel_profile = "flat";
-          pointer_accel = "0.5";
+          pointer_accel = "0";
         };
         "Logitech USB Receiver" = {
           accel_profile = "flat";
-          pointer_accel = "0.5";
+          pointer_accel = "0";
         };
       };
 
