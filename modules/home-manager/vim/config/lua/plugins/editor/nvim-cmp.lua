@@ -1,3 +1,31 @@
+local lsp_symbols = {
+	Text = "   (Text) ",
+	Method = "   (Method)",
+	Function = "   (Function)",
+	Constructor = "   (Constructor)",
+	Field = " ﴲ  (Field)",
+	Variable = "[] (Variable)",
+	Class = "   (Class)",
+	Interface = " ﰮ  (Interface)",
+	Module = "   (Module)",
+	Property = " 襁 (Property)",
+	Unit = "   (Unit)",
+	Value = "   (Value)",
+	Enum = " 練 (Enum)",
+	Keyword = "   (Keyword)",
+	Snippet = "   (Snippet)",
+	Color = "   (Color)",
+	File = "   (File)",
+	Reference = "   (Reference)",
+	Folder = "   (Folder)",
+	EnumMember = "   (EnumMember)",
+	Constant = " ﲀ  (Constant)",
+	Struct = " ﳤ  (Struct)",
+	Event = "   (Event)",
+	Operator = "   (Operator)",
+	TypeParameter = "   (TypeParameter)",
+}
+
 return {
 	{
 		"L3MON4D3/LuaSnip",
@@ -101,29 +129,17 @@ return {
 					end, { "i", "s" }),
 				},
 				formatting = {
-					format = lspkind_status_ok and lspkind.cmp_format({
-						mode = "symbol",
-						maxwidth = 25,
-						ellipsis_char = "...",
-						before = function(entry, vim_item)
-							if vim_item.kind == "Color" and entry.completion_item.documentation then
-								local _, _, r, g, b =
-									string.find(entry.completion_item.documentation, "^rgb%((%d+), (%d+), (%d+)")
-								if r then
-									local color = string.format("%02x", r)
-										.. string.format("%02x", g)
-										.. string.format("%02x", b)
-									local group = "Tw_" .. color
-									if vim.fn.hlID(group) < 1 then
-										vim.api.nvim_set_hl(0, group, { fg = "#" .. color })
-									end
-									vim_item.kind_hl_group = group
-									return vim_item
-								end
-							end
-							return vim_item
-						end,
-					}),
+					format = function(entry, item)
+						item.kind = lsp_symbols[item.kind]
+						item.menu = ({
+							buffer = "[Buffer]",
+							nvim_lsp = "[LSP]",
+							luasnip = "[Snippet]",
+							neorg = "[Neorg]",
+						})[entry.source.name]
+
+						return item
+					end,
 				},
 			}
 		end,
