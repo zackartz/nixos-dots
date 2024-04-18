@@ -2,14 +2,14 @@
   programs.kitty = {
     enable = true;
     font = {
-      name = "Iosevka Nerd Font Mono SemiBold";
+      name = "Iosevka Term SemiBold";
       size = 14;
     };
 
     extraConfig = ''
-      bold_font Iosevka Nerd Font Mono Heavy
-      italic_font Iosevka Nerd Font Mono SemiBold Italic
-      bold_italic_font Iosevka Nerd Font Mono Heavy Italic
+      bold_font Iosevk Term Heavy
+      italic_font Iosevka Term SemiBold Italic
+      bold_italic_font Iosevka Term Heavy Italic
     '';
 
     catppuccin.enable = true;
