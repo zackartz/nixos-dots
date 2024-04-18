@@ -12,8 +12,8 @@
 
       output = {
         DP-1 = {
-          mode = "2560x1440@240Hz";
-          adaptive_sync = "on";
+          mode = "2560x1440@239.972Hz";
+          adaptive_sync = "off";
         };
         HDMI-A-1 = {
           disable = "disable";
