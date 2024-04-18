@@ -5,7 +5,7 @@
 }: {
   wayland.windowManager.sway = {
     enable = true;
-    package = pkgs.swayfx;
+    # package = pkgs.swayfx;
     config = rec {
       terminal = "kitty";
       startup = [{command = "firefox";}];
