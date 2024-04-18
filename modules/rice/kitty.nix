@@ -2,16 +2,22 @@
   programs.kitty = {
     enable = true;
     font = {
-      name = "JetBrains Mono Nerd Font Mono";
+      name = "Iosevka Nerd Font Mono SemiBold";
       size = 14;
     };
+
+    extraConfig = ''
+      bold_font Iosevka Nerd Font Mono Heavy
+      italic_font Iosevka Nerd Font Mono SemiBold Italic
+      bold_italic_font Iosevka Nerd Font Mono Heavy Italic
+    '';
 
     catppuccin.enable = true;
 
     # theme = "catppuccin";
 
     settings = {
-      window_padding_width = 8;
+      window_padding_width = 12;
       background_opacity = "0.8";
 
       # foreground = "#a9b1d6";
