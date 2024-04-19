@@ -67,6 +67,7 @@ return {
 					{ name = "luasnip", priority = 750 },
 					{ name = "buffer", priority = 500 },
 					{ name = "path", priority = 250 },
+					{ name = "neorg", priority = 250 },
 				}),
 				mapping = {
 					["<Up>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),

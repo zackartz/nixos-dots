@@ -17,6 +17,9 @@ return {
 						index = "index.norg",
 					},
 				},
+				["core.completion"] = {
+					engine = "nvim-cmp",
+				},
 			})
 		end,
 	},
