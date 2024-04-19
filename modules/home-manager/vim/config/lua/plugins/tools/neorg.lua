@@ -25,6 +25,8 @@ return {
 				["core.looking-glass"] = {},
 				["core.qol.toc"] = {},
 				["core.qol.todo_items"] = {},
+				["core.esupports.hop"] = {},
+				["core.esupports.indent"] = {},
 			})
 		end,
 	},
