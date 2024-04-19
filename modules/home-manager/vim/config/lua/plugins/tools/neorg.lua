@@ -31,6 +31,7 @@ return {
 					["core.qol.todo_items"] = {},
 					["core.esupports.hop"] = {},
 					["core.esupports.indent"] = {},
+					["core.summary"] = {},
 				},
 			})
 		end,
