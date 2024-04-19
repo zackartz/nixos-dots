@@ -48,7 +48,7 @@
       drop_shadow = "yes";
       shadow_range = 60;
       shadow_render_power = 5;
-      "col.shadow" = "rgba(292c3cee)";
+      "col.shadow" = "rgba(07061f29)";
     };
 
     misc = {
