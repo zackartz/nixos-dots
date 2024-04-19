@@ -30,6 +30,7 @@ return {
 
 	g = {
 		mapleader = " ",
+		maplocalleader = "_",
 		highlighturl_enabled = true,
 	},
 }
