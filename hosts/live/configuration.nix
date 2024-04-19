@@ -56,15 +56,15 @@
     ];
   };
 
-  home-manager.extraSpecialArgs = {inherit inputs;};
-  home-manager.users.nixos = {
-    imports = [../../modules/home-manager/default.nix];
-    _module.args.theme = import ../../core/theme.nix;
-
-    home.stateVersion = "23.11"; # Please read the comment before changing it.
-
-    home.username = "nixos";
-    home.homeDirectory = "/home/nixos";
-  };
+  # home-manager.extraSpecialArgs = {inherit inputs;};
+  # home-manager.users.nixos = {
+  #   imports = [../../modules/home-manager/default.nix];
+  #   _module.args.theme = import ../../core/theme.nix;
+  #
+  #   home.stateVersion = "23.11"; # Please read the comment before changing it.
+  #
+  #   home.username = "nixos";
+  #   home.homeDirectory = "/home/nixos";
+  # };
   users.extraUsers.root.password = "nixos";
 }

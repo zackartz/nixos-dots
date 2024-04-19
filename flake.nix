@@ -86,7 +86,6 @@
         "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-plasma5.nix"
         "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
         ./hosts/live/configuration.nix
-        inputs.home-manager.nixosModules.default
       ];
     };
 
