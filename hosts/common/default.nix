@@ -10,7 +10,6 @@
 }: {
   imports = [
     # Include the results of the hardware scan.
-    ../../env/wayland
     ({
       options,
       lib,
@@ -30,6 +29,21 @@
       cores = 4;
     };
   };
+
+  # specialisation = {
+  #   bspwm.configuration = {
+  #     imports = [
+  #       ../../env/x11
+  #     ];
+  #     environment.etc."specialisation".text = "bspwm";
+  #   };
+  #   hyprland.configuration = {
+  #     imports = [
+  #       ../../env/wayland
+  #     ];
+  #     environment.etc."specialisation".text = "hyprland";
+  #   };
+  # };
 
   nix.gc = {
     automatic = true;

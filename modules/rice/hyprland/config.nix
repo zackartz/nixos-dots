@@ -10,7 +10,7 @@
     general = {
       # gaps
       gaps_in = 6;
-      gaps_out = 11;
+      gaps_out = 12;
 
       # border thiccness
       border_size = 4;
@@ -32,20 +32,20 @@
 
     decoration = {
       # fancy corners
-      rounding = 12;
+      rounding = 10;
       # blur
       blur = {
         enabled = true;
-        size = 3;
-        passes = 6;
+        size = 2;
+        passes = 5;
         ignore_opacity = false;
         new_optimizations = 1;
-        contrast = 0.7;
-        brightness = 0.8;
+        contrast = 0.9;
+        brightness = 0.9;
       };
 
       # shadow config
-      drop_shadow = "no";
+      drop_shadow = "yes";
       shadow_range = 20;
       shadow_render_power = 5;
       "col.shadow" = "rgba(292c3cee)";
@@ -58,10 +58,6 @@
       disable_hyprland_logo = true;
 
       vfr = true;
-
-      # window swallowing
-      enable_swallow = true; # hide windows that spawn other windows
-      swallow_regex = "^(foot)$";
 
       # dpms
       mouse_move_enables_dpms = true; # enable dpms on mouse/touchpad action

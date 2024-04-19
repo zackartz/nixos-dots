@@ -113,20 +113,20 @@
     package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
 
-  specialisation = {
-    nvidiaProduction.configuration = {
-      hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.production;
-      environment.etc."specialisation".text = "nvidiaProduction";
-    };
-    nvidiaStable.configuration = {
-      hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
-      environment.etc."specialisation".text = "nvidiaStable";
-    };
-    nvidiaVulkanBeta.configuration = {
-      hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
-      environment.etc."specialisation".text = "nvidiaVulkanBeta";
-    };
-  };
+  # specialisation = {
+  #   nvidiaProduction.configuration = {
+  #     hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.production;
+  #     environment.etc."specialisation".text = "nvidiaProduction";
+  #   };
+  #   nvidiaStable.configuration = {
+  #     hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  #     environment.etc."specialisation".text = "nvidiaStable";
+  #   };
+  #   nvidiaVulkanBeta.configuration = {
+  #     hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
+  #     environment.etc."specialisation".text = "nvidiaVulkanBeta";
+  #   };
+  # };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.zack = {
@@ -140,8 +140,6 @@
       rio
       telegram-desktop
       kitty
-      mailspring
-      #  thunderbird
     ];
   };
 

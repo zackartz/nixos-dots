@@ -1,11 +1,8 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
-  imports = [./fonts.nix];
+{pkgs, ...}: {
+  imports = [../common/fonts.nix];
 
   environment.etc."greetd/environments".text = ''
+    bspwm
     Hyprland
   '';
 
