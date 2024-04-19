@@ -46,7 +46,7 @@
 
       # shadow config
       drop_shadow = "yes";
-      shadow_range = 20;
+      shadow_range = 60;
       shadow_render_power = 5;
       "col.shadow" = "rgba(292c3cee)";
     };
