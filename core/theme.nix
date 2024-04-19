@@ -1,7 +1,7 @@
 {
   x = c: "#${c}";
 
-  colors = rec {
+  colors = {
     "base" = "191724";
     "surface" = "1f1d2e";
     "overlay" = "26233a";
@@ -19,5 +19,5 @@
     "highlighthigh" = "524f67";
   };
 
-  wallpaper = ./wall.png;
+  wallpaper = ./wallpaper.png;
 }
