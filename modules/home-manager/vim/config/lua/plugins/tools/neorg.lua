@@ -7,26 +7,28 @@ return {
 		version = "*",
 		config = function()
 			require("neorg").setup({
-				["core.defaults"] = {},
-				["core.concealer"] = {},
-				["core.dirman"] = {
-					config = {
-						workspaces = {
-							dev = "~/notes",
+				load = {
+					["core.defaults"] = {},
+					["core.concealer"] = {},
+					["core.dirman"] = {
+						config = {
+							workspaces = {
+								dev = "~/notes",
+							},
+							index = "index.norg",
 						},
-						index = "index.norg",
 					},
+					["core.completion"] = {
+						engine = "nvim-cmp",
+					},
+					["core.ui.calendar"] = {},
+					["core.export"] = {},
+					["core.looking-glass"] = {},
+					["core.qol.toc"] = {},
+					["core.qol.todo_items"] = {},
+					["core.esupports.hop"] = {},
+					["core.esupports.indent"] = {},
 				},
-				["core.completion"] = {
-					engine = "nvim-cmp",
-				},
-				["core.ui.calendar"] = {},
-				["core.export"] = {},
-				["core.looking-glass"] = {},
-				["core.qol.toc"] = {},
-				["core.qol.todo_items"] = {},
-				["core.esupports.hop"] = {},
-				["core.esupports.indent"] = {},
 			})
 		end,
 	},
