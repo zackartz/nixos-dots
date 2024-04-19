@@ -1,6 +1,6 @@
 # zack's nixos dotfiles
 
-![image](https://github.com/zackartz/nixos-dots/assets/34588810/c8c7cee0-01f9-4e20-b166-87ef60705b5b)
+![image](https://github.com/zackartz/nixos-dots/assets/34588810/0f4c85c2-f9e8-4de3-89c1-0a95c0ab681f)
 
 my customized versions of other's dotfiles
 
