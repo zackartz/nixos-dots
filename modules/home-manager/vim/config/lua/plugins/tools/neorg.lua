@@ -19,7 +19,9 @@ return {
 						},
 					},
 					["core.completion"] = {
-						engine = "nvim-cmp",
+						config = {
+							engine = "nvim-cmp",
+						},
 					},
 					["core.ui.calendar"] = {},
 					["core.export"] = {},
