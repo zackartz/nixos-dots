@@ -23,6 +23,7 @@ return {
 							engine = "nvim-cmp",
 						},
 					},
+					["core.keybinds"] = {},
 					["core.ui.calendar"] = {},
 					["core.export"] = {},
 					["core.looking-glass"] = {},
