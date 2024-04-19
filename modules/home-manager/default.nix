@@ -98,6 +98,7 @@
 
     pkgs.mongodb-compass
     pkgs.postman
+    pkgs.mosh
 
     pkgs.openvpn
 

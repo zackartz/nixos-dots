@@ -25,6 +25,7 @@ return {
 		conceallevel = 2,
 		mouse = "n",
 		clipboard = "unnamedplus",
+		scrolloff = 15,
 	},
 
 	g = {
