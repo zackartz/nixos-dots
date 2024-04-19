@@ -15,6 +15,7 @@ return {
 							workspaces = {
 								dev = "~/notes",
 							},
+							default_workspace = "dev",
 							index = "index.norg",
 						},
 					},
