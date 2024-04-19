@@ -20,6 +20,11 @@ return {
 				["core.completion"] = {
 					engine = "nvim-cmp",
 				},
+				["core.ui.calendar"] = {},
+				["core.export"] = {},
+				["core.looking-glass"] = {},
+				["core.qol.toc"] = {},
+				["core.qol.todo_items"] = {},
 			})
 		end,
 	},
