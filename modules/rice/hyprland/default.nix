@@ -4,8 +4,7 @@
   inputs,
   theme,
   ...
-}:
-with lib; let
+}: let
   mkService = lib.recursiveUpdate {
     Unit.PartOf = ["graphical-session.target"];
     Unit.After = ["graphical-session.target"];
