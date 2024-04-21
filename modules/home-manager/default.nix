@@ -90,7 +90,6 @@
     pkgs.hyprshot
     pkgs.jetbrains.idea-community
     pkgs.jetbrains.datagrip
-    pkgs.xwaylandvideobridge
     pkgs.ungoogled-chromium
     pkgs.google-chrome # fuck
 
