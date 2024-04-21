@@ -39,6 +39,11 @@
       "workspace 2, title:^(thunderbird)$"
       "workspace 4, title:^(.*(Disc|WebC)ord.*)$"
       "workspace 2, class:^(firefox)$"
+      "opacity 0.0 override,class:^(xwaylandvideobridge)$"
+      "noanim,class:^(xwaylandvideobridge)$"
+      "noinitialfocus,class:^(xwaylandvideobridge)$"
+      "maxsize 1 1,class:^(xwaylandvideobridge)$"
+      "noblur,class:^(xwaylandvideobridge)$"
     ];
   };
 }
