@@ -194,7 +194,7 @@
       Restart = "on-failure";
     };
     Install = {
-      wantedBy = ["default.target"];
+      WantedBy = ["default.target"];
     };
   };
 
