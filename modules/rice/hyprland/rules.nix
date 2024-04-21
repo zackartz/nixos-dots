@@ -20,15 +20,13 @@
       "tile, title:Spotify"
 
       "idleinhibit focus, class:^(mpv)$"
-      "idleinhibit focus,class:foot"
-      "idleinhibit fullscreen, class:^(firefox)$"
 
       "float, title:^(Picture-in-Picture)$"
       "pin, title:^(Picture-in-Picture)$"
 
       "float,class:udiskie"
 
-      "workspace special silent,class:^(pavucontrol)$"
+      # "workspace special silent,class:^(pavucontrol)$"
 
       "float, class:^(imv)$"
 
@@ -36,7 +34,7 @@
       "workspace special silent, title:^(Firefox — Sharing Indicator)$"
       "workspace special silent, title:^(.*is sharing (your screen|a window)\.)$"
 
-      "workspace 2, title:^(thunderbird)$"
+      "workspace 2, class:^(thunderbird)$"
       "workspace 4, title:^(.*(Disc|WebC)ord.*)$"
       "workspace 2, class:^(firefox)$"
       "opacity 0.0 override,class:^(xwaylandvideobridge)$"

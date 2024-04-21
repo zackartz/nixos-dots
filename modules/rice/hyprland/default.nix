@@ -11,7 +11,7 @@
     Install.WantedBy = ["graphical-session.target"];
   };
 in {
-  imports = [./config.nix ./binds.nix];
+  imports = [./config.nix ./binds.nix ./rules.nix];
   wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.default;
