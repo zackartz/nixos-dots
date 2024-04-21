@@ -92,7 +92,7 @@ return {
 				return
 			end
 
-
+			local catppuccin = require("catppuccin")
 
 			return {
 				snippet = {

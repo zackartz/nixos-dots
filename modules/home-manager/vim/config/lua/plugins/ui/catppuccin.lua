@@ -6,6 +6,11 @@ return {
 	end,
 	opts = {
 		transparent_background = true,
+		custom_highlights = function(colors)
+			return {
+				Pmenu = { bg = colors.base },
+			}
+		end,
 		integrations = {
 			cmp = true,
 			noice = true,
