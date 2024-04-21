@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   imports = [
@@ -180,6 +181,20 @@
     };
     Service = {
       ExecStart = "${inputs.kb-gui.packages.${pkgs.system}.kb}/bin/kb";
+    };
+  };
+
+  systemd.user.services.xwaylandvideobridge = {
+    Unit = {
+      Description = "Tool to make it easy to stream wayland windows and screens to exisiting applications running under Xwayland";
+    };
+    Service = {
+      Type = "simple";
+      ExecStart = lib.getExe pkgs.xwaylandvideobridge;
+      Restart = "on-failure";
+    };
+    Install = {
+      wantedBy = ["default.target"];
     };
   };
 
