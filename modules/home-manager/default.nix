@@ -71,6 +71,7 @@
     # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
     pkgs.discord
+    pkgs.webcord
     pkgs.slack
     (pkgs.nerdfonts.override {fonts = ["Iosevka"];})
     pkgs.git
