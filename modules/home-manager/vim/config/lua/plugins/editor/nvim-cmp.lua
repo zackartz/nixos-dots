@@ -45,11 +45,6 @@ return {
 				return
 			end
 
-			local win_conf = cmp.config.window.bordered({
-				winhighlight = "FloatBorder:FloatBorder",
-				scrollbar = false,
-			})
-
 			return {
 				snippet = {
 					expand = function(args)
@@ -59,10 +54,12 @@ return {
 				window = {
 					completion = {
 						winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-						col_offset = -3,
-						side_padding = 0,
+						side_padding = 4,
 					},
-					documentation = win_conf,
+					documentation = {
+						winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+						side_padding = 4,
+					},
 				},
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp", priority = 1000 },
