@@ -23,7 +23,7 @@ in {
   programs.waybar = {
     enable = true;
     style = import ./style.nix;
-    # package = inputs.waybar.packages.x86_64-linux.waybar;
+    package = inputs.waybar.packages.x86_64-linux.waybar;
     systemd = {
       enable = true;
       target = "hyprland-session.target";
@@ -43,7 +43,7 @@ in {
           "battery"
         ];
         modules-center = [];
-        modules-right = ["pulseaudio" "network" "clock" "custom/power"];
+        modules-right = ["pulseaudio" "network" "clock" "tray" "custom/power"];
         "hyprland/workspaces" = {
           on-click = "activate";
           format = "{icon}";
