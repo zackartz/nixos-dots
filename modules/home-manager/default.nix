@@ -86,6 +86,7 @@ in {
     # pkgs.discord
     # pkgs.webcord
     pkgs.vesktop
+    pkgs.gimp
     pkgs.slack
     (pkgs.nerdfonts.override {fonts = ["Iosevka"];})
     pkgs.git
