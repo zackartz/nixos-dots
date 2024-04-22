@@ -22,6 +22,11 @@
 
   networking.nameservers = ["1.1.1.1" "1.0.0.1"];
 
+  boot.kernel.sysctl = {
+    "fs.inotify.max_user_watches" = 100000;
+    "fs.inotify.max_queued_events" = 100000;
+  };
+
   virtualisation.vmVariant = {
     # following configuration is added only when building VM with build-vm
     virtualisation = {
