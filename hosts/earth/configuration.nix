@@ -41,6 +41,7 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+  services.fstrim.enable = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
