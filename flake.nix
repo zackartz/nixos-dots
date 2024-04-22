@@ -57,6 +57,10 @@
     };
 
     systems.url = "github:nix-systems/default";
+    spicetify-nix = {
+      url = "github:the-argus/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {

@@ -4,7 +4,9 @@
   inputs,
   lib,
   ...
-}: {
+}: let
+  spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
+in {
   imports = [
     ./swayidle.nix
     ./vim/default.nix
@@ -19,6 +21,7 @@
     ../rice/wofi.nix
     ../shell
 
+    inputs.spicetify-nix.homeManagerModule
     inputs.catppuccin.homeManagerModules.catppuccin
   ];
 
@@ -41,7 +44,17 @@
   };
 
   catppuccin.flavour = "mocha";
+  programs.spicetify = {
+    enable = true;
+    theme = spicePkgs.themes.catppuccin;
+    colorScheme = "mocha";
 
+    enabledExtensions = with spicePkgs.extensions; [
+      fullAppDisplay
+      shuffle # shuffle+ (special characters are sanitized out of ext names)
+      hidePodcasts
+    ];
+  };
   xdg.mimeApps.defaultApplications = {
     "text/html" = "firefox.desktop";
     "x-scheme-handler/http" = "firefox.desktop";
@@ -75,7 +88,6 @@
     pkgs.slack
     (pkgs.nerdfonts.override {fonts = ["Iosevka"];})
     pkgs.git
-    pkgs.spotify
     pkgs.neovide
     pkgs.wofi
     pkgs.alejandra
