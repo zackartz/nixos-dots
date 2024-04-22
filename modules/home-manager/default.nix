@@ -83,8 +83,9 @@ in {
     # # fonts?
     # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
-    pkgs.discord
-    pkgs.webcord
+    # pkgs.discord
+    # pkgs.webcord
+    pkgs.vesktop
     pkgs.slack
     (pkgs.nerdfonts.override {fonts = ["Iosevka"];})
     pkgs.git
@@ -149,12 +150,6 @@ in {
       git commit -am "$gen"
       git push origin main
       popd
-    '')
-    (pkgs.writeShellScriptBin "work" ''
-      #!${pkgs.bash}/bin/bash
-      cd work/
-      nix shell nixpkgs#openvpn
-      openvpn zack_myers.ovpn
     '')
   ];
 
