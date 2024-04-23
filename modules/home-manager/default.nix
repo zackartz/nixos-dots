@@ -55,6 +55,7 @@ in {
       hidePodcasts
     ];
   };
+
   xdg.mimeApps.defaultApplications = {
     "text/html" = "firefox.desktop";
     "x-scheme-handler/http" = "firefox.desktop";
