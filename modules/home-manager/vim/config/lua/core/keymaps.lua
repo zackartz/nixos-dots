@@ -14,7 +14,7 @@ return {
 		[l("W")] = { cmd("w!"), fmt("Save", "Save file!") },
 		[l("q")] = { cmd("q"), fmt("Exit", "Exit window") },
 		[l("Q")] = { cmd("q!"), fmt("Exit", "Exit window!") },
-		[l("p")] = { '"+p', fmt("Clipboard", "Paste from clipboard") },
+		[l("p")] = { '"_dP', fmt("Clipboard", "Paste from clipboard") },
 		[l("P")] = { '"+P', fmt("Clipboard", "Paste from clipboard") },
 		[l(":")] = { ":lua ", fmt("Lua", "Lua prompt") },
 		[l("%")] = { cmd("luafile %"), fmt("Lua", "Luafile") },
