@@ -1,6 +1,6 @@
 # home.nix
 {theme, ...}: {
-  wayland.windowManager.hyprland.settings = {
+  wayland.windowManager.hyprland.settings = with theme.colors; {
     exec-once = [
       "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
       "pw-loopback -C \"alsa_input.pci-0000_0d_00.4.analog-stereo\" -P \"Scarlett Solo (3rd Gen.) Headphones / Line 1-2\""
@@ -18,6 +18,10 @@
 
       # whether to apply the sensitivity to raw input (e.g. used by games where you aim using your mouse)
       apply_sens_to_raw = 0;
+
+      # active border color
+      "col.active_border" = "rgb(${rose})";
+      "col.inactive_border" = "rgb(${muted})";
     };
 
     input = {
@@ -45,6 +49,7 @@
       drop_shadow = "yes";
       shadow_range = 60;
       shadow_render_power = 5;
+      "col.shadow" = "rgba(07061f29)";
     };
 
     misc = {
