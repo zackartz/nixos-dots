@@ -1,10 +1,10 @@
 {
   config,
-  lib,
+  inputs,
   pkgs,
   ...
 }: let
-  nvimDir = "/home/zack/nixos/modules/home-manager/vim";
+  nvimDir = "${inputs.self}/modules/home-manager/vim";
 in {
   programs.neovim = {
     enable = true;
