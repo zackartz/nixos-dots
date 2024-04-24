@@ -58,7 +58,7 @@
       force_default_wallpaper = 0;
       disable_hyprland_logo = true;
 
-      vfr = true;
+      vfr = false;
 
       # dpms
       mouse_move_enables_dpms = true; # enable dpms on mouse/touchpad action
