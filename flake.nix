@@ -23,6 +23,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.3.0";
+
+      # Optional but recommended to limit the size of your system closure.
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     catppuccin.url = "github:catppuccin/nix";
 
     hyprland = {
@@ -42,18 +49,22 @@
 
     kb-gui = {
       url = "github:zackartz/kb-gui";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     waybar = {
       url = "github:Alexays/Waybar";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     rio-term = {
       url = "github:zackartz/rio";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     systems.url = "github:nix-systems/default";
@@ -79,6 +90,7 @@
       specialArgs = {inherit inputs;};
       modules = [
         ./hosts/earth/configuration.nix
+        inputs.lanzaboote.nixosModules.lanzaboote
         inputs.home-manager.nixosModules.default
       ];
     };

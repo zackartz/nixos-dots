@@ -81,6 +81,7 @@
   environment.systemPackages = with pkgs; [
     alvr
     BeatSaberModManager
+    sbctl
   ];
 
   hardware.nvidia = {
