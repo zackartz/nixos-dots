@@ -18,6 +18,7 @@
       lib.mkIf (options ? virtualisation.memorySize) {
         users.users.zack.password = "foo";
       })
+    ../../env/wayland
   ];
 
   networking.nameservers = ["1.1.1.1" "1.0.0.1"];
