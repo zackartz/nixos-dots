@@ -36,6 +36,8 @@
 
       "workspace 2, class:^(thunderbird)$"
       "workspace 4, title:^(.*(Disc|WebC)ord.*)$"
+      "workspace 4, class:^(.*Slack.*)$"
+      "workspace 3, title:^(Spotify Premium)$"
       "workspace 2, class:^(firefox)$"
       "opacity 0.0 override,class:^(xwaylandvideobridge)$"
       "noanim,class:^(xwaylandvideobridge)$"
