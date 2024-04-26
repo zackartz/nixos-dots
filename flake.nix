@@ -108,7 +108,7 @@
     devShells = eachSystem (pkgs: {
       default = pkgs.mkShell {
         buildInputs = [
-          pkgs.nil
+          pkgs.nixd
           pkgs.stylua
           pkgs.lua-language-server
           pkgs.luajitPackages.lua-lsp

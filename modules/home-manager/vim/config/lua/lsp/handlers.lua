@@ -29,7 +29,7 @@ M.lua_ls = make_config("lua_ls", {
 	},
 })
 
-M.nil_ls = make_config("nil_ls", {})
+M.nil_ls = make_config("nixd", {})
 
 M.cssls = make_config("cssls", {
 	settings = {
