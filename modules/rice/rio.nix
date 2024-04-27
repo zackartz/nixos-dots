@@ -1,7 +1,7 @@
 {inputs, ...}: {
   programs.rio = {
     enable = true;
-    package = inputs.rio-term.packages.x86_64-linux.default;
+    # package = inputs.rio-term.packages.x86_64-linux.default;
     catppuccin.enable = true;
     settings = {
       padding-x = 10;

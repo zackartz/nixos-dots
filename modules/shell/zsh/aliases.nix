@@ -40,6 +40,7 @@ with pkgs; {
   diff = "diff --color=auto";
   wu = "nmcli con up zack_myers";
   wd = "nmcli con down zack_myers";
+  "v" = "nvim";
   ".." = "cd ..";
   "..." = "cd ../../";
   "...." = "cd ../../../";
