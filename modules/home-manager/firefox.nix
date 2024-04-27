@@ -37,6 +37,9 @@ in {
           "browser.newtabpage.activity-stream.section.highlights.includePocket" = lock-false;
           "browser.newtabpage.enhanced" = lock-false;
           "browser.newtabpage.introShown" = lock-true;
+          "browser.newtabpage.activity-stream.showSponsoredTopSites" = lock-false;
+          "browser.newtabpage.activity-stream.showSponsored" = lock-false;
+          "browser.newtabpage.activity-stream.system.showSponsored" = lock-false;
           "browser.safebrowsing.appRepURL" = {
             Value = "";
             Status = "locked";
@@ -70,6 +73,7 @@ in {
           "browser.urlbar.quicksuggest.enabled" = lock-false;
           "browser.urlbar.speculativeConnect.enabled" = lock-false;
           "browser.urlbar.trimURLs" = lock-false;
+          "browser.urlbar.suggest.quicksuggest.sponsored" = lock-false;
           "datareporting.healthreport.service.enabled" = lock-false;
           "datareporting.healthreport.uploadEnabled" = lock-false;
           "datareporting.policy.dataSubmissionEnabled" = lock-false;
