@@ -10,6 +10,7 @@ in {
   imports = [
     ./swayidle.nix
     ./vim/default.nix
+    ./firefox.nix
 
     ../rice/hyprland
     # ../rice/sway
