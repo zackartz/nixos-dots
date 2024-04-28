@@ -72,73 +72,20 @@ in {
   # release notes.
   home.stateVersion = "23.11"; # Please read the comment before changing it.
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
   home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # pkgs.discord
-    # pkgs.webcord
-    pkgs.vesktop
-    pkgs.gimp
-    pkgs.slack
     (pkgs.nerdfonts.override {fonts = ["Iosevka"];})
-    pkgs.git
-    pkgs.neovide
     pkgs.wofi
-    pkgs.alejandra
     pkgs.dconf
     pkgs.wl-clipboard
     pkgs.swaybg
-    pkgs.zoom-us
     pkgs.pavucontrol
     pkgs.wlogout
-    pkgs.prismlauncher
-    pkgs.obs-studio
-    inputs.kb-gui.packages.${pkgs.system}.kb
     pkgs.sway-audio-idle-inhibit
     pkgs.hyprshot
-    pkgs.jetbrains.idea-community
-    pkgs.jetbrains.datagrip
-    pkgs.ungoogled-chromium
-    pkgs.google-chrome # fuck
-
-    pkgs.thunderbird
-
-    pkgs.mongodb-compass
-    pkgs.postman
-    pkgs.mosh
-
-    pkgs.openvpn
 
     pkgs.nix-output-monitor
 
     pkgs.nh
-
-    pkgs.parsec-bin
-    pkgs.filezilla
-    pkgs.steam
-    pkgs.gerbera
-
-    pkgs.devenv
-    pkgs.ghidra
-
-    pkgs.zed-editor
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
 
     pkgs.killall
     (pkgs.writeShellScriptBin "rebuild" ''
@@ -181,18 +128,6 @@ in {
   programs.fzf = {
     enable = true;
     catppuccin.enable = true;
-  };
-
-  systemd.user.services.kb-gui = {
-    Unit = {
-      Description = "KB Time/Date thing";
-    };
-    Install = {
-      WantedBy = ["default.target"];
-    };
-    Service = {
-      ExecStart = "${inputs.kb-gui.packages.${pkgs.system}.kb}/bin/kb";
-    };
   };
 
   systemd.user.services.xwaylandvideobridge = {

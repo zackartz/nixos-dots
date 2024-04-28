@@ -1,6 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   config,
   pkgs,
@@ -153,7 +150,7 @@
     extraSpecialArgs = {inherit inputs;};
     users = {
       "zack" = {
-        imports = [../../modules/home-manager/default.nix];
+        imports = [../../modules/home-manager/zack.nix];
         _module.args.theme = import ../../core/theme.nix;
 
         home.username = "zack";
