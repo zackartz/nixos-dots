@@ -123,8 +123,6 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  programs.zsh.enable = true;
-
   users.groups.plugdev = {};
 
   # Allow unfree packages
