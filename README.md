@@ -121,6 +121,9 @@ We will need to copy some things over from `configuration.nix`, namely boot rela
   boot.loader.grub.device = "/dev/vda"; # the device to change
 ```
 
+> [!WARN]
+> DO NOT COPY THIS CODE, THIS IS JUST AN EXAMPLE OF WHAT TO LOOK FOR
+
 Make sure the device targets the correct drive for your EFI to be installed on.
 
 Finally, add the following to `flake.nix` (somewhere around line 100).
