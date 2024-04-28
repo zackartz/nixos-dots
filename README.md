@@ -164,4 +164,4 @@ cp -r ~/nixos-dots /mnt/home/zack/nixos # replace "zack" with your username
 Reboot the system and you're done! Enjoy the system!
 
 > [!TIP]
-> Check ./modules/shell/zsh/aliases.nix for useful aliases, like "r" to rebuild your system!
+> Check `./modules/shell/zsh/aliases.nix` for useful aliases, like "r" to rebuild your system!
