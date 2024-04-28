@@ -73,7 +73,6 @@ in {
   home.stateVersion = "23.11"; # Please read the comment before changing it.
 
   home.packages = [
-    (pkgs.nerdfonts.override {fonts = ["Iosevka"];})
     pkgs.wofi
     pkgs.dconf
     pkgs.wl-clipboard

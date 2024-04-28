@@ -109,6 +109,7 @@
       default = pkgs.mkShell {
         buildInputs = [
           pkgs.nixd
+          pkgs.alejandra
           pkgs.stylua
           pkgs.lua-language-server
           pkgs.luajitPackages.lua-lsp
