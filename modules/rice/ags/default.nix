@@ -20,6 +20,11 @@
     brightnessctl
     gvfs
     accountsservice
+    swww
+    gnome.gnome-control-center
+    gnome.nautilus
+    gnome.totem
+    loupe
   ];
 
   guiDeps = with pkgs; [
