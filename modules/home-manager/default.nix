@@ -19,6 +19,7 @@ in {
     ../rice/kitty.nix
     # ../rice/waybar
     # ../rice/dunst.nix
+    ../rice/anyrun
     ../rice/rio.nix
     ../rice/wofi.nix
     ../shell
@@ -100,6 +101,17 @@ in {
       git commit -am "$gen"
       git push origin main
       popd
+    '')
+    (pkgs.writeShellScriptBin "powermenu" ''
+      chosen=$(printf "  Power Off\n  Restart\n  Suspend\n  Lock\n󰍃  Log Out" | anyrun --plugins libstdin.so --show-results-immediately true)
+
+      case "$chosen" in
+          "  Power Off") systemctl poweroff;;
+          "  Restart") systemctl reboot;;
+          "  Lock") swaylock;;
+          "󰍃 Log Out") hyprctl dispatch exit;;
+          *) exit 1 ;;
+      esac
     '')
   ];
 

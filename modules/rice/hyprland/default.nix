@@ -34,12 +34,21 @@ in {
     };
   };
 
+  # systemd.user.services = {
+  #   swaybg = mkService {
+  #     Unit.Description = "Wallpaper chooser";
+  #     Service = {
+  #       ExecStart = "${lib.getExe pkgs.swaybg} -i ${theme.wallpaper}";
+  #       Restart = "always";
+  #     };
+  #   };
+  # };
+
   systemd.user.services = {
-    swaybg = mkService {
-      Unit.Description = "Wallpaper chooser";
+    swww = mkService {
+      Unit.Description = "Wallpaper Daemon";
       Service = {
-        ExecStart = "${lib.getExe pkgs.swaybg} -i ${theme.wallpaper}";
-        Restart = "always";
+        ExecStart = "${pkgs.swww}/bin/swww-daemon";
       };
     };
   };

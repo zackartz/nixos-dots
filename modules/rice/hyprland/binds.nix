@@ -25,7 +25,7 @@ in {
       [
         ''${mod},RETURN,exec,kitty''
 
-        "${mod},D,exec,wofi --show drun"
+        "${mod},D,exec,killall anyrun || anyrun"
         "${mod},Q,killactive"
         "${mod},M,exit"
         "${mod},P,pseudo"
