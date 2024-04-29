@@ -48,7 +48,7 @@ in {
     swww = mkService {
       Unit.Description = "Wallpaper Daemon";
       Service = {
-        ExecStart = "${pkgs.swww}/bin/swww-daemon";
+        ExecStart = "${pkgs.swww}/bin/swww-daemon && ${pkgs.swww}/bin/swww img ${theme.wallpaper}";
       };
     };
   };
