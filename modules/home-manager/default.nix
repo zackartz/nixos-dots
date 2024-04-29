@@ -12,12 +12,13 @@ in {
     ./vim/default.nix
     ./firefox.nix
 
+    ../rice/ags
     ../rice/hyprland
     # ../rice/sway
     ../rice/gtk.nix
     ../rice/kitty.nix
-    ../rice/waybar
-    ../rice/dunst.nix
+    # ../rice/waybar
+    # ../rice/dunst.nix
     ../rice/rio.nix
     ../rice/wofi.nix
     ../shell

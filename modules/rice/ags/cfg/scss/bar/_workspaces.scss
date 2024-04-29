@@ -1,0 +1,27 @@
+.workspaces_pill {
+    background: #1e1e2e;
+    border-radius: 15px;
+    border: 3px solid #11111b;
+    padding: 1px 15px;
+}
+
+.workspaces {
+    margin: 3px 0;
+    & button {
+        background: #cdd6f4;
+        border-radius: 24px;
+        margin: 0 3px;
+        min-height: 16px;
+        min-width: 16px;
+        transition: all 0.3s $materialStandard;
+
+        &:hover {
+            min-width: 24px;
+        }
+
+        &.focused {
+            background: $accent;
+            min-width: 32px;
+        }
+    }
+}

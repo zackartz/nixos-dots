@@ -1,0 +1,13 @@
+.title {
+    background: #1e1e2e;
+    border-radius: 15px;
+    border: 3px solid #11111b;
+    color: #cdd6f4;
+    font-weight: bold;
+    margin-left: 10px;
+    padding: 1px 15px;
+    &:hover {
+        color: $accent;
+        border: 3px solid $accent;
+    }
+}
