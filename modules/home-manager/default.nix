@@ -82,7 +82,8 @@ in {
     pkgs.pavucontrol
     pkgs.wlogout
     pkgs.sway-audio-idle-inhibit
-    pkgs.hyprshot
+    pkgs.grim
+    pkgs.slurp
 
     pkgs.nix-output-monitor
 

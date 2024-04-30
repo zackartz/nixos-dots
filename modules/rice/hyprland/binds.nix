@@ -44,7 +44,7 @@ in {
         "${mod},mouse_up,workspace,e-1" # move to the previous ws
 
         "${mod},X,exec, ags --toggle-window \"dashboard\""
-        "${mod},Print,exec, hyprshot -m region --clipboard-only"
+        "${mod},Print,exec,grim -g \"$(slurp)\" - | wl-copy && wl-paste > ~/Pictures/Screenshots/Screenshot-$(date +%F_%T).png;"
         ",Print,exec, grim - | wl-copy"
         "${modshift},O,exec,wl-ocr"
 
