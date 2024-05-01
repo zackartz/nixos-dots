@@ -4,7 +4,6 @@
   ...
 }: {
   home.packages = [
-    pkgs.vesktop
     pkgs.gimp
     pkgs.slack
 
@@ -26,7 +25,6 @@
 
     pkgs.parsec-bin
     pkgs.filezilla
-    pkgs.steam
     pkgs.ghidra
     pkgs.zed-editor
     pkgs.openvpn

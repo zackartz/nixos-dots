@@ -22,6 +22,10 @@
       })
   ];
 
+  programs.steam.enable = true;
+  programs.steam.gamescopeSession.enable = true;
+  programs.gamemode.enable = true;
+
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -83,6 +87,8 @@
     alvr
     BeatSaberModManager
     sbctl
+    vesktop
+    mangohud
   ];
 
   hardware.nvidia = {
