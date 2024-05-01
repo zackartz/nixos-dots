@@ -67,7 +67,7 @@
     };
 
     rio-term = {
-      url = "github:zackartz/rio/fix/nix-builds";
+      url = "github:raphamorim/rio";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
