@@ -53,6 +53,8 @@
     '';
     locations."/favicon.ico".extraConfig = ''
       access_log off; log_not_found off;
+    '';
+    locations."/robots.txt".extraConfig = ''
       access_log off; log_not_found off;
     '';
     locations."~ \\.php$".extraConfig = ''
@@ -71,7 +73,7 @@
       fastcgi_read_timeout 300;
     '';
 
-    locations."~ //\.ht".extraConfig = ''
+    locations."~ ///\.ht".extraConfig = ''
       deny all;
     '';
 
