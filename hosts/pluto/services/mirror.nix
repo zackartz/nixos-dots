@@ -10,7 +10,7 @@
 
   systemd.services."mirror-update" = {
     script = ''
-      ${pkgs.rsync}/bin/rsync -vPa rsync://mirrors.lug.mtu.edu/archlinux/ /var/www/mirror.zackmyers.io/
+      ${pkgs.rsync}/bin/rsync -vPa rsync://mirrors.lug.mtu.edu/archlinux/ /var/www/mirror.zackmyers.io/archlinux/
     '';
     serviceConfig = {
       Type = "oneshot";
@@ -18,11 +18,9 @@
     };
   };
 
-  services.nginx.virtualHosts."mirror.zackmyers.io" = {
+  services.nginx.virtualHosts."mirror.zackmyers.io/" = {
     forceSSL = true;
     enableACME = true;
-    locations."/archlinux" = {
-      root = "/var/www/mirror.zackmyers.io";
-    };
+    root = "/var/www/mirror.zackmyers.io";
   };
 }
