@@ -106,7 +106,7 @@
       extension=${pkgs.php81Extensions.zip}/lib/php/extensions/zip.so
     '';
     pools.pterodactyl = {
-      user = "nobody";
+      user = config.services.nginx.user;
       phpPackage = pkgs.php81;
       settings = {
         "pm" = "dynamic";
