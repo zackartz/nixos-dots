@@ -46,6 +46,7 @@
   services.mullvad-vpn.enable = true;
   services.transmission = {
     enable = true;
+    package = pkgs.transmission_4;
     settings = {
       download-dir = "/home/zack/dl";
     };
