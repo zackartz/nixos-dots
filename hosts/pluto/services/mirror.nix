@@ -22,7 +22,7 @@
     forceSSL = true;
     enableACME = true;
     root = "/var/www/mirror.zackmyers.io";
-    location."/".extraConfig = ''
+    locations."/".extraConfig = ''
       autoindex on;
     '';
   };
