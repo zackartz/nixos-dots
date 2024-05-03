@@ -72,7 +72,7 @@
       fastcgi_read_timeout 300;
     '';
 
-    locations."~ ///\.ht".extraConfig = ''
+    locations."~ //\\.ht".extraConfig = ''
       deny all;
     '';
 
