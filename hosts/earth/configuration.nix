@@ -47,7 +47,7 @@
   services.transmission = {
     enable = true;
     settings = {
-      download-dir = "${config.services.transmission.home}/dl";
+      download-dir = "/home/zack/dl";
     };
   };
 
@@ -66,9 +66,6 @@
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.supportedFilesystems = ["ntfs"];
-
-  # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"]; # or "nvidiaLegacy470 etc.
 
   services.minidlna = {
     enable = true;
