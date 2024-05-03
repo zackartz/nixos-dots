@@ -96,8 +96,7 @@
     phpOptions = ''
       extension=${pkgs.php81Extensions.openssl}/lib/php/extensions/openssl.so
       extension=${pkgs.php81Extensions.gd}/lib/php/extensions/gd.so
-      extension=${pkgs.php81Extensions.pdo_mysql}/lib/php/extensions/pdo_mysql.so
-      extension=${pkgs.php81Extensions.mysqli}/lib/php/extensions/mysqli.so
+      extension=${pkgs.php81Extensions.mysqlnd}/lib/php/extensions/mysqlnd.so
       extension=${pkgs.php81Extensions.mbstring}/lib/php/extensions/mbstring.so
       extension=${pkgs.php81Extensions.tokenizer}/lib/php/extensions/tokenizer.so
       extension=${pkgs.php81Extensions.bcmath}/lib/php/extensions/bcmath.so
