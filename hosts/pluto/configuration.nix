@@ -12,6 +12,8 @@
     ./hardware-configuration.nix
 
     ./services/searxng.nix
+    ./services/nginx.nix
+    ./services/mirror.nix
   ];
 
   # Bootloader.
