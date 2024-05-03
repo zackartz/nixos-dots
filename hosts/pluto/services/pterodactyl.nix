@@ -94,20 +94,20 @@
 
   services.phpfpm = {
     phpOptions = ''
-      extension=${pkgs.php82Extensions.openssl}/lib/php/extensions/openssl.so
-      extension=${pkgs.php82Extensions.gd}/lib/php/extensions/gd.so
-      extension=${pkgs.php82Extensions.pdo_mysql}/lib/php/extensions/mysql.so
-      extension=${pkgs.php82Extensions.mbstring}/lib/php/extensions/mbstring.so
-      extension=${pkgs.php82Extensions.tokenizer}/lib/php/extensions/tokenizer.so
-      extension=${pkgs.php82Extensions.bcmath}/lib/php/extensions/bcmath.so
-      extension=${pkgs.php82Extensions.xml}/lib/php/extensions/xml.so
-      extension=${pkgs.php82Extensions.dom}/lib/php/extensions/dom.so
-      extension=${pkgs.php82Extensions.curl}/lib/php/extensions/curl.so
-      extension=${pkgs.php82Extensions.zip}/lib/php/extensions/zip.so
+      extension=${pkgs.php81Extensions.openssl}/lib/php/extensions/openssl.so
+      extension=${pkgs.php81Extensions.gd}/lib/php/extensions/gd.so
+      extension=${pkgs.php81Extensions.pdo_mysql}/lib/php/extensions/mysql.so
+      extension=${pkgs.php81Extensions.mbstring}/lib/php/extensions/mbstring.so
+      extension=${pkgs.php81Extensions.tokenizer}/lib/php/extensions/tokenizer.so
+      extension=${pkgs.php81Extensions.bcmath}/lib/php/extensions/bcmath.so
+      extension=${pkgs.php81Extensions.xml}/lib/php/extensions/xml.so
+      extension=${pkgs.php81Extensions.dom}/lib/php/extensions/dom.so
+      extension=${pkgs.php81Extensions.curl}/lib/php/extensions/curl.so
+      extension=${pkgs.php81Extensions.zip}/lib/php/extensions/zip.so
     '';
     pools.pterodactyl = {
       user = "nobody";
-      phpPackage = pkgs.php;
+      phpPackage = pkgs.php81;
       settings = {
         "pm" = "dynamic";
         "listen.owner" = config.services.nginx.user;
