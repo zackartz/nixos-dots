@@ -43,6 +43,27 @@ in {
     };
   };
 
+  environment.etc."pterodactyl/config.yml".text = ''
+    debug: false
+    uuid: d9ba8bb8-8c2f-4150-aadf-ee940d244246
+    token_id: rJuftwFA5ojnP9eW
+    token: Qm6PyNvu1tKXMaqwzPQzfJuMdezdTLWh8DJVjrpWIDDVOitm2wIz04tJ35Ey1txN
+    api:
+      host: 0.0.0.0
+      port: 6969
+      ssl:
+        enabled: true
+        cert: /etc/letsencrypt/live/node.nyc.zackmyers.io/fullchain.pem
+        key: /etc/letsencrypt/live/node.nyc.zackmyers.io/privkey.pem
+      upload_limit: 100
+    system:
+      data: /var/lib/pterodactyl/volumes
+      sftp:
+        bind_port: 2022
+    allowed_mounts: []
+    remote: 'https://pterodactyl.zackmyers.io'
+  '';
+
   systemd.services."wings" = {
     after = ["docker.service"];
     requires = ["docker.service"];
