@@ -43,6 +43,7 @@
     wireplumber.enable = true;
   };
   services.fstrim.enable = true;
+  services.mullvad-vpn.enable = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = lib.mkForce false;
