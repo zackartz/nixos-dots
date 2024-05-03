@@ -44,8 +44,8 @@
   };
 
   services.nginx.virtualHosts."pterodactyl.zackmyers.io" = {
-    forceSSL = false;
-    enableACME = false;
+    forceSSL = true;
+    enableACME = true;
     root = "/var/www/pterodactyl/public";
 
     locations."/".extraConfig = ''
