@@ -77,6 +77,9 @@
     '';
 
     extraConfig = ''
+      index index.html index.htm index.php;
+      charset utf-8;
+
       access_log off;
       error_log  /var/log/nginx/pterodactyl.app-error.log error;
 
