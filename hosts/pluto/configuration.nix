@@ -49,6 +49,17 @@
 
   programs.zsh.enable = true;
 
+  services.searx = {
+    enable = true;
+    package = pkgs.searxng;
+    runInUwsgi = true;
+    uwsgiConfig = {
+      http = ":8080";
+    };
+  };
+
+  programs.mosh.enable = true;
+
   users.mutableUsers = false;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.zack = {
