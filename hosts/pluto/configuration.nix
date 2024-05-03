@@ -85,6 +85,9 @@
   security.acme = {
     acceptTerms = true;
     defaults.email = "zach@zacharymyers.com";
+    certs."node.nyc.zackmyers.io" = {
+      email = "zach@zacharymyers.com";
+    };
   };
 
   # Some programs need SUID wrappers, can be configured further or are
