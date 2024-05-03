@@ -47,16 +47,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
-
-    hyprcontrib = {
-      url = "github:hyprwm/contrib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     kb-gui = {
       url = "github:zackartz/kb-gui";
       inputs.nixpkgs.follows = "nixpkgs";

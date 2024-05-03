@@ -60,18 +60,13 @@
   users.users.zack = {
     isNormalUser = true;
     description = "zack";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "docker"];
     shell = pkgs.zsh;
     packages = with pkgs; [];
     hashedPassword = "$6$rounds=2000000$673Iz4rM8Dr9yz7C$Xq5JXxE7ioUrpZmMf3uTrPN2ODrEu3Sph6EhWyPoM5Ty./FhgB9hU0mz1yYo8sUj7wdUMWfR98haVJ24Wv3BK/";
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
-  ];
+  virtualisation.docker.enable = true;
 
   home-manager = {
     extraSpecialArgs = {inherit inputs;};
