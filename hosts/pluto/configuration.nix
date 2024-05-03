@@ -14,6 +14,7 @@
     ./services/searxng.nix
     ./services/nginx.nix
     ./services/mirror.nix
+    ./services/pterodactyl.nix
   ];
 
   # Bootloader.
