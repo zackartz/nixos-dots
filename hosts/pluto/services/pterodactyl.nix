@@ -93,7 +93,7 @@
 
   services.phpfpm.pools.mypool = {
     user = "nobody";
-    package = pkgs.php;
+    phpPackage = pkgs.php;
     settings = {
       "pm" = "dynamic";
       "listen.owner" = config.services.nginx.user;
