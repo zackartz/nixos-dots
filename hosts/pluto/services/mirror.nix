@@ -18,7 +18,7 @@
     };
   };
 
-  services.nginx.virtualHosts."mirror.zackmyers.io/" = {
+  services.nginx.virtualHosts."mirror.zackmyers.io" = {
     forceSSL = true;
     enableACME = true;
     root = "/var/www/mirror.zackmyers.io";
