@@ -18,6 +18,8 @@
 
   networking.hostName = "pluto"; # Define your hostname.
 
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+
   # Enable networking
   networking.networkmanager.enable = true;
 
@@ -45,12 +47,17 @@
     xkbVariant = "";
   };
 
+  programs.zsh.enable = true;
+
+  users.mutableUsers = false;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.zack = {
     isNormalUser = true;
     description = "zack";
     extraGroups = ["networkmanager" "wheel"];
+    shell = pkgs.zsh;
     packages = with pkgs; [];
+    hashedPassword = "$6$rounds=2000000$673Iz4rM8Dr9yz7C$Xq5JXxE7ioUrpZmMf3uTrPN2ODrEu3Sph6EhWyPoM5Ty./FhgB9hU0mz1yYo8sUj7wdUMWfR98haVJ24Wv3BK/";
   };
 
   # List packages installed in system profile. To search, run:
