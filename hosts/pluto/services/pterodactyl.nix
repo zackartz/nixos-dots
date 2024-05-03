@@ -1,7 +1,6 @@
 {
   pkgs,
   config,
-  lib,
   ...
 }: let
   wings = pkgs.stdenv.mkDerivation {
