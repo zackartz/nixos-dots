@@ -3,15 +3,6 @@
   lib,
   ...
 }: {
-  services = {
-    udiskie.enable = true;
-    gpg-agent = {
-      enable = true;
-      pinentryPackage = lib.mkForce pkgs.pinentry-gnome3;
-      enableSshSupport = true;
-      enableZshIntegration = true;
-    };
-  };
   programs = {
     gpg.enable = true;
     man.enable = true;
