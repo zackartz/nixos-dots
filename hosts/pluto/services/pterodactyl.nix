@@ -61,7 +61,6 @@
       fastcgi_split_path_info ^(.+\.php)(/.+)$;
       fastcgi_pass unix:${config.services.phpfpm.pools.mypool.socket};
       fastcgi_index index.php;
-      include fastcgi_params;
       fastcgi_param PHP_VALUE "upload_max_filesize = 100M \n post_max_size=100M";
       fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
       fastcgi_param HTTP_PROXY "";
