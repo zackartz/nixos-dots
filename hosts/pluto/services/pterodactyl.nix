@@ -59,7 +59,7 @@
     '';
     locations."~ \\.php$".extraConfig = ''
       fastcgi_split_path_info ^(.+\.php)(/.+)$;
-      fastcgi_pass unix:${config.services.phpfpm.pools.mypool.socket};
+      fastcgi_pass unix:${config.services.phpfpm.pools.pterodactyl.socket};
       fastcgi_index index.php;
       include ${pkgs.nginx}/conf/fastcgi_params;
       fastcgi_param PHP_VALUE "upload_max_filesize = 100M \n post_max_size=100M";
@@ -92,17 +92,31 @@
     '';
   };
 
-  services.phpfpm.pools.mypool = {
-    user = "nobody";
-    phpPackage = pkgs.php;
-    settings = {
-      "pm" = "dynamic";
-      "listen.owner" = config.services.nginx.user;
-      "pm.max_children" = 5;
-      "pm.start_servers" = 2;
-      "pm.min_spare_servers" = 1;
-      "pm.max_spare_servers" = 3;
-      "pm.max_requests" = 500;
+  services.phpfpm = {
+    phpOptions = ''
+      extension=${pkgs.php82Extensions.openssl}/lib/php/extensions/openssl.so
+      extension=${pkgs.php82Extensions.gd}/lib/php/extensions/gd.so
+      extension=${pkgs.php82Extensions.mysql}/lib/php/extensions/mysql.so
+      extension=${pkgs.php82Extensions.mbstring}/lib/php/extensions/mbstring.so
+      extension=${pkgs.php82Extensions.tokenizer}/lib/php/extensions/tokenizer.so
+      extension=${pkgs.php82Extensions.bcmath}/lib/php/extensions/bcmath.so
+      extension=${pkgs.php82Extensions.xml}/lib/php/extensions/xml.so
+      extension=${pkgs.php82Extensions.dom}/lib/php/extensions/dom.so
+      extension=${pkgs.php82Extensions.curl}/lib/php/extensions/curl.so
+      extension=${pkgs.php82Extensions.zip}/lib/php/extensions/zip.so
+    '';
+    pools.pterodactyl = {
+      user = "nobody";
+      phpPackage = pkgs.php;
+      settings = {
+        "pm" = "dynamic";
+        "listen.owner" = config.services.nginx.user;
+        "pm.max_children" = 5;
+        "pm.start_servers" = 2;
+        "pm.min_spare_servers" = 1;
+        "pm.max_spare_servers" = 3;
+        "pm.max_requests" = 500;
+      };
     };
   };
 
