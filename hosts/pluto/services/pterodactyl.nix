@@ -53,8 +53,9 @@ in {
       port: 6969
       ssl:
         enabled: true
-        cert: /etc/letsencrypt/live/node.nyc.zackmyers.io/fullchain.pem
-        key: /etc/letsencrypt/live/node.nyc.zackmyers.io/privkey.pem
+
+        cert: /var/lib/acme/node.nyc.zackmyers.io/fullchain.pem
+        key: /var/lib/acme/node.nyc.zackmyers.io/key.pem
       upload_limit: 100
     system:
       data: /var/lib/pterodactyl/volumes
