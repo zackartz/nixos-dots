@@ -44,6 +44,12 @@
   };
   services.fstrim.enable = true;
   services.mullvad-vpn.enable = true;
+  services.transmission = {
+    enable = true;
+    settings = {
+      download-dir = "${config.services.transmission.home}/dl";
+    };
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = lib.mkForce false;
@@ -90,6 +96,7 @@
     sbctl
     vesktop
     mangohud
+    transmission_4
   ];
 
   hardware.nvidia = {

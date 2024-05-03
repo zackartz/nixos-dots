@@ -29,6 +29,7 @@ with pkgs; {
   kys = "shutdown now";
   gpl = "curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE";
   agpl = "curl https://www.gnu.org/licenses/agpl-3.0.txt -o LICENSE";
+  tsm = "transmission-remote";
   g = "git";
   n = "nix";
   r = "rebuild";
