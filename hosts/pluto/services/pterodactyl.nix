@@ -1,8 +1,25 @@
 {
   pkgs,
   config,
+  lib,
   ...
-}: {
+}: let
+  wings = pkgs.stdenv.mkDerivation {
+    name = "wings";
+
+    src = pkgs.fetchurl {
+      name = "wings";
+      url = "https://github.com/pterodactyl/wings/releases/latest/download/wings_linux_amd64";
+      sha256 = lib.fakeSha256;
+    };
+
+    phases = ["installPhase"];
+
+    installPhase = ''
+      install -D $src $out/bin/wings
+    '';
+  };
+in {
   services.mysql = {
     enable = true;
     package = pkgs.mariadb;
@@ -24,6 +41,26 @@
     serviceConfig = {
       Type = "oneshot";
       User = "root";
+    };
+  };
+
+  systemd.services."wings" = {
+    after = ["docker.service"];
+    requires = ["docker.service"];
+    partOf = ["docker.service"];
+    script = ''
+      ${wings}/bin/wings
+    '';
+    wantedBy = ["multi-user.target"];
+    serviceConfig = {
+      User = "root";
+      WorkingDirectory = "/etc/pterodactyl";
+      LimitNOFILE = 4096;
+      PIDFile = /var/run/wings/daemon.pid;
+      Restart = "on-failure";
+      StartLimitInterval = 180;
+      StartLimitBurst = 30;
+      RestartSec = "5s";
     };
   };
 
@@ -71,6 +108,14 @@
       fastcgi_connect_timeout 300;
       fastcgi_send_timeout 300;
       fastcgi_read_timeout 300;
+
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header Host $host;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+      proxy_redirect off;
+      proxy_buffering off;
+      proxy_request_buffering off;
     '';
 
     locations."~ /\\.ht".extraConfig = ''
