@@ -84,20 +84,6 @@
     };
   };
 
-  services.nginx = {
-    enable = true;
-    package = pkgs.nginxStable.override {openssl = pkgs.libressl;};
-    virtualHosts = {
-      "search.zackmyers.io" = {
-        forceSSL = true;
-        enableACME = true;
-        locations."/" = {
-          proxyPass = "http://localhost:8080";
-        };
-      };
-    };
-  };
-
   security.acme = {
     acceptTerms = true;
     defaults.email = "zach@zacharymyers.com";
