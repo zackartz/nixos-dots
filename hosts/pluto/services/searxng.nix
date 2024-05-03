@@ -16,7 +16,7 @@
   services.nginx.virtualHosts."search.zackmyers.io" = {
     forceSSL = true;
     enableACME = true;
-    locations."/searx" = {
+    locations."/" = {
       proxyPass = "http://localhost:8080";
     };
   };
