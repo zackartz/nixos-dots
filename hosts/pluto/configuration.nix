@@ -10,6 +10,8 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+
+    ./services/searxng.nix
   ];
 
   # Bootloader.
@@ -48,15 +50,6 @@
   };
 
   programs.zsh.enable = true;
-
-  services.searx = {
-    enable = true;
-    package = pkgs.searxng;
-    runInUwsgi = true;
-    uwsgiConfig = {
-      http = ":8080";
-    };
-  };
 
   programs.mosh.enable = true;
 
