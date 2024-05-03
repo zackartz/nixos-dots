@@ -70,6 +70,7 @@ in {
     requires = ["docker.service"];
     partOf = ["docker.service"];
     script = ''
+      export PATH=${pkgs.coreutils}:$PATH
       ${wings}/bin/wings
     '';
     wantedBy = ["multi-user.target"];
