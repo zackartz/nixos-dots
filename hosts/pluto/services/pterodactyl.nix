@@ -10,7 +10,7 @@
     src = pkgs.fetchurl {
       name = "wings";
       url = "https://github.com/pterodactyl/wings/releases/latest/download/wings_linux_amd64";
-      sha256 = lib.fakeSha256;
+      sha256 = "sha256-S8vTpxvtmv7TfRMpgKxVPkvTmji1rlPEd9ApM3Rt6FY=";
     };
 
     phases = ["installPhase"];
