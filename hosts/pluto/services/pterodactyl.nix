@@ -71,6 +71,7 @@ in {
     partOf = ["docker.service"];
     script = ''
       #!/usr/bin/env bash
+      echo $PATH
       ${wings}/bin/wings
     '';
     wantedBy = ["multi-user.target"];
