@@ -90,7 +90,7 @@ in {
     after = ["redis.service"];
     wantedBy = ["multi-user.target"];
     script = ''
-      ${pkgs.php} /var/www/pterodactyl/artisan queue:work --queue=high,standard,low --sleep=3 --tries=3
+      ${pkgs.php}/bin/php /var/www/pterodactyl/artisan queue:work --queue=high,standard,low --sleep=3 --tries=3
     '';
     serviceConfig = {
       User = "nginx";
