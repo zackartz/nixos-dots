@@ -43,7 +43,6 @@ in {
     };
   };
 
-
   systemd.services."wings" = {
     after = ["docker.service"];
     requires = ["docker.service"];
