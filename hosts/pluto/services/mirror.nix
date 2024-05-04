@@ -2,8 +2,8 @@
   systemd.timers."mirror-update" = {
     wantedBy = ["timers.target"];
     timerConfig = {
-      OnBootSec = "5m";
-      OnUnitActiveSec = "5m";
+      OnBootSec = "1h";
+      OnUnitActiveSec = "1h";
       Unit = "mirror-update.service";
     };
   };
