@@ -70,6 +70,17 @@
     ];
   };
 
+  user.users.alfie = {
+    isNormalUser = true;
+    description = "alfie";
+    extraGroups = ["wheel" "docker"];
+    shell = pkgs.zsh;
+    hashedPassword = "$6$rounds=2000000$iq6PHGbyILszBS.4$PNjQ8FHJAC6JwwjTns1gxfLrXH0m/yMdFE57O29mGBEKOYm0fDqd1XG/7GjdBgNsxYVVy3LgebOGifSMUwelu1";
+    openssh.authorizedKeys.keys = [
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCtlZMJYa7JrZfUDSgJrxbahZClsbbCB8ahvIk3wmokAPSMzMunVmll0QAliYA+WV4A4zAlecCfVRvBDa3e2M3Yct54Oo6uNPNsPmKS6/5WN293p7r9j9jYLAAPe8OfC24dXb06BmLQ0kPdBWxd8sfINhcDKv+8vtncaTowG4k3UK0w9LJB+91uZM1lMK1MCppC1vbdvDMuJ4m3pidT/0bNEdFWUMXEu3G024d+u5fHyEVGwNWpbMshXRLPpfJtg4qPLXiyf/piE2gXiBdoFWDhspWT2NO8GEpgBTmdmR1qNviOcnJlxwGSNTvL1GYK5DAxqNZBm3GYAheNIpdikxpgUiS28Z4nCBNChLK2fFzS8Ol2OGK0qfe5fNEkjxsi624hG6xvEZqEXsVBV1tzH+cw5iC6jda03HXmMcZ23glI4fhE/RNR6yAMYjj1DwdiILMnWsW3H9YYPQmkRdY028WB6Lpr9k4pD7+O3PEekwEGLe9XahTHndrUMFv68eAgvC8= rotki@DESKTOP-J809N7P"
+    ];
+  };
+
   virtualisation.docker.enable = true;
 
   home-manager = {
@@ -81,6 +92,13 @@
 
         home.username = "zack";
         home.homeDirectory = "/home/zack";
+      };
+      "alfie" = {
+        imports = [../../modules/home-manager/pluto.nix];
+        _module.args.theme = import ../../core/theme.nix;
+
+        home.username = "alfie";
+        home.homeDirectory = "/home/alfie";
       };
     };
   };
