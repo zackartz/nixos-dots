@@ -8,6 +8,7 @@
     pkgs.slack
 
     pkgs.zoom-us
+    pkgs.elisa
 
     pkgs.prismlauncher
     pkgs.obs-studio
