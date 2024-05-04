@@ -70,7 +70,7 @@
     ];
   };
 
-  user.users.alfie = {
+  users.users.alfie = {
     isNormalUser = true;
     description = "alfie";
     extraGroups = ["wheel" "docker"];
