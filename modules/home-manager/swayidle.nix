@@ -3,6 +3,7 @@
   lib,
   config,
   theme,
+  inputs,
   ...
 }: let
   suspendScript = pkgs.writeShellScript "suspend-script" ''
@@ -54,34 +55,32 @@ in {
       ignore-empty-password = true;
     };
   };
-  services.swayidle = {
-    enable = true;
-    events = [
-      {
-        event = "before-sleep";
-        command = "${pkgs.swaylock-effects}/bin/swaylock -fF";
-      }
-      {
-        event = "lock";
-        command = "${pkgs.swaylock-effects}/bin/swaylock -fF";
-      }
-      {
-        event = "lock";
-        command = "${pkgs.gtklock}/bin/gtklock";
-      }
-    ];
-    timeouts = [
-      {
-        timeout = 300;
-        command = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl dispatch dpms off";
-        resumeCommand = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl dispatch dpms on";
-      }
-      {
-        timeout = 310;
-        command = suspendScript.outPath;
-      }
-    ];
+
+  systemd.user.services.hypridle = {
+    Unit = {
+      Description = "Idle Daemon for Hyprland";
+    };
+    Service = {
+      Type = "simple";
+      ExecStart = lib.getExe inputs.hypridle.packages.${pkgs.system}.hypridle;
+      Restart = "on-failure";
+    };
+    Install = {
+      WantedBy = ["hyprland-session.target"];
+    };
   };
 
-  systemd.user.services.swayidle.Install.WantedBy = lib.mkForce ["hyprland-session.target"];
+  xdg.configFile."hypr/hypridle.conf".text = ''
+    general {
+        lock_cmd = ${pkgs.swaylock-effects}/bin/swaylock -fF
+        before_sleep_cmd = ${pkgs.swaylock-effects}/bin/swaylock -fF    # command ran before sleep
+        ignore_dbus_inhibit = false             # whether to ignore dbus-sent idle-inhibit requests (used by e.g. firefox or steam)
+    }
+
+    listener {
+        timeout = 300                            # in seconds
+        on-timeout = ${config.wayland.windowManager.hyprland.package}/bin/hyprctl dispatch dpms off
+        on-resume = ${config.wayland.windowManager.hyprland.package}/bin/hyprctl dispatch dpms on
+    }
+  '';
 }

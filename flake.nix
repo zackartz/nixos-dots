@@ -40,11 +40,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hypridle = {
+      url = "github:hyprwm/hypridle";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     catppuccin.url = "github:catppuccin/nix";
 
     hyprland = {
-      url = "github:hyprwm/Hyprland/";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     };
 
     kb-gui = {
