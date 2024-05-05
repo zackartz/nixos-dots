@@ -42,12 +42,14 @@ M.cssls = make_config("cssls", {
 	},
 })
 
--- M.tailwindcss = make_config("tailwindcss", {
--- on_attach = function()
--- 	local bufnr = vim.api.nvim_get_current_buf()
--- 	require("document-color").buf_attach(bufnr)
--- end,
--- })
+M.astro = make_config("astro")
+
+M.tailwindcss = make_config("tailwindcss", {
+	on_attach = function()
+		local bufnr = vim.api.nvim_get_current_buf()
+		require("document-color").buf_attach(bufnr)
+	end,
+})
 
 M.clangd = make_config("clangd", {
 	cmd = {
