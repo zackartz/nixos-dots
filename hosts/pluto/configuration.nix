@@ -124,6 +124,8 @@
     passwordAuthentication = false;
   };
 
+  zmio.blog.enable = true;
+
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [80 443 6969 2022];
   networking.firewall.allowedTCPPortRanges = [

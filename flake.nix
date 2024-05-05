@@ -33,6 +33,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    blog.url = "github:zackartz/zmio";
+
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.3.0";
 
@@ -96,6 +98,7 @@
       modules = [
         ./hosts/pluto/configuration.nix
         inputs.home-manager_stable.nixosModules.default
+        inputs.blog.nixosModule.default
       ];
     };
 
