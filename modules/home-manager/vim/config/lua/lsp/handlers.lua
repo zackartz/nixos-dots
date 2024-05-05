@@ -7,7 +7,7 @@ local make_config = function(name, config)
 	local extended_config = vim.tbl_extend("error", { capabilities = capabilities }, config)
 
 	return function()
-		require("lspconfig")[name].setup(config)
+		require("lspconfig")[name].setup(extended_config)
 	end
 end
 
