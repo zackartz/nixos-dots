@@ -98,7 +98,7 @@
       modules = [
         ./hosts/pluto/configuration.nix
         inputs.home-manager_stable.nixosModules.default
-        inputs.blog.nixosModule.default
+        inputs.blog.nixosModule
       ];
     };
 
