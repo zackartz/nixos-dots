@@ -42,7 +42,7 @@ M.cssls = make_config("cssls", {
 	},
 })
 
-M.astro = make_config("astro")
+M.astro = make_config("astro", {})
 
 M.tailwindcss = make_config("tailwindcss", {
 	on_attach = function()
