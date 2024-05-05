@@ -42,6 +42,7 @@ M.cssls = make_config("cssls", {
 	},
 })
 
+M.texlab = make_config("texlab", {})
 M.astro = make_config("astro", {})
 
 M.tailwindcss = make_config("tailwindcss", {
