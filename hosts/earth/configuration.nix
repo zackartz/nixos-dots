@@ -82,10 +82,9 @@
     extraGroups = ["users"];
   };
 
-  # services.openssh = {
-  #   enable = true;
-  #   PasswordAuthentication = true;
-  # };
+  services.openssh = {
+    enable = true;
+  };
 
   environment.systemPackages = with pkgs; [
     alvr
@@ -94,6 +93,7 @@
     vesktop
     mangohud
     transmission_4
+    inputs.agenix.packages.${pkgs.system}.default
   ];
 
   hardware.nvidia = {
