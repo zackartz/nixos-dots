@@ -63,15 +63,12 @@
     description = "zack";
     extraGroups = ["networkmanager" "wheel" "docker"];
     shell = pkgs.zsh;
+    packages = with pkgs; [];
     hashedPassword = "$6$rounds=2000000$673Iz4rM8Dr9yz7C$Xq5JXxE7ioUrpZmMf3uTrPN2ODrEu3Sph6EhWyPoM5Ty./FhgB9hU0mz1yYo8sUj7wdUMWfR98haVJ24Wv3BK/";
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICuUA9KTvcZ+ZTEO90y6VcmQyuwL30I2mOGsm8GZn7BF zack@mars"
     ];
   };
-
-  environment.systemPackages = [
-    inputs.agenix.packages.${pkgs.system}.default
-  ];
 
   users.users.alfie = {
     isNormalUser = true;

@@ -14,8 +14,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs_stable.url = "github:nixos/nixpkgs/nixos-23.11";
 
-    agenix.url = "github:ryantm/agenix";
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -101,7 +99,6 @@
         ./hosts/pluto/configuration.nix
         inputs.home-manager_stable.nixosModules.default
         inputs.blog.nixosModule
-        inputs.agenix.nixosModule.default
       ];
     };
 
@@ -111,7 +108,6 @@
         ./hosts/earth/configuration.nix
         inputs.lanzaboote.nixosModules.lanzaboote
         inputs.home-manager.nixosModules.default
-        inputs.agenix.nixosModules.default
       ];
     };
 
