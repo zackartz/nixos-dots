@@ -88,6 +88,7 @@ in {
     pkgs.nix-output-monitor
 
     pkgs.nh
+    pkgs.dwl
 
     pkgs.killall
     (pkgs.writeShellScriptBin "rebuild" ''
