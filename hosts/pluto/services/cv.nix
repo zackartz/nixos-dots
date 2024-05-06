@@ -6,6 +6,11 @@
   services.nginx.virtualHosts."cv.zackmyers.io" = {
     forceSSL = true;
     enableACME = true;
-    locations."/".root = "${inputs.resume.packages.${pkgs.system}.default}";
+    locations."/" = {
+      root = "${inputs.resume.packages.${pkgs.system}.default}";
+    };
+    extraConfig = ''
+      index resume.pdf
+    '';
   };
 }
