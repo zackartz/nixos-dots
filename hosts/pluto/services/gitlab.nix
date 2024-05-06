@@ -84,6 +84,8 @@ in {
     enable = true;
     databasePasswordFile = sec.gitlab_db.path;
     initialRootPasswordFile = sec.gitlab_initpw.path;
+    port = 443;
+    https = true;
     host = "git.zackmyers.io";
     secrets = {
       secretFile = sec.gitlab_sec.path;
