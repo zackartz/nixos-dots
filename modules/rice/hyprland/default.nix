@@ -14,7 +14,7 @@ in {
   imports = [./config.nix ./binds.nix ./rules.nix];
   wayland.windowManager.hyprland = {
     enable = true;
-    package = pkgs.hyprland;
+    package = inputs.hyprland.packages.${pkgs.system}.default;
 
     systemd = {
       variables = ["--all"];
