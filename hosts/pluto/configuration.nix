@@ -16,6 +16,7 @@
     ./services/mirror.nix
     ./services/pterodactyl.nix
     ./services/gitlab.nix
+    ./services/cv.nix
   ];
 
   # Bootloader.
