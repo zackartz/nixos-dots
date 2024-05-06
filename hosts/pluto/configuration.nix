@@ -15,6 +15,7 @@
     ./services/nginx.nix
     ./services/mirror.nix
     ./services/pterodactyl.nix
+    ./services/gitlab.nix
   ];
 
   # Bootloader.
@@ -55,6 +56,8 @@
   programs.zsh.enable = true;
 
   programs.mosh.enable = true;
+
+  environment.systemPackages = [inputs.agenix.packages.${pkgs.system}.agenix];
 
   users.mutableUsers = false;
   # Define a user account. Don't forget to set a password with ‘passwd’.

@@ -27,6 +27,9 @@
     anyrun.url = "github:Kirottu/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
     ags.url = "github:Aylur/ags";
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
+    agenix.inputs.darwin.follows = "";
 
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
@@ -99,6 +102,7 @@
         ./hosts/pluto/configuration.nix
         inputs.home-manager_stable.nixosModules.default
         inputs.blog.nixosModule
+        inputs.agenix.nixosModules.default
       ];
     };
 
@@ -108,6 +112,7 @@
         ./hosts/earth/configuration.nix
         inputs.lanzaboote.nixosModules.lanzaboote
         inputs.home-manager.nixosModules.default
+        inputs.agenix.nixosModules.default
       ];
     };
 

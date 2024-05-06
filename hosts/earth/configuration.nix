@@ -94,6 +94,7 @@
     vesktop
     mangohud
     transmission_4
+    inputs.agenix.packages.${pkgs.system}.agenix
   ];
 
   hardware.nvidia = {
