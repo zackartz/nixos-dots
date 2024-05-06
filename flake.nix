@@ -24,6 +24,7 @@
       inputs.nixpkgs.follows = "nixpkgs_stable";
     };
 
+    resume.url = "git+https://git.zackmyers.io/zack/resume";
     anyrun.url = "github:Kirottu/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
     ags.url = "github:Aylur/ags";
