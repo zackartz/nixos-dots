@@ -39,6 +39,7 @@ in {
     enable = true;
     databasePasswordFile = sec.gitlab_db.path;
     initialRootPasswordFile = sec.gitlab_initpw.path;
+    host = "git.zackmyers.io";
     secrets = {
       secretFile = sec.gitlab_sec.path;
       otpFile = sec.gitlab_otp.path;
