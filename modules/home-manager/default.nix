@@ -14,7 +14,7 @@ in {
 
     ../rice/ags
     ../rice/hyprland
-    ../rice/sway
+    # ../rice/sway
     ../rice/gtk.nix
     ../rice/kitty.nix
     # ../rice/waybar
@@ -88,6 +88,7 @@ in {
     pkgs.nix-output-monitor
 
     pkgs.nh
+    pkgs.dwl
 
     pkgs.killall
     (pkgs.writeShellScriptBin "rebuild" ''

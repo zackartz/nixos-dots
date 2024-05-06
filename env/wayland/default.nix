@@ -6,7 +6,7 @@
   imports = [../common/fonts.nix];
 
   environment.etc."greetd/environments".text = ''
-    sway
+    bspwm
     Hyprland
   '';
 
@@ -15,7 +15,7 @@
       enable = true;
       settings = rec {
         initial_session = {
-          command = "sway";
+          command = "Hyprland";
           user = "zack";
         };
         default_session = initial_session;
