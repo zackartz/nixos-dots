@@ -24,8 +24,8 @@
   networking.nameservers = ["1.1.1.1" "1.0.0.1"];
 
   boot.kernel.sysctl = {
-    "fs.inotify.max_user_watches" = 100000;
-    "fs.inotify.max_queued_events" = 100000;
+    "fs.inotify.max_user_watches" = 1048576;
+    "fs.inotify.max_queued_events" = 1048576;
   };
 
   virtualisation.vmVariant = {
