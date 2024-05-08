@@ -132,6 +132,10 @@ in {
   programs.btop = {
     enable = true;
     catppuccin.enable = true;
+    extraConfig = ''
+      update_ms = 100
+      vim_keys = true
+    '';
   };
 
   programs.lazygit = {
