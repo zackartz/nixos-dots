@@ -69,11 +69,11 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1714969585,
-        "narHash": "sha256-fQ1ypJ2nsJkZX0fXz8lHWwEtbmi6L5rf03cl8aus+PM=",
+        "lastModified": 1715354931,
+        "narHash": "sha256-Rf36cp9G4BDui1zOkIPMozp3yqHnAYfT3DwRjKPTs1A=",
         "owner": "zackartz",
         "repo": "zmio",
-        "rev": "286b0f33845b44cdc230ef7b2fd98a778149d379",
+        "rev": "c9d0b1ae278993cc44d0c95c2de8c97e0a8c1dc0",
         "type": "github"
       },
       "original": {
