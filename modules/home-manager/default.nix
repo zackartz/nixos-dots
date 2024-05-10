@@ -85,6 +85,8 @@ in {
     pkgs.grim
     pkgs.slurp
 
+    (pkgs.uutils-coreutils.override {prefix = "";})
+
     pkgs.nix-output-monitor
 
     pkgs.nh
