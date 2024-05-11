@@ -87,7 +87,6 @@ in {
 
     pkgs.xfce.thunar
     pkgs.nitch
-    pkgs.cava
     pkgs.nix-output-monitor
 
     pkgs.nh
@@ -130,6 +129,11 @@ in {
     enable = true;
     enableZshIntegration = true;
     options = ["--cmd cd"];
+  };
+
+  programs.cava = {
+    enable = true;
+    catppuccin.enable = true;
   };
 
   programs.btop = {
