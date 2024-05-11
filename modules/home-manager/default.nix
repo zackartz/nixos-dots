@@ -87,6 +87,7 @@ in {
 
     pkgs.xfce.thunar
     pkgs.nitch
+    pkgs.cava
     pkgs.nix-output-monitor
 
     pkgs.nh
