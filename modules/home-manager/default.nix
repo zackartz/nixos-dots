@@ -46,11 +46,11 @@ in {
     options = "--delete-older-than 30d";
   };
 
-  catppuccin.flavour = "latte";
+  catppuccin.flavour = "mocha";
   programs.spicetify = {
     enable = true;
     theme = spicePkgs.themes.catppuccin;
-    colorScheme = "latte";
+    colorScheme = "mocha";
 
     enabledExtensions = with spicePkgs.extensions; [
       fullAppDisplay
