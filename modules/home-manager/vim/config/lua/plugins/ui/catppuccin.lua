@@ -11,6 +11,7 @@ return {
 				Pmenu = { bg = colors.base },
 			}
 		end,
+		flavor = "mocha",
 		integrations = {
 			cmp = true,
 			noice = true,
