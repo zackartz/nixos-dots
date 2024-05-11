@@ -29,7 +29,7 @@ in {
       set-option -sa terminal-overrides ",xterm*:Tc"
       set -g mouse on
 
-      set -g @catppuccin-flavor 'mocha'
+      set -g @catppuccin-flavor 'latte'
 
       set -g base-index 1
       set -g pane-base-index 1

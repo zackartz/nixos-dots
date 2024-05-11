@@ -24,6 +24,10 @@
       inputs.nixpkgs.follows = "nixpkgs_stable";
     };
 
+    snowfall-lib = {
+      url = "github:snowfallorg/lib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     resume.url = "git+https://git.zackmyers.io/zack/resume";
     anyrun.url = "github:Kirottu/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
