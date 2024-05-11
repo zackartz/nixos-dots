@@ -85,6 +85,8 @@ in {
     pkgs.grim
     pkgs.slurp
 
+    pkgs.xfce.thunar
+    pkgs.nitch
     pkgs.nix-output-monitor
 
     pkgs.nh
