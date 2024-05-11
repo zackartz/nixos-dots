@@ -50,8 +50,7 @@
     while ! ${mullvad}/bin/mullvad status >/dev/null; do sleep 1; done
     ${mullvad}/bin/mullvad auto-connect set on
     ${mullvad}/bin/mullvad tunnel set ipv6 on
-    ${mullvad}/bin/mullvad set default \
-      --block-ads --block-trackers --block-malware
+    ${mullvad}/bin/mullvad connect
   '';
 
   services.transmission = {
