@@ -5,7 +5,7 @@ return {
 		vim.cmd.colorscheme("catppuccin")
 	end,
 	opts = {
-		transparent_background = true,
+		transparent_background = false,
 		custom_highlights = function(colors)
 			return {
 				Pmenu = { bg = colors.base },
