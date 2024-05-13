@@ -19,6 +19,5 @@
     "highlighthigh" = "524f67";
   };
 
-  anime = ./anime.png;
   wallpaper = ./wallpaper.png;
 }
