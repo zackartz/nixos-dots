@@ -2,16 +2,6 @@ local filetypes = require("core.filetypes")
 local configurer = require("utils.configurer")
 local opts = {}
 
-package.path = package.path
-	.. ";"
-	.. "/nix/store/cga26ykqb57jyiws6wvrsmw9xrqf7555-lua5.1-lua-curl-0.3.13-1/share/lua/5.1/cURL.lua;"
-	.. "/nix/store/cga26ykqb57jyiws6wvrsmw9xrqf7555-lua5.1-lua-curl-0.3.13-1/share/lua/5.1/cURL/?.lua;"
-	.. "/nix/store/cga26ykqb57jyiws6wvrsmw9xrqf7555-lua5.1-lua-curl-0.3.13-1/share/lua/5.1/cURL/impl/cURL.lua"
-
-package.cpath = package.cpath
-	.. ";"
-	.. "/nix/store/cga26ykqb57jyiws6wvrsmw9xrqf7555-lua5.1-lua-curl-0.3.13-1/lib/lua/5.1/lcurl.so"
-
 if vim.g.vscode then
 	-- VSCode Neovim
 	opts.spec = "vscode.plugins"

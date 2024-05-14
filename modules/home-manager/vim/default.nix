@@ -28,11 +28,6 @@ in {
       nodePackages.typescript-language-server
       tailwindcss-language-server
 
-      lua51Packages.lua-curl
-      lua51Packages.nvim-nio
-      lua51Packages.xml2lua
-      lua51Packages.mimetypes
-
       # Tools
       git
       html-tidy
@@ -50,6 +45,12 @@ in {
     ];
     plugins = [
       pkgs.vimPlugins.lazy-nvim # All other plugins are managed by lazy-nvim
+    ];
+    extraLuaPackages = with pkgs; [
+      lua51Packages.lua-curl
+      lua51Packages.nvim-nio
+      lua51Packages.xml2lua
+      lua51Packages.mimetypes
     ];
   };
 
