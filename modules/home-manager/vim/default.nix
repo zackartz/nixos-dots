@@ -36,6 +36,7 @@ in {
       nodejs
       fswatch # File watcher utility, replacing libuv.fs_event for neovim 10.0
       sqlite
+      postgresql
       gerbera
       vscode-extensions.vadimcn.vscode-lldb.adapter
     ];
