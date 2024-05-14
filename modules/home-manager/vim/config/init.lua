@@ -31,6 +31,14 @@ end
 
 setup_all_servers()
 
+package.path = package.path
+	.. ";"
+	.. "/nix/store/cga26ykqb57jyiws6wvrsmw9xrqf7555-lua5.1-lua-curl-0.3.13-1/share/lua/5.1/cURL.lua"
+
+package.cpath = package.cpath
+	.. ";"
+	.. "/nix/store/cga26ykqb57jyiws6wvrsmw9xrqf7555-lua5.1-lua-curl-0.3.13-1/lib/lua/5.1/lcurl.so"
+
 vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
 vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
 vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
