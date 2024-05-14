@@ -74,6 +74,6 @@
       force_zero_scaling = true;
     };
 
-    monitor = ["DP-1,2560x1440@240,0x0,1" "HDMI-A-1,disable"];
+    monitor = ["DP-1,2560x1440@240,0x0,1.25,bitdepth,10" "HDMI-A-1,disable"];
   };
 }
