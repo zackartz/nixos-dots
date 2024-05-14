@@ -66,6 +66,7 @@ in {
     STATE_FILE=$STATE_DIR/lazy-lock-checksum
     LOCK_FILE=~/.config/nvim/lazy-lock.json
     HASH=$(nix-hash --flat $LOCK_FILE)
+    CURL_DIR=${pkgs.curl}
 
     [ ! -d $STATE_DIR ] && mkdir -p $STATE_DIR
     [ ! -f $STATE_FILE ] && touch $STATE_FILE
