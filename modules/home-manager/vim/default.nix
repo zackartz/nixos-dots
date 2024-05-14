@@ -35,6 +35,7 @@ in {
 
       # Tools
       git
+      html-tidy
       cmake
       fzf
       gcc
