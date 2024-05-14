@@ -34,6 +34,8 @@ return {
 		-- Neotree
 		[l("e")] = { cmd("Neotree toggle"), fmt("FileTree", "Toggle Neotree") },
 
+		[l("ng")] = { cmd("Neogit"), fmt("Git", "Open Neogit") },
+
 		-- move.nvim
 		["<A-j>"] = { cmd("MoveLine(1)"), "Move line down" },
 		["<A-k>"] = { cmd("MoveLine(-1)"), "Move line up" },

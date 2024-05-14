@@ -39,10 +39,10 @@ return {
 	["textDocument/typeDefinition"] = {
 		["gT"] = { lsp.type_definition, "Go to type definition" },
 	},
-	["textDocument/codeLens"] = {
-		["<leader>ll"] = { lsp.run_codelens, fmt("Run", "Run codelens") },
-		["<leader>lL"] = { lsp.refresh_codelens, fmt("Restart", "Refresh codelens") },
-	},
+	-- ["textDocument/codeLens"] = {
+	-- 	["<leader>ll"] = { lsp.run_codelens, fmt("Run", "Run codelens") },
+	-- 	["<leader>lL"] = { lsp.refresh_codelens, fmt("Restart", "Refresh codelens") },
+	-- },
 	["workspace/symbol"] = {
 		["<leader>ls"] = { lsp.symbols, fmt("Symbol", "Workspace symbols") },
 	},
