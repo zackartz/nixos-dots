@@ -27,6 +27,11 @@ in {
       nodePackages.typescript-language-server
       tailwindcss-language-server
 
+      luajitPackages.lua-curl
+      luajitPackages.nvim-nio
+      luajitPackages.mimetypes
+      luajitPackages.xml2lua
+
       # Tools
       git
       cmake
@@ -37,7 +42,6 @@ in {
       fswatch # File watcher utility, replacing libuv.fs_event for neovim 10.0
       sqlite
       postgresql
-      luarocks-nix
       mongosh
       gerbera
       vscode-extensions.vadimcn.vscode-lldb.adapter
