@@ -29,7 +29,10 @@ in {
       tailwindcss-language-server
 
       luajitPackages.luarocks
-      curl
+      luajitPackages.lua-curl
+      luajitPackages.nvim-nio
+      luajitPackages.xml2lua
+      luajitPackages.mimetypes
 
       # Tools
       git
