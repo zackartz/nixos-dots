@@ -1,15 +1,11 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   gtk = {
     enable = true;
-    theme = {
-      name = "Catppuccin-Frappe-Compact-Pink-Dark";
-      package = pkgs.catppuccin-gtk.override {
-        accents = ["pink"];
-        tweaks = ["rimless"];
-        size = "compact";
-        variant = "frappe";
-      };
-    };
+    catppuccin.enable = true;
 
     iconTheme = {
       package = pkgs.catppuccin-papirus-folders;
@@ -60,21 +56,21 @@
     enable = true;
     platformTheme = "qtct";
     style = {
-      name = "Catppuccin-Frappe-Dark";
+      name = "Catppuccin-Mocha-Sapphire";
       package = pkgs.catppuccin-kde.override {
-        flavour = ["frappe"];
-        accents = ["pink"];
+        flavour = ["mocha"];
+        accents = ["sapphire"];
       };
     };
   };
   xdg.configFile = {
     "Kvantum/catppuccin/catppuccin.kvconfig".source = builtins.fetchurl {
-      url = "https://raw.githubusercontent.com/catppuccin/Kvantum/main/src/Catppuccin-Frappe-Pink/Catppuccin-Frappe-Pink.kvconfig";
-      sha256 = "0pl936nchif2zsgzy4asrlc3gvv4fv2ln2myrqx13r6xra1vkcqs";
+      url = "https://raw.githubusercontent.com/catppuccin/Kvantum/main/src/Catppuccin-Mocha-Sapphire/Catppuccin-Mocha-Sapphire.kvconfig";
+      sha256 = "sha256:0n9f5hysr4k1sf9fd3sgd9fvqwrxrpcvj6vajqmb5c5ji8nv2w3c";
     };
     "Kvantum/catppuccin/catppuccin.svg".source = builtins.fetchurl {
-      url = "https://raw.githubusercontent.com/catppuccin/Kvantum/main/src/Catppuccin-Frappe-Pink/Catppuccin-Frappe-Pink.svg";
-      sha256 = "1b92j0gb65l2pvrf90inskr507a1kwin1zy0grwcsdyjmrm5yjrv";
+      url = "https://raw.githubusercontent.com/catppuccin/Kvantum/main/src/Catppuccin-Mocha-Sapphire/Catppuccin-Mocha-Sapphire.svg";
+      sha256 = "sha256:1hq9h34178h0d288hgwb0ngqnixz24m9lk0ahc4dahwqn77fndwf";
     };
     "Kvantum/kvantum.kvconfig".text = ''
       [General]
