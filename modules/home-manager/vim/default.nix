@@ -28,11 +28,10 @@ in {
       nodePackages.typescript-language-server
       tailwindcss-language-server
 
-      luajitPackages.luarocks
-      luajitPackages.lua-curl
-      luajitPackages.nvim-nio
-      luajitPackages.xml2lua
-      luajitPackages.mimetypes
+      lua51Packages.lua-curl
+      lua51Packages.nvim-nio
+      lua51Packages.xml2lua
+      lua51Packages.mimetypes
 
       # Tools
       git
