@@ -27,12 +27,8 @@ in {
       nodePackages.typescript-language-server
       tailwindcss-language-server
 
-      # luajitPackages.lua-curl
-      # luajitPackages.nvim-nio
-      # luajitPackages.mimetypes
-      # luajitPackages.xml2lua
-
       luajitPackages.luarocks
+      curl
 
       # Tools
       git
