@@ -49,6 +49,7 @@ in {
     ];
     plugins = [
       pkgs.vimPlugins.lazy-nvim # All other plugins are managed by lazy-nvim
+      pkgs.vimPlugins.rest-nvim
     ];
   };
 
