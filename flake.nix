@@ -54,7 +54,7 @@
     catppuccin.url = "github:catppuccin/nix";
 
     hyprland = {
-      url = "git+https://github.com/hyprwm/hyprland?submodules=1";
+      url = "github:hyprwm/Hyprland/v0.40.0";
     };
 
     kb-gui = {
