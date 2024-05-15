@@ -1,5 +1,6 @@
 return {
 	"isabelroses/charm-freeze.nvim",
+	lazy = false,
 	config = function()
 		require("charm-freeze").setup({
 			command = "freeze",
