@@ -30,6 +30,7 @@ end
 M.freeze_selection = function()
 	local path = "./._freeze.png"
 
+	vim.cmd("normal! gv")
 	-- Retrieve buffer ID for the current buffer
 	local buf = vim.api.nvim_get_current_buf()
 
@@ -40,9 +41,6 @@ M.freeze_selection = function()
 	-- Retrieve the line numbers from the positions
 	local start_line = start_pos[1]
 	local end_line = end_pos[1]
-
-	-- Exit visual mode and return to normal mode
-	vim.cmd("normal! gv")
 
 	-- Execute the 'Freeze' command on the selected range
 	vim.cmd(start_line .. "," .. end_line .. "Freeze")
