@@ -17,6 +17,35 @@ local select = function(prompt, callback)
 	end)
 end
 
+M.freeze = function()
+	local path = "./._freeze.png"
+
+	-- Execute the 'Freeze' command on the selected range
+	vim.cmd("Freeze")
+
+	-- Run the shell command 'wl-copy <path>' after 'Freeze' completes
+	vim.fn.system("wl-copy < " .. path)
+	vim.fn.system("rm " .. path)
+end
+
+M.freeze_selection = function()
+	local path = "./._freeze.png"
+
+	-- Save and exit visual mode
+	vim.cmd("normal! gv")
+
+	-- Get the positions of the start and end of the visual selection
+	local start_line = vim.fn.getpos("'<")[2] -- line number of the start of selection
+	local end_line = vim.fn.getpos("'>")[2] -- line number of the end of selection
+
+	-- Execute the 'Freeze' command on the selected range
+	vim.cmd(start_line .. "," .. end_line .. "Freeze")
+
+	-- Run the shell command 'wl-copy <path>' after 'Freeze' completes
+	vim.fn.system("wl-copy < " .. path)
+	vim.fn.system("rm " .. path)
+end
+
 M.set_filetype = function()
 	input("Set filetype: ", function(value)
 		vim.bo[0].filetype = value

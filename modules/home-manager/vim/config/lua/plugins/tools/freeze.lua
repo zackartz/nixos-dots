@@ -4,7 +4,7 @@ return {
 		require("charm-freeze").setup({
 			command = "freeze",
 			output = function()
-				return "./" .. os.date("%Y-%m-%d") .. "_freeze.png"
+				return "./" .. "._freeze.png"
 			end,
 			show_line_numbers = true,
 			theme = "catppuccin-mocha",

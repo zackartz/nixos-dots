@@ -1,7 +1,9 @@
 local map = require("utils.mappings")
 local f = require("utils.functions")
 local fmt = require("utils.icons").fmt
+local fn = require("utils.functions")
 local l, cmd, rcmd, lua = map.leader, map.cmd, map.rcmd, map.lua
+local freeze, freeze_selection = fn.freeze, fn.freeze_selection
 
 return {
 	i = {
@@ -41,7 +43,7 @@ return {
 		[l("ct")] = { cmd("CloakToggle"), "Cloak Toggle" },
 
 		-- Freeze
-		[l("sc")] = { cmd("Freeze"), "Take code screenshot" },
+		[l("sc")] = { freeze(), "Take code screenshot" },
 
 		-- Rest
 		[l("rr")] = { cmd("Rest run"), "Run request in Rest" },
@@ -261,7 +263,7 @@ return {
 		[l(";")] = { f.comment_selection, fmt("Comment", "Comment selection") },
 
 		-- Freeze
-		[l("sc")] = { cmd("'<,'>Freeze"), "Take code screenshot" },
+		[l("sc")] = { freeze_selection(), "Take code screenshot" },
 
 		-- gitsigns
 		[l("gr")] = { cmd("Gitsigns reset_hunk"), fmt("Restore", "Revert hunk") },
