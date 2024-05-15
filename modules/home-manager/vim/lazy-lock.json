@@ -6,6 +6,7 @@
   "bufferline.nvim": { "branch": "main", "commit": "73540cb95f8d95aa1af3ed57713c6720c78af915" },
   "catppuccin": { "branch": "main", "commit": "d97387aea8264f484bb5d5e74f2182a06c83e0d8" },
   "ccc.nvim": { "branch": "main", "commit": "f388f1981d222967c741fe9927edf9ba5fa3bcbe" },
+  "charm-freeze.nvim": { "branch": "main", "commit": "3ad4dd739b97d92adb219a5752a8734fc8579055" },
   "clear-action.nvim": { "branch": "master", "commit": "609adc95871ffd7b11f75f8326a67c53b8513e93" },
   "cloak.nvim": { "branch": "main", "commit": "6e5bcd50bebc5cdb7cd3a00eb3d97ab7c4cc3b94" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },

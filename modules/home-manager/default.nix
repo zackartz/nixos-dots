@@ -62,6 +62,7 @@ in {
     "text/html" = "firefox.desktop";
     "x-scheme-handler/http" = "firefox.desktop";
     "x-scheme-handler/https" = "firefox.desktop";
+    "image/png" = "feh.desktop";
   };
 
   # This value determines the Home Manager release that your configuration is
@@ -85,6 +86,7 @@ in {
     pkgs.slurp
 
     pkgs.xfce.thunar
+    pkgs.feh
     pkgs.nitch
     pkgs.nix-output-monitor
     pkgs.fastfetch
