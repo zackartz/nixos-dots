@@ -8,7 +8,9 @@ return {
 			end,
 			line_numbers = true,
 			font = {
+				size = 16,
 				family = "Iosevka",
+				ligatures = true,
 			},
 			theme = "catppuccin-mocha",
 		})
