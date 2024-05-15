@@ -17,25 +17,6 @@ local select = function(prompt, callback)
 	end)
 end
 
-local function set_marks()
-	-- Exit visual mode temporarily
-	vim.cmd("normal! gv")
-
-	-- Get the positions of the start and end of the visual selection
-	local start_pos = vim.fn.getpos("'<")
-	local end_pos = vim.fn.getpos("'>")
-
-	-- Set mark 'a' at the start of the selection
-	vim.fn.setpos("'a", start_pos)
-
-	-- Set mark 'b' at the end of the selection
-	vim.fn.setpos("'b", end_pos)
-
-	-- Optionally, print a confirmation or reselect the visual area
-	print("Marks set: 'a' at start, 'b' at end")
-	vim.cmd("normal! gv") -- Reselect the visual area if desired
-end
-
 M.freeze = function()
 	local path = "./._freeze.png"
 
@@ -47,16 +28,21 @@ M.freeze = function()
 end
 
 M.freeze_selection = function()
-	set_marks()
-
 	local path = "./._freeze.png"
 
-	-- Save and exit visual mode
-	vim.cmd("normal! gv")
+	-- Retrieve buffer ID for the current buffer
+	local buf = vim.api.nvim_get_current_buf()
 
-	-- Get the positions of the start and end of the visual selection
-	local start_line = vim.fn.getpos("'<")[2] -- line number of the start of selection
-	local end_line = vim.fn.getpos("'>")[2] -- line number of the end of selection
+	-- Get positions of the start ('<') and end ('>') of the visual selection
+	local start_pos = vim.api.nvim_buf_get_mark(buf, "<")
+	local end_pos = vim.api.nvim_buf_get_mark(buf, ">")
+
+	-- Retrieve the line numbers from the positions
+	local start_line = start_pos[1]
+	local end_line = end_pos[1]
+
+	-- Exit visual mode and return to normal mode
+	vim.cmd("normal! gv")
 
 	-- Execute the 'Freeze' command on the selected range
 	vim.cmd(start_line .. "," .. end_line .. "Freeze")
