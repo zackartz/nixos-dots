@@ -21,7 +21,7 @@ M.freeze = function()
 	local path = "./._freeze.png"
 
 	-- Execute the 'Freeze' command on the selected range
-	vim.cmd("Freeze")
+	vim.cmd("<cmd>Freeze<CR>")
 
 	-- Run the shell command 'wl-copy <path>' after 'Freeze' completes
 	vim.fn.system("wl-copy < " .. path)
@@ -39,7 +39,7 @@ M.freeze_selection = function()
 	local end_line = vim.fn.getpos("'>")[2] -- line number of the end of selection
 
 	-- Execute the 'Freeze' command on the selected range
-	vim.cmd(start_line .. "," .. end_line .. "Freeze")
+	vim.cmd('<cmd>' .. start_line .. ',' .. end_line .. 'Freeze<CR>')
 
 	-- Run the shell command 'wl-copy <path>' after 'Freeze' completes
 	vim.fn.system("wl-copy < " .. path)
