@@ -260,6 +260,9 @@ return {
 		[l("P")] = { '"+P', fmt("Clipboard", "Paste from clipboard") },
 		[l(";")] = { f.comment_selection, fmt("Comment", "Comment selection") },
 
+		-- Freeze
+		[l("sc")] = { cmd("Freeze"), "Take code screenshot" },
+
 		-- gitsigns
 		[l("gr")] = { cmd("Gitsigns reset_hunk"), fmt("Restore", "Revert hunk") },
 
