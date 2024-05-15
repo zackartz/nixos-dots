@@ -7,11 +7,6 @@ return {
 				return "./" .. os.date("%Y-%m-%d") .. "_freeze.png"
 			end,
 			show_line_numbers = true,
-			font = {
-				size = 16,
-				family = "Iosevka",
-				ligatures = true,
-			},
 			theme = "catppuccin-mocha",
 		})
 	end,
