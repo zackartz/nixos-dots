@@ -41,7 +41,7 @@ return {
 		[l("ct")] = { cmd("CloakToggle"), "Cloak Toggle" },
 
 		-- Freeze
-		[l("sc")] = { cmd("freeze"), "Take code screenshot" },
+		[l("sc")] = { cmd("Freeze"), "Take code screenshot" },
 
 		-- Rest
 		[l("rr")] = { cmd("Rest run"), "Run request in Rest" },
