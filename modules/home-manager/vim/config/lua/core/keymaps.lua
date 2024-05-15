@@ -43,7 +43,7 @@ return {
 		[l("ct")] = { cmd("CloakToggle"), "Cloak Toggle" },
 
 		-- Freeze
-		[l("sc")] = { freeze(), "Take code screenshot" },
+		[l("sc")] = { freeze, "Take code screenshot" },
 
 		-- Rest
 		[l("rr")] = { cmd("Rest run"), "Run request in Rest" },
@@ -263,7 +263,7 @@ return {
 		[l(";")] = { f.comment_selection, fmt("Comment", "Comment selection") },
 
 		-- Freeze
-		[l("sc")] = { freeze_selection(), "Take code screenshot" },
+		[l("sc")] = { freeze_selection, "Take code screenshot" },
 
 		-- gitsigns
 		[l("gr")] = { cmd("Gitsigns reset_hunk"), fmt("Restore", "Revert hunk") },
