@@ -30,7 +30,7 @@ end
 M.freeze_selection = function()
 	local path = "./._freeze.png"
 
-	vim.cmd("normal! gv")
+	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", false, true, true), "nx", false)
 	-- Retrieve buffer ID for the current buffer
 	local buf = vim.api.nvim_get_current_buf()
 
