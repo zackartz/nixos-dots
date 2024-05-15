@@ -261,7 +261,7 @@ return {
 		[l(";")] = { f.comment_selection, fmt("Comment", "Comment selection") },
 
 		-- Freeze
-		[l("sc")] = { cmd("Freeze"), "Take code screenshot" },
+		[l("sc")] = { cmd("'<,'>Freeze"), "Take code screenshot" },
 
 		-- gitsigns
 		[l("gr")] = { cmd("Gitsigns reset_hunk"), fmt("Restore", "Revert hunk") },
