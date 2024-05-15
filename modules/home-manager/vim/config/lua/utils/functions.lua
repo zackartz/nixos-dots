@@ -126,7 +126,6 @@ M.open_dapui = function()
 end
 
 M.close_dapui = function()
-	require("neo-tree").show()
 	require("dapui").close()
 end
 

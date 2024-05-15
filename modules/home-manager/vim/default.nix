@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }: let
   nvimDir = "/home/${config.home.username}/nixos/modules/home-manager/vim";
@@ -33,6 +34,7 @@ in {
       html-tidy
       cmake
       fzf
+      charm-freeze
       gcc
       gnumake
       nodejs

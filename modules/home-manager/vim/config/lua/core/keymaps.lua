@@ -37,6 +37,12 @@ return {
 		-- Neogit
 		[l("ng")] = { cmd("Neogit"), fmt("Git", "Open Neogit") },
 
+		-- Cloak
+		[l("ct")] = { cmd("CloakToggle"), "Cloak Toggle" },
+
+		-- Freeze
+		[l("sc")] = { cmd("freeze"), "Take code screenshot" },
+
 		-- Rest
 		[l("rr")] = { cmd("Rest run"), "Run request in Rest" },
 

@@ -50,6 +50,7 @@
   "nvim-ufo": { "branch": "main", "commit": "a5390706f510d39951dd581f6d2a972741b3fa26" },
   "nvim-web-devicons": { "branch": "master", "commit": "e37bb1feee9e7320c76050a55443fa843b4b6f83" },
   "overseer.nvim": { "branch": "master", "commit": "226789848772d99b3b61363b6ea7663882f8c05e" },
+  "playground": { "branch": "master", "commit": "ba48c6a62a280eefb7c85725b0915e021a1a0749" },
   "plenary.nvim": { "branch": "master", "commit": "08e301982b9a057110ede7a735dd1b5285eb341f" },
   "promise-async": { "branch": "main", "commit": "93540c168c5ed2b030ec3e6c40ab8bbb85e36355" },
   "rest.nvim": { "branch": "main", "commit": "f96edb54a2940322bc7ed81a1031be04db7d3a99" },
