@@ -20,8 +20,7 @@ end
 M.freeze = function()
 	local path = "./._freeze.png"
 
-	-- Execute the 'Freeze' command on the selected range
-	vim.cmd("<cmd>Freeze<CR>")
+	require('charm-freeze').start()
 
 	-- Run the shell command 'wl-copy <path>' after 'Freeze' completes
 	vim.fn.system("wl-copy < " .. path)
