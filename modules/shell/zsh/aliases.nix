@@ -38,8 +38,8 @@ with pkgs; {
   umnt = "udisksctl unmount -b";
   burn = "pkill -9";
   diff = "diff --color=auto";
-  wu = "nmcli con up zack_myers";
-  wd = "nmcli con down zack_myers";
+  wu = "nmcli con up zachary_myers";
+  wd = "nmcli con down zachary_myers";
   "v" = "nvim";
   ".." = "cd ..";
   "..." = "cd ../../";
