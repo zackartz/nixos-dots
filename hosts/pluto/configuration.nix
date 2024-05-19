@@ -16,6 +16,7 @@
     ./services/pterodactyl.nix
     ./services/gitlab.nix
     ./services/cv.nix
+    ./services/grafana.nix
   ];
 
   # Bootloader.
