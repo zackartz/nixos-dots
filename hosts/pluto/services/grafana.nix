@@ -9,7 +9,7 @@
 
     provision = {
       enable = true;
-      datasources = [
+      datasources.settings.datasources = [
         {
           name = "Prometheus";
           type = "prometheus";
@@ -168,6 +168,7 @@
     enableACME = true;
     locations."/" = {
       proxyPass = "http://127.0.0.1:${toString config.services.grafana.port}";
+      recommendedProxySettings = true;
       proxyWebsockets = true;
     };
   };
