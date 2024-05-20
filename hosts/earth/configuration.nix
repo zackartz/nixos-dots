@@ -74,6 +74,7 @@
 
   networking.networkmanager.enable = true;
   networking.networkmanager.unmanaged = ["enp6s0"];
+  networking.firewall.enable = false;
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.supportedFilesystems = ["ntfs"];
