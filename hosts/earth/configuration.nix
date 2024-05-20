@@ -72,9 +72,12 @@
 
   networking.hostName = "earth"; # Define your hostname.
 
-  networking.networkmanager.enable = true;
-  networking.networkmanager.unmanaged = ["enp6s0"];
-  networking.firewall.enable = false;
+  networking.networkmanager = {
+    enable = true;
+    unmanaged = ["enp6s0"];
+    insertNameservers = ["1.1.1.1" "1.0.0.1"];
+  };
+  # networking.firewall.enable = false;
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.supportedFilesystems = ["ntfs"];
