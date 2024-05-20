@@ -34,7 +34,7 @@
       "workspace special silent, title:^(Firefox — Sharing Indicator)$"
       "workspace special silent, title:^(.*is sharing (your screen|a window)\.)$"
 
-      "workspace 2, class:^(thunderbird)$"
+      "workspace 5, class:^(thunderbird)$"
       "workspace 4, title:^(.*(Disc|WebC)ord.*)$"
       "workspace 4, class:^(.*Slack.*)$"
       "workspace 3, title:^(Spotify Premium)$"
