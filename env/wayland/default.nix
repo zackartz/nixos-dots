@@ -40,7 +40,7 @@
       QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
       MOZ_ENABLE_WAYLAND = "1";
       WLR_BACKEND = "wayland";
-      WLR_RENDERER = "vulkan";
+      WLR_RENDERER = "wayland";
       XDG_SESSION_TYPE = "wayland";
       SDL_VIDEODRIVER = "wayland";
       XDG_CACHE_HOME = "/home/zack/.cache";
