@@ -12,6 +12,8 @@
       "slack"
     ];
 
+    "debug:disable_logs" = false;
+
     general = {
       # gaps
       gaps_in = 6;
