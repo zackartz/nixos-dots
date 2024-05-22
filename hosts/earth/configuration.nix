@@ -43,6 +43,12 @@
   };
   services.fstrim.enable = true;
   services.mullvad-vpn.enable = true;
+  services.openvpn.servers = {
+    work = {
+      config = ''config /home/zack/Downloads/zachary_myers.ovpn '';
+      updateResolvConf = true;
+    };
+  };
 
   # disable autoconnect for now
   # systemd.services."mullvad-daemon".postStart = let
