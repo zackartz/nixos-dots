@@ -2,19 +2,20 @@
   options,
   config,
   lib,
+  inputs,
+  system,
   ...
 }:
 with lib;
 with lib.custom; let
-  cfg = config.shells.zsh;
+  cfg = config.apps.music.spotify;
+  spicePkgs = inputs.spicetify-nix.packages.${system}.default;
 in {
   options.apps.music.spotify = with types; {
     enable = mkBoolOpt false "Enable Spotify";
   };
 
   config = mkIf cfg.enable {
-    home.packages = [pkgs.spotify];
-
     programs.spicetify = {
       enable = true;
       theme = spicePkgs.themes.catppuccin;

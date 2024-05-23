@@ -13,6 +13,10 @@
     tools.tmux.enable = true;
     tools.neovim.enable = true;
     tools.starship.enable = true;
+    tools.skim.enable = true;
+    tools.direnv.enable = true;
+    tools.tealdeer.enable = true;
+    tools.bat.enable = true;
 
     term.kitty.enable = true;
 
@@ -24,11 +28,23 @@
     };
   };
 
+  shells.zsh.enable = true;
+
   rice.gtk.enable = true;
 
   services.lock.enable = true;
 
   xdg.enable = true;
+
+  programs = {
+    gpg.enable = true;
+    man.enable = true;
+    eza.enable = true;
+    dircolors = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+  };
 
   # catppuccin.enable = true;
 

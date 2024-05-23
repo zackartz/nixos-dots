@@ -43,7 +43,6 @@ in {
         DISABLE_QT5_COMPAT = "0";
         GDK_BACKEND = "wayland,x11";
         ANKI_WAYLAND = "1";
-        DIRENV_LOG_FORMAT = "";
         QT_AUTO_SCREEN_SCALE_FACTOR = "1";
         QT_QPA_PLATFORM = "wayland;xcb";
         DISABLE_QT_COMPAT = "0";
