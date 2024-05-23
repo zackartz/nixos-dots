@@ -28,6 +28,7 @@
       download-dir = "/home/zack/dl";
     };
   };
+  services.gnome.gnome-keyring.enable = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = lib.mkForce false;

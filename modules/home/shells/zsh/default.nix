@@ -24,6 +24,7 @@ in {
         LC_ALL = "en_US.UTF-8";
         ZSH_AUTOSUGGEST_USE_ASYNC = "true";
         SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
+        FLAKE = "/home/zack/nixos";
       };
       enableAutosuggestions = true;
       history = {

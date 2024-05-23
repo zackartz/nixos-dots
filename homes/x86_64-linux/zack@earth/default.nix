@@ -86,6 +86,8 @@
     pkgs.dwl
 
     pkgs.killall
+    pkgs.custom.rebuild
+    pkgs.custom.powermenu
 
     pkgs.parsec-bin
     pkgs.filezilla

@@ -94,6 +94,8 @@
       inherit inputs;
       src = ./.;
 
+      overlays = [inputs.neovim-nightly-overlay.overlay];
+
       snowfall = {
         namespace = "custom";
       };
