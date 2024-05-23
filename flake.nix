@@ -67,6 +67,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    snowfall-lib = {
+      url = "github:snowfallorg/lib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
       # inputs.nixpkgs.follows = "nixpkgs";
@@ -84,60 +89,91 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    nixpkgs_stable,
-    systems,
-    ...
-  } @ inputs: let
-    eachSystem = f:
-      nixpkgs.lib.genAttrs (import systems) (
-        system:
-          f nixpkgs.legacyPackages.${system}
-      );
-  in {
-    nixosConfigurations.pluto = nixpkgs_stable.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
-      modules = [
-        ./hosts/pluto/configuration.nix
-        inputs.home-manager_stable.nixosModules.default
-        inputs.blog.nixosModule
-        inputs.agenix.nixosModules.default
-      ];
-    };
+  outputs = inputs:
+    inputs.snowfall-lib.mkFlake {
+      inherit inputs;
+      src = ./.;
 
-    nixosConfigurations.earth = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
-      modules = [
-        ./hosts/earth/configuration.nix
-        inputs.lanzaboote.nixosModules.lanzaboote
-        inputs.home-manager.nixosModules.default
-        inputs.catppuccin.nixosModules.catppuccin
-        inputs.agenix.nixosModules.default
-      ];
-    };
-
-    nixosConfigurations.live = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = {inherit inputs;};
-      modules = [
-        "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-plasma5.nix"
-        "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-        # ./hosts/live/configuration.nix
-      ];
-    };
-
-    devShells = eachSystem (pkgs: {
-      default = pkgs.mkShell {
-        buildInputs = [
-          pkgs.nixd
-          pkgs.alejandra
-          pkgs.stylua
-          pkgs.lua-language-server
-          pkgs.luajitPackages.lua-lsp
-        ];
+      snowfall = {
+        namespace = "custom";
       };
-    });
-  };
+
+      channels-config = {
+        allowUnfree = true;
+      };
+
+      templates = import ./templates {};
+
+      homes.modules = with inputs; [
+        spicetify-nix.homeManagerModule
+        catppuccin.homeManagerModules.catppuccin
+        anyrun.homeManagerModules.default
+        ags.homeManagerModules.default
+      ];
+
+      systems.modules.nixos = with inputs; [
+        lanzaboote.nixosModules.lanzaboote
+        home-manager.nixosModules.home-manager
+        catppuccin.nixosModules.catppuccin
+        blog.nixosModule
+        agenix.nixosModules.default
+      ];
+    };
+
+  # outputs = {
+  #   self,
+  #   nixpkgs,
+  #   nixpkgs_stable,
+  #   systems,
+  #   ...
+  # } @ inputs: let
+  #   eachSystem = f:
+  #     nixpkgs.lib.genAttrs (import systems) (
+  #       system:
+  #         f nixpkgs.legacyPackages.${system}
+  #     );
+  # in {
+  #   nixosConfigurations.pluto = nixpkgs_stable.lib.nixosSystem {
+  #     specialArgs = {inherit inputs;};
+  #     modules = [
+  #       ./hosts/pluto/configuration.nix
+  #       inputs.home-manager_stable.nixosModules.default
+  #       inputs.blog.nixosModule
+  #       inputs.agenix.nixosModules.default
+  #     ];
+  #   };
+  #
+  #   nixosConfigurations.earth = nixpkgs.lib.nixosSystem {
+  #     specialArgs = {inherit inputs;};
+  #     modules = [
+  #       ./hosts/earth/configuration.nix
+  #       inputs.lanzaboote.nixosModules.lanzaboote
+  #       inputs.home-manager.nixosModules.default
+  #       inputs.catppuccin.nixosModules.catppuccin
+  #       inputs.agenix.nixosModules.default
+  #     ];
+  #   };
+  #
+  #   nixosConfigurations.live = nixpkgs.lib.nixosSystem {
+  #     system = "x86_64-linux";
+  #     specialArgs = {inherit inputs;};
+  #     modules = [
+  #       "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-plasma5.nix"
+  #       "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+  #       # ./hosts/live/configuration.nix
+  #     ];
+  #   };
+  #
+  #   devShells = eachSystem (pkgs: {
+  #     default = pkgs.mkShell {
+  #       buildInputs = [
+  #         pkgs.nixd
+  #         pkgs.alejandra
+  #         pkgs.stylua
+  #         pkgs.lua-language-server
+  #         pkgs.luajitPackages.lua-lsp
+  #       ];
+  #     };
+  #   });
+  # };
 }
