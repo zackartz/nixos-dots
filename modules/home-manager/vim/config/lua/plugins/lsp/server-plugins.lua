@@ -20,8 +20,4 @@ return {
 		version = "^4", -- Recommended
 		ft = { "rust" },
 	},
-	{
-		"christoomey/vim-tmux-navigator",
-		lazy = false,
-	},
 }

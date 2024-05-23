@@ -45,7 +45,7 @@
   services.mullvad-vpn.enable = true;
   services.openvpn.servers = {
     work = {
-      config = ''config /home/zack/Downloads/zachary_myers.ovpn '';
+      config = ''config /home/zack/Downloads/zachary_myers.ovpn'';
       updateResolvConf = true;
     };
   };
@@ -188,6 +188,8 @@
       kitty
     ];
   };
+
+  catppuccin.enable = true;
 
   home-manager = {
     extraSpecialArgs = {inherit inputs;};

@@ -113,6 +113,7 @@
         ./hosts/earth/configuration.nix
         inputs.lanzaboote.nixosModules.lanzaboote
         inputs.home-manager.nixosModules.default
+        inputs.catppuccin.nixosModules.catppuccin
         inputs.agenix.nixosModules.default
       ];
     };

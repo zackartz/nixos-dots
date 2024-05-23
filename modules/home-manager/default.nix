@@ -45,7 +45,7 @@ in {
     options = "--delete-older-than 30d";
   };
 
-  catppuccin.flavour = "mocha";
+  catppuccin.flavor = "mocha";
   programs.spicetify = {
     enable = true;
     theme = spicePkgs.themes.catppuccin;
