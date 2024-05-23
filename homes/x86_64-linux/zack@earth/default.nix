@@ -66,8 +66,26 @@
 
     pkgs.mongodb-compass
     pkgs.postman
-    pkgs.nh
     pkgs.mosh
+
+    pkgs.dconf
+    pkgs.wl-clipboard
+    pkgs.pavucontrol
+    pkgs.wlogout
+    pkgs.sway-audio-idle-inhibit
+    pkgs.grim
+    pkgs.slurp
+
+    pkgs.xfce.thunar
+    pkgs.feh
+    pkgs.nitch
+    pkgs.nix-output-monitor
+    pkgs.fastfetch
+
+    pkgs.nh
+    pkgs.dwl
+
+    pkgs.killall
 
     pkgs.parsec-bin
     pkgs.filezilla
