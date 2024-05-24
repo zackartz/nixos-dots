@@ -94,7 +94,7 @@
       inherit inputs;
       src = ./.;
 
-      overlays = [inputs.neovim-nightly-overlay.overlay];
+      overlays = [inputs.neovim-nightly-overlay.overlays.default];
 
       snowfall = {
         namespace = "custom";
@@ -121,61 +121,4 @@
         agenix.nixosModules.default
       ];
     };
-
-  # outputs = {
-  #   self,
-  #   nixpkgs,
-  #   nixpkgs_stable,
-  #   systems,
-  #   ...
-  # } @ inputs: let
-  #   eachSystem = f:
-  #     nixpkgs.lib.genAttrs (import systems) (
-  #       system:
-  #         f nixpkgs.legacyPackages.${system}
-  #     );
-  # in {
-  #   nixosConfigurations.pluto = nixpkgs_stable.lib.nixosSystem {
-  #     specialArgs = {inherit inputs;};
-  #     modules = [
-  #       ./hosts/pluto/configuration.nix
-  #       inputs.home-manager_stable.nixosModules.default
-  #       inputs.blog.nixosModule
-  #       inputs.agenix.nixosModules.default
-  #     ];
-  #   };
-  #
-  #   nixosConfigurations.earth = nixpkgs.lib.nixosSystem {
-  #     specialArgs = {inherit inputs;};
-  #     modules = [
-  #       ./hosts/earth/configuration.nix
-  #       inputs.lanzaboote.nixosModules.lanzaboote
-  #       inputs.home-manager.nixosModules.default
-  #       inputs.catppuccin.nixosModules.catppuccin
-  #       inputs.agenix.nixosModules.default
-  #     ];
-  #   };
-  #
-  #   nixosConfigurations.live = nixpkgs.lib.nixosSystem {
-  #     system = "x86_64-linux";
-  #     specialArgs = {inherit inputs;};
-  #     modules = [
-  #       "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-plasma5.nix"
-  #       "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-  #       # ./hosts/live/configuration.nix
-  #     ];
-  #   };
-  #
-  #   devShells = eachSystem (pkgs: {
-  #     default = pkgs.mkShell {
-  #       buildInputs = [
-  #         pkgs.nixd
-  #         pkgs.alejandra
-  #         pkgs.stylua
-  #         pkgs.lua-language-server
-  #         pkgs.luajitPackages.lua-lsp
-  #       ];
-  #     };
-  #   });
-  # };
 }

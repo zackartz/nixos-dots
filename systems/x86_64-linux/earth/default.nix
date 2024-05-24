@@ -56,6 +56,8 @@
   #   PasswordAuthentication = true;
   # };
 
+  time.timeZone = "America/Detroit";
+
   environment.systemPackages = [
     pkgs.BeatSaberModManager
     pkgs.sbctl
