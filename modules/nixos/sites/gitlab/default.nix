@@ -21,32 +21,32 @@ in {
   config = mkIf cfg.enable {
     age.secrets = {
       gitlab_db = {
-        file = ../../../../sec/gitlab_db.age;
+        file = ../sec/gitlab_db.age;
         owner = user;
         group = group;
       };
       gitlab_initpw = {
-        file = ../../../../sec/gitlab_initpw.age;
+        file = ../sec/gitlab_initpw.age;
         owner = user;
         group = group;
       };
       gitlab_otp = {
-        file = ../../../../sec/gitlab_otp.age;
+        file = ../sec/gitlab_otp.age;
         owner = user;
         group = group;
       };
       gitlab_pw = {
-        file = ../../../../sec/gitlab_pw.age;
+        file = ../sec/gitlab_pw.age;
         owner = user;
         group = group;
       };
       gitlab_sec = {
-        file = ../../../../sec/gitlab_sec.age;
+        file = ../sec/gitlab_sec.age;
         owner = user;
         group = group;
       };
       gitlab_runner = {
-        file = ../../../../sec/gitlab_runner.age;
+        file = ../sec/gitlab_runner.age;
       };
     };
 
