@@ -81,9 +81,6 @@
 
     home = {
       enable = true;
-      config = {
-        # home-manager.stateVersion = "23.11";
-      };
     };
   };
 

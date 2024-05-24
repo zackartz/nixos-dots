@@ -6,6 +6,47 @@ return {
 		build = "make install_jsregexp",
 		config = function()
 			require("luasnip.loaders.from_vscode").lazy_load()
+
+			local ls = require("luasnip")
+			local s = ls.snippet
+			local i = ls.insert_node
+			local t = ls.text_node
+			local fmt = require("luasnip.extras.fmt").fmt -- Import the fmt function
+
+			-- Define a new snippet for your specific use case
+			ls.add_snippets("nix", { -- Assuming the snippet is for Nix files, adjust the filetype as necessary
+				s(
+					"nixcfg",
+					fmt(
+						[[
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+with lib;
+with lib.custom; let
+  cfg = config.{<>};
+in {
+  options.{<>} = with types; {
+    enable = mkBoolOpt false "<>";
+  };
+
+  config = mkIf cfg.enable {
+<>
+  };
+}]],
+						{
+							i(1), -- Cursor point 1, after config.
+							i(2), -- Cursor point 2, after options.
+							i(3), -- Cursor point 3, for the option description inside mkBoolOpt
+							i(4), -- Cursor point 4, inside the mkIf cfg.enable block
+						},
+						{ delimiters = "<>" }
+					)
+				), -- Ensure to specify the delimiters if they differ from the default
+			})
 		end,
 	},
 

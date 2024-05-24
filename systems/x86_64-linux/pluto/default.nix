@@ -9,14 +9,6 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-
-    ./services/searxng.nix
-    ./services/nginx.nix
-    ./services/mirror.nix
-    ./services/pterodactyl.nix
-    ./services/gitlab.nix
-    ./services/cv.nix
-    ./services/grafana.nix
   ];
 
   # Bootloader.
@@ -24,6 +16,19 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "pluto"; # Define your hostname.
+
+  services.web.nginx.enable = true;
+  sites = {
+    cv.enable = true;
+    gitlab.enable = true;
+    grafana.enable = true;
+    mirror.enable = true;
+    pterodactyl.enable = true;
+    search.enable = true;
+  };
+
+  zmio.blog.enable = true;
+  zmio.blog.domain = "zackster.zip";
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
@@ -87,23 +92,21 @@
 
   virtualisation.docker.enable = true;
 
-  home-manager = {
-    extraSpecialArgs = {inherit inputs;};
-    users = {
-      "zack" = {
-        imports = [../../modules/home-manager/pluto.nix];
-        _module.args.theme = import ../../core/theme.nix;
+  snowfallorg.users.zack = {
+    create = true;
+    admin = false;
 
-        home.username = "zack";
-        home.homeDirectory = "/home/zack";
-      };
-      "alfie" = {
-        imports = [../../modules/home-manager/pluto.nix];
-        _module.args.theme = import ../../core/theme.nix;
+    home = {
+      enable = true;
+    };
+  };
 
-        home.username = "alfie";
-        home.homeDirectory = "/home/alfie";
-      };
+  snowfallorg.users.alfie = {
+    create = true;
+    admin = false;
+
+    home = {
+      enable = true;
     };
   };
 
@@ -128,8 +131,6 @@
     passwordAuthentication = false;
     permitRootLogin = "no";
   };
-
-  zmio.blog.enable = true;
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [80 443 6969 2022];
