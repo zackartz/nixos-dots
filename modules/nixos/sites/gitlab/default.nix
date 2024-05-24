@@ -97,7 +97,7 @@ in {
       initialRootPasswordFile = sec.gitlab_initpw.path;
       port = 443;
       https = true;
-      host = "git.zackmyers.io";
+      host = cfg.domain;
       secrets = {
         secretFile = sec.gitlab_sec.path;
         otpFile = sec.gitlab_otp.path;
