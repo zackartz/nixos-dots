@@ -13,9 +13,9 @@ in {
 
     fonts = {
       normal = mkStringOpt "Zed Mono Bold" "Normal Font";
-      bold = mkStringOpt "Zed Mono Heavy" "Bold Font";
+      bold = mkStringOpt "Zed Mono ExtraBold" "Bold Font";
       italic = mkStringOpt "Zed Mono Bold Italic" "Italic Font";
-      bold_italic = mkStringOpt "Zed Mono Bold Heavy Italic" "Bold Italic Font";
+      bold_italic = mkStringOpt "Zed Mono ExtraBold Italic" "Bold Italic Font";
     };
   };
 

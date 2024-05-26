@@ -75,6 +75,8 @@
     shell = pkgs.zsh;
   };
 
+  users.groups.plugdev = {};
+
   snowfallorg.users.zack = {
     create = true;
     admin = false;
