@@ -35,6 +35,7 @@ in {
         noto-fonts-emoji
         jetbrains-mono
         (nerdfonts.override {fonts = ["Iosevka" "JetBrainsMono"];})
+        custom.zed-fonts
       ];
 
       enableDefaultPackages = false;

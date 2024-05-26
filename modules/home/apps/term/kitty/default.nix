@@ -10,20 +10,27 @@ with lib.custom; let
 in {
   options.apps.term.kitty = with types; {
     enable = mkBoolOpt false "Enable Kitty Term";
+
+    fonts = {
+      normal = mkStringOpt "Zed Mono Bold" "Normal Font";
+      bold = mkStringOpt "Zed Mono Heavy" "Bold Font";
+      italic = mkStringOpt "Zed Mono Bold Italic" "Italic Font";
+      bold_italic = mkStringOpt "Zed Mono Bold Heavy Italic" "Bold Italic Font";
+    };
   };
 
   config = mkIf cfg.enable {
     programs.kitty = {
       enable = true;
       font = {
-        name = "Iosevka Term SemiBold";
+        name = cfg.fonts.normal;
         size = 14;
       };
 
       extraConfig = ''
-        bold_font Iosevk Term Heavy
-        italic_font Iosevka Term SemiBold Italic
-        bold_italic_font Iosevka Term Heavy Italic
+        bold_font ${cfg.fonts.bold}
+        italic_font ${cfg.fonts.italic}
+        bold_italic_font ${cfg.fonts.bold_italic}
       '';
 
       catppuccin.enable = true;

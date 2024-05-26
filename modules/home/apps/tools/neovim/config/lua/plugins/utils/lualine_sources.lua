@@ -35,8 +35,8 @@ M.mode = {
 			S = colors.sky,
 		}
 		return {
-			fg = map[mode] or colors.lavender,
-			bg = colors.base,
+			fg = colors.base,
+			bg = map[mode] or colors.blue,
 		}
 	end,
 }
@@ -46,6 +46,7 @@ M.branch = {
 	icon = icons.GitBranch,
 	color = function()
 		local colors = require("catppuccin.palettes").get_palette()
+
 		return { bg = colors.base }
 	end,
 }

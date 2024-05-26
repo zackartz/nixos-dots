@@ -67,27 +67,9 @@ in {
 		opts = function()
 			local cmp = require("cmp")
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+			local lspkind = require("lspkind")
 
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-
-			local icons = {
-				branch = "",
-				bullet = "•",
-				o_bullet = "○",
-				check = "✔",
-				d_chev = "∨",
-				ellipses = "…",
-				file = "╼",
-				hamburger = "≡",
-				lock = "",
-				r_chev = ">",
-				ballot_x = " ",
-				up_tri = " ",
-				info_i = " ",
-				--  ballot_x = '✘',
-				--  up_tri = '▲',
-				--  info_i = '¡',
-			}
 
 			local function get_lsp_completion_context(completion, source)
 				local ok, source_name = pcall(function()
@@ -139,14 +121,12 @@ in {
 						luasnip.lsp_expand(args.body)
 					end,
 				},
+
 				window = {
 					completion = {
 						winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-						side_padding = 4,
-					},
-					documentation = {
-						winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-						side_padding = 4,
+						col_offset = -3,
+						side_padding = 0,
 					},
 				},
 				sources = cmp.config.sources({
@@ -189,86 +169,24 @@ in {
 						end
 					end, { "i", "s" }),
 				},
+				view = {
+					entries = { name = "custom", selection_order = "near_cursor" },
+				},
+				experimental = {
+					ghost_text = true,
+				},
 				formatting = {
-					-- format = lspkind_status_ok and lspkind.cmp_format({
-					-- 	mode = "symbol",
-					-- 	maxwidth = 25,
-					-- 	ellipsis_char = "...",
-					-- 	before = function(entry, vim_item)
-					-- 		if vim_item.kind == "Color" and entry.completion_item.documentation then
-					-- 			local _, _, r, g, b =
-					-- 				string.find(entry.completion_item.documentation, "^rgb%((%d+), (%d+), (%d+)")
-					-- 			if r then
-					-- 				local color = string.format("%02x", r)
-					-- 					.. string.format("%02x", g)
-					-- 					.. string.format("%02x", b)
-					-- 				local group = "Tw_" .. color
-					-- 				if vim.fn.hlID(group) < 1 then
-					-- 					vim.api.nvim_set_hl(0, group, { fg = "#" .. color })
-					-- 				end
-					-- 				vim_item.kind_hl_group = group
-					-- 				return vim_item
-					-- 			end
-					-- 		end
-					-- 		return vim_item
-					-- 	end,
-					-- }),
+					fields = { "kind", "abbr", "menu" },
 					format = function(entry, vim_item)
-						if not require("cmp.utils.api").is_cmdline_mode() then
-							local abbr_width_max = 25
-							local menu_width_max = 20
+						local kind = lspkind.cmp_format({
+							mode = "symbol_text",
+							maxwidth = 50,
+						})(entry, vim_item)
+						local strings = vim.split(kind.kind, "%s", { trimempty = true })
+						kind.kind = " " .. strings[1] .. " "
+						kind.menu = "    (" .. strings[2] .. ")"
 
-							local choice = require("lspkind").cmp_format({
-								ellipsis_char = icons.ellipsis,
-								maxwidth = abbr_width_max,
-								mode = "symbol",
-							})(entry, vim_item)
-
-							choice.abbr = vim.trim(choice.abbr)
-
-							local abbr_width = string.len(choice.abbr)
-							if abbr_width < abbr_width_max then
-								local padding = string.rep(" ", abbr_width_max - abbr_width)
-								vim_item.abbr = choice.abbr .. padding
-							end
-
-							local cmp_ctx = get_lsp_completion_context(entry.completion_item, entry.source)
-							if cmp_ctx ~= nil and cmp_ctx ~= "" then
-								choice.menu = cmp_ctx
-							else
-								choice.menu = ""
-							end
-
-							local menu_width = string.len(choice.menu)
-							if menu_width > menu_width_max then
-								choice.menu = vim.fn.strcharpart(choice.menu, 0, menu_width_max - 1)
-								choice.menu = choice.menu .. icons.ellipses
-							else
-								local padding = string.rep(" ", menu_width_max - menu_width)
-								choice.menu = padding .. choice.menu
-							end
-
-							return choice
-						else
-							local abbr_width_min = 20
-							local abbr_width_max = 50
-
-							local choice = require("lspkind").cmp_format({
-								ellipsis_char = icons.ellipses,
-								maxwidth = abbr_width_max,
-								mode = "symbol",
-							})(entry, vim_item)
-
-							choice.abbr = vim.trim(choice.abbr)
-
-							local abbr_width = string.len(choice.abbr)
-							if abbr_width < abbr_width_min then
-								local padding = string.rep(" ", abbr_width_min - abbr_width)
-								vim_item.abbr = choice.abbr .. padding
-							end
-
-							return choice
-						end
+						return kind
 					end,
 				},
 			}
