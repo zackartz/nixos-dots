@@ -21,22 +21,22 @@ M.mode = {
 		return icon .. " " .. name
 	end,
 	color = function()
-		local colors = require("tokyonight.colors")
+		local colors = require("catppuccin.palettes").get_palette()
 		local mode = vim.fn.mode()
 		local map = {
-			n = colors.default.blue,
-			i = colors.default.green,
-			c = colors.default.yellow,
-			t = colors.default.cyan,
-			R = colors.default.red,
-			v = colors.default.magenta,
-			V = colors.default.magenta,
-			s = colors.default.magenta,
-			S = colors.default.magenta,
+			n = colors.sapphire,
+			i = colors.green,
+			c = colors.yellow,
+			t = colors.mauve,
+			R = colors.maroon,
+			v = colors.lavender,
+			V = colors.lavender,
+			s = colors.sky,
+			S = colors.sky,
 		}
 		return {
-			fg = map[mode] or colors.default.magenta,
-			bg = colors.night.bg,
+			fg = map[mode] or colors.lavender,
+			bg = colors.base,
 		}
 	end,
 }
@@ -45,8 +45,8 @@ M.branch = {
 	"branch",
 	icon = icons.GitBranch,
 	color = function()
-		local colors = require("tokyonight.colors")
-		return { bg = colors.night.bg }
+		local colors = require("catppuccin.palettes").get_palette()
+		return { bg = colors.base }
 	end,
 }
 
@@ -58,8 +58,8 @@ M.diff = {
 		removed = fmt("Removed", ""),
 	},
 	color = function()
-		local colors = require("tokyonight.colors")
-		return { bg = colors.night.bg }
+		local colors = require("catppuccin.palettes").get_palette()
+		return { bg = colors.base }
 	end,
 }
 
@@ -68,24 +68,24 @@ M.filetype = { "filetype" }
 M.diagnostics = {
 	"diagnostics",
 	color = function()
-		local colors = require("tokyonight.colors")
-		return { bg = colors.night.bg }
+		local colors = require("catppuccin.palettes").get_palette()
+		return { bg = colors.base }
 	end,
 }
 
 M.encoding = {
 	"encoding",
 	color = function()
-		local colors = require("tokyonight.colors")
-		return { fg = colors.default.blue, bg = colors.night.bg }
+		local colors = require("catppuccin.palettes").get_palette()
+		return { fg = colors.blue, bg = colors.base }
 	end,
 }
 
 M.fileformat = {
 	"fileformat",
 	color = function()
-		local colors = require("tokyonight.colors")
-		return { fg = colors.default.blue, bg = colors.night.bg }
+		local colors = require("catppuccin.palettes").get_palette()
+		return { fg = colors.blue, bg = colors.base }
 	end,
 }
 
@@ -97,8 +97,8 @@ M.indentation = {
 		return type .. ": " .. value
 	end,
 	color = function()
-		local colors = require("tokyonight.colors")
-		return { fg = colors.default.blue, bg = colors.night.bg }
+		local colors = require("catppuccin.palettes").get_palette()
+		return { fg = colors.blue, bg = colors.base }
 	end,
 }
 
@@ -108,8 +108,8 @@ M.progress = {
 		return vim.trim(location)
 	end,
 	color = function()
-		local colors = require("tokyonight.colors")
-		return { fg = colors.default.purple, bg = colors.night.bg }
+		local colors = require("catppuccin.palettes").get_palette()
+		return { fg = colors.lavender, bg = colors.base }
 	end,
 }
 
@@ -119,8 +119,8 @@ M.location = {
 		return vim.trim(location)
 	end,
 	color = function()
-		local colors = require("tokyonight.colors")
-		return { fg = colors.default.purple, bg = colors.night.bg }
+		local colors = require("catppuccin.palettes").get_palette()
+		return { fg = colors.lavender, bg = colors.base }
 	end,
 }
 
@@ -130,8 +130,8 @@ M.macro = {
 	end,
 	icon = icons.Recording,
 	color = function()
-		local colors = require("tokyonight.colors")
-		return { fg = colors.default.red }
+		local colors = require("catppuccin.palettes").get_palette()
+		return { fg = colors.red, bg = colors.base }
 	end,
 }
 
@@ -149,8 +149,8 @@ M.lsp = {
 	end,
 	icon = icons.Braces,
 	color = function()
-		local colors = require("tokyonight.colors")
-		return { fg = colors.default.comment, bg = colors.night.bg }
+		local colors = require("catppuccin.palettes").get_palette()
+		return { fg = colors.overlay0, bg = colors.base }
 	end,
 }
 
@@ -159,8 +159,8 @@ M.gap = {
 		return " "
 	end,
 	color = function()
-		local colors = require("tokyonight.colors")
-		return { bg = colors.night.bg }
+		local colors = require("catppuccin.palettes").get_palette()
+		return { bg = colors.base }
 	end,
 	padding = 0,
 }
