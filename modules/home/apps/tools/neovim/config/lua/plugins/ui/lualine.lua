@@ -22,6 +22,11 @@ return {
 		sections = {
 			lualine_x = {
 				"rest",
+				{
+					require("noice").api.statusline.mode.get,
+					cond = require("noice").api.statusline.mode.has,
+					color = { fg = "#ff9e64" },
+				},
 			},
 			-- lualine_a = { sources.mode },
 			-- lualine_b = { sources.branch, sources.diff },
