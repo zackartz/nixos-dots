@@ -19,6 +19,9 @@
 
   protocols.wayland.enable = true;
 
+  services.udev.extraRules = ''
+    KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0664", GROUP="plugdev"
+  '';
   services.fstrim.enable = true;
   services.vpn.enable = true;
   services.vpn.mullvad = true;

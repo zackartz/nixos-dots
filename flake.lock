@@ -607,11 +607,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1716669967,
-        "narHash": "sha256-wq91XpwR0tv7e7KwSp0qzvu31EMssznl8DzbNy4M4Hk=",
+        "lastModified": 1716801877,
+        "narHash": "sha256-vfMb7opO2xva0jt/UwMGlyjK4DB73SWxus4Oryww+C8=",
         "ref": "refs/heads/main",
-        "rev": "553232a3e4c112c8511309e6b685cb614895e714",
-        "revCount": 4743,
+        "rev": "db5d39a66f1285f78321d953eac398feaedfc63d",
+        "revCount": 4744,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -784,11 +784,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1716760058,
-        "narHash": "sha256-5fMMNezTARjbc8HgEkvcOazlrsBBzlKSMVp56xTCY2g=",
+        "lastModified": 1716818885,
+        "narHash": "sha256-sBi+rAf30wHnlhwOueoVHExGZFr4o1LTTexe8Llfc1Q=",
         "owner": "nix-community",
         "repo": "neovim-nightly-overlay",
-        "rev": "0c1fc48841eda5e35402327b1a71f4bb034a012c",
+        "rev": "241821173b62c73be35e3bc824de4f07bdd3c157",
         "type": "github"
       },
       "original": {
@@ -1127,11 +1127,11 @@
         "systems": "systems_11"
       },
       "locked": {
-        "lastModified": 1716764023,
-        "narHash": "sha256-kO/2GGvRprxC1i7eSG4e+D44mCS1utNugQFWkQ8fCso=",
+        "lastModified": 1716816692,
+        "narHash": "sha256-7kJwoiRh5FrTd20LFxIoKLwMk4U8mR1OUGTizV1GxNA=",
         "owner": "raphamorim",
         "repo": "rio",
-        "rev": "12ee026c5cb88e959d66cbb0ff2037e2a5b5e77d",
+        "rev": "07cb7f6cce5f41a2ec01e79ae10d3055da52d5db",
         "type": "github"
       },
       "original": {
@@ -1488,11 +1488,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1716524201,
-        "narHash": "sha256-5+c0w1KegSmT4W2AzsW433YmmBm+SlNHlpcaXWVcg08=",
+        "lastModified": 1716793388,
+        "narHash": "sha256-qc3je8kpU7AYI2KBFR+hpyQNzHgq1DCaY8XQO8jpR5k=",
         "owner": "Alexays",
         "repo": "Waybar",
-        "rev": "63bb338343cad3337726739704b75d1b0b13a8a5",
+        "rev": "ac2fa9870f82554898ff4c6b46adc48d4048169b",
         "type": "github"
       },
       "original": {
