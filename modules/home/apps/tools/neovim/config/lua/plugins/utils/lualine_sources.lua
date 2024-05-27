@@ -47,7 +47,7 @@ M.branch = {
 	color = function()
 		local colors = require("catppuccin.palettes").get_palette()
 
-		return { bg = colors.base }
+		return { bg = nil }
 	end,
 }
 
@@ -60,7 +60,7 @@ M.diff = {
 	},
 	color = function()
 		local colors = require("catppuccin.palettes").get_palette()
-		return { bg = colors.base }
+		return { bg = nil }
 	end,
 }
 
@@ -70,7 +70,7 @@ M.diagnostics = {
 	"diagnostics",
 	color = function()
 		local colors = require("catppuccin.palettes").get_palette()
-		return { bg = colors.base }
+		return { bg = nil }
 	end,
 }
 
@@ -78,7 +78,7 @@ M.encoding = {
 	"encoding",
 	color = function()
 		local colors = require("catppuccin.palettes").get_palette()
-		return { fg = colors.blue, bg = colors.base }
+		return { fg = colors.blue, bg = nil }
 	end,
 }
 
@@ -86,7 +86,7 @@ M.fileformat = {
 	"fileformat",
 	color = function()
 		local colors = require("catppuccin.palettes").get_palette()
-		return { fg = colors.blue, bg = colors.base }
+		return { fg = colors.blue, bg = nil }
 	end,
 }
 
@@ -99,7 +99,7 @@ M.indentation = {
 	end,
 	color = function()
 		local colors = require("catppuccin.palettes").get_palette()
-		return { fg = colors.blue, bg = colors.base }
+		return { fg = colors.blue, bg = nil }
 	end,
 }
 
@@ -110,7 +110,7 @@ M.progress = {
 	end,
 	color = function()
 		local colors = require("catppuccin.palettes").get_palette()
-		return { fg = colors.lavender, bg = colors.base }
+		return { fg = colors.lavender, bg = nil }
 	end,
 }
 
@@ -121,7 +121,7 @@ M.location = {
 	end,
 	color = function()
 		local colors = require("catppuccin.palettes").get_palette()
-		return { fg = colors.lavender, bg = colors.base }
+		return { fg = colors.lavender, bg = nil }
 	end,
 }
 
@@ -132,7 +132,7 @@ M.macro = {
 	icon = icons.Recording,
 	color = function()
 		local colors = require("catppuccin.palettes").get_palette()
-		return { fg = colors.red, bg = colors.base }
+		return { fg = colors.red, bg = nil }
 	end,
 }
 
@@ -151,7 +151,7 @@ M.lsp = {
 	icon = icons.Braces,
 	color = function()
 		local colors = require("catppuccin.palettes").get_palette()
-		return { fg = colors.overlay0, bg = colors.base }
+		return { fg = colors.overlay0, bg = nil }
 	end,
 }
 
@@ -161,7 +161,7 @@ M.gap = {
 	end,
 	color = function()
 		local colors = require("catppuccin.palettes").get_palette()
-		return { bg = colors.base }
+		return { bg = nil }
 	end,
 	padding = 0,
 }

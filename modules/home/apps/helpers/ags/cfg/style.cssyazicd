@@ -117,7 +117,7 @@ menu menuitem {
       min-width: 32px; }
 
 .bar {
-  font-family: JetBrains Mono Nerd Font; }
+  font-family: Zed Sans; }
 
 .Slider {
   background: #1e1e2e;

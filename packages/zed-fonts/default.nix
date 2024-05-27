@@ -68,7 +68,6 @@ buildNpmPackage rec {
   buildPhase = ''
     export HOME=$TMPDIR
     runHook preBuild
-    npm run build --no-update-notifier -- --jCmd=$NIX_BUILD_CORES --verbose=9 ttf::zed-mono
     npm run build --no-update-notifier -- --jCmd=$NIX_BUILD_CORES --verbose=9 ttf::zed-sans
     runHook postBuild
   '';
@@ -77,7 +76,7 @@ buildNpmPackage rec {
     runHook preInstall
     fontdir="$out/share/fonts/truetype"
     install -d "$fontdir"
-    install "dist/$pname/ttf"/* "$fontdir"
+    install "dist/zed-sans/ttf"/* "$fontdir"
     runHook postInstall
   '';
 

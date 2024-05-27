@@ -44,11 +44,11 @@ in {
       fontconfig = {
         defaultFonts = {
           monospace = [
-            "Iosevka Nerd Font Complete Mono"
-            "Iosevka Nerd Font"
+            "ZedMono Nerd Font Complete Mono"
+            "ZedMono Nerd Font"
             "Noto Color Emoji"
           ];
-          sansSerif = ["Inter" "Noto Color Emoji"];
+          sansSerif = ["Zed Sans" "Noto Color Emoji"];
           serif = ["Noto Serif" "Noto Color Emoji"];
           emoji = ["Noto Color Emoji"];
         };
