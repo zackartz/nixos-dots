@@ -21,6 +21,7 @@
 
   services.fstrim.enable = true;
   services.vpn.enable = true;
+  services.vpn.mullvad = true;
   services.transmission = {
     enable = true;
     package = pkgs.transmission_4;

@@ -110,7 +110,7 @@ M.progress = {
 	end,
 	color = function()
 		local colors = require("catppuccin.palettes").get_palette()
-		return { fg = colors.lavender, bg = nil }
+		return { fg = colors.lavender, bg = colors.base }
 	end,
 }
 
@@ -121,7 +121,7 @@ M.location = {
 	end,
 	color = function()
 		local colors = require("catppuccin.palettes").get_palette()
-		return { fg = colors.lavender, bg = nil }
+		return { fg = colors.lavender, bg = colors.base }
 	end,
 }
 

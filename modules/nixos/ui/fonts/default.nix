@@ -34,7 +34,7 @@ in {
         noto-fonts-cjk
         noto-fonts-emoji
         jetbrains-mono
-        (nerdfonts.override {fonts = ["Iosevka" "JetBrainsMono" "ZedMono"];})
+        (nerdfonts.override {fonts = ["Iosevka" "JetBrainsMono"];})
         custom.zed-fonts
       ];
 

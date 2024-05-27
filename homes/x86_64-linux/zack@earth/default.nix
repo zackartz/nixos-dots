@@ -18,6 +18,8 @@
     tools.tealdeer.enable = true;
     tools.bat.enable = true;
 
+    tools.gh.enable = true;
+
     term.kitty.enable = true;
 
     music.spotify.enable = true;

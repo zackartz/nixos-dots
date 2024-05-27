@@ -27,9 +27,9 @@ return {
 }:
 with lib;
 with lib.custom; let
-  cfg = config.{<>};
+  cfg = config.<>;
 in {
-  options.{<>} = with types; {
+  options.<> = with types; {
     enable = mkBoolOpt false "<>";
   };
 

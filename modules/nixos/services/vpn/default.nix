@@ -11,11 +11,11 @@ in {
   options.services.vpn = with types; {
     enable = mkBoolOpt false "Enable VPN service(s)";
 
-    enableMullvad = mkBoolOpt false "Enable Mullvad VPN Daemon";
+    mullvad = mkBoolOpt false "Enable Mullvad VPN Daemon";
   };
 
   config = mkIf cfg.enable {
-    services.mullvad-vpn.enable = cfg.enableMullvad;
+    services.mullvad-vpn.enable = cfg.mullvad;
     services.openvpn.servers = {
       work = {
         config = ''config /home/zack/Downloads/zachary_myers.ovpn'';
@@ -26,7 +26,7 @@ in {
     systemd.services."mullvad-daemon".postStart = let
       mullvad = config.services.mullvad-vpn.package;
     in
-      mkIf cfg.enableMullvad ''
+      mkIf cfg.mullvad ''
         while ! ${mullvad}/bin/mullvad status >/dev/null; do sleep 1; done
         ${mullvad}/bin/mullvad auto-connect set on
         ${mullvad}/bin/mullvad tunnel set ipv6 on
