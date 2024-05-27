@@ -44,8 +44,8 @@ in {
       fontconfig = {
         defaultFonts = {
           monospace = [
-            "ZedMono Nerd Font Mono Bold"
-            "ZedMono Nerd Font"
+            "ZedMono Nerd Font Mono"
+            "Zed Mono"
             "Noto Color Emoji"
           ];
           sansSerif = ["Zed Sans" "Noto Color Emoji"];
