@@ -34,7 +34,7 @@ in {
         noto-fonts-cjk
         noto-fonts-emoji
         jetbrains-mono
-        (nerdfonts.override {fonts = ["Iosevka" "JetBrainsMono"];})
+        (nerdfonts.override {fonts = ["Iosevka" "JetBrainsMono" "ZedMono"];})
         custom.zed-fonts
       ];
 
@@ -44,7 +44,6 @@ in {
       fontconfig = {
         defaultFonts = {
           monospace = [
-            "Iosevka"
             "Iosevka Nerd Font Complete Mono"
             "Iosevka Nerd Font"
             "Noto Color Emoji"
