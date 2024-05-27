@@ -44,6 +44,8 @@
 
   networking.hostName = "earth"; # Define your hostname.
 
+  networking.extraHosts = "127.0.0.1 local-cald.io";
+
   networking.networkmanager = {
     enable = true;
     unmanaged = ["enp6s0"];

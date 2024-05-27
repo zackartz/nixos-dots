@@ -60,7 +60,7 @@ M.diff = {
 	},
 	color = function()
 		local colors = require("catppuccin.palettes").get_palette()
-		return { bg = nil }
+		return { bg = colors.base }
 	end,
 }
 
@@ -70,7 +70,7 @@ M.diagnostics = {
 	"diagnostics",
 	color = function()
 		local colors = require("catppuccin.palettes").get_palette()
-		return { bg = nil }
+		return { bg = colors.base }
 	end,
 }
 
@@ -78,7 +78,7 @@ M.encoding = {
 	"encoding",
 	color = function()
 		local colors = require("catppuccin.palettes").get_palette()
-		return { fg = colors.blue, bg = nil }
+		return { fg = colors.blue, bg = colors.base }
 	end,
 }
 
@@ -86,7 +86,7 @@ M.fileformat = {
 	"fileformat",
 	color = function()
 		local colors = require("catppuccin.palettes").get_palette()
-		return { fg = colors.blue, bg = nil }
+		return { fg = colors.blue, bg = colors.base }
 	end,
 }
 
@@ -99,7 +99,7 @@ M.indentation = {
 	end,
 	color = function()
 		local colors = require("catppuccin.palettes").get_palette()
-		return { fg = colors.blue, bg = nil }
+		return { fg = colors.blue, bg = colors.base }
 	end,
 }
 
@@ -132,7 +132,7 @@ M.macro = {
 	icon = icons.Recording,
 	color = function()
 		local colors = require("catppuccin.palettes").get_palette()
-		return { fg = colors.red, bg = nil }
+		return { fg = colors.red, bg = colors.base }
 	end,
 }
 
@@ -151,7 +151,7 @@ M.lsp = {
 	icon = icons.Braces,
 	color = function()
 		local colors = require("catppuccin.palettes").get_palette()
-		return { fg = colors.overlay0, bg = nil }
+		return { fg = colors.overlay0, bg = colors.base }
 	end,
 }
 
@@ -161,7 +161,7 @@ M.gap = {
 	end,
 	color = function()
 		local colors = require("catppuccin.palettes").get_palette()
-		return { bg = nil }
+		return { bg = colors.base }
 	end,
 	padding = 0,
 }
