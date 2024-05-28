@@ -50,16 +50,16 @@ in {
         libsForQt5.qt5ct
         breeze-icons
       ];
-      # pointerCursor = {
-      #   package = pkgs.bibata-cursors;
-      #   name = "Bibata-Modern-Classic";
-      #   size = 16;
-      #   gtk.enable = true;
-      #   x11.enable = true;
-      # };
+      pointerCursor = {
+        package = pkgs.catppuccin-cursors;
+        name = "mochaMauve";
+        size = 16;
+        gtk.enable = true;
+        x11.enable = true;
+      };
 
       sessionVariables = {
-        XCURSOR_SIZE = "32";
+        XCURSOR_SIZE = "16";
         GTK_USE_PORTAL = "1";
       };
     };
