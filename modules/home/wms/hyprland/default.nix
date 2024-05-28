@@ -41,6 +41,7 @@ in {
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland = {
       enable = true;
+      xwayland.enable = true;
       package = inputs.hyprland.packages.${system}.default;
 
       systemd = {
