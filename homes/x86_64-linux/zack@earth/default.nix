@@ -48,7 +48,7 @@
     };
   };
 
-  # catppuccin.enable = true;
+  catppuccin.enable = true;
 
   home.packages = [
     pkgs.gimp

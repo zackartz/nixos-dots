@@ -17,6 +17,7 @@ in {
   config = mkIf cfg.enable {
     programs.swaylock = {
       enable = true;
+      catppuccin.enable = false;
       package = pkgs.swaylock-effects;
       settings = with colors; {
         clock = true;

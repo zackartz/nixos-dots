@@ -34,6 +34,7 @@ in {
 
   config = mkIf cfg.enable {
     programs.neovim = {
+      catppuccin.enable = false;
       enable = true;
       defaultEditor = true;
       extraPackages = with pkgs; [

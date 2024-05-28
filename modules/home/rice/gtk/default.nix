@@ -18,10 +18,10 @@ in {
       enable = true;
       catppuccin.enable = true;
 
-      iconTheme = {
-        package = pkgs.catppuccin-papirus-folders;
-        name = "Papirus";
-      };
+      # iconTheme = {
+      #   package = pkgs.catppuccin-papirus-folders;
+      #   name = "Papirus";
+      # };
       font = {
         name = "Iosevka";
         size = 11;
