@@ -8,7 +8,7 @@ return {
 			javascriptreact = { "prettierd", "rustywind" },
 			typescriptreact = { "prettierd", "rustywind" },
 			svelte = { "prettierd", "rustywind" },
-			astro = { "prettierd", "rustywind" },
+			astro = { "prettier", "rustywind" },
 			css = { "prettierd" },
 			html = { "prettierd" },
 			json = { "prettierd" },
@@ -16,7 +16,7 @@ return {
 			markdown = { "prettierd" },
 			graphql = { "prettierd" },
 			lua = { "stylua" },
-			python = { "isort", "black" },
+			python = { "black" },
 			nix = { "alejandra" },
 		},
 		format_on_save = {
