@@ -42,15 +42,15 @@ in {
     wayland.windowManager.hyprland = {
       enable = true;
       xwayland.enable = true;
-      package = inputs.hyprland.packages.${system}.default;
+      # package = inputs.hyprland.packages.${system}.default;
 
       systemd = {
         enable = true;
-        variables = ["--all"];
-        extraCommands = [
-          "systemctl --user stop graphical-session.target"
-          "systemctl --user start hyprland-session.target"
-        ];
+        # variables = ["--all"];
+        # extraCommands = [
+        #   "systemctl --user stop graphical-session.target"
+        #   "systemctl --user start hyprland-session.target"
+        # ];
       };
     };
 
