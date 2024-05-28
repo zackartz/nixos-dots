@@ -1,5 +1,5 @@
 return {
 	"nvim-treesitter/nvim-treesitter-context",
-	event = "BufLoad",
+	event = "BufEnter",
 	opts = { enable = true },
 }

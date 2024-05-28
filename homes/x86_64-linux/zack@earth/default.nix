@@ -144,7 +144,6 @@
   };
 
   services = {
-    udiskie.enable = true;
     gpg-agent = {
       enable = true;
       pinentryPackage = lib.mkForce pkgs.pinentry-gnome3;
