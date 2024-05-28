@@ -20,6 +20,7 @@ in {
     programs.spicetify = {
       enable = true;
       theme = spicePkgs.themes.catppuccin;
+      spotifyPackage = pkgs.custom.spotify;
       colorScheme = "mocha";
 
       enabledExtensions = with spicePkgs.extensions; [
