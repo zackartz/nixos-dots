@@ -45,6 +45,7 @@ in {
         shfmt
         isort
         stylua
+        rustywind
 
         # LSP
         lua-language-server
