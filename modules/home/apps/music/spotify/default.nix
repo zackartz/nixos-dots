@@ -4,6 +4,7 @@
   lib,
   inputs,
   system,
+  pkgs,
   ...
 }:
 with lib;
