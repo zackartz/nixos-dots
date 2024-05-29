@@ -121,6 +121,14 @@
     };
   };
 
+  snowfallorg.users.aspect = {
+    create = true;
+    admin = false;
+    home = {
+      enable = true;
+    };
+  };
+
   security.acme = {
     acceptTerms = true;
     defaults.email = "zach@zacharymyers.com";
