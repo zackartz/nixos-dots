@@ -90,6 +90,17 @@
     ];
   };
 
+  users.users.aspect = {
+    isNormalUser = true;
+    description = "aspect";
+    extraGroups = ["wheel" "docker"];
+    shell = pkgs.zsh;
+    hashedPassword = "$6$rounds=2000000$.jQCugUHZuUcjfEn$L1M3pmsEPCeqckEPa5t7pqKCxQyGwxmQvK/65c2.IAXE0bhsoGL3kN0F9WpLxcN/wLt7xcikz005GiKFF.AND.";
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA45PCi9tsGbGlVYq2Rt1jAD9/GDIDCsEfv88+4mAA2U imboo@FBISurvallienceVan3"
+    ];
+  };
+
   virtualisation.docker.enable = true;
 
   snowfallorg.users.zack = {
