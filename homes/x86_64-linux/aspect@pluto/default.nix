@@ -39,6 +39,8 @@
     pkgs.fastfetch
 
     pkgs.nh
+    pkgs.gcc
+    pkgs.clang
 
     pkgs.killall
     pkgs.custom.rebuild
