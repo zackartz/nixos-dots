@@ -56,6 +56,7 @@ in {
         nodePackages.vscode-json-languageserver
         nodePackages.typescript-language-server
         tailwindcss-language-server
+        clang
 
         # Tools
         git
