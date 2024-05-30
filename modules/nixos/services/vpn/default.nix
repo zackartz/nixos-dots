@@ -16,12 +16,16 @@ in {
 
   config = mkIf cfg.enable {
     services.mullvad-vpn.enable = cfg.mullvad;
-    services.openvpn.servers = {
-      work = {
-        config = ''config /home/zack/Downloads/zachary_myers.ovpn'';
-        updateResolvConf = true;
+    services.openvpn = {
+      servers = {
+        work = {
+          config = ''config /home/zack/Downloads/zachary_myers.ovpn'';
+          updateResolvConf = true;
+        };
       };
     };
+
+    systemd.services.openvpn-work.wantedBy = lib.mkForce [];
 
     systemd.services."mullvad-daemon".postStart = let
       mullvad = config.services.mullvad-vpn.package;
