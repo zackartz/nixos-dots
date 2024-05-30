@@ -78,11 +78,11 @@ in {
         lazy-nix-helper-nvim
         lazy-nvim
       ];
-      extraLuaPackages = with pkgs; [
-        lua51Packages.lua-curl
-        lua51Packages.nvim-nio
-        lua51Packages.xml2lua
-        lua51Packages.mimetypes
+      extraLuaPackages = ps: [
+        ps.lua-curl
+        ps.nvim-nio
+        ps.xml2lua
+        ps.mimetypes
       ];
       extraLuaConfig = ''
         local plugins = {

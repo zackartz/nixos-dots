@@ -18,6 +18,7 @@ with pkgs; {
   MANPAGER = "sh -c 'col -bx | bat -l man -p'";
   du = getExe du-dust;
   ps = getExe procs;
+  deploy = "nixos-rebuild switch --flake ~/nixos#pluto --target-host zack@zackmyers.io --use-remote-sudo";
   m = "mkdir -p";
   fcd = "cd $(find -type d | fzf)";
   l = "ls -lF --time-style=long-iso --icons";

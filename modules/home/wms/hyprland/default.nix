@@ -74,6 +74,8 @@ in {
           "${mod},M,exit"
           "${mod},P,pseudo"
 
+          "${mod},B,exec,${pkgs.kitty}/bin/kitty \"${pkgs.tmux}/bin/tmux -d -s work '${pkgs.neovim}/bin/nvim'\""
+
           "${mod},J,togglesplit,"
 
           "${mod},T,togglegroup," # group focused window
