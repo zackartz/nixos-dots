@@ -8,6 +8,10 @@
 }: {
   imports = [./hardware-configuration.nix];
 
+  nix.settings = {
+    trusted-users = ["zack"];
+  };
+
   hardware.audio.enable = true;
   hardware.nvidia.enable = true;
 

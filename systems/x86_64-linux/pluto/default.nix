@@ -11,6 +11,10 @@
     ./hardware-configuration.nix
   ];
 
+  nix.settings = {
+    trusted-users = ["zack"];
+  };
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
