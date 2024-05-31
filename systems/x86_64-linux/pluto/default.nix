@@ -22,10 +22,7 @@
   networking.hostName = "pluto"; # Define your hostname.
 
   services.web.nginx.enable = true;
-  services.github-runner = {
-    enable = true;
-    url = "https://github.com/zackartz/nixos-dots";
-  };
+  services.gh.enable = true;
   sites = {
     cv.enable = true;
     gitlab.enable = true;
