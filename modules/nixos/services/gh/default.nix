@@ -9,7 +9,7 @@ with lib.custom; let
   cfg = config.services.gh;
 
   sec = config.age.secrets;
-  group = config.services.github-runner.runnerGroup;
+  group = config.services.github-runner.pluto.runnerGroup;
 in {
   options.services.gh = with types; {
     enable = mkBoolOpt false "Enable GitHub Actions Runner";
@@ -23,7 +23,7 @@ in {
       };
     };
 
-    services.github-runner = {
+    services.github-runner.pluto = {
       enable = true;
       url = "https://github.com/zackartz/nixos-dots";
       tokenFile = sec.github_runner.path;
