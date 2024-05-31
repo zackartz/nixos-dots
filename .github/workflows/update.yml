@@ -17,7 +17,7 @@ jobs:
 
       - name: "Update flake.lock ❄️"
         run: |
-          nix flake update
+          nix flake update --accept-flake-config
 
       - name: "Commit and push"
         uses: EndBug/add-and-commit@v9
