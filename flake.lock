@@ -886,11 +886,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1717086148,
-        "narHash": "sha256-rZyQv0MdYX+tYoGhc5mV4iZb+kGqA93+k3R1BIRiwXk=",
+        "lastModified": 1717171539,
+        "narHash": "sha256-Sr7x7scl6VGOD/+74wyZaKF2asiidkG/9+Me5vmEy84=",
         "owner": "nix-community",
         "repo": "neovim-nightly-overlay",
-        "rev": "fe31f9e863e643327e8a5fffa0f4aae9288fd048",
+        "rev": "8d9517ad34e62b04744f1586838d4565939172b4",
         "type": "github"
       },
       "original": {
@@ -1179,11 +1179,11 @@
         "systems": "systems_10"
       },
       "locked": {
-        "lastModified": 1715054505,
-        "narHash": "sha256-0A5f0NgIqdUuGejpPGcAPc7gRr0cFP+gzq9DAzdJsPs=",
+        "lastModified": 1717172081,
+        "narHash": "sha256-tjpxhEr67pK7xE70gbNlMCbo9BCiJVkurTu+VsVYQz8=",
         "ref": "refs/heads/main",
-        "rev": "0776e48962c7775c156f4419e0156b33f265dfc1",
-        "revCount": 6,
+        "rev": "26484d6b46369590be8d341688feb5af2377b5de",
+        "revCount": 10,
         "type": "git",
         "url": "https://git.zackster.zip/zack/resume"
       },
@@ -1580,11 +1580,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1717093735,
-        "narHash": "sha256-cah3EMtjmNvFCm9vbtNRyVsGpGjVzd5wF4JYG1TebuA=",
+        "lastModified": 1717171161,
+        "narHash": "sha256-lSb3GoBbXh8nAb6ICA/Nf3Y2rTJ+0HfxKyC9KxAx38I=",
         "owner": "Alexays",
         "repo": "Waybar",
-        "rev": "1a1a61e917af09ae4e505b61aa8f0e2da7a649ef",
+        "rev": "7163752aa07f145e5951e2388b7693e19fc5d446",
         "type": "github"
       },
       "original": {
