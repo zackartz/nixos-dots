@@ -52,10 +52,10 @@ in {
       ];
       pointerCursor = {
         package = pkgs.catppuccin-cursors.mochaMauve;
-        name = "Catppuccin-Mocha-Mauve-Cursors";
+        name = "catppuccin-mocha-mauve-cursors";
         x11 = {
           enable = true;
-          defaultCursor = "Catppuccin-Mocha-Mauve-Cursors";
+          defaultCursor = "catppuccin-mocha-mauve-cursors";
         };
         size = 24;
       };
