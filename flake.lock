@@ -1203,11 +1203,11 @@
         "systems": "systems_13"
       },
       "locked": {
-        "lastModified": 1717534964,
-        "narHash": "sha256-pAUy6AhKdL+6EvfUGZJKpsg+h6gMr1OeHPgJagwI3/k=",
+        "lastModified": 1717623207,
+        "narHash": "sha256-Ih4E5/2Sde5v2pMarYB35wJZjAGTTRDJjfwNuGWn58E=",
         "owner": "raphamorim",
         "repo": "rio",
-        "rev": "5c6884797eaa381c00f9dcbc44e4bc9cb10223f8",
+        "rev": "4adb1603a62eefb63e29933a1151c61e39f5d102",
         "type": "github"
       },
       "original": {
@@ -1596,11 +1596,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1717171161,
-        "narHash": "sha256-lSb3GoBbXh8nAb6ICA/Nf3Y2rTJ+0HfxKyC9KxAx38I=",
+        "lastModified": 1717618075,
+        "narHash": "sha256-VswaF+HMGpT5S/0QWrSSquj9TWCYkZ5mTtoazcgBUTA=",
         "owner": "Alexays",
         "repo": "Waybar",
-        "rev": "7163752aa07f145e5951e2388b7693e19fc5d446",
+        "rev": "365e77af58264e717d946d9d7701b82b54585db2",
         "type": "github"
       },
       "original": {
