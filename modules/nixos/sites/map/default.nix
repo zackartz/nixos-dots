@@ -16,9 +16,9 @@ in {
     services.nginx.virtualHosts."cobblemonsurvival.zackmyers.io" = {
       forceSSL = true;
       enableACME = true;
-      locations."/".extraConfig = ''
+      locations."/" = {
         proxyPass = "http://localhost:8100";
-      '';
+      };
     };
   };
 }

@@ -30,6 +30,7 @@
     mirror.enable = true;
     pterodactyl.enable = true;
     search.enable = true;
+    map.enable = true;
   };
 
   zmio.blog.enable = true;
