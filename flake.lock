@@ -487,11 +487,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1716213921,
-        "narHash": "sha256-xrsYFST8ij4QWaV6HEokCUNIZLjjLP1bYC60K8XiBVA=",
+        "lastModified": 1717664902,
+        "narHash": "sha256-7XfBuLULizXjXfBYy/VV+SpYMHreNRHk9nKMsm1bgb4=",
         "owner": "cachix",
         "repo": "git-hooks.nix",
-        "rev": "0e8fcc54b842ad8428c9e705cb5994eaf05c26a0",
+        "rev": "cc4d466cb1254af050ff7bdf47f6d404a7c646d1",
         "type": "github"
       },
       "original": {
@@ -668,11 +668,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1717605046,
-        "narHash": "sha256-1oVVblacE6uQztHTTPG6NoUzj5RErIRbmDoVNWnG6xg=",
+        "lastModified": 1717698429,
+        "narHash": "sha256-81gZr6hXEySxzdpqltnR4GOBHO+QFRxFHQK3fW3iTTE=",
         "ref": "refs/heads/main",
-        "rev": "c95845b1488b4bd63e901cbdc4cb68c27a45971b",
-        "revCount": 4766,
+        "rev": "af5f24929d83cc7a97a77de516bc665e38acfa12",
+        "revCount": 4767,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -887,11 +887,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1717645050,
-        "narHash": "sha256-+hXiY/3szujQ7kYxvK1lAwi7xRr+fPL3T0hUCTFym6s=",
+        "lastModified": 1717737574,
+        "narHash": "sha256-Oc1xZW7pc/cCr+2FpgbFuNz/yBh4ZqjsbmSH7pVADiE=",
         "owner": "nix-community",
         "repo": "neovim-nightly-overlay",
-        "rev": "ce97d77872d10c363414634b885a02890f5d4a78",
+        "rev": "da7e7da75fab002c8e6c695ddce45c825fbe6444",
         "type": "github"
       },
       "original": {
@@ -903,11 +903,11 @@
     "neovim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1717627211,
-        "narHash": "sha256-Hyy1FzCHAnYnVPf1Xebwa9P6wicYaemEasgnnHbPAl8=",
+        "lastModified": 1717712276,
+        "narHash": "sha256-r9mtD17PiNYVKWs+Cc9uIv/vmkRtiwGrG42QRd1K6Os=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "78d3f4742872f535ebc75500afde4858985c40d8",
+        "rev": "d490a7bc5b9d731828f5da16b35a86b4e1270624",
         "type": "github"
       },
       "original": {
@@ -1062,11 +1062,11 @@
     },
     "nixpkgs_6": {
       "locked": {
-        "lastModified": 1717459389,
-        "narHash": "sha256-I8/plBsua4/NZ5bKgj+z7/ThiWuud1YFwLsn1QQ5PgE=",
+        "lastModified": 1717646450,
+        "narHash": "sha256-KE+UmfSVk5PG8jdKdclPVcMrUB8yVZHbsjo7ZT1Bm3c=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "3b01abcc24846ae49957b30f4345bab4b3f1d14b",
+        "rev": "818dbe2f96df233d2041739d6079bb616d3e5597",
         "type": "github"
       },
       "original": {
@@ -1078,11 +1078,11 @@
     },
     "nixpkgs_7": {
       "locked": {
-        "lastModified": 1717384422,
-        "narHash": "sha256-sQ1FBYvO4SoZwoRvUIDY94hQyg+uqakG0UMClRbqyG4=",
+        "lastModified": 1717602782,
+        "narHash": "sha256-pL9jeus5QpX5R+9rsp3hhZ+uplVHscNJh8n8VpqscM0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "cb0317c4552b5639d7e2d85d2adbf4b9de0ff0d7",
+        "rev": "e8057b67ebf307f01bdcc8fba94d94f75039d1f6",
         "type": "github"
       },
       "original": {
@@ -1203,11 +1203,11 @@
         "systems": "systems_13"
       },
       "locked": {
-        "lastModified": 1717678376,
-        "narHash": "sha256-hq7idLlnqlVqmnJcuIm6QL/Vuqqki4gf4K/x+qRwv/4=",
+        "lastModified": 1717703727,
+        "narHash": "sha256-mBT1NzDcW32xEBHGX3QBq/eugZqeHmPsd/dmIfG6nzM=",
         "owner": "raphamorim",
         "repo": "rio",
-        "rev": "c0eef6075eea2637da5eb0b53a445f6cbda8c3ef",
+        "rev": "7253c145c050dd87fe56b1c868e9cb4e76af3dd4",
         "type": "github"
       },
       "original": {
@@ -1596,11 +1596,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1717618075,
-        "narHash": "sha256-VswaF+HMGpT5S/0QWrSSquj9TWCYkZ5mTtoazcgBUTA=",
+        "lastModified": 1717742102,
+        "narHash": "sha256-M/D1bF9H9bH+RYRlF4zW6LWX7yB8ckJ8ieRLsrTttqA=",
         "owner": "Alexays",
         "repo": "Waybar",
-        "rev": "365e77af58264e717d946d9d7701b82b54585db2",
+        "rev": "f4da2039159ac466d42182f8335c860f5b223b54",
         "type": "github"
       },
       "original": {
