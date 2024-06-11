@@ -128,6 +128,10 @@ in {
         force_no_accel = true;
       };
 
+      dwindle = {
+        force_split = 2;
+      };
+
       decoration = {
         # fancy corners
         rounding = 10;
