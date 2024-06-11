@@ -25,6 +25,8 @@ in {
 
         "zackmyers.io" = {
           globalRedirect = "zackster.zip";
+          forceSSL = true;
+          enableACME = true;
         };
       };
     };
