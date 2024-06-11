@@ -22,6 +22,10 @@ in {
           forceSSL = true;
           enableACME = true;
         };
+
+        "zackmyers.io" = {
+          globalRedirect = "zackster.zip";
+        };
       };
     };
   };
