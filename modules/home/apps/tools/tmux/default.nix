@@ -18,18 +18,19 @@ in {
       dreamsofcode-io-catppuccin-tmux =
         pkgs.tmuxPlugins.mkTmuxPlugin
         {
-          pluginName = "catppuccin";
-          version = "unstable-2023-01-06";
+          pluginName = "tokyo-night-tmux";
+          version = "v1.5.3";
           src = pkgs.fetchFromGitHub {
-            owner = "dreamsofcode-io";
-            repo = "catppuccin-tmux";
-            rev = "b4e0715356f820fc72ea8e8baf34f0f60e891718";
-            sha256 = "sha256-FJHM6LJkiAwxaLd5pnAoF3a7AE1ZqHWoCpUJE0ncCA8=";
+            owner = "janoamaral";
+            repo = "tokyo-night-tmux";
+            rev = "v1.5.3";
+            sha256 = "sha256-3rMYYzzSS2jaAMLjcQoKreE0oo4VWF9dZgDtABCUOtY=";
           };
         };
     in {
       enable = true;
       shell = "${pkgs.zsh}/bin/zsh";
+      catppuccin.enable = false;
       historyLimit = 100000;
       plugins = with pkgs; [
         {

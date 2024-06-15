@@ -12,8 +12,8 @@
     tools.git.enable = true;
     tools.tmux.enable = true;
     tools.neovim.enable = true;
-    tools.starship.enable = true;
     tools.skim.enable = true;
+    tools.ohmyposh.enable = true;
     tools.direnv.enable = true;
     tools.tealdeer.enable = true;
     tools.bat.enable = true;
@@ -86,6 +86,8 @@
 
     pkgs.nh
     pkgs.dwl
+
+    pkgs.foliate
 
     pkgs.killall
     pkgs.custom.rebuild

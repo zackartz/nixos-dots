@@ -51,7 +51,6 @@ in {
         lua-language-server
         nixd
         rust-analyzer
-        nodePackages.bash-language-server
         vscode-langservers-extracted
         nodePackages.vscode-json-languageserver
         nodePackages.typescript-language-server
