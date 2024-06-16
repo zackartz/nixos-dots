@@ -18,13 +18,13 @@ in {
       dreamsofcode-io-catppuccin-tmux =
         pkgs.tmuxPlugins.mkTmuxPlugin
         {
-          pluginName = "tokyo-night-tmux";
-          version = "v1.5.3";
+          pluginName = "catppuccin";
+          version = "unstable-2023-01-06";
           src = pkgs.fetchFromGitHub {
-            owner = "janoamaral";
-            repo = "tokyo-night-tmux";
-            rev = "v1.5.3";
-            sha256 = "sha256-3rMYYzzSS2jaAMLjcQoKreE0oo4VWF9dZgDtABCUOtY=";
+            owner = "dreamsofcode-io";
+            repo = "catppuccin-tmux";
+            rev = "b4e0715356f820fc72ea8e8baf34f0f60e891718";
+            sha256 = "sha256-FJHM6LJkiAwxaLd5pnAoF3a7AE1ZqHWoCpUJE0ncCA8=";
           };
         };
     in {
@@ -40,18 +40,19 @@ in {
         tmuxPlugins.sensible
         tmuxPlugins.vim-tmux-navigator
         tmuxPlugins.yank
+        tmuxPlugins.cpu
       ];
       extraConfig = ''
         set-option -sa terminal-overrides ",xterm*:Tc"
         set -g mouse on
-
-        set -g @catppuccin-flavor 'mocha'
 
         set -g base-index 1
         set -g pane-base-index 1
         setw -g mode-keys vi
         set-window-option -g pane-base-index 1
         set-option -g renumber-windows on
+
+        set -g @catppuccin-flavor 'mocha'
         set -g @catppuccin_window_left_separator ""
         set -g @catppuccin_window_right_separator " "
         set -g @catppuccin_window_middle_separator " █"
@@ -60,7 +61,7 @@ in {
         set -g @catppuccin_window_default_text "#W"
         set -g @catppuccin_window_current_fill "number"
         set -g @catppuccin_window_current_text "#W#{?window_zoomed_flag,(),}"
-        set -g @catppuccin_status_modules_right "directory meetings date_time"
+        set -g @catppuccin_status_modules_right "directory meetings cpu date_time uptime"
         set -g @catppuccin_status_modules_left "session"
         set -g @catppuccin_status_left_separator  " "
         set -g @catppuccin_status_right_separator " "

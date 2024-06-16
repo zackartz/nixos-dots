@@ -10,5 +10,6 @@ mkShell {
     stylua
     lua-language-server
     luajitPackages.lua-lsp
+    python3
   ];
 }
