@@ -43,7 +43,7 @@ in {
                 foreground = "p:text";
                 "powerline_symbol" = "";
                 style = "diamond";
-                template = "{{ .UserName }}@{{ .HostName }}";
+                template = "{{ .UserName }}@{{ .HostName }} ";
                 type = "session";
               }
               {
@@ -56,7 +56,7 @@ in {
                 };
                 "powerline_symbol" = "";
                 style = "powerline";
-                template = " {{ .Path }}";
+                template = " {{ .Path }} ";
                 type = "path";
               }
               {
