@@ -60,8 +60,6 @@
     pkgs.prismlauncher
     pkgs.obs-studio
 
-    pkgs.jetbrains.idea-community
-    pkgs.jetbrains.datagrip
     pkgs.ungoogled-chromium
 
     pkgs.thunderbird
