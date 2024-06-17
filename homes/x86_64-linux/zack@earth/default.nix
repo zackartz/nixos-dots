@@ -13,7 +13,7 @@
     tools.tmux.enable = true;
     tools.neovim.enable = true;
     tools.skim.enable = true;
-    tools.ohmyposh.enable = true;
+    tools.starship.enable = true;
     tools.direnv.enable = true;
     tools.tealdeer.enable = true;
     tools.bat.enable = true;
