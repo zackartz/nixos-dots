@@ -39,8 +39,9 @@ with pkgs; {
   umnt = "udisksctl unmount -b";
   burn = "pkill -9";
   diff = "diff --color=auto";
-  wu = "nmcli con up zachary_myers";
-  wd = "nmcli con down zachary_myers";
+  ws = "sudo systemctl status openvpn-work.service";
+  wu = "sudo systemctl start openvpn-work.service";
+  wd = "sudo systemctl stop openvpn-work.service";
   "v" = "nvim";
   ".." = "cd ..";
   "..." = "cd ../../";
