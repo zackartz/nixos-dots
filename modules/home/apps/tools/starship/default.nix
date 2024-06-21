@@ -40,7 +40,7 @@ in {
           read_only_style = "fg:black bg:red";
         };
         git_commit = {commit_hash_length = 7;};
-        git_branch = {format = ":[$symbol$branch]($style) ";};
+        git_branch = {format = "[$symbol$branch]($style) ";};
         git_status = {
           conflicted = "[<](white)=[$count](bright-white bold)[>](white)";
           ahead = "[<](white)⇡[$count](bright-white bold)[>](white)";
