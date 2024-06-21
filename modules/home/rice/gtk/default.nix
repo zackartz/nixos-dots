@@ -10,18 +10,21 @@ with lib.custom; let
   cfg = config.rice.gtk;
 in {
   options.rice.gtk = with types; {
-    enable = mkBoolOpt false "Enable Zsh Configuration";
+    enable = mkBoolOpt false "Enable GTK Customization";
   };
 
   config = mkIf cfg.enable {
     gtk = {
       enable = true;
-      catppuccin.enable = true;
 
       # iconTheme = {
       #   package = pkgs.catppuccin-papirus-folders;
       #   name = "Papirus";
       # };
+      theme = {
+        name = "Tokyo-Night-B-GS";
+        package = pkgs.tokyonight-gtk-theme;
+      };
       font = {
         name = "Iosevka";
         size = 11;
@@ -59,37 +62,6 @@ in {
         };
         size = 24;
       };
-
-      sessionVariables = {
-      };
-    };
-    qt = {
-      enable = true;
-      platformTheme = "qtct";
-      style = {
-        name = "Catppuccin-Mocha-Sapphire";
-        package = pkgs.catppuccin-kde.override {
-          flavour = ["mocha"];
-          accents = ["sapphire"];
-        };
-      };
-    };
-    xdg.configFile = {
-      "Kvantum/catppuccin/catppuccin.kvconfig".source = builtins.fetchurl {
-        url = "https://raw.githubusercontent.com/catppuccin/Kvantum/main/src/Catppuccin-Mocha-Sapphire/Catppuccin-Mocha-Sapphire.kvconfig";
-        sha256 = "sha256:0n9f5hysr4k1sf9fd3sgd9fvqwrxrpcvj6vajqmb5c5ji8nv2w3c";
-      };
-      "Kvantum/catppuccin/catppuccin.svg".source = builtins.fetchurl {
-        url = "https://raw.githubusercontent.com/catppuccin/Kvantum/main/src/Catppuccin-Mocha-Sapphire/Catppuccin-Mocha-Sapphire.svg";
-        sha256 = "sha256:1hq9h34178h0d288hgwb0ngqnixz24m9lk0ahc4dahwqn77fndwf";
-      };
-      "Kvantum/kvantum.kvconfig".text = ''
-        [General]
-        theme=catppuccin
-
-        [Applications]
-        catppuccin=qt5ct, org.qbittorrent.qBittorrent, hyprland-share-picker
-      '';
     };
   };
 }
