@@ -17,10 +17,10 @@ in {
     gtk = {
       enable = true;
 
-      # iconTheme = {
-      #   package = pkgs.catppuccin-papirus-folders;
-      #   name = "Papirus";
-      # };
+      iconTheme = {
+        package = pkgs.catppuccin-papirus-folders;
+        name = "Papirus";
+      };
       theme = {
         name = "Tokyonight-Dark-B";
         package = pkgs.tokyonight-gtk-theme;
