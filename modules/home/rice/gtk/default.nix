@@ -22,7 +22,7 @@ in {
       #   name = "Papirus";
       # };
       theme = {
-        name = "Tokyo-Night-B-GS";
+        name = "Tokyonight-Dark-B";
         package = pkgs.tokyonight-gtk-theme;
       };
       font = {
