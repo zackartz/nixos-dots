@@ -29,7 +29,7 @@ in {
           $username$shlvl$kubernetes''${custom.dir}''${custom.home_dir}$directory''${custom.git_host}$git_branch$git_commit$git_state$git_status$hg_branch$docker_context$package$cmake$dart$dotnet$elixir$elm$erlang$golang$helm$java$julia$kotlin$nim$nodejs$ocaml$perl$php$purescript$python$ruby$rust$swift$terraform$vagrant$zig$nix_shell$conda$aws$gcloud$openstack$env_var$crystal$custom$cmd_duration$lua$line_break$jobs$status$character
         '';
         character = {
-          success_symbol = "[>](#f5c2e7)[>](#89b4fa)[>](#f2cdcd)";
+          success_symbol = "[>](#89b4fa)[>](#f5c2e7)[>](#f2cdcd)";
           error_symbol = "[>>>](red)";
         };
         directory = {
