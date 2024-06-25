@@ -17,14 +17,6 @@ in {
     gtk = {
       enable = true;
 
-      iconTheme = {
-        package = pkgs.catppuccin-papirus-folders;
-        name = "Papirus";
-      };
-      theme = {
-        name = "Tokyonight-Dark-B";
-        package = pkgs.tokyonight-gtk-theme;
-      };
       font = {
         name = "Iosevka";
         size = 11;
@@ -53,15 +45,6 @@ in {
         libsForQt5.qt5ct
         breeze-icons
       ];
-      pointerCursor = {
-        package = pkgs.catppuccin-cursors.mochaMauve;
-        name = "catppuccin-mocha-mauve-cursors";
-        x11 = {
-          enable = true;
-          defaultCursor = "catppuccin-mocha-mauve-cursors";
-        };
-        size = 24;
-      };
     };
   };
 }
