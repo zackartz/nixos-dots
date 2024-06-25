@@ -21,6 +21,11 @@ in {
         name = "Iosevka";
         size = 11;
       };
+
+      theme = {
+        name = "Tokyonight-Dark-B";
+        package = pkgs.tokyonight-gtk-theme;
+      };
       gtk3.extraConfig = {
         gtk-xft-antialias = 1;
         gtk-xft-hinting = 1;
