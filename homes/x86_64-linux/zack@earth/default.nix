@@ -5,7 +5,7 @@
   lib,
   ...
 }: {
-  wms.hyprland.enable = true;
+  wms.sway.enable = true;
   apps = {
     web.firefox.enable = true;
 
