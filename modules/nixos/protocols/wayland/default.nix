@@ -18,6 +18,7 @@ in {
     environment.etc."greetd/environments".text = ''
       bspwm
       Hyprland
+      sway
     '';
 
     services = {
@@ -25,7 +26,7 @@ in {
         enable = true;
         settings = rec {
           initial_session = {
-            command = "Hyprland";
+            command = "sway";
             user = "zack";
           };
           default_session = initial_session;
