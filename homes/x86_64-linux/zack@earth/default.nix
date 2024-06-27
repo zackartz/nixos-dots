@@ -5,7 +5,7 @@
   lib,
   ...
 }: {
-  wms.sway.enable = true;
+  wms.river.enable = true;
   apps = {
     web.firefox.enable = true;
 

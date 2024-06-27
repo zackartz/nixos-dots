@@ -26,7 +26,7 @@ in {
         enable = true;
         settings = rec {
           initial_session = {
-            command = "sway";
+            command = "river";
             user = "zack";
           };
           default_session = initial_session;
