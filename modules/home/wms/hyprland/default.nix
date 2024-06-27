@@ -134,7 +134,7 @@ in {
 
       decoration = {
         # fancy corners
-        rounding = 0;
+        rounding = 10;
         # blur
         blur = {
           enabled = true;
