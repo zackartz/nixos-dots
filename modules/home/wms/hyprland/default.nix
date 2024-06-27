@@ -107,11 +107,11 @@ in {
 
       general = {
         # gaps
-        gaps_in = 6;
-        gaps_out = 12;
+        gaps_in = 4;
+        gaps_out = 8;
 
         # border thiccness
-        border_size = 4;
+        border_size = 2;
 
         # whether to apply the sensitivity to raw input (e.g. used by games where you aim using your mouse)
         apply_sens_to_raw = 0;
@@ -134,7 +134,7 @@ in {
 
       decoration = {
         # fancy corners
-        rounding = 10;
+        rounding = 0;
         # blur
         blur = {
           enabled = true;
@@ -142,8 +142,8 @@ in {
           passes = 5;
           ignore_opacity = false;
           new_optimizations = 1;
-          contrast = 0.9;
-          brightness = 0.9;
+          contrast = 1;
+          brightness = 1;
         };
 
         # shadow config
@@ -159,7 +159,7 @@ in {
         force_default_wallpaper = 0;
         disable_hyprland_logo = true;
 
-        vfr = true;
+        vfr = false;
 
         # dpms
         mouse_move_enables_dpms = true; # enable dpms on mouse/touchpad action
