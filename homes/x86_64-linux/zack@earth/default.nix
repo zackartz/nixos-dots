@@ -5,7 +5,7 @@
   lib,
   ...
 }: {
-  wms.river.enable = true;
+  wms.hyprland.enable = true;
   apps = {
     web.firefox.enable = true;
 

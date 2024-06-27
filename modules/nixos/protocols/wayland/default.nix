@@ -26,7 +26,7 @@ in {
         enable = true;
         settings = rec {
           initial_session = {
-            command = "river";
+            command = "Hyprland";
             user = "zack";
           };
           default_session = initial_session;
