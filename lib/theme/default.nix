@@ -19,5 +19,5 @@
     "highlighthigh" = "524f67";
   };
 
-  wallpaper = ./wallpaper.png;
+  wallpaper = ./wall3.png;
 }
