@@ -2,7 +2,7 @@ return {
 	"catppuccin/nvim",
 	name = "catppuccin",
 	init = function()
-		vim.cmd.colorscheme("catppuccin-mocha")
+		vim.cmd.colorscheme("catppuccin-macchiato")
 	end,
 	opts = {
 		transparent_background = true,
