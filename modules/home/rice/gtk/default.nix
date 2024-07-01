@@ -14,6 +14,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    catppuccin.pointerCursor.enable = true;
+
     gtk = {
       enable = true;
 
