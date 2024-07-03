@@ -30,7 +30,7 @@ in {
     in {
       enable = true;
       shell = "${pkgs.zsh}/bin/zsh";
-      catppuccin.enable = false;
+      catppuccin.enable = true;
       historyLimit = 100000;
       plugins = with pkgs; [
         tmuxPlugins.sensible
