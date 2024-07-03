@@ -33,10 +33,6 @@ in {
       catppuccin.enable = false;
       historyLimit = 100000;
       plugins = with pkgs; [
-        {
-          plugin = dreamsofcode-io-catppuccin-tmux;
-          extraConfig = "";
-        }
         tmuxPlugins.sensible
         tmuxPlugins.vim-tmux-navigator
         tmuxPlugins.yank
