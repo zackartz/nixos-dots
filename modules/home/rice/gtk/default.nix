@@ -28,6 +28,15 @@ in {
         name = "Tokyonight-Dark-B";
         package = pkgs.tokyonight-gtk-theme;
       };
+
+      iconTheme = {
+        name = "Papirus-Dark";
+        package = pkgs.catppuccin-papirus-folders.override {
+          accent = "pink";
+          flavor = "macchiato";
+        };
+      };
+
       gtk3.extraConfig = {
         gtk-xft-antialias = 1;
         gtk-xft-hinting = 1;
@@ -50,7 +59,6 @@ in {
         qt6Packages.qtstyleplugin-kvantum
         libsForQt5.qtstyleplugin-kvantum
         libsForQt5.qt5ct
-        breeze-icons
       ];
     };
   };
