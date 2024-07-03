@@ -77,12 +77,6 @@ in {
         lazy-nix-helper-nvim
         lazy-nvim
       ];
-      extraLuaPackages = ps: [
-        ps.lua-curl
-        ps.nvim-nio
-        ps.xml2lua
-        ps.mimetypes
-      ];
       extraLuaConfig = ''
         local plugins = {
         	${pluginList config.programs.neovim.plugins}
