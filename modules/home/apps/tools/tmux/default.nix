@@ -52,7 +52,7 @@ in {
         set-window-option -g pane-base-index 1
         set-option -g renumber-windows on
 
-        set -g @catppuccin-flavor 'macchiato'
+        set -g @catppuccin_flavor 'macchiato'
         set -g @catppuccin_window_left_separator ""
         set -g @catppuccin_window_right_separator " "
         set -g @catppuccin_window_middle_separator " █"
