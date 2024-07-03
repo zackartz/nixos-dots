@@ -50,7 +50,7 @@
 
   catppuccin.enable = true;
   catppuccin.flavor = "macchiato";
-  catppuccin.accent = "pink";
+  catppuccin.accent = "rosewater";
 
   home.packages = [
     pkgs.gimp

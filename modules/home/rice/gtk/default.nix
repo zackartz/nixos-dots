@@ -8,6 +8,7 @@
 with lib;
 with lib.custom; let
   cfg = config.rice.gtk;
+  ctp = config.catppuccin;
 in {
   options.rice.gtk = with types; {
     enable = mkBoolOpt false "Enable GTK Customization";
@@ -32,8 +33,8 @@ in {
       iconTheme = {
         name = "Papirus-Dark";
         package = pkgs.catppuccin-papirus-folders.override {
-          accent = "pink";
-          flavor = "macchiato";
+          accent = ctp.accent;
+          flavor = ctp.flavor;
         };
       };
 
