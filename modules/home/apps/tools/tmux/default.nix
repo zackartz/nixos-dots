@@ -14,20 +14,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    programs.tmux = let
-      dreamsofcode-io-catppuccin-tmux =
-        pkgs.tmuxPlugins.mkTmuxPlugin
-        {
-          pluginName = "catppuccin";
-          version = "unstable-2023-01-06";
-          src = pkgs.fetchFromGitHub {
-            owner = "dreamsofcode-io";
-            repo = "catppuccin-tmux";
-            rev = "b4e0715356f820fc72ea8e8baf34f0f60e891718";
-            sha256 = "sha256-FJHM6LJkiAwxaLd5pnAoF3a7AE1ZqHWoCpUJE0ncCA8=";
-          };
-        };
-    in {
+    programs.tmux = {
       enable = true;
       shell = "${pkgs.zsh}/bin/zsh";
       catppuccin.enable = true;
@@ -48,7 +35,6 @@ in {
         set-window-option -g pane-base-index 1
         set-option -g renumber-windows on
 
-        set -g @catppuccin_flavor 'macchiato'
         set -g @catppuccin_window_left_separator ""
         set -g @catppuccin_window_right_separator " "
         set -g @catppuccin_window_middle_separator " █"
