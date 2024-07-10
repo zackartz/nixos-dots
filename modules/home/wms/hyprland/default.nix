@@ -74,8 +74,6 @@ in {
           "${mod},M,exit"
           "${mod},P,pseudo"
 
-          "${mod},B,exec,${pkgs.foot}/bin/foot"
-
           "${mod},J,togglesplit,"
 
           "${mod},T,togglegroup," # group focused window
