@@ -19,7 +19,7 @@ in {
     services.openvpn = {
       servers = {
         work = {
-          config = ''config /home/zack/Downloads/zachary_myers.ovpn'';
+          config = ''config /home/zoey/Downloads/zachary_myers.ovpn'';
           updateResolvConf = true;
         };
       };

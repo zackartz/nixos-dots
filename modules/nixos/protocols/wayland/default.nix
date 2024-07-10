@@ -27,7 +27,7 @@ in {
         settings = rec {
           initial_session = {
             command = "Hyprland";
-            user = "zack";
+            user = "zoey";
           };
           default_session = initial_session;
         };
@@ -53,8 +53,9 @@ in {
         WLR_RENDERER = "wayland";
         XDG_SESSION_TYPE = "wayland";
         SDL_VIDEODRIVER = "wayland";
-        XDG_CACHE_HOME = "/home/zack/.cache";
+        XDG_CACHE_HOME = "/home/zoey/.cache";
         CLUTTER_BACKEND = "wayland";
+        DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
       };
       loginShellInit = ''
         dbus-update-activation-environment --systemd DISPLAY

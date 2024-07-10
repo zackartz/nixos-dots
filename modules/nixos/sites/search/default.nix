@@ -11,7 +11,7 @@ in {
   options.sites.search = with types; {
     enable = mkBoolOpt false "Enable Search (Searxng)";
 
-    domain = mkStringOpt "search.zackmyers.io" "The domain of the search instance";
+    domain = mkStringOpt "search.zoeys.computer" "The domain of the search instance";
   };
 
   config = mkIf cfg.enable {

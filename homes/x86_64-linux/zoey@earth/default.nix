@@ -8,6 +8,7 @@
   wms.hyprland.enable = true;
   apps = {
     web.firefox.enable = true;
+    web.firefox.setDefault = true;
 
     tools.git.enable = true;
     tools.tmux.enable = true;

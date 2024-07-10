@@ -250,6 +250,7 @@ in {
               (extension "decentraleyes" "jid1-BoFifL9Vbdl2zQ@jetpack")
               (extension "canvasblocker" "CanvasBlocker@kkapsner.de")
               (extension "clearurls" "{74145f27-f039-47ce-a470-a662b129930a}")
+              (extension "mtab" "contact@maxhu.dev")
             ];
         };
       };

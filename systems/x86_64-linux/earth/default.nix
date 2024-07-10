@@ -9,7 +9,7 @@
   imports = [./hardware-configuration.nix];
 
   nix.settings = {
-    trusted-users = ["zack"];
+    trusted-users = ["zoey"];
   };
 
   hardware.audio.enable = true;
@@ -34,7 +34,7 @@
     enable = true;
     package = pkgs.transmission_4;
     settings = {
-      download-dir = "/home/zack/dl";
+      download-dir = "/home/zoey/dl";
     };
   };
   services.gnome.gnome-keyring.enable = true;
@@ -72,23 +72,32 @@
   environment.systemPackages = [
     pkgs.BeatSaberModManager
     pkgs.sbctl
-    pkgs.vesktop
+    pkgs.custom.vesktop
     pkgs.mangohud
     pkgs.transmission_4
     inputs.agenix.packages.${system}.agenix
   ];
 
   programs.zsh.enable = true;
+  users.users.zoey = {
+    isNormalUser = true;
+    description = "zoey";
+    extraGroups = ["networkmanager" "wheel" "docker" "libvirtd" "plugdev"];
+    shell = pkgs.zsh;
+    initialHashedPassword = "$6$rounds=2000000$rFBJH7LwdEHvv.0i$HdHorWqp8REPdWPk5fEgZXX1TujRJkMxumGK0f0elFN0KRPlBjJMW2.35A.ID/o3eC/hGTwbSJAcJcwVN2zyV/";
+  };
+
   users.users.zack = {
     isNormalUser = true;
     description = "zack";
     extraGroups = ["networkmanager" "wheel" "docker" "libvirtd" "plugdev"];
     shell = pkgs.zsh;
+    initialHashedPassword = "$6$rounds=2000000$rFBJH7LwdEHvv.0i$HdHorWqp8REPdWPk5fEgZXX1TujRJkMxumGK0f0elFN0KRPlBjJMW2.35A.ID/o3eC/hGTwbSJAcJcwVN2zyV/";
   };
 
   users.groups.plugdev = {};
 
-  snowfallorg.users.zack = {
+  snowfallorg.users.zoey = {
     create = true;
     admin = false;
 
