@@ -21,7 +21,7 @@ in {
     programs.git = {
       enable = true;
       userName = "zack";
-      userEmail = "zackmyers@lavabit.com";
+      userEmail = "hi@zoeys.computer";
       ignores = [
         ".cache/"
         ".DS_Store"
