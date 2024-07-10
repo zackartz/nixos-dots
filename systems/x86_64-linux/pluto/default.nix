@@ -12,7 +12,7 @@
   ];
 
   nix.settings = {
-    trusted-users = ["zack"];
+    trusted-users = ["zoey"];
   };
 
   # Bootloader.
@@ -85,6 +85,18 @@
     ];
   };
 
+  users.users.zoey = {
+    isNormalUser = true;
+    description = "zoey";
+    extraGroups = ["networkmanager" "wheel" "docker"];
+    shell = pkgs.zsh;
+    packages = with pkgs; [];
+    hashedPassword = "$6$rounds=2000000$673Iz4rM8Dr9yz7C$Xq5JXxE7ioUrpZmMf3uTrPN2ODrEu3Sph6EhWyPoM5Ty./FhgB9hU0mz1yYo8sUj7wdUMWfR98haVJ24Wv3BK/";
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILOThndTuZC0H+aHfTr2FrFr4KaYfvZ4MCA/W+POUHtW zoey@earth"
+    ];
+  };
+
   users.users.alfie = {
     isNormalUser = true;
     description = "alfie";
@@ -110,6 +122,15 @@
   virtualisation.docker.enable = true;
 
   snowfallorg.users.zack = {
+    create = true;
+    admin = false;
+
+    home = {
+      enable = true;
+    };
+  };
+
+  snowfallorg.users.zoey = {
     create = true;
     admin = false;
 
