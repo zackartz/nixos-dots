@@ -25,10 +25,12 @@ in {
         size = 11;
       };
 
-      theme = {
-        name = "Tokyonight-Dark-B";
-        package = pkgs.tokyonight-gtk-theme;
-      };
+      catppuccin.enable = true;
+
+      # theme = {
+      #   name = "Tokyonight-Dark-B";
+      #   package = pkgs.tokyonight-gtk-theme;
+      # };
 
       iconTheme = {
         name = "Papirus-Dark";
