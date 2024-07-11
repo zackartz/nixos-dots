@@ -26,7 +26,7 @@ in {
       };
 
       theme = {
-        name = "Tokyonight";
+        name = "Tokyonight-Dark";
         package = pkgs.tokyonight-gtk-theme;
       };
 
