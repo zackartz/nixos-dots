@@ -38,9 +38,5 @@ in {
       # no need to redefine it in your config for now)
       wireplumber.enable = true;
     };
-    sound = {
-      enable = true;
-      mediaKeys.enable = true;
-    };
   };
 }
