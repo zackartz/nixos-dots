@@ -40,8 +40,8 @@ with pkgs; {
   burn = "pkill -9";
   diff = "diff --color=auto";
   ws = "sudo systemctl status openvpn-work.service";
-  wu = "sudo systemctl start openvpn-work.service";
-  wd = "sudo systemctl stop openvpn-work.service";
+  wu = "vpn disconnect -w && sudo systemctl start openvpn-work.service";
+  wd = "sudo systemctl stop openvpn-work.service && vpn connect -w";
   "v" = "nvim";
   ".." = "cd ..";
   "..." = "cd ../../";
