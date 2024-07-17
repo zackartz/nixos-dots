@@ -33,6 +33,9 @@ in {
     services.nginx.virtualHosts.${cfg.domain} = {
       forceSSL = true;
       enableACME = true;
+      extraConfig = ''
+        access_log off;
+      '';
       locations."/searx/" = {
         proxyPass = "http://localhost:8080";
       };
