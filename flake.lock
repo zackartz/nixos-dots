@@ -1174,11 +1174,11 @@
         "systems": "systems_11"
       },
       "locked": {
-        "lastModified": 1721425055,
-        "narHash": "sha256-C9JfY7hRJtcGJs5H2Oxz/qC8pTKdk4rsapzJzjGjkao=",
+        "lastModified": 1721505100,
+        "narHash": "sha256-H0xuGtFSvbVTApz3z5KuE1Zh92Oqi2fdA2seiAU1CqI=",
         "owner": "raphamorim",
         "repo": "rio",
-        "rev": "8cb4eecedd74fcc488b77fc3e65912d30611f928",
+        "rev": "cc797319c6ea4274accefb52f67a91441dd56bfe",
         "type": "github"
       },
       "original": {
