@@ -12,7 +12,7 @@ in {
   options.sites.cv = with types; {
     enable = mkBoolOpt false "Enable CV site";
 
-    domain = mkStringOpt "cv.zackster.zip" "The domain for the site";
+    domain = mkStringOpt "cv.zackmyers.io" "The domain for the site";
   };
 
   config = mkIf cfg.enable {

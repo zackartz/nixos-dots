@@ -34,7 +34,7 @@
   };
 
   zmio.blog.enable = true;
-  zmio.blog.domain = "zackster.zip";
+  zmio.blog.domain = "zackmyers.io";
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
