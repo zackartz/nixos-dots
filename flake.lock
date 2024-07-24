@@ -654,11 +654,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1721836211,
-        "narHash": "sha256-N6IlIjizXrbytHpjVsMPcMdz7WKBpLwY0oPzwThnB8o=",
+        "lastModified": 1721840856,
+        "narHash": "sha256-VQ9gOoxMVqcgb1fGV93eiabW4U1bAj8bZqaCs4qTy8U=",
         "ref": "refs/heads/main",
-        "rev": "11843953621dc3f2df966c1447d0bbd81b099689",
-        "revCount": 4975,
+        "rev": "3e543d2ce8ba64abb4d226dbb88c4513474501cf",
+        "revCount": 4976,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -1185,11 +1185,11 @@
         "systems": "systems_10"
       },
       "locked": {
-        "lastModified": 1717172081,
-        "narHash": "sha256-tjpxhEr67pK7xE70gbNlMCbo9BCiJVkurTu+VsVYQz8=",
+        "lastModified": 1721842409,
+        "narHash": "sha256-b3A9v7DsCprHMm30koUoHmI/rUwyf0BaFAGhB1WTc2c=",
         "ref": "refs/heads/main",
-        "rev": "26484d6b46369590be8d341688feb5af2377b5de",
-        "revCount": 10,
+        "rev": "d1b572262ed63ffab3e93712bbf71cb224448a19",
+        "revCount": 11,
         "type": "git",
         "url": "https://git.zackster.zip/zack/resume"
       },
