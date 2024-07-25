@@ -4,10 +4,8 @@ writeShellScriptBin "rebuild" ''
   pushd ~/nixos/
   alejandra . &>/dev/null
   git add .
+  git pull origin main
   echo "[REBUILD]: rebuilding nixos"
   nh os switch
-  gen=$(nixos-rebuild list-generations | grep current)
-  git commit -am "$gen"
-  git pull origin main
   popd
 ''
