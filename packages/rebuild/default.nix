@@ -8,6 +8,6 @@ writeShellScriptBin "rebuild" ''
   nh os switch --update
   gen=$(nixos-rebuild list-generations | grep current)
   git commit -am "$gen"
-  git push origin main
+  git pull origin main
   popd
 ''
