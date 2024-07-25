@@ -17,7 +17,7 @@ jobs:
   build-nixos:
     runs-on: ubuntu-latest
     steps:     
-       - name: "Maximize Disk Space"
+      - name: "Maximize Disk Space"
         uses: easimon/maximize-build-space@v8
         with:
           root-reserve-mb: 8192
