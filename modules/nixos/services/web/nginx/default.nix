@@ -13,10 +13,19 @@ in {
   };
 
   config = mkIf cfg.enable {
+    security.dhparams = {
+      enable = true;
+      params.nginx = {};
+    };
+
     services.nginx = {
       enable = true;
       package = pkgs.nginxStable.override {openssl = pkgs.libressl;};
       recommendedProxySettings = true;
+      recommendedGzipSettings = true;
+      recommendedOptimisation = true;
+      recommendedTlsSettings = true;
+      sslDhparam = config.security.dhparams.params.nginx.path;
       virtualHosts = {
         "node.nyc.zackmyers.io" = {
           forceSSL = true;
