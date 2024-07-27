@@ -10,7 +10,7 @@
 with lib;
 with lib.custom; let
   cfg = config.apps.music.spotify;
-  spicePkgs = inputs.spicetify-nix.packages.${system}.default;
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
 in {
   options.apps.music.spotify = with types; {
     enable = mkBoolOpt false "Enable Spotify";

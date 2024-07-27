@@ -11,7 +11,7 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -88,7 +88,7 @@
 
     systems.url = "github:nix-systems/default";
     spicetify-nix = {
-      url = "github:the-argus/spicetify-nix";
+      url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -111,7 +111,7 @@
       templates = import ./templates {};
 
       homes.modules = with inputs; [
-        spicetify-nix.homeManagerModule
+        spicetify-nix.homeManagerModules.default
         catppuccin.homeManagerModules.catppuccin
         anyrun.homeManagerModules.default
         ags.homeManagerModules.default
