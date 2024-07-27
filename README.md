@@ -14,6 +14,9 @@ could not have done this without their work :)
 
 Grab the [nixos iso](https://nixos.org/download/) and install nixos on to your computer using the graphical installer.
 
+> [!WARNING]
+> You can choose whatever desktop environment you want, but make sure the username you choose is the one you will want to continue with!
+
 > [!TIP]
 > You can use [nixos anywhere](https://github.com/nix-community/nixos-anywhere) to install your config to other systems (or like, a server) via ssh once you have your desktop installed :)
 
@@ -109,6 +112,8 @@ Create a new file in `systems/x86_64-linux/<your-hostname>/default.nix` with the
   catppuccin.enable = true; # If you want your TTY to be catppuccin too haha
 }
 ```
+
+One note, change the `# Bootloader` section to what is currently in `/etc/nixos/configuration.nix` so that the bootloader config stays the same.
 
 Nice! We're also going to need the `hardware-configuration.nix` for your system, copy that file from `/etc/nixos/hardware-configuration.nix` so it sits alongside the `default.nix` file.
 
