@@ -7,7 +7,7 @@ with lib; rec {
 
   mkBoolOpt = mkOpt types.bool;
 
-  mkStringOpt = mkOpt types.string;
+  mkStringOpt = mkOpt types.str;
 
   mkBoolOpt' = mkOpt' types.bool;
 
