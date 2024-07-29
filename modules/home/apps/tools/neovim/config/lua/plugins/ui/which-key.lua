@@ -4,7 +4,7 @@ return {
 	"folke/which-key.nvim",
 	event = "VeryLazy",
 	init = function()
-		require("which-key").register({
+		require("which-key").add({
 			{ "<leader>C", group = format("Package", "Crates") },
 			{ "<leader>D", group = format("Database", "DbUI") },
 			{ "<leader>S", group = format("FolderClock", "Session") },
@@ -24,13 +24,13 @@ return {
 		})
 	end,
 	opts = {
-		key_labels = {
+		replace = {
 			["<space>"] = " ",
 		},
 		icons = {
 			group = "",
 		},
-		window = {
+		win = {
 			border = "rounded",
 		},
 	},
