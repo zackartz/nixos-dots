@@ -78,93 +78,82 @@ in {
         lazy-nvim
       ];
       extraLuaConfig = ''
-        local plugins = {
-        	${pluginList config.programs.neovim.plugins}
-        }
-        local lazy_nix_helper_path = "${lazy-nix-helper-nvim}"
-        if not vim.loop.fs_stat(lazy_nix_helper_path) then
-        	lazy_nix_helper_path = vim.fn.stdpath("data") .. "/lazy_nix_helper/lazy_nix_helper.nvim"
-        	if not vim.loop.fs_stat(lazy_nix_helper_path) then
-        		vim.fn.system({
-        			"git",
-        			"clone",
-        			"--filter=blob:none",
-        			"https://github.com/b-src/lazy_nix_helper.nvim.git",
-        			lazy_nix_helper_path,
-        		})
-        	end
-        end
+                local plugins = {
+                	${pluginList config.programs.neovim.plugins}
+                }
+                local lazy_nix_helper_path = "${lazy-nix-helper-nvim}"
+                if not vim.loop.fs_stat(lazy_nix_helper_path) then
+                	lazy_nix_helper_path = vim.fn.stdpath("data") .. "/lazy_nix_helper/lazy_nix_helper.nvim"
+                	if not vim.loop.fs_stat(lazy_nix_helper_path) then
+                		vim.fn.system({
+                			"git",
+                			"clone",
+                			"--filter=blob:none",
+                			"https://github.com/b-src/lazy_nix_helper.nvim.git",
+                			lazy_nix_helper_path,
+                		})
+                	end
+                end
 
-        -- add the Lazy Nix Helper plugin to the vim runtime
-        vim.opt.rtp:prepend(lazy_nix_helper_path)
+                -- add the Lazy Nix Helper plugin to the vim runtime
+                vim.opt.rtp:prepend(lazy_nix_helper_path)
 
-        -- call the Lazy Nix Helper setup function
-        local non_nix_lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-        local lazy_nix_helper_opts = { lazypath = non_nix_lazypath, input_plugin_table = plugins }
-        require("lazy-nix-helper").setup(lazy_nix_helper_opts)
+                -- call the Lazy Nix Helper setup function
+                local non_nix_lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+                local lazy_nix_helper_opts = { lazypath = non_nix_lazypath, input_plugin_table = plugins }
+                require("lazy-nix-helper").setup(lazy_nix_helper_opts)
 
-        -- get the lazypath from Lazy Nix Helper
-        local lazypath = require("lazy-nix-helper").lazypath()
-        if not vim.loop.fs_stat(lazypath) then
-        	vim.fn.system({
-        		"git",
-        		"clone",
-        		"--filter=blob:none",
-        		"https://github.com/folke/lazy.nvim.git",
-        		"--branch=stable", -- latest stable release
-        		lazypath,
-        	})
-        end
-        vim.opt.rtp:prepend(lazypath)
+                -- get the lazypath from Lazy Nix Helper
+                local lazypath = require("lazy-nix-helper").lazypath()
+                if not vim.loop.fs_stat(lazypath) then
+                	vim.fn.system({
+                		"git",
+                		"clone",
+                		"--filter=blob:none",
+                		"https://github.com/folke/lazy.nvim.git",
+                		"--branch=stable", -- latest stable release
+                		lazypath,
+                	})
+                end
+                vim.opt.rtp:prepend(lazypath)
 
-        local filetypes = require("core.filetypes")
-        local configurer = require("utils.configurer")
-        local opts = {}
-
-        if vim.g.vscode then
-        	-- VSCode Neovim
-        	opts.spec = "vscode.plugins"
-        	opts.options = require("vscode.options")
-        	opts.keymaps = require("vscode.keymaps")
-        else
-        	-- Normal Neovim
-        	opts.spec = "plugins"
-        	opts.options = require("core.options")
-        	opts.keymaps = require("core.keymaps")
-        	opts.autocmd = require("core.autocmd")
-        	opts.signs = require("core.signs")
-        end
-
-        configurer.setup(opts)
-
-        local handlers = require("lsp.handlers") -- Adjust the path as necessary
-
-        local function setup_all_servers()
-        	for server, setup_fn in pairs(handlers) do
-        		if type(setup_fn) == "function" then
-        			-- Call the setup function for each server
-        			setup_fn()
-        		end
-        	end
-        end
-
-        setup_all_servers()
-
-        vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
-        vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
-        vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
-        vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
-
-        vim.keymap.set("i", "<left>", '<cmd>echo "Use h to move!!"<CR>')
-        vim.keymap.set("i", "<right>", '<cmd>echo "Use l to move!!"<CR>')
-        vim.keymap.set("i", "<up>", '<cmd>echo "Use k to move!!"<CR>')
-        vim.keymap.set("i", "<down>", '<cmd>echo "Use j to move!!"<CR>')
-        -- Neovide config
-        vim.o.guifont = "Iosevka Nerd Font Mono:h14"
-        vim.g.neovide_transparency = 0.75
-
-        -- vim.lsp.log.set_level(vim.lsp.log_levels.INFO)
-        vim.filetype.add(filetypes)
+        require("lazy").setup({
+          spec = {
+            -- add LazyVim and import its plugins
+            { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+            -- import/override with your plugins
+            { import = "plugins" },
+          },
+          defaults = {
+            -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
+            -- If you know what you're doing, you can set this to `true` to have all your custom plugins lazy-loaded by default.
+            lazy = false,
+            -- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
+            -- have outdated releases, which may break your Neovim install.
+            version = false, -- always use the latest git commit
+            -- version = "*", -- try installing the latest stable version for plugins that support semver
+          },
+          install = { colorscheme = { "tokyonight", "habamax" } },
+          checker = {
+            enabled = true, -- check for plugin updates periodically
+            notify = false, -- notify on update
+          }, -- automatically check for plugin updates
+          performance = {
+            rtp = {
+              -- disable some rtp plugins
+              disabled_plugins = {
+                "gzip",
+                -- "matchit",
+                -- "matchparen",
+                -- "netrwPlugin",
+                "tarPlugin",
+                "tohtml",
+                "tutor",
+                "zipPlugin",
+              },
+            },
+          },
+        })
       '';
     };
 
