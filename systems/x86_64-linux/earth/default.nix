@@ -38,6 +38,10 @@
     };
   };
   services.gnome.gnome-keyring.enable = true;
+  services._1password = {
+    enable = true;
+    polkitPolicyOwnerUsername = "zoey";
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = lib.mkForce false;
@@ -82,14 +86,6 @@
   users.users.zoey = {
     isNormalUser = true;
     description = "zoey";
-    extraGroups = ["networkmanager" "wheel" "docker" "libvirtd" "plugdev"];
-    shell = pkgs.zsh;
-    initialHashedPassword = "$6$rounds=2000000$rFBJH7LwdEHvv.0i$HdHorWqp8REPdWPk5fEgZXX1TujRJkMxumGK0f0elFN0KRPlBjJMW2.35A.ID/o3eC/hGTwbSJAcJcwVN2zyV/";
-  };
-
-  users.users.zack = {
-    isNormalUser = true;
-    description = "zack";
     extraGroups = ["networkmanager" "wheel" "docker" "libvirtd" "plugdev"];
     shell = pkgs.zsh;
     initialHashedPassword = "$6$rounds=2000000$rFBJH7LwdEHvv.0i$HdHorWqp8REPdWPk5fEgZXX1TujRJkMxumGK0f0elFN0KRPlBjJMW2.35A.ID/o3eC/hGTwbSJAcJcwVN2zyV/";
