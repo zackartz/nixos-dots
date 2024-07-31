@@ -45,4 +45,4 @@ jobs:
 
       - name: "Build NixOS config ❄️"
         run: |
-          NIX_BUILD_CORES=2 nix build .\#nixosConfigurations."earth".config.system.build.toplevel
+          NIX_BUILD_CORES=1 NIX_BUILD_MAX_JOBS=1 nix build .\#nixosConfigurations."earth".config.system.build.toplevel
