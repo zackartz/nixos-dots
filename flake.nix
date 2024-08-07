@@ -18,6 +18,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
+
     resume.url = "git+https://git.zackster.zip/zack/resume";
     anyrun.url = "github:Kirottu/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
@@ -49,6 +51,7 @@
 
     hyprland = {
       url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     kb-gui = {
@@ -98,7 +101,7 @@
       inherit inputs;
       src = ./.;
 
-      overlays = [inputs.neovim-nightly-overlay.overlays.default];
+      overlays = [inputs.neovim-nightly-overlay.overlays.default inputs.nixpkgs-wayland.overlay];
 
       snowfall = {
         namespace = "custom";

@@ -15,6 +15,17 @@
     trusted-users = ["zoey"];
   };
 
+  nix.optimise = {
+    automatic = true;
+    dates = ["03:45"];
+  };
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 14d";
+  };
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

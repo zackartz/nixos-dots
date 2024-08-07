@@ -28,6 +28,16 @@ with pkgs; {
   ls = "${getExe eza} -h --git --icons --color=auto --group-directories-first -s extension";
   tree = "${getExe eza} --tree --icons --tree";
   kys = "shutdown now";
+  w = ''| nvim -c "setlocal buftype=nofile bufhidden=wipe" -c "nnoremap <buffer> q :q!<CR>" -'';
+  lv = "nvim -c \"normal '\''0\"";
+  pf = ''
+    fzf --bind ctrl-y:preview-up,ctrl-e:preview-down \
+    --bind ctrl-b:preview-page-up,ctrl-f:preview-page-down \
+    --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down \
+    --bind ctrl-k:up,ctrl-j:down \
+    --preview='bat --style=numbers --color=always --line-range :100 {}'
+  '';
+  ff = "for file in \`pf\`; do cmd=\"v \$file\" && print -rs -- \$cmd && eval \$cmd; done";
   gpl = "curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE";
   agpl = "curl https://www.gnu.org/licenses/agpl-3.0.txt -o LICENSE";
   tsm = "transmission-remote";

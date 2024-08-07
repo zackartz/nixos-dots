@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }:
 with lib;
@@ -22,7 +23,6 @@ in {
     wayland.windowManager.sway = {
       enable = true;
       xwayland = true;
-      package = pkgs.swayfx;
       extraOptions = ["--unsupported-gpu"];
 
       config = {

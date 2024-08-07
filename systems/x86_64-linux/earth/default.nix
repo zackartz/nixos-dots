@@ -12,6 +12,17 @@
     trusted-users = ["zoey"];
   };
 
+  nix.optimise = {
+    automatic = true;
+    dates = ["03:45"];
+  };
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 14d";
+  };
+
   hardware.audio.enable = true;
   hardware.nvidia.enable = true;
 

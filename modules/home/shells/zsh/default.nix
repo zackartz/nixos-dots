@@ -42,6 +42,7 @@ in {
           "${zsh-autocomplete}/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
           "${zsh-you-should-use}/share/zsh/plugins/you-should-use/you-should-use.plugin.zsh"
           "${zsh-navigation-tools}/share/zsh/site-functions/zsh-navigation-tools.plugin.zsh"
+          "${oh-my-zsh}/share/oh-my-zsh/plugins/colored-man-pages/colored-man-pages.plugin.zsh"
         ];
 
         source = map (source: "source ${source}") sources;

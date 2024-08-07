@@ -39,18 +39,13 @@ in {
       defaultEditor = true;
       extraPackages = with pkgs; [
         # Formatters
-        alejandra # Nix
         black # Python
         prettierd # Multi-language
         shfmt
         isort
-        stylua
         rustywind
 
         # LSP
-        lua-language-server
-        nixd
-        rust-analyzer
         vscode-langservers-extracted
         nodePackages.vscode-json-languageserver
         nodePackages.typescript-language-server

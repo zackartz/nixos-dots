@@ -23,6 +23,7 @@
     tools.gh.enable = true;
 
     term.kitty.enable = true;
+    term.foot.enable = true;
 
     music.spotify.enable = true;
 
@@ -101,6 +102,9 @@
     pkgs.zed-editor
     pkgs.openvpn
     pkgs.telegram-desktop
+    pkgs.linux-manual
+    pkgs.man-pages
+    pkgs.man-pages-posix
   ];
 
   programs.zoxide = {

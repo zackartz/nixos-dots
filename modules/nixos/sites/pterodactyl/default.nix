@@ -45,7 +45,7 @@ in {
 
     systemd.services."p_artisan-run" = {
       script = ''
-        ${pkgs.php}/bin/php /var/www/pterodactyl/artisan schedule:run >> /dev/null 2>&1
+        ${pkgs.php83}/bin/php /var/www/pterodactyl/artisan schedule:run >> /dev/null 2>&1
       '';
       serviceConfig = {
         Type = "oneshot";
@@ -79,7 +79,7 @@ in {
       after = ["redis.service"];
       wantedBy = ["multi-user.target"];
       script = ''
-        ${pkgs.php}/bin/php /var/www/pterodactyl/artisan queue:work --queue=high,standard,low --sleep=3 --tries=3
+        ${pkgs.php83}/bin/php /var/www/pterodactyl/artisan queue:work --queue=high,standard,low --sleep=3 --tries=3
       '';
       serviceConfig = {
         User = "nginx";
@@ -150,20 +150,20 @@ in {
 
     services.phpfpm = {
       phpOptions = ''
-        extension=${pkgs.php81Extensions.openssl}/lib/php/extensions/openssl.so
-        extension=${pkgs.php81Extensions.gd}/lib/php/extensions/gd.so
-        extension=${pkgs.php81Extensions.mysqlnd}/lib/php/extensions/mysqlnd.so
-        extension=${pkgs.php81Extensions.mbstring}/lib/php/extensions/mbstring.so
-        extension=${pkgs.php81Extensions.tokenizer}/lib/php/extensions/tokenizer.so
-        extension=${pkgs.php81Extensions.bcmath}/lib/php/extensions/bcmath.so
-        extension=${pkgs.php81Extensions.xml}/lib/php/extensions/xml.so
-        extension=${pkgs.php81Extensions.dom}/lib/php/extensions/dom.so
-        extension=${pkgs.php81Extensions.curl}/lib/php/extensions/curl.so
-        extension=${pkgs.php81Extensions.zip}/lib/php/extensions/zip.so
+        extension=${pkgs.php83Extensions.openssl}/lib/php/extensions/openssl.so
+        extension=${pkgs.php83Extensions.gd}/lib/php/extensions/gd.so
+        extension=${pkgs.php83Extensions.mysqlnd}/lib/php/extensions/mysqlnd.so
+        extension=${pkgs.php83Extensions.mbstring}/lib/php/extensions/mbstring.so
+        extension=${pkgs.php83Extensions.tokenizer}/lib/php/extensions/tokenizer.so
+        extension=${pkgs.php83Extensions.bcmath}/lib/php/extensions/bcmath.so
+        extension=${pkgs.php83Extensions.xml}/lib/php/extensions/xml.so
+        extension=${pkgs.php83Extensions.dom}/lib/php/extensions/dom.so
+        extension=${pkgs.php83Extensions.curl}/lib/php/extensions/curl.so
+        extension=${pkgs.php83Extensions.zip}/lib/php/extensions/zip.so
       '';
       pools.pterodactyl = {
         user = config.services.nginx.user;
-        phpPackage = pkgs.php81;
+        phpPackage = pkgs.php83;
         settings = {
           "pm" = "dynamic";
           "listen.owner" = config.services.nginx.user;
