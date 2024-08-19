@@ -46,7 +46,7 @@ in {
         rustywind
 
         # LSP
-        vscode-langservers-extracted
+        # vscode-langservers-extracted
         nodePackages.vscode-json-languageserver
         nodePackages.typescript-language-server
         tailwindcss-language-server
