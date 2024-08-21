@@ -15,6 +15,11 @@ in {
   config = mkIf cfg.enable {
     programs.foot = {
       enable = true;
+      settings = {
+        colors = {
+          alpha = "0.9";
+        };
+      };
     };
   };
 }

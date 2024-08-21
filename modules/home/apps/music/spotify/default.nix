@@ -20,19 +20,7 @@ in {
     programs.spicetify = {
       enable = true;
       theme = spicePkgs.themes.catppuccin;
-      spotifyPackage = pkgs.spotify.overrideAttrs {
-        fixupPhase = ''
-          runHook preFixup
-
-          wrapProgramShell $out/share/spotify/spotify \
-            ''${gappsWrapperArgs[@]} \
-            --prefix LD_LIBRARY_PATH : "$librarypath" \
-            --prefix PATH : "${pkgs.gnome.zenity}/bin" \
-            --add-flags "--disable-gpu"
-
-          runHook postFixup
-        '';
-      };
+      spotifyPackage = pkgs.spotify;
       colorScheme = "mocha";
 
       enabledExtensions = with spicePkgs.extensions; [

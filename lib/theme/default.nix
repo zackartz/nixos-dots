@@ -19,5 +19,14 @@
     "highlighthigh" = "524f67";
   };
 
+  fonts = {
+    mono = {
+      normal = "Iosevka Bold";
+      bold = "Iosevka ExtraBold";
+      italic = "Iosevka Bold Italic";
+      bold_italic = "Iosevka ExtraBold Italic";
+    };
+  };
+
   wallpaper = ./wallpaper.png;
 }

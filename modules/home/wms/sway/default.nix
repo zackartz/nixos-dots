@@ -31,6 +31,8 @@ in {
 
         menu = "killall anyrun || anyrun";
 
+        modifier = "Mod4";
+
         input = {
           "Logitech USB Receiver Keyboard" = {
             accel_profile = "flat";

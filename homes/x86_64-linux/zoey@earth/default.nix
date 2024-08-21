@@ -7,7 +7,6 @@
 }: {
   wms.hyprland.enable = true;
   apps = {
-    web.firefox.enable = true;
     web.librewolf.enable = true;
     web.librewolf.setDefault = true;
 
@@ -24,6 +23,7 @@
 
     term.kitty.enable = true;
     term.foot.enable = true;
+    term.rio.enable = true;
 
     music.spotify.enable = true;
 
