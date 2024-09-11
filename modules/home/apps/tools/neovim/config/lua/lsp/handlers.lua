@@ -16,6 +16,8 @@ end
 -- make_config(server_name, {})()
 -- end
 
+M.bashls = make_config("bashls", {})
+
 M.lua_ls = make_config("lua_ls", {
 	settings = {
 		Lua = {
@@ -125,6 +127,6 @@ M.clangd = make_config("clangd", {
 	},
 })
 
-M.tsserver = make_config("tsserver", {})
+M.ts_ls = make_config("ts_ls", {})
 
 return M

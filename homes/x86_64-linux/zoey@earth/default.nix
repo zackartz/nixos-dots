@@ -98,7 +98,6 @@
 
     pkgs.parsec-bin
     pkgs.filezilla
-    pkgs.ghidra
     pkgs.zed-editor
     pkgs.openvpn
     pkgs.telegram-desktop

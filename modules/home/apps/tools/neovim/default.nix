@@ -42,6 +42,7 @@ in {
         black # Python
         prettierd # Multi-language
         shfmt
+        shellcheck
         isort
         rustywind
 
@@ -51,6 +52,7 @@ in {
         nodePackages.typescript-language-server
         tailwindcss-language-server
         clang
+        bash-language-server
 
         # Tools
         git

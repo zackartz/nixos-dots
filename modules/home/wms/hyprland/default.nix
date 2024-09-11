@@ -112,9 +112,6 @@ in {
         # border thiccness
         border_size = 2;
 
-        # whether to apply the sensitivity to raw input (e.g. used by games where you aim using your mouse)
-        apply_sens_to_raw = 0;
-
         # active border color
         "col.active_border" = "rgb(${rose})";
         "col.inactive_border" = "rgb(${muted})";
@@ -124,7 +121,7 @@ in {
         kb_layout = "us";
         sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
         accel_profile = "flat";
-        force_no_accel = true;
+        force_no_accel = false;
       };
 
       dwindle = {
