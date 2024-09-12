@@ -21,7 +21,6 @@ in {
         work = {
           config = ''config /home/zoey/Downloads/zachary_myers.ovpn'';
           updateResolvConf = true;
-          extraArgs = [''''];
         };
       };
     };

@@ -35,7 +35,6 @@ in {
         noto-fonts-emoji
         jetbrains-mono
         (nerdfonts.override {fonts = ["Iosevka" "JetBrainsMono"];})
-        custom.zed-fonts
       ];
 
       enableDefaultPackages = false;
@@ -48,7 +47,7 @@ in {
             "Iosevka"
             "Noto Color Emoji"
           ];
-          sansSerif = ["Zed Sans" "Noto Color Emoji"];
+          sansSerif = ["Iosevka" "Noto Color Emoji"];
           serif = ["Noto Serif" "Noto Color Emoji"];
           emoji = ["Noto Color Emoji"];
         };
