@@ -27,12 +27,12 @@ in {
 
       theme = {
         name = "Tokyonight-Dark";
-        package = pkgs.tokyonight-gtk-theme;
+        package = pkgs-unstable.tokyonight-gtk-theme;
       };
 
       iconTheme = {
         name = "Papirus-Dark";
-        package = pkgs.catppuccin-papirus-folders.override {
+        package = pkgs-unstable.catppuccin-papirus-folders.override {
           accent = ctp.accent;
           flavor = ctp.flavor;
         };

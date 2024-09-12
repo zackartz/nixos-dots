@@ -98,7 +98,7 @@
 
     pkgs.parsec-bin
     pkgs.filezilla
-    pkgs.zed-editor
+    lib.custom.pkgs-unstable.zed-editor
     pkgs.openvpn
     pkgs.telegram-desktop
     pkgs.linux-manual

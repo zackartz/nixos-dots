@@ -73,7 +73,7 @@
   };
   # networking.firewall.enable = false;
 
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = lib.custom.pkgs-unstable.linuxPackages_zen;
   boot.supportedFilesystems = ["ntfs"];
 
   services.dlna.enable = true;
@@ -118,4 +118,6 @@
 
   virtualisation.docker.enable = true;
   virtualisation.libvirtd.enable = true;
+
+  system.stateVersion = "24.05";
 }

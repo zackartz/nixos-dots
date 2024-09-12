@@ -11,10 +11,11 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -71,7 +72,7 @@
 
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      #      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     rio-term = {
@@ -96,12 +97,16 @@
     };
   };
 
-  outputs = inputs:
+  outputs = inputs @ {
+    self,
+    nixpkgs-unstable,
+    ...
+  }:
     inputs.snowfall-lib.mkFlake {
       inherit inputs;
       src = ./.;
 
-      overlays = [inputs.neovim-nightly-overlay.overlays.default inputs.nixpkgs-wayland.overlay];
+      overlays = [inputs.nixpkgs-wayland.overlay];
 
       snowfall = {
         namespace = "custom";

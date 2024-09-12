@@ -1,4 +1,5 @@
 {
+  inputs,
   options,
   config,
   lib,
@@ -37,6 +38,7 @@ in {
       catppuccin.enable = false;
       enable = true;
       defaultEditor = true;
+      package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
       extraPackages = with pkgs; [
         # Formatters
         black # Python
@@ -52,7 +54,7 @@ in {
         nodePackages.typescript-language-server
         tailwindcss-language-server
         clang
-        bash-language-server
+        pkgs-unstable.bash-language-server
 
         # Tools
         git

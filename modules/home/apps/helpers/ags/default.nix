@@ -27,8 +27,8 @@ with lib.custom; let
     accountsservice
     swww
     gnome.gnome-control-center
-    nautilus
-    totem
+    gnome.nautilus
+    gnome.totem
     loupe
   ];
 
