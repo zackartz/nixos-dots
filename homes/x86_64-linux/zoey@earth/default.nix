@@ -101,6 +101,11 @@
     pkgs.filezilla
     lib.custom.pkgs-unstable.zed-editor
     lib.custom.pkgs-unstable.rmpc
+
+    inputs.zen-browser.packages.${pkgs.system}.default
+
+    pkgs.mpc-cli
+
     pkgs.openvpn
     pkgs.telegram-desktop
     pkgs.linux-manual
