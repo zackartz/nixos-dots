@@ -38,6 +38,7 @@
   rice.gtk.enable = true;
 
   services.lock.enable = true;
+  services.music.enable = true;
 
   xdg.enable = true;
 
@@ -99,6 +100,7 @@
     pkgs.parsec-bin
     pkgs.filezilla
     lib.custom.pkgs-unstable.zed-editor
+    lib.custom.pkgs-unstable.rmpc
     pkgs.openvpn
     pkgs.telegram-desktop
     pkgs.linux-manual

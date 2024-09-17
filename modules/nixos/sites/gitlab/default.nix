@@ -15,7 +15,7 @@ in {
   options.sites.gitlab = with types; {
     enable = mkBoolOpt false "Enable GitLab";
 
-    domain = mkStringOpt "git.zackster.zip" "Domain for GitLab";
+    domain = mkStringOpt "git.zoeys.computer" "Domain for GitLab";
   };
 
   config = mkIf cfg.enable {
