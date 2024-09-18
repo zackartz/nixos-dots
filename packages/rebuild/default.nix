@@ -1,11 +1,15 @@
-{writeShellScriptBin, ...}:
+{
+  writeShellScriptBin,
+  pkgs,
+  ...
+}:
 writeShellScriptBin "rebuild" ''
   set -e
   pushd ~/nixos/
-  alejandra . &>/dev/null
+  ${pkgs.alejandra}/bin/alejandra . &>/dev/null
   git add .
   git pull origin main
   echo "[REBUILD]: rebuilding nixos"
-  nh os switch
+  ${pkgs.nh}/bin/nh os switch
   popd
 ''

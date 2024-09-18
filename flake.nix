@@ -50,10 +50,10 @@
 
     catppuccin.url = "github:catppuccin/nix";
 
-    # hyprland = {
-    #   url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    hyprland = {
+      url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     kb-gui = {
       url = "github:zackartz/kb-gui";

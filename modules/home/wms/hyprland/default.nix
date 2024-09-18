@@ -42,7 +42,7 @@ in {
     wayland.windowManager.hyprland = {
       enable = true;
       xwayland.enable = true;
-      package = pkgs-unstable.hyprland;
+      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
 
       systemd = {
         enable = true;
@@ -58,7 +58,7 @@ in {
       exec-once = [
         "pw-loopback -C \"alsa_input.pci-0000_0d_00.4.analog-stereo\" -P \"Scarlett Solo (3rd Gen.) Headphones / Line 1-2\""
         "sway-audio-idle-inhibit"
-        "${pkgs.librewolf}/bin/librewolf"
+        "zen"
         "telegram"
         "thunderbird"
         "vesktop"

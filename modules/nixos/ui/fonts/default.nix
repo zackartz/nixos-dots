@@ -29,7 +29,20 @@ in {
         lexend
         jost
         dejavu_fonts
-        iosevka-bin
+        (pkgs-unstable.iosevka.override {
+          set = "Custom";
+          privateBuildPlan = ''
+            [buildPlans.IosevkaCustom]
+            family = "Iosevka"
+            spacing = "normal"
+            serifs = "sans"
+            noCvSs = true
+            exportGlyphNames = false
+
+              [buildPlans.IosevkaCustom.variants]
+              inherits = "ss10"
+          '';
+        })
         noto-fonts
         noto-fonts-cjk
         noto-fonts-emoji
