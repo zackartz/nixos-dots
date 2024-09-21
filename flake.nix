@@ -21,7 +21,7 @@
 
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
 
-    resume.url = "git+https://git.zackster.zip/zack/resume";
+    resume.url = "git+https://git.zoeys.computer/zoey/resume";
     anyrun.url = "github:Kirottu/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
     ags.url = "github:Aylur/ags";
