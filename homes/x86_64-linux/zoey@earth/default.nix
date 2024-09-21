@@ -8,7 +8,6 @@
   wms.hyprland.enable = true;
   apps = {
     web.librewolf.enable = true;
-    web.librewolf.setDefault = true;
 
     tools.git.enable = true;
     tools.tmux.enable = true;
@@ -39,6 +38,7 @@
 
   services.lock.enable = true;
   services.music.enable = true;
+  services.pm-bridge.enable = true;
 
   xdg.enable = true;
 
@@ -49,6 +49,18 @@
     dircolors = {
       enable = true;
       enableZshIntegration = true;
+    };
+  };
+
+  xdg.mimeApps = {
+    enable = true;
+
+    defaultApplications = {
+      "text/html" = "zen.desktop";
+      "x-scheme-handler/http" = "zen.desktop";
+      "x-scheme-handler/https" = "zen.desktop";
+      "x-scheme-handler/about" = "zen.desktop";
+      "x-scheme-handler/unknown" = "zen.desktop";
     };
   };
 
@@ -102,7 +114,7 @@
     lib.custom.pkgs-unstable.zed-editor
     lib.custom.pkgs-unstable.rmpc
 
-    inputs.zen-browser.packages.${pkgs.system}.default
+    pkgs.custom.zen-browser
 
     pkgs.mpc-cli
 

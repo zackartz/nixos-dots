@@ -1,10 +1,13 @@
-{pkgs ? import <nixpkgs> {}}: let
+{
+  pkgs ? import <nixpkgs> {},
+  lib,
+}: let
   pname = "zen-browser";
-  version = "1.0.0-a.29";
+  version = "1.0.1-a.2";
 
   src = pkgs.fetchurl {
     url = "https://github.com/zen-browser/desktop/releases/download/${version}/zen-specific.AppImage";
-    sha256 = "sha256-cB2aJ9awl+gTyBOe0T7wMiZWw7RcwohOuCCdWBJXXwo=";
+    sha256 = "sha256-Pc65S2WjI/CdKIunmMTKYzqGFfm3D9PHsiOEqfQ7r8A=";
   };
 
   appimageContents = pkgs.appimageTools.extractType2 {

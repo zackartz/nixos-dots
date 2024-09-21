@@ -37,7 +37,7 @@ in {
             spacing = "normal"
             serifs = "sans"
             noCvSs = true
-            exportGlyphNames = false
+            exportGlyphNames = true
 
               [buildPlans.IosevkaCustom.variants]
               inherits = "ss10"

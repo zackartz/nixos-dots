@@ -39,6 +39,10 @@ in {
   };
 
   config = mkIf cfg.enable {
+    home.packages = [
+      pkgs-unstable.xwayland
+    ];
+
     wayland.windowManager.hyprland = {
       enable = true;
       xwayland.enable = true;
@@ -216,14 +220,14 @@ in {
       ];
     };
 
-    # fake a tray to let apps start
-    # https://github.com/nix-community/home-manager/issues/2064
-    systemd.user.targets.tray = {
-      Unit = {
-        Description = "Home Manager System Tray";
-        Requires = ["graphical-session-pre.target"];
-      };
-    };
+    # # fake a tray to let apps start
+    # # https://github.com/nix-community/home-manager/issues/2064
+    # systemd.user.targets.tray = {
+    #   Unit = {
+    #     Description = "Home Manager System Tray";
+    #     Requires = ["graphical-session-pre.target"];
+    #   };
+    # };
 
     systemd.user.services = {
       swaybg = mkService {

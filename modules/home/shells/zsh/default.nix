@@ -69,6 +69,16 @@ in {
             sha256 = "sha256-BB9L84HjUnV1OUIp2U2lHYHEg5q4p/TgqLcsCvInkC8=";
           };
         }
+        {
+          name = "zsh-autocomplete";
+          file = "zsh-autocomplete.plugin.zsh";
+          src = pkgs.fetchFromGitHub {
+            owner = "marlonrichert";
+            repo = "zsh-autocomplete";
+            rev = "008caaea55780dd2b55f119d6880c5b89e5e4bb2";
+            sha256 = "sha256-jibIHwT/oVQUSxVrT0SGFSMu1N05szPyHZ4Qc7v6Ntc=";
+          };
+        }
       ];
 
       dirHashes = {

@@ -71,7 +71,6 @@
     unmanaged = ["enp6s0"];
     # insertNameservers = ["1.1.1.1" "1.0.0.1"];
   };
-  # networking.firewall.enable = false;
 
   boot.kernelPackages = lib.custom.pkgs-unstable.linuxPackages_zen;
   boot.supportedFilesystems = ["ntfs"];
@@ -115,6 +114,8 @@
 
   catppuccin.enable = true;
   programs.virt-manager.enable = true;
+
+  sites.jellyfin.enable = true;
 
   virtualisation.docker.enable = true;
   virtualisation.libvirtd.enable = true;
