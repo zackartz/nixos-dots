@@ -23,11 +23,12 @@ in {
     wayland.windowManager.sway = {
       enable = true;
       xwayland = true;
+      package = inputs.nixpkgs-wayland.packages.${pkgs.system}.sway-unwrapped;
       extraOptions = ["--unsupported-gpu"];
 
       config = {
-        terminal = "kitty";
-        startup = [{command = "firefox";}];
+        terminal = "foot";
+        startup = [{command = "zen";} {command = "vesktop";} {command = "slack";} {command = "telegram-desktop";} {command = "thunderbird";}];
 
         menu = "killall anyrun || anyrun";
 

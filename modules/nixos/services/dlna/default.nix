@@ -18,8 +18,8 @@ in {
       openFirewall = true;
       settings = {
         notify_interval = 60;
-        friendly_name = "ZACKPC";
-        media_dir = ["A,/home/zack/Music"];
+        friendly_name = "workstation";
+        media_dir = ["A,/home/zoey/Music"];
         inotify = "yes";
       };
     };

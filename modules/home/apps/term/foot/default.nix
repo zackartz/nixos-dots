@@ -16,6 +16,9 @@ in {
     programs.foot = {
       enable = true;
       settings = {
+        main = {
+          font = "Iosevka:weight=bold:size=20";
+        };
         colors = {
           alpha = "0.9";
         };

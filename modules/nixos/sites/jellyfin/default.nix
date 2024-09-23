@@ -15,7 +15,6 @@ in {
   config = mkIf cfg.enable {
     services.jellyfin = {
       enable = true;
-      dataDir = "/mnt/lul";
       openFirewall = true;
     };
   };

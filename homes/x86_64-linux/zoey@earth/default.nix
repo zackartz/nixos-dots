@@ -5,7 +5,7 @@
   lib,
   ...
 }: {
-  wms.hyprland.enable = true;
+  wms.sway.enable = true;
   apps = {
     web.librewolf.enable = true;
 
@@ -39,6 +39,7 @@
   services.lock.enable = true;
   services.music.enable = true;
   services.pm-bridge.enable = true;
+  services.udiskie.enable = true;
 
   xdg.enable = true;
 

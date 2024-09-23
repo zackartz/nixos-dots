@@ -3,41 +3,93 @@
   lib,
 }: let
   pname = "zen-browser";
-  version = "1.0.1-a.2";
+  version = "1.0.1-a.4";
 
-  src = pkgs.fetchurl {
-    url = "https://github.com/zen-browser/desktop/releases/download/${version}/zen-specific.AppImage";
-    sha256 = "sha256-Pc65S2WjI/CdKIunmMTKYzqGFfm3D9PHsiOEqfQ7r8A=";
-  };
-
-  appimageContents = pkgs.appimageTools.extractType2 {
-    inherit pname version src;
-  };
+  runtimeLibs = with pkgs;
+    [
+      libGL
+      libGLU
+      libevent
+      libffi
+      libjpeg
+      libpng
+      libstartup_notification
+      libvpx
+      libwebp
+      stdenv.cc.cc
+      fontconfig
+      libxkbcommon
+      zlib
+      freetype
+      gtk3
+      libxml2
+      dbus
+      xcb-util-cursor
+      alsa-lib
+      libpulseaudio
+      pango
+      atk
+      cairo
+      gdk-pixbuf
+      glib
+      udev
+      libva
+      mesa
+      libnotify
+      cups
+      pciutils
+      ffmpeg
+      libglvnd
+      pipewire
+    ]
+    ++ (with pkgs.xorg; [
+      libxcb
+      libX11
+      libXcursor
+      libXrandr
+      libXi
+      libXext
+      libXcomposite
+      libXdamage
+      libXfixes
+      libXScrnSaver
+    ]);
 in
-  pkgs.appimageTools.wrapType2 rec {
-    inherit pname version src;
+  pkgs.stdenv.mkDerivation {
+    inherit version pname;
 
-    extraInstallCommands = ''
-      mkdir -p $out/share/applications $out/share/pixmaps
-      cp ${appimageContents}/zen.desktop $out/share/applications/
-      cp ${appimageContents}/zen.png $out/share/pixmaps/
+    src = builtins.fetchTarball {
+      url = "https://github.com/zen-browser/desktop/releases/download/${version}/zen.linux-specific.tar.bz2";
+      sha256 = "sha256:0jjfr1201gfw0cy8q1jbr504994z33sbw8ip86c6xbww8qm60bqh";
+    };
 
-      for n in {16,32,48,64,128}; do
-        size=$n"x"$n
-        mkdir -p $out/share/icons/hicolor/$size/apps
-        file="default"$n".png"
-        cp ${appimageContents}/browser/chrome/icons/default/$file $out/share/icons/hicolor/$size/apps/zen.png
-      done
+    desktopSrc = ./.;
 
-      substituteInPlace $out/share/applications/zen.desktop \
-        --replace-fail "Exec=zen %u" "Exec=$out/bin/${pname} %u"
+    phases = ["installPhase" "fixupPhase"];
+
+    nativeBuildInputs = [pkgs.makeWrapper pkgs.copyDesktopItems pkgs.wrapGAppsHook];
+
+    installPhase = ''
+      mkdir -p $out/bin && cp -r $src/* $out/bin
+      install -D $desktopSrc/zen.desktop $out/share/applications/zen.desktop
+      install -D $src/browser/chrome/icons/default/default128.png $out/share/icons/hicolor/128x128/apps/zen.png
     '';
 
-    meta = with pkgs.lib; {
-      description = "Zen Browser - Experience tranquillity while browsing the web without people tracking you.";
-      homepage = "https://github.com/zen-browser/desktop";
-      license = licenses.mpl20;
-      maintainers = with maintainers; [zvictor];
-      platforms = platforms.linux;
-    };
+    fixupPhase = ''
+      chmod 755 $out/bin/*
+      patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" $out/bin/zen
+      wrapProgram $out/bin/zen --set LD_LIBRARY_PATH "${pkgs.lib.makeLibraryPath runtimeLibs}" \
+                      --set MOZ_LEGACY_PROFILES 1 --set MOZ_ALLOW_DOWNGRADE 1 --prefix XDG_DATA_DIRS : "$GSETTINGS_SCHEMAS_PATH"
+      patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" $out/bin/zen-bin
+      wrapProgram $out/bin/zen-bin --set LD_LIBRARY_PATH "${pkgs.lib.makeLibraryPath runtimeLibs}" \
+                      --set MOZ_LEGACY_PROFILES 1 --set MOZ_ALLOW_DOWNGRADE 1 --prefix XDG_DATA_DIRS : "$GSETTINGS_SCHEMAS_PATH"
+      patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" $out/bin/glxtest
+      wrapProgram $out/bin/glxtest --set LD_LIBRARY_PATH "${pkgs.lib.makeLibraryPath runtimeLibs}"
+      patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" $out/bin/updater
+      wrapProgram $out/bin/updater --set LD_LIBRARY_PATH "${pkgs.lib.makeLibraryPath runtimeLibs}"
+      patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" $out/bin/vaapitest
+      wrapProgram $out/bin/vaapitest --set LD_LIBRARY_PATH "${pkgs.lib.makeLibraryPath runtimeLibs}"
+    '';
+
+    meta.mainProgram = "zen";
   }

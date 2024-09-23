@@ -41,6 +41,7 @@
   services.vpn.enable = true;
   services.xserver.enable = true;
   services.vpn.mullvad = true;
+  services.udisks2.enable = true;
   services.transmission = {
     enable = true;
     package = pkgs.transmission_4;
