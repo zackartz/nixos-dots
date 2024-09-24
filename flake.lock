@@ -708,10 +708,10 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1727116306,
-        "narHash": "sha256-qzGnf7RGKXFU/n+onZx3iE6h2l6w5pRAnqPR+2nW/yk=",
+        "lastModified": 1727137145,
+        "narHash": "sha256-3HB4Y7YBWItpKBWyzQHXzNH9JXAoYqkNIYpeV4dB7kI=",
         "ref": "refs/heads/main",
-        "rev": "2121ff7746cd2e44d1e1edd57f6681998ca8f8e3",
+        "rev": "0a211f29f5952322925b9f982cbf9b0326d45f0f",
         "revCount": 5252,
         "submodules": true,
         "type": "git",
