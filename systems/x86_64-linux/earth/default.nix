@@ -87,7 +87,7 @@
   environment.systemPackages = [
     pkgs.BeatSaberModManager
     pkgs.sbctl
-    pkgs.vesktop
+    pkgs.custom.vesktop
     pkgs.mangohud
     pkgs.transmission_4
     inputs.agenix.packages.${system}.agenix

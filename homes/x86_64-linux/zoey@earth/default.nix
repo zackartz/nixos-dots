@@ -5,7 +5,7 @@
   lib,
   ...
 }: {
-  wms.sway.enable = true;
+  wms.hyprland.enable = true;
   apps = {
     web.librewolf.enable = true;
 

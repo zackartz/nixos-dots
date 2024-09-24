@@ -24,7 +24,8 @@ in {
         enable = true;
         settings = rec {
           initial_session = {
-            command = "sway --unsupported-gpu";
+            # command = "sway --unsupported-gpu";
+            command = "Hyprland";
             user = "zoey";
           };
           default_session = initial_session;

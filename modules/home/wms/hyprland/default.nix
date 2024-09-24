@@ -171,7 +171,7 @@ in {
         force_zero_scaling = true;
       };
 
-      monitor = ["DP-1,2560x1440@240,0x0,1,bitdepth,10" "HDMI-A-1,disable"];
+      monitor = ["DP-1,2560x1440@240,0x0,1,bitdepth,10" "HDMI-A-1,disable" "DP-2,disable"];
 
       layerrule = [
         "blur, ^(gtk-layer-shell)$"
@@ -211,7 +211,7 @@ in {
         "workspace 4, title:^(.*(Disc|WebC)ord.*)$"
         "workspace 4, class:^(.*Slack.*)$"
         "workspace 3, title:^(Spotify Premium)$"
-        "workspace 2, class:^(firefox)$"
+        "workspace 2, class:^(zen)$"
         "opacity 0.0 override,class:^(xwaylandvideobridge)$"
         "noanim,class:^(xwaylandvideobridge)$"
         "noinitialfocus,class:^(xwaylandvideobridge)$"
