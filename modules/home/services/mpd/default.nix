@@ -16,6 +16,12 @@ in {
     services.mpd = {
       enable = true;
       musicDirectory = "/home/zoey/Music";
+      extraConfig = ''
+        audio_output {
+          type "pipewire"
+          name "PipeWire Sound Server"
+        }
+      '';
     };
   };
 }

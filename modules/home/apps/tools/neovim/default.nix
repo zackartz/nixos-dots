@@ -56,6 +56,9 @@ in {
         clang
         pkgs-unstable.bash-language-server
 
+        curl
+        jq
+
         # Tools
         git
         html-tidy

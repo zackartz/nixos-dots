@@ -40,7 +40,10 @@ in {
             exportGlyphNames = true
 
               [buildPlans.IosevkaCustom.variants]
-              inherits = "ss10"
+              inherits = "ss20"
+
+                [buildPlans.IosevkaCustom.variants.design]
+                one = "base-flat-top-serif"
           '';
         })
         noto-fonts
