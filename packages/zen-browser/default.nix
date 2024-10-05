@@ -3,7 +3,7 @@
   lib,
 }: let
   pname = "zen-browser";
-  version = "1.0.1-a.5";
+  version = "1.0.1-a.7";
 
   runtimeLibs = with pkgs;
     [
@@ -60,7 +60,7 @@ in
 
     src = builtins.fetchTarball {
       url = "https://github.com/zen-browser/desktop/releases/download/${version}/zen.linux-specific.tar.bz2";
-      sha256 = "sha256:0rj8x0b7vnl6zj8mky9qip54l1cp8rpy0465gr28zsjnjhp7qyak";
+      sha256 = "sha256:1dlb2cl86ndsl6b6jv7qr7rdg2rzqjgn3y8rlw6d8jj5r0giyinh";
     };
 
     desktopSrc = ./.;

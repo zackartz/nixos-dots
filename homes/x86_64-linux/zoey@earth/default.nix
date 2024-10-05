@@ -115,6 +115,8 @@
     lib.custom.pkgs-unstable.zed-editor
     lib.custom.pkgs-unstable.rmpc
 
+    pkgs.signal-desktop
+
     pkgs.custom.zen-browser
 
     pkgs.mpc-cli
