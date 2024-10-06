@@ -1,26 +1,9 @@
-# nvimrc
+**This repo is supposed to used as config by NvChad users!**
 
-**NOTE:** Neovim [nightly](https://github.com/neovim/neovim/releases/nightly) is required for inlay hint.
+- The main nvchad repo (NvChad/NvChad) is used as a plugin by this repo.
+- So you just import its modules , like `require "nvchad.options" , require "nvchad.mappings"`
+- So you can delete the .git from this repo ( when you clone it locally ) or fork it :)
 
-This repository contains my personal Neovim configuration, designed to be comprehensive and to provide a feature-rich IDE experience with a polished UI.
+# Credits
 
-It's my daily driver for Rust, Lua and Web stuff. I also have a backup configuration for Vscode Neovim just in case I'll be forced to use Vscode.
-
-![preview](https://github.com/luckasRanarison/nvimrc/assets/101930730/27e5b421-7869-4a77-b4d3-cf236b78d8b3)
-
-## Structure
-
-```shell
-.
-├── after
-├── core
-├── lsp
-├── plugins
-│   ├── editor
-│   ├── lsp
-│   ├── tools
-│   ├── ui
-│   └── utils
-├── utils
-└── vscode
-```
+1) Lazyvim starter https://github.com/LazyVim/starter as nvchad's starter was inspired by Lazyvim's . It made a lot of things easier!
