@@ -41,23 +41,36 @@ in {
       package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
       extraPackages = with pkgs; [
         # Formatters
+        alejandra # Nix
         black # Python
         prettierd # Multi-language
         shfmt
-        shellcheck
         isort
+        stylua
         rustywind
 
         # LSP
-        # vscode-langservers-extracted
+        lua-language-server
+        nixd
+        rust-analyzer
+        vscode-langservers-extracted
         nodePackages.vscode-json-languageserver
         nodePackages.typescript-language-server
+        #nodePackages.astro-language-server
+        nodePackages.bash-language-server
+        nodePackages.svelte-language-server
+        tailwindcss-language-server
+        taplo
+        docker-compose-language-service
+        dockerfile-language-server-nodejs
+        haskellPackages.hadolint
+        shellcheck
+        markdownlint-cli2
+        shfmt
+        sqlfluff
+
         tailwindcss-language-server
         clang
-        pkgs-unstable.bash-language-server
-
-        curl
-        jq
 
         # Tools
         git
@@ -119,54 +132,7 @@ in {
         end
         vim.opt.rtp:prepend(lazypath)
 
-        local filetypes = require("core.filetypes")
-        local configurer = require("utils.configurer")
-        local opts = {}
-
-        if vim.g.vscode then
-        	-- VSCode Neovim
-        	opts.spec = "vscode.plugins"
-        	opts.options = require("vscode.options")
-        	opts.keymaps = require("vscode.keymaps")
-        else
-        	-- Normal Neovim
-        	opts.spec = "plugins"
-        	opts.options = require("core.options")
-        	opts.keymaps = require("core.keymaps")
-        	opts.autocmd = require("core.autocmd")
-        	opts.signs = require("core.signs")
-        end
-
-        configurer.setup(opts)
-
-        local handlers = require("lsp.handlers") -- Adjust the path as necessary
-
-        local function setup_all_servers()
-        	for server, setup_fn in pairs(handlers) do
-        		if type(setup_fn) == "function" then
-        			-- Call the setup function for each server
-        			setup_fn()
-        		end
-        	end
-        end
-
-        setup_all_servers()
-
-        vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
-        vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
-        vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
-        vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
-
-        vim.keymap.set("i", "<left>", '<cmd>echo "Use h to move!!"<CR>')
-        vim.keymap.set("i", "<right>", '<cmd>echo "Use l to move!!"<CR>')
-        vim.keymap.set("i", "<up>", '<cmd>echo "Use k to move!!"<CR>')
-        vim.keymap.set("i", "<down>", '<cmd>echo "Use j to move!!"<CR>')
-        -- Neovide config
-        vim.o.guifont = "Iosevka Nerd Font Mono:h14"
-        vim.g.neovide_transparency = 0.75
-
-        -- vim.lsp.log.set_level(vim.lsp.log_levels.INFO)
-        vim.filetype.add(filetypes)
+        require('config.lazy')
       '';
     };
 

@@ -5,7 +5,7 @@
 }:
 mkShell {
   packages = with pkgs; [
-    nixd
+    nil
     alejandra
     stylua
     lua-language-server
