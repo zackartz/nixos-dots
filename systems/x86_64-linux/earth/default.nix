@@ -26,7 +26,7 @@
   hardware.audio.enable = true;
   hardware.nvidia.enable = true;
 
-  nprograms.nix-ld.enable = true;
+  programs.nix-ld.enable = true;
 
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
