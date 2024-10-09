@@ -34,7 +34,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    blog.url = "github:zackartz/zmio";
+    blog.url = "git+https://git.zoeys.computer/zoey/web";
 
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.3.0";

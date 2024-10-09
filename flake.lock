@@ -104,17 +104,17 @@
         "systems": "systems_5"
       },
       "locked": {
-        "lastModified": 1716933162,
-        "narHash": "sha256-r2f8PSutFSGZ41ktTnW89s6BhuDfXmi18bHFq1u9Vog=",
-        "owner": "zackartz",
-        "repo": "zmio",
-        "rev": "6af9d01d6905b67572caa0fe803e31c10fd995dc",
-        "type": "github"
+        "lastModified": 1726333295,
+        "narHash": "sha256-oKYJ0AjaaMnlX0wayT1TKPqHDeLI0hph4pfPLsrognY=",
+        "ref": "refs/heads/main",
+        "rev": "04422a6a54de7aa4172e428d363c5f6068c486ef",
+        "revCount": 24,
+        "type": "git",
+        "url": "https://git.zoeys.computer/zoey/web"
       },
       "original": {
-        "owner": "zackartz",
-        "repo": "zmio",
-        "type": "github"
+        "type": "git",
+        "url": "https://git.zoeys.computer/zoey/web"
       }
     },
     "catppuccin": {
