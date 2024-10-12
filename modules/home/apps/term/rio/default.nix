@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }:
 with lib;
@@ -15,6 +16,7 @@ in {
   config = mkIf cfg.enable {
     programs.rio = {
       enable = true;
+      package = inputs.rio-term.packages.${pkgs.system}.default;
       settings = {
         window = {
           opacity = 0.9;
@@ -31,25 +33,25 @@ in {
         fonts = {
           regular = {
             family = "Iosevka";
-            style = "normal";
+            style = "Normal";
             weight = 700;
           };
 
           bold = {
             family = "Iosevka";
-            style = "normal";
+            style = "Normal";
             weight = 800;
           };
 
           italic = {
             family = "Iosevka";
-            style = "italic";
+            style = "Italic";
             weight = 700;
           };
 
           bold-italic = {
             family = "Iosevka";
-            style = "italic";
+            style = "Italic";
             weight = 800;
           };
         };

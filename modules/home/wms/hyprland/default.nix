@@ -60,11 +60,11 @@ in {
 
     wayland.windowManager.hyprland.settings = with colors; {
       exec-once = [
-        "pw-loopback -C \"alsa_input.pci-0000_0d_00.4.analog-stereo\" -P \"Scarlett Solo (3rd Gen.) Headphones / Line 1-2\""
+        # "pw-loopback -C \"alsa_input.pci-0000_0d_00.4.analog-stereo\" -P \"Scarlett Solo (3rd Gen.) Headphones / Line 1-2\""
         "sway-audio-idle-inhibit"
         "zen-browser"
         "sleep 6;telegram-desktop"
-        "sleep 6;thunderbird"
+        "sleep 10;thunderbird"
         "vesktop"
         "spotify"
         "slack"
@@ -72,7 +72,7 @@ in {
 
       bind =
         [
-          ''${mod},RETURN,exec,kitty''
+          ''${mod},RETURN,exec,${pkgs.kitty}/bin/kitty''
 
           "${mod},D,exec,killall anyrun || anyrun"
           "${mod},Q,killactive"

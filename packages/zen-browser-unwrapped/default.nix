@@ -151,21 +151,21 @@
 in
   buildStdenv.mkDerivation rec {
     pname = "zen-browser-unwrapped";
-    version = "1.0.1-a.7";
+    version = "1.0.1-a.8";
 
     src = fetchFromGitHub {
       owner = "zen-browser";
       repo = "desktop";
-      rev = "2345563879de10bec3f94ad60408f63e7d2e5780";
+      rev = "${version}";
       leaveDotGit = true;
       fetchSubmodules = true;
-      hash = lib.fakeHash;
+      hash = "sha256-88/9IX3YCrbVdcp9uiz713T5b4WigJf1NkZeINWGkzM=";
     };
 
     firefoxVersion = (lib.importJSON "${src}/surfer.json").version.version;
     firefoxSrc = fetchurl {
       url = "mirror://mozilla/firefox/releases/${firefoxVersion}/source/firefox-${firefoxVersion}.source.tar.xz";
-      hash = "sha256-AnIloemwdPAHLiLHJkzyew0jZMZ1w8qBGqbCX7Abn3A=";
+      hash = "sha256-BA6DSslN1SRvnXemb3tDxDxi9TjQC1+UWXU03B23dhY=";
     };
 
     SURFER_COMPAT = generic;

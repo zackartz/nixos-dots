@@ -23,6 +23,7 @@
     term.kitty.enable = true;
     term.foot.enable = true;
     term.rio.enable = true;
+    term.alacritty.enable = true;
 
     music.spotify.enable = true;
 

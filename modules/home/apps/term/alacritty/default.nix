@@ -13,20 +13,20 @@ in {
 
     fonts = {
       normal = {
-        family = mkStringOpt "ZedMono NFM" "The Family of the font";
-        style = mkStringOpt "Bold" "The Style of the font";
-      };
-      bold = {
-        family = mkStringOpt "ZedMono NFM" "The Family of the font";
+        family = mkStringOpt "Iosevka" "The Family of the font";
         style = mkStringOpt "ExtraBold" "The Style of the font";
       };
+      bold = {
+        family = mkStringOpt "Iosevka" "The Family of the font";
+        style = mkStringOpt "Heavy" "The Style of the font";
+      };
       italic = {
-        family = mkStringOpt "ZedMono NFM" "The Family of the font";
-        style = mkStringOpt "Bold Italic" "The Style of the font";
+        family = mkStringOpt "Iosevka" "The Family of the font";
+        style = mkStringOpt "ExtraBold Italic" "The Style of the font";
       };
       bold_italic = {
-        family = mkStringOpt "ZedMono NFM" "The Family of the font";
-        style = mkStringOpt "ExtraBold Italic" "The Style of the font";
+        family = mkStringOpt "Iosevka" "The Family of the font";
+        style = mkStringOpt "Heavy Italic" "The Style of the font";
       };
     };
   };
@@ -37,7 +37,13 @@ in {
       catppuccin.enable = true;
 
       settings = {
-        background_opacity = "0.75";
+        window = {
+          opacity = 0.95;
+          padding = {
+            x = 20;
+            y = 20;
+          };
+        };
         font = {
           normal = cfg.fonts.normal;
           bold = cfg.fonts.bold;

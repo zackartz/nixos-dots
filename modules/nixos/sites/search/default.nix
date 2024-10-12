@@ -17,7 +17,6 @@ in {
   config = mkIf cfg.enable {
     services.searx = {
       enable = true;
-      package = pkgs.searxng;
       runInUwsgi = true;
       settings = {
         # server.port = 8080;

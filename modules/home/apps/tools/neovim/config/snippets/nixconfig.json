@@ -1,0 +1,25 @@
+{
+  "Nix Module Template": {
+    "prefix": "nixcfg",
+    "body": [
+      "{",
+      "  lib,",
+      "  config,",
+      "  pkgs,",
+      "  ...",
+      "}:",
+      "with lib;",
+      "with lib.custom; let",
+      "  cfg = config.${1:moduleName};",
+      "in {",
+      "  options.${1:moduleName} = with types; {",
+      "    enable = mkBoolOpt false \"${2:Description}\";",
+      "  };",
+      "  config = mkIf cfg.enable {",
+      "    $0",
+      "  };",
+      "}"
+    ],
+    "description": "Template for a Nix module"
+  }
+}
