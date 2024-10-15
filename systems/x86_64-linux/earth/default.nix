@@ -52,6 +52,9 @@
     };
   };
   services.gnome.gnome-keyring.enable = true;
+  services.solaar = {
+    enable = true;
+  };
   services._1password = {
     enable = true;
     polkitPolicyOwnerUsername = "zoey";
