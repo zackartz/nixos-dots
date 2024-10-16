@@ -72,7 +72,8 @@ in {
       extraPortals = [
         pkgs.xdg-desktop-portal-gtk
         pkgs.xdg-desktop-portal-wlr
-        inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
+        # inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
+        pkgs.xdg-desktop-portal-hyprland
         pkgs.xwaylandvideobridge
       ];
     };

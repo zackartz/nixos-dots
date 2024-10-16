@@ -44,7 +44,7 @@ in {
       nvidiaSettings = true;
 
       # Optionally, you may need to select the appropriate driver version for your specific GPU.
-      package = pkgs-unstable.linuxPackages_zen.nvidiaPackages.latest;
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
     };
 
     environment.variables = {

@@ -36,6 +36,7 @@
 
   services.web.nginx.enable = true;
   services.gh.enable = true;
+  services.fail2ban.enable = true;
   sites = {
     cv.enable = true;
     gitlab.enable = true;

@@ -43,6 +43,7 @@
   services.vpn.enable = true;
   services.xserver.enable = true;
   services.vpn.mullvad = true;
+  services.lorri.enable = true;
   services.udisks2.enable = true;
   services.transmission = {
     enable = true;
@@ -81,7 +82,7 @@
   boot.kernelPackages = lib.custom.pkgs-unstable.linuxPackages_zen;
   boot.supportedFilesystems = ["ntfs"];
 
-  services.dlna.enable = true;
+  services.dlna.enable = false;
   # services.openssh = {
   #   enable = true;
   #   PasswordAuthentication = true;

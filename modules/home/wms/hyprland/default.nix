@@ -40,13 +40,12 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = [
-      pkgs-unstable.xwayland
+      pkgs.xwayland
     ];
 
     wayland.windowManager.hyprland = {
       enable = true;
       xwayland.enable = true;
-      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
 
       systemd = {
         enable = true;
@@ -169,6 +168,10 @@ in {
 
       xwayland = {
         force_zero_scaling = true;
+      };
+
+      cursor = {
+        no_hardware_cursors = true;
       };
 
       monitor = ["DP-1,2560x1440@240,0x0,1,bitdepth,10" "HDMI-A-1,disable" "DP-2,disable"];
