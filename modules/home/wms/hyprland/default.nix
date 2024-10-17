@@ -12,9 +12,9 @@ with lib.custom; let
   cfg = config.wms.hyprland;
 
   mkService = recursiveUpdate {
-    Unit.PartOf = ["graphical-session.target"];
-    Unit.After = ["graphical-session.target"];
-    Install.WantedBy = ["graphical-session.target"];
+    Unit.PartOf = ["hyprland-session.target"];
+    Unit.After = ["hyprland-session.target"];
+    Install.WantedBy = ["hyprland-session.target"];
   };
 
   mod = "SUPER";
@@ -47,26 +47,31 @@ in {
       enable = true;
       xwayland.enable = true;
 
-      systemd = {
-        enable = true;
-        variables = ["--all"];
-        extraCommands = [
-          "systemctl --user stop graphical-session.target"
-          "systemctl --user start hyprland-session.target"
-        ];
-      };
+      # systemd = {
+      #   enable = true;
+      #   enableXdgAutostart = true;
+      #   variables = ["-all"];
+      # };
     };
 
     wayland.windowManager.hyprland.settings = with colors; {
       exec-once = [
         # "pw-loopback -C \"alsa_input.pci-0000_0d_00.4.analog-stereo\" -P \"Scarlett Solo (3rd Gen.) Headphones / Line 1-2\""
-        "sway-audio-idle-inhibit"
-        "zen-browser"
+        # "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "zen"
         "sleep 6;telegram-desktop"
         "sleep 10;thunderbird"
         "vesktop"
         "spotify"
         "slack"
+      ];
+
+      env = [
+        "XDG_SESSION_TYPE,wayland"
+        "XDG_SESSION_DESKTOP,Hyprland"
+        "XDG_CURRENT_DESKTOP,Hyprland"
       ];
 
       bind =
@@ -174,7 +179,7 @@ in {
         no_hardware_cursors = true;
       };
 
-      monitor = ["DP-1,2560x1440@240,0x0,1,bitdepth,10" "HDMI-A-1,disable" "DP-2,disable"];
+      monitor = ["DP-1,2560x1440@240,0x0,1" "HDMI-A-1,disable" "DP-2,disable"];
 
       layerrule = [
         "blur, ^(gtk-layer-shell)$"

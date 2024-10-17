@@ -28,8 +28,8 @@ stdenv.mkDerivation (finalAttrs: {
   src = fetchFromGitHub {
     owner = "Vencord";
     repo = "Vesktop";
-    rev = "d008f903995c802cb5addd99bd759878c8a3491a";
-    hash = "sha256-oQr0k+0dOuJgwg51hr3O/OZoD66XOctQK82bu+MY+zE=";
+    rev = "8993b0d";
+    hash = "sha256-R8MT8Z5oHJTAXE2SAcq+yAeVkUEhisLOUaUyMAwFy4w=";
   };
 
   # NOTE: This requires pnpm 8.10.0 or newer

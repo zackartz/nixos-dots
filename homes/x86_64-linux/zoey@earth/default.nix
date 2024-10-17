@@ -97,6 +97,8 @@
     pkgs.grim
     pkgs.slurp
 
+    pkgs.neovide
+
     pkgs.xfce.thunar
     pkgs.feh
     pkgs.nitch

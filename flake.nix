@@ -106,6 +106,11 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -117,7 +122,7 @@
       inherit inputs;
       src = ./.;
 
-      overlays = [inputs.nixpkgs-wayland.overlay];
+      overlays = [inputs.nixpkgs-wayland.overlay inputs.rust-overlay.overlays.default];
 
       snowfall = {
         namespace = "custom";

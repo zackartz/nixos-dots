@@ -52,6 +52,8 @@ in {
         # LSP
         lua-language-server
         nixd
+        (pkgs.rust-bin.selectLatestNightlyWith
+          (toolchain: toolchain.minimal))
         rust-analyzer
         vscode-langservers-extracted
         nodePackages.vscode-json-languageserver

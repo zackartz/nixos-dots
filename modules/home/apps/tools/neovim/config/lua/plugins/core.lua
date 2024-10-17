@@ -17,11 +17,14 @@ return {
       })
     end,
   },
+  "direnv/direnv.vim",
   {
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = {
         nix = { "alejandra" },
+        typescript = { "prettierd" },
+        javascript = { "prettierd" },
       },
     },
   },
@@ -32,20 +35,23 @@ return {
     -- optional: provides snippets for the snippet source
     dependencies = "rafamadriz/friendly-snippets",
 
-    -- use a release tag to download pre-built binaries
-    version = "v0.*",
-    -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-    -- build = 'cargo build --release',
+    build = "cargo build --release",
 
     opts = {
       keymap = {
         show = "<C-S-space>",
         accept = "<Enter>",
-        select_prev = { "<S-Tab>", "<C-j>" },
-        select_next = { "<C-Tab>", "<C-k>" },
+        select_prev = { "<S-Tab>", "<C-j>", "<C-p>" },
+        select_next = { "<C-Tab>", "<C-k>", "<C-n>" },
 
         snippet_forward = "<Tab>",
         snippet_backward = "<C-S-Tab>",
+      },
+
+      windows = {
+        documentation = {
+          auto_show = true,
+        },
       },
 
       highlight = {

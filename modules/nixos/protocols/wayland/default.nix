@@ -33,6 +33,10 @@ in {
       };
     };
 
+    programs.hyprland = {
+      enable = true;
+    };
+
     environment = {
       variables = {
         NIXOS_OZONE_WL = "1";
@@ -65,17 +69,15 @@ in {
 
     hardware.pulseaudio.support32Bit = true;
 
-    xdg.portal = {
-      enable = true;
-      config.common.default = "*";
-      wlr.enable = true;
-      extraPortals = [
-        pkgs.xdg-desktop-portal-gtk
-        pkgs.xdg-desktop-portal-wlr
-        # inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
-        pkgs.xdg-desktop-portal-hyprland
-        pkgs.xwaylandvideobridge
-      ];
-    };
+    # xdg.portal = {
+    #   enable = true;
+    #   wlr.enable = false;
+    #   config.common.default = "*";
+    #   extraPortals = [
+    #     pkgs.xdg-desktop-portal-gtk
+    #     # pkgs.xdg-desktop-portal-wlr
+    #     pkgs.xwaylandvideobridge
+    #   ];
+    # };
   };
 }

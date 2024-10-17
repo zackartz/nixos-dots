@@ -25,6 +25,7 @@
 
   hardware.audio.enable = true;
   hardware.nvidia.enable = true;
+  hardware.keyboard.qmk.enable = true;
 
   programs.nix-ld.enable = true;
 

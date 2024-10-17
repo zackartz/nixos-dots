@@ -59,7 +59,7 @@ in {
         Description = "Aylur's Gtk Shell";
         PartOf = [
           "tray.target"
-          "graphical-session.target"
+          "hyprland-session.target"
         ];
       };
       Service = {
@@ -67,7 +67,7 @@ in {
         ExecStart = "${config.programs.ags.package}/bin/ags";
         Restart = "on-failure";
       };
-      Install.WantedBy = ["graphical-session.target"];
+      Install.WantedBy = ["hyprland-session.target"];
     };
   };
 }
