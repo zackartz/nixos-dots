@@ -9,40 +9,39 @@ with lib.custom; let
   cfg = config.services.pm-bridge;
 in {
   options.services.pm-bridge = with types; {
-    enable = mkBoolOpt false "Enable Protonmail Bridge";
+    enable = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Whether to enable the Bridge.";
+    };
 
-    package = lib.mkPackageOption pkgs "protonmail-bridge" {};
+    nonInteractive = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Start Bridge entirely noninteractively";
+    };
 
-    logLevel = lib.mkOption {
-      type = lib.types.nullOr (
-        lib.types.enum [
-          "panic"
-          "fatal"
-          "error"
-          "warn"
-          "info"
-          "debug"
-        ]
-      );
-      default = null;
-      description = "Log level of the Proton Mail Bridge service. If set to null then the service uses it's default log level.";
+    logLevel = mkOption {
+      type = types.enum ["panic" "fatal" "error" "warn" "info" "debug" "debug-client" "debug-server"];
+      default = "info";
+      description = "The log level";
     };
   };
 
   config = mkIf cfg.enable {
     systemd.user.services.protonmail-bridge = {
       Unit = {
-        Description = "A Bridge to view Protonmail Messages in your local email client";
+        Description = "Protonmail Bridge";
+        After = ["network.target"];
       };
-      Service = let
-        logLevel = lib.optionalString (cfg.logLevel != null) "--log-level ${cfg.logLevel}";
-      in {
-        Type = "simple";
-        ExecStart = "${lib.getExe cfg.package} --noninteractive ${logLevel}";
+
+      Service = {
         Restart = "always";
+        ExecStart = "${pkgs.protonmail-bridge}/bin/protonmail-bridge --no-window --log-level ${cfg.logLevel}" + optionalString (cfg.nonInteractive) " --noninteractive";
       };
+
       Install = {
-        WantedBy = ["graphical-session.target"];
+        WantedBy = ["default.target"];
       };
     };
   };

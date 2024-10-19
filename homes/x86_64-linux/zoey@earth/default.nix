@@ -105,6 +105,9 @@
     pkgs.nix-output-monitor
     pkgs.fastfetch
 
+    pkgs.libreoffice-qt6-fresh
+    pkgs.signal-desktop
+
     pkgs.nh
     pkgs.dwl
 

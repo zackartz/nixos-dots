@@ -149,5 +149,12 @@
         agenix.nixosModules.default
         solaar.nixosModules.default
       ];
+
+      # Add this new section
+      outputs-builder = channels: {
+        hydraJobs = {
+          x86_64-linux.earth = self.nixosConfigurations.x86_64-linux.earth.config.system.build.toplevel;
+        };
+      };
     };
 }
