@@ -15,23 +15,11 @@ in {
   };
 
   config = mkIf cfg.enable {
-    age.secrets = {
-      hydra_key = {
-        owner = "hydra";
-        group = "hydra";
-        file = ./sec/hydra_key.age;
-      };
-    };
-
     services.hydra = {
       enable = true;
       hydraURL = "https://hydra.zoeys.computer";
       useSubstitutes = true;
       notificationSender = "hydra@localhost"; # e-mail of hydra service
-
-      extraConfig = ''
-        binary_cache_secret_key_file = ${sec.hydra_key.path}
-      '';
     };
 
     services.nginx.virtualHosts."hydra.zoeys.computer" = {
