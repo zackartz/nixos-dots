@@ -1,28 +1,189 @@
-name: update-flake
+name: Nix Flake Update
 
 on:
   schedule:
-    - cron: "0 0 * * *"
-  workflow_dispatch:
+    - cron: '0 0 * * *'  # Run daily at midnight UTC
+  workflow_dispatch:  # Allow manual trigger
+
+env:
+  BRANCH_NAME: auto-update-flake-${{ github.run_number }}
+  HYDRA_INSTANCE: https://hydra.zoeys.computer
+  HYDRA_PROJECT: config
+  HYDRA_JOBSET: main
 
 jobs:
-  update-flake:
+  check-existing-pr:
     runs-on: ubuntu-latest
-
+    outputs:
+      pr_exists: ${{ steps.check-pr.outputs.pr_exists }}
     steps:
-      - uses: actions/checkout@v4.0.0
-
-      - name: "Install Nix ❄️"
-        uses: cachix/install-nix-action@v27
-
-      - name: "Update flake.lock ❄️"
+      - name: Check for existing PR
+        id: check-pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          nix flake update --accept-flake-config
+          existing_pr=$(gh pr list --repo ${{ github.repository }} --head "auto-update-flake-" --state open --json number --jq length)
+          echo "pr_exists=$existing_pr" >> $GITHUB_OUTPUT
 
-      - name: "Commit and push"
-        uses: EndBug/add-and-commit@v9
+  update-flake:
+    needs: check-existing-pr
+    if: needs.check-existing-pr.outputs.pr_exists == '0'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v22
+
+      - name: Create update branch
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git checkout -b ${{ env.BRANCH_NAME }}
+
+      - name: Update flake dependencies
+        run: nix flake update
+
+      - name: Commit changes
+        run: |
+          git add flake.lock
+          git commit -m "Auto-update flake dependencies"
+          git push origin ${{ env.BRANCH_NAME }}
+
+      - name: Create Pull Request
+        id: create-pr
+        uses: peter-evans/create-pull-request@v5
         with:
-          add: "flake.lock"
-          default_author: github_actions
-          message: "chore: update flake.lock"
-        
+          title: 'Auto-update Nix flake dependencies'
+          body: 'This PR updates the Nix flake dependencies.'
+          branch: ${{ env.BRANCH_NAME }}
+          base: main
+
+      - name: Trigger Hydra build
+        run: |
+          curl -X POST -u "${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}" \
+            "${{ env.HYDRA_INSTANCE }}/api/trigger-build?project=${{ env.HYDRA_PROJECT }}&jobset=${{ env.HYDRA_JOBSET }}"
+
+      - name: Wait for Hydra build
+        id: wait-for-build
+        run: |
+          # Poll Hydra build status
+          max_attempts=60  # 30 minutes (30 * 2 minutes)
+          attempt=0
+          while [ $attempt -lt $max_attempts ]; do
+            status=$(curl -s -u "${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}" \
+              "${{ env.HYDRA_INSTANCE }}/api/job/${{ env.HYDRA_PROJECT }}/${{ env.HYDRA_JOBSET }}/latest" | jq -r '.buildstatus')
+            if [ "$status" = "0" ]; then
+              echo "BUILD_SUCCESS=true" >> $GITHUB_OUTPUT
+              exit 0
+            elif [ "$status" = "1" ] || [ "$status" = "2" ] || [ "$status" = "3" ]; then
+              echo "BUILD_SUCCESS=false" >> $GITHUB_OUTPUT
+              exit 0
+            fi
+            sleep 120  # Wait for 2 minutes before checking again
+            ((attempt++))
+          done
+          echo "BUILD_SUCCESS=false" >> $GITHUB_OUTPUT  # Timeout, consider as failure
+
+      - name: Merge PR if build succeeds
+        if: steps.wait-for-build.outputs.BUILD_SUCCESS == 'true'
+        run: |
+          gh pr merge ${{ steps.create-pr.outputs.pull-request-number }} --merge
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Schedule retry if build fails
+        if: steps.wait-for-build.outputs.BUILD_SUCCESS != 'true'
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          issue-number: ${{ steps.create-pr.outputs.pull-request-number }}
+          body: |
+            The Hydra build failed. This PR will be updated and retried in 24 hours.
+
+      - name: Retry update after 24 hours
+        if: steps.wait-for-build.outputs.BUILD_SUCCESS != 'true'
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          event-type: retry-flake-update
+          client-payload: '{"pr_number": "${{ steps.create-pr.outputs.pull-request-number }}"}'
+
+  retry-update:
+    runs-on: ubuntu-latest
+    if: github.event.action == 'retry-flake-update'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v22
+
+      - name: Checkout PR branch
+        run: |
+          pr_number="${{ github.event.client_payload.pr_number }}"
+          branch_name=$(gh pr view $pr_number --json headRefName -q .headRefName)
+          git checkout $branch_name
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update flake dependencies
+        run: nix flake update
+
+      - name: Commit and push changes
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add flake.lock
+          git commit -m "Auto-update flake dependencies (retry)"
+          git push origin HEAD
+
+      - name: Trigger Hydra build
+        run: |
+          curl -X POST -u "${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}" \
+            "${{ env.HYDRA_INSTANCE }}/api/trigger-build?project=${{ env.HYDRA_PROJECT }}&jobset=${{ env.HYDRA_JOBSET }}"
+
+      - name: Wait for Hydra build
+        id: wait-for-build
+        run: |
+          # Poll Hydra build status (same as in update-flake job)
+          max_attempts=60  # 30 minutes (30 * 2 minutes)
+          attempt=0
+          while [ $attempt -lt $max_attempts ]; do
+            status=$(curl -s -u "${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}" \
+              "${{ env.HYDRA_INSTANCE }}/api/job/${{ env.HYDRA_PROJECT }}/${{ env.HYDRA_JOBSET }}/latest" | jq -r '.buildstatus')
+            if [ "$status" = "0" ]; then
+              echo "BUILD_SUCCESS=true" >> $GITHUB_OUTPUT
+              exit 0
+            elif [ "$status" = "1" ] || [ "$status" = "2" ] || [ "$status" = "3" ]; then
+              echo "BUILD_SUCCESS=false" >> $GITHUB_OUTPUT
+              exit 0
+            fi
+            sleep 120  # Wait for 2 minutes before checking again
+            ((attempt++))
+          done
+          echo "BUILD_SUCCESS=false" >> $GITHUB_OUTPUT  # Timeout, consider as failure
+
+      - name: Merge PR if build succeeds
+        if: steps.wait-for-build.outputs.BUILD_SUCCESS == 'true'
+        run: |
+          pr_number="${{ github.event.client_payload.pr_number }}"
+          gh pr merge $pr_number --merge
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Schedule another retry if build fails
+        if: steps.wait-for-build.outputs.BUILD_SUCCESS != 'true'
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          issue-number: ${{ github.event.client_payload.pr_number }}
+          body: |
+            The Hydra build failed again. This PR will be updated and retried in 24 hours.
+
+      - name: Retry update after 24 hours
+        if: steps.wait-for-build.outputs.BUILD_SUCCESS != 'true'
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          event-type: retry-flake-update
+          client-payload: '{"pr_number": "${{ github.event.client_payload.pr_number }}"}'
