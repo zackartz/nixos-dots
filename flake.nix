@@ -1,15 +1,15 @@
 {
   description = "Nixos config flake";
 
-  nixConfig = {
-    extra-substituters = [
-      "https://hydra.zoeys.computer"
-    ];
-    extra-trusted-public-keys = [
-      "hydra.zoeys.computer-1:ssh-ed25519:0000000b7373682d65643235353139000000205f061b28bd7b23ff28347b79ac7719587c471904487cebc19172a682240256cc"
-    ];
-  };
-
+  # nixConfig = {
+  #   extra-substituters = [
+  #     "https://cache.zoeys.computer"
+  #   ];
+  #   extra-trusted-public-keys = [
+  #   "cache.zoeys.computer:0Pvq2E8GWBX9qk1aTQ3RpZ01t4Nu5uWMQy90ippP9Ls="
+  #   ];
+  # };
+  #
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";

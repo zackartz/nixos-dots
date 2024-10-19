@@ -10,7 +10,7 @@ with lib.custom; let
 
   sec = config.age.secrets;
 in {
-  options.sites.hydra = with types; {
+  options.sites.cache = with types; {
     enable = mkBoolOpt false "Enable Hydra";
   };
 
