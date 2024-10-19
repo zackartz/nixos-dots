@@ -117,8 +117,8 @@
     self,
     nixpkgs-unstable,
     ...
-  }:
-    inputs.snowfall-lib.mkFlake {
+  }: let
+    snowfallConfig = inputs.snowfall-lib.mkFlake {
       inherit inputs;
       src = ./.;
 
@@ -147,13 +147,13 @@
         agenix.nixosModules.default
         solaar.nixosModules.default
       ];
-
-      # Add this new section
-      outputs-builder = channels: {
-        hydraJobs = {
-          x86_64-linux.earth = self.nixosConfigurations.earth.config.system.build.toplevel;
-          x86_64-linux.pluto = self.nixosConfigurations.pluto.config.system.build.toplevel;
-        };
+    };
+  in
+    snowfallConfig
+    // {
+      hydraJobs = {
+        x86_64-linux.earth = self.nixosConfigurations.earth.config.system.build.toplevel;
+        x86_64-linux.pluto = self.nixosConfigurations.pluto.config.system.build.toplevel;
       };
     };
 }
