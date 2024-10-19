@@ -1,15 +1,15 @@
 {
   description = "Nixos config flake";
 
-  # nixConfig = {
-  #   extra-substituters = [
-  #     "https://cache.zoeys.computer"
-  #   ];
-  #   extra-trusted-public-keys = [
-  #   "cache.zoeys.computer:0Pvq2E8GWBX9qk1aTQ3RpZ01t4Nu5uWMQy90ippP9Ls="
-  #   ];
-  # };
-  #
+  nixConfig = {
+    extra-substituters = [
+      "https://cache.zoeys.computer"
+    ];
+    extra-trusted-public-keys = [
+      "cache.zoeys.computer:0Pvq2E8GWBX9qk1aTQ3RpZ01t4Nu5uWMQy90ippP9Ls="
+    ];
+  };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
