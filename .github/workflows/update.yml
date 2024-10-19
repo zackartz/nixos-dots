@@ -43,7 +43,7 @@ jobs:
           git checkout -b ${{ env.BRANCH_NAME }}
 
       - name: Update flake dependencies
-        run: nix flake update
+        run: nix flake update --accept-flake-config
 
       - name: Commit changes
         run: |
