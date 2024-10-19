@@ -30,6 +30,7 @@ in {
 
     nix.settings.allowed-uris = [
       "github:"
+      "https://github.com"
       "git+https://github.com/"
       "git+ssh://github.com/"
       "git+https://git.zoeys.computer/"
