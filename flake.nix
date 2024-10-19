@@ -152,6 +152,7 @@
       outputs-builder = channels: {
         hydraJobs = {
           x86_64-linux.earth = self.nixosConfigurations.earth.config.system.build.toplevel;
+          x86_64-linux.pluto = self.nixosConfigurations.pluto.config.system.build.toplevel;
         };
       };
     };

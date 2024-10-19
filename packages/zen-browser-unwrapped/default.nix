@@ -159,7 +159,7 @@ in
       rev = "${version}";
       leaveDotGit = true;
       fetchSubmodules = true;
-      hash = "sha256-C08mouHUTSwiF/nNZ4T0A+33121ERWUOyCw6LMNTWQc=";
+      hash = "sha256-JnohKvY7455qlPpcr38307DEnAWFdJF+liLBnvBSl98=";
     };
 
     firefoxVersion = (lib.importJSON "${src}/surfer.json").version.version;
