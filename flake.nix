@@ -132,8 +132,6 @@
         allowUnfree = true;
       };
 
-      templates = import ./templates {};
-
       homes.modules = with inputs; [
         spicetify-nix.homeManagerModules.default
         catppuccin.homeManagerModules.catppuccin
@@ -153,7 +151,7 @@
       # Add this new section
       outputs-builder = channels: {
         hydraJobs = {
-          x86_64-linux.earth = self.nixosConfigurations.x86_64-linux.earth.config.system.build.toplevel;
+          x86_64-linux.earth = self.nixosConfigurations.earth.config.system.build.toplevel;
         };
       };
     };
