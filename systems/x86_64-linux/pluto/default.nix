@@ -47,6 +47,7 @@
     search.enable = true;
     map.enable = true;
     hydra.enable = true;
+    cache.enable = true;
   };
 
   zmio.blog.enable = true;
