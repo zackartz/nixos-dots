@@ -3,10 +3,10 @@
 
   nixConfig = {
     extra-substituters = [
-      "https://zackartz.cachix.org"
+      "https://hydra.zoeys.computer"
     ];
     extra-trusted-public-keys = [
-      "zackartz.cachix.org-1:nrEfVZF8MVX0Lnt73KwYzH2kwDzFuAoR5VPjuUd4R30="
+      "hydra.zoeys.computer-1:ssh-ed25519:0000000b7373682d65643235353139000000205f061b28bd7b23ff28347b79ac7719587c471904487cebc19172a682240256cc"
     ];
   };
 
