@@ -104,11 +104,11 @@
         "systems": "systems_5"
       },
       "locked": {
-        "lastModified": 1729387509,
-        "narHash": "sha256-9KjUhlJLoyM+PZ8dSTVWb98CVntwnXDTyaQ460vlga8=",
+        "lastModified": 1729390858,
+        "narHash": "sha256-qagI7+nAxrr5tzWb9W/5o9rfX6MTsxQM3TO53mq8RTA=",
         "ref": "refs/heads/main",
-        "rev": "bc2f45151d751e49a1385345a9958cc316c94b9c",
-        "revCount": 26,
+        "rev": "9477af4043d0bc05a082389d0b57a141121ae8d5",
+        "revCount": 27,
         "type": "git",
         "url": "https://git.zoeys.computer/zoey/web"
       },
