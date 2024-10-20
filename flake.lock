@@ -104,11 +104,11 @@
         "systems": "systems_5"
       },
       "locked": {
-        "lastModified": 1729387509,
-        "narHash": "sha256-9KjUhlJLoyM+PZ8dSTVWb98CVntwnXDTyaQ460vlga8=",
+        "lastModified": 1729390858,
+        "narHash": "sha256-qagI7+nAxrr5tzWb9W/5o9rfX6MTsxQM3TO53mq8RTA=",
         "ref": "refs/heads/main",
-        "rev": "bc2f45151d751e49a1385345a9958cc316c94b9c",
-        "revCount": 26,
+        "rev": "9477af4043d0bc05a082389d0b57a141121ae8d5",
+        "revCount": 27,
         "type": "git",
         "url": "https://git.zoeys.computer/zoey/web"
       },
@@ -1752,11 +1752,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1729304879,
-        "narHash": "sha256-H7KGGJUU9BcDNnfXiATBGgs6FJKWQdfftNJS+/v2aMU=",
+        "lastModified": 1729391507,
+        "narHash": "sha256-as0I9xieJUHf7kiK2a9znDsVZQTFWhM1pLivII43Gi0=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "b259ef799b5ac014604da71ecd92d4a52603ed2d",
+        "rev": "784981a9feeba406de38c1c9a3decf966d853cca",
         "type": "github"
       },
       "original": {
