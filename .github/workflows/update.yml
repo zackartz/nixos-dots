@@ -34,7 +34,7 @@ jobs:
 
   update-flake:
     needs: check-existing-pr
-    if: needs.check-existing-pr.outputs.pr_exists == false
+    if: needs.check-existing-pr.outputs.pr_exists == 'false'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -201,7 +201,7 @@ jobs:
 
   retry-update:
     needs: check-existing-pr
-    if: needs.check-existing-pr.outputs.pr_exists == true
+    if: needs.check-existing-pr.outputs.pr_exists == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
