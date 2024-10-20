@@ -107,14 +107,14 @@ jobs:
           echo "BUILD_SUCCESS=false" >> $GITHUB_OUTPUT  # Timeout, consider as failure
 
       - name: Merge PR if build succeeds
-        if: steps.wait-for-build.outputs.BUILD_SUCCESS == 'true'
+        if: steps.git-check.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS == 'true'
         run: |
           gh pr merge ${{ steps.create-pr.outputs.pull-request-number }} --merge
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Schedule retry if build fails
-        if: steps.wait-for-build.outputs.BUILD_SUCCESS != 'true'
+        if: steps.git-check.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS != 'true'
         uses: peter-evans/create-or-update-comment@v3
         with:
           issue-number: ${{ steps.create-pr.outputs.pull-request-number }}
@@ -122,7 +122,7 @@ jobs:
             The Hydra build failed. This PR will be updated and retried in 24 hours.
 
       - name: Retry update after 24 hours
-        if: steps.wait-for-build.outputs.BUILD_SUCCESS != 'true'
+        if: steps.git-check.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS != 'true'
         uses: peter-evans/repository-dispatch@v2
         with:
           event-type: retry-flake-update
