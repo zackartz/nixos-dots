@@ -1,0 +1,79 @@
+name: 'Create Hydra Jobset'
+description: 'Creates or updates a jobset on a Hydra CI server'
+inputs:
+  hydra_instance:
+    description: 'URL of the Hydra instance'
+    required: true
+  hydra_project:
+    description: 'Name of the Hydra project'
+    required: true
+  hydra_jobset:
+    description: 'Name of the Hydra jobset'
+    required: true
+  hydra_username:
+    description: 'Username for Hydra authentication'
+    required: true
+  hydra_password:
+    description: 'Password for Hydra authentication'
+    required: true
+  flake_uri:
+    description: 'URI of the flake to build'
+    required: true
+  description:
+    description: 'Description of the jobset'
+    required: false
+    default: 'Auto-created jobset'
+  enabled:
+    description: 'Whether the jobset should be enabled'
+    required: false
+    default: '1'
+  visible:
+    description: 'Whether the jobset should be visible'
+    required: false
+    default: '0'
+  keepnr:
+    description: 'Number of builds to keep'
+    required: false
+    default: '3'
+  checkinterval:
+    description: 'Interval between checks in seconds'
+    required: false
+    default: '300'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Create or update Hydra jobset
+      shell: bash
+      run: |
+        AUTH_HEADER="Authorization: Basic $(echo -n '${{ inputs.hydra_username }}:${{ inputs.hydra_password }}' | base64)"
+        
+        # Prepare the JSON payload
+        payload=$(cat << EOF
+        {
+          "enabled": ${{ inputs.enabled }},
+          "visible": ${{ inputs.visible }},
+          "keepnr": ${{ inputs.keepnr }},
+          "checkinterval": ${{ inputs.checkinterval }},
+          "description": "${{ inputs.description }}",
+          "flake": "${{ inputs.flake_uri }}",
+          "type": 1
+        }
+        EOF
+        )
+        
+        # Send the request to create or update the jobset
+        response=$(curl -s -X PUT \
+          -H "Content-Type: application/json" \
+          -H "$AUTH_HEADER" \
+          -d "$payload" \
+          "${{ inputs.hydra_instance }}/jobset/${{ inputs.hydra_project }}/${{ inputs.hydra_jobset }}")
+        
+        # Check the response
+        if [[ $response == *"\"jobset\":\"${{ inputs.hydra_jobset }}\""* ]]; then
+          echo "Hydra jobset created or updated successfully"
+        else
+          echo "Failed to create or update Hydra jobset"
+          echo "Response: $response"
+          exit 1
+        fi

@@ -77,6 +77,18 @@ jobs:
                        --base main \
                        --head ${{ env.BRANCH_NAME }}
 
+      - name: Create Hydra jobset
+        if: steps.update-flake.outputs.CHANGED == 'true'
+        uses: ./.github/actions/create-hydra-jobset
+        with:
+          hydra_instance: ${{ env.HYDRA_INSTANCE }}
+          hydra_project: ${{ env.HYDRA_PROJECT }}
+          hydra_jobset: ${{ env.HYDRA_JOBSET }}
+          hydra_username: ${{ secrets.HYDRA_USERNAME }}
+          hydra_password: ${{ secrets.HYDRA_PASSWORD }}
+          flake_uri: "github:${{ github.repository }}/${{ env.BRANCH_NAME }}"
+          description: "PR #${{ steps.create-pr.outputs.pr_number }} - Auto-update flake dependencies"
+
       - name: Trigger Hydra build
         if: steps.update-flake.outputs.CHANGED == 'true'
         uses: ./.github/actions/trigger-hydra-build
@@ -97,6 +109,13 @@ jobs:
           hydra_jobset: ${{ env.HYDRA_JOBSET }}
           hydra_username: ${{ secrets.HYDRA_USERNAME }}
           hydra_password: ${{ secrets.HYDRA_PASSWORD }}
+
+      - name: Approve PR
+        if: steps.update-flake.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr review ${{ steps.create-pr.outputs.pr_number }} --approve --body "Automated approval: Hydra build succeeded"
 
       - name: Merge PR if build succeeds
         if: steps.update-flake.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS == 'true'
@@ -167,6 +186,13 @@ jobs:
           hydra_jobset: ${{ env.HYDRA_JOBSET }}
           hydra_username: ${{ secrets.HYDRA_USERNAME }}
           hydra_password: ${{ secrets.HYDRA_PASSWORD }}
+
+      - name: Approve PR
+        if: steps.update-flake.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr review ${{ needs.check-existing-pr.outputs.pr_number }} --approve --body "Automated approval: Hydra build succeeded"
 
       - name: Merge PR if build succeeds
         if: steps.update-flake.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS == 'true'
