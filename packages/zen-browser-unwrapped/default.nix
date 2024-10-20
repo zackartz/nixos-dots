@@ -165,7 +165,7 @@ in
     firefoxVersion = (lib.importJSON "${src}/surfer.json").version.version;
     firefoxSrc = fetchurl {
       url = "mirror://mozilla/firefox/releases/${firefoxVersion}/source/firefox-${firefoxVersion}.source.tar.xz";
-      hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+      hash = "sha256-en3z+Xc3RT76okPKnbr5XQ8PgzxdyK+stXBO4W7wYNA=";
     };
 
     SURFER_COMPAT = generic;
