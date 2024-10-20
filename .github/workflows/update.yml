@@ -72,12 +72,28 @@ jobs:
                        --base main \
                        --head ${{ env.BRANCH_NAME }}
 
+      - name: Get Hydra session token
+        id: hydra-session
+        run: |
+          response=$(curl -X POST -i \
+            '${{ env.HYDRA_INSTANCE }}/login' \
+            -H 'accept: application/json' \
+            -H 'Content-Type: application/json' \
+            -H 'Origin: ${{ env.HYDRA_INSTANCE }}' \
+            -d '{
+              "username": "${{ secrets.HYDRA_USERNAME }}",
+              "password": "${{ secrets.HYDRA_PASSWORD }}"
+            }')
+          session_cookie=$(echo "$response" | grep -i 'set-cookie' | sed -n 's/.*hydra_session=\([^;]*\).*/\1/p')
+          echo "SESSION_COOKIE=$session_cookie" >> $GITHUB_OUTPUT
+
       - name: Create Hydra jobset
         if: steps.update-flake.outputs.CHANGED == 'true'
+        env:
+          SESSION_COOKIE: ${{ steps.hydra-session.outputs.SESSION_COOKIE }}
         run: |
-          AUTH_HEADER="Authorization: Basic $(echo -n '${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}' | base64)"
           curl -X PUT -H "Content-Type: application/json" \
-            -H "$AUTH_HEADER" \
+            -H "Cookie: hydra_session=$SESSION_COOKIE" \
             -d '{
               "enabled": 1,
               "visible": true,
@@ -92,10 +108,11 @@ jobs:
 
       - name: Trigger Hydra build
         if: steps.update-flake.outputs.CHANGED == 'true'
+        env:
+          SESSION_COOKIE: ${{ steps.hydra-session.outputs.SESSION_COOKIE }}
         run: |
-          AUTH_HEADER="Authorization: Basic $(echo -n '${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}' | base64)"
           curl -X POST -H "Content-Type: application/json" \
-            -H "$AUTH_HEADER" \
+            -H "Cookie: hydra_session=$SESSION_COOKIE" \
             -H "Origin: ${{ env.HYDRA_INSTANCE }}" \
             -d '{"jobsets": ["${{ env.HYDRA_PROJECT }}:${{ env.HYDRA_JOBSET }}"]}' \
             "${{ env.HYDRA_INSTANCE }}/api/push"
@@ -103,12 +120,13 @@ jobs:
       - name: Wait for Hydra build
         if: steps.update-flake.outputs.CHANGED == 'true'
         id: wait-for-build
+        env:
+          SESSION_COOKIE: ${{ steps.hydra-session.outputs.SESSION_COOKIE }}
         run: |
-          AUTH_HEADER="Authorization: Basic $(echo -n '${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}' | base64)"
           max_attempts=60  # 30 minutes (30 * 2 minutes)
           attempt=0
           while [ $attempt -lt $max_attempts ]; do
-            response=$(curl -s -H "$AUTH_HEADER" \
+            response=$(curl -s -H "Cookie: hydra_session=$SESSION_COOKIE" \
               "${{ env.HYDRA_INSTANCE }}/api/jobsets?project=${{ env.HYDRA_PROJECT }}")
             status=$(echo "$response" | jq -r '.[] | select(.name == "${{ env.HYDRA_JOBSET }}") | .nrfailed')
             if [ "$status" = "0" ]; then
