@@ -129,18 +129,31 @@ jobs:
           while [ $attempt -lt $max_attempts ]; do
             response=$(curl -s -H "Cookie: hydra_session=$SESSION_COOKIE" \
               "${{ env.HYDRA_INSTANCE }}/api/jobsets?project=${{ env.HYDRA_PROJECT }}")
-            nrscheduled=$(echo "$response" | jq -r '.[] | select(.name == "${{ env.HYDRA_JOBSET }}") | .nrscheduled')
-            nrfailed=$(echo "$response" | jq -r '.[] | select(.name == "${{ env.HYDRA_JOBSET }}") | .nrfailed')
-            nrtotal=$(echo "$response" | jq -r '.[] | select(.name == "${{ env.HYDRA_JOBSET }}") | .nrtotal')
+            jobset=$(echo "$response" | jq -r '.[] | select(.name == "${{ env.HYDRA_JOBSET }}")')
             
-            echo "Attempt $((attempt+1))/$max_attempts: nrscheduled=$nrscheduled, nrfailed=$nrfailed, nrtotal=$nrtotal"
+            if [ -z "$jobset" ]; then
+              echo "Jobset ${{ env.HYDRA_JOBSET }} not found. Waiting..."
+              sleep 120
+              ((attempt++))
+              continue
+            fi
             
-            if [ "$nrtotal" = "0" ] || [ "$nrscheduled" = "0" -a "$nrfailed" = "0" ]; then
+            nrscheduled=$(echo "$jobset" | jq -r '.nrscheduled')
+            nrfailed=$(echo "$jobset" | jq -r '.nrfailed')
+            nrsucceeded=$(echo "$jobset" | jq -r '.nrsucceeded')
+            nrtotal=$(echo "$jobset" | jq -r '.nrtotal')
+            
+            echo "Attempt $((attempt+1))/$max_attempts: nrscheduled=$nrscheduled, nrfailed=$nrfailed, nrsucceeded=$nrsucceeded, nrtotal=$nrtotal"
+            
+            if [ "$nrtotal" = "0" ]; then
               echo "Build not started yet. Waiting..."
             elif [ "$nrfailed" != "0" ]; then
               build_status="failed"
               break
-            elif [ "$nrscheduled" = "0" ]; then
+            elif [ "$nrsucceeded" = "$nrtotal" ] && [ "$nrtotal" != "0" ]; then
+              build_status="succeeded"
+              break
+            elif [ "$nrscheduled" = "0" ] && [ "$nrsucceeded" != "0" ] && [ "$nrsucceeded" = "$nrtotal" ]; then
               build_status="succeeded"
               break
             else
