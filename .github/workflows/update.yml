@@ -126,7 +126,9 @@ jobs:
           max_attempts=60  # 30 minutes (30 * 2 minutes)
           attempt=0
           build_status="unknown"
+          set -e  # Exit immediately if a command exits with a non-zero status
           while [ $attempt -lt $max_attempts ]; do
+            echo "Attempt $((attempt + 1))/$max_attempts"
             response=$(curl -s -H "Cookie: hydra_session=$SESSION_COOKIE" \
               "${{ env.HYDRA_INSTANCE }}/api/jobsets?project=${{ env.HYDRA_PROJECT }}")
             jobset=$(echo "$response" | jq -r '.[] | select(.name == "${{ env.HYDRA_JOBSET }}")')
@@ -134,7 +136,7 @@ jobs:
             if [ -z "$jobset" ]; then
               echo "Jobset ${{ env.HYDRA_JOBSET }} not found. Waiting..."
               sleep 120
-              ((attempt++))
+              attempt=$((attempt + 1))
               continue
             fi
 
@@ -149,7 +151,7 @@ jobs:
             nrtotal=$(echo "$jobset" | jq -r '.nrtotal')
             echo "nrtotal passed"
             
-            echo "Attempt $((attempt+1))/$max_attempts: nrscheduled=$nrscheduled, nrfailed=$nrfailed, nrsucceeded=$nrsucceeded, nrtotal=$nrtotal"
+            echo "Status: nrscheduled=$nrscheduled, nrfailed=$nrfailed, nrsucceeded=$nrsucceeded, nrtotal=$nrtotal"
             
             if [ "$nrtotal" = "0" ]; then
               echo "Build not started yet. Waiting..."
@@ -167,7 +169,7 @@ jobs:
             fi
             
             sleep 120  # Wait for 2 minutes before checking again
-            ((attempt++))
+            attempt=$((attempt + 1))
           done
           
           if [ "$build_status" = "unknown" ]; then
@@ -178,6 +180,7 @@ jobs:
           echo "BUILD_SUCCESS=$([ "$build_status" = "succeeded" ] && echo "true" || echo "false")" >> $GITHUB_OUTPUT
           if [ "$build_status" = "succeeded" ]; then
             echo "Build succeeded!"
+            exit 0
           else
             echo "Build failed or timed out."
             exit 1
