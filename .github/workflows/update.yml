@@ -9,7 +9,7 @@ env:
   BRANCH_NAME: auto-update-flake-${{ github.run_number }}
   HYDRA_INSTANCE: https://hydra.zoeys.computer
   HYDRA_PROJECT: config
-  HYDRA_JOBSET: main
+  HYDRA_JOBSET: pr-${{ github.run_number }}  # Changed to use a PR-specific jobset
 
 jobs:
   check-existing-pr:
@@ -45,13 +45,13 @@ jobs:
       - name: Update flake dependencies
         run: nix flake update --accept-flake-config
 
-      - name: Commit changes
+      - name: Check for changes
+        id: git-check
         run: |
-          git add flake.lock
-          git commit -m "Auto-update flake dependencies"
-          git push origin ${{ env.BRANCH_NAME }}
+          git diff --exit-code flake.lock || echo "CHANGED=true" >> $GITHUB_OUTPUT
 
       - name: Create Pull Request
+        if: steps.git-check.outputs.CHANGED == 'true'
         id: create-pr
         uses: peter-evans/create-pull-request@v5
         with:
@@ -60,12 +60,32 @@ jobs:
           branch: ${{ env.BRANCH_NAME }}
           base: main
 
+      - name: Create Hydra jobset
+        if: steps.git-check.outputs.CHANGED == 'true'
+        run: |
+          curl -X PUT -H "Content-Type: application/json" \
+            -u "${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}" \
+            -d '{
+              "enabled": 1,
+              "hidden": false,
+              "description": "PR #${{ steps.create-pr.outputs.pull-request-number }} - Auto-update flake dependencies",
+              "flake": "github:${{ github.repository }}/${{ env.BRANCH_NAME }}",
+              "checkinterval": 60,
+              "schedulingshares": 100,
+              "enableemail": false,
+              "emailoverride": "",
+              "keepnr": 3
+            }' \
+            "${{ env.HYDRA_INSTANCE }}/jobset/${{ env.HYDRA_PROJECT }}/${{ env.HYDRA_JOBSET }}"
+
       - name: Trigger Hydra build
+        if: steps.git-check.outputs.CHANGED == 'true'
         run: |
           curl -X POST -u "${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}" \
             "${{ env.HYDRA_INSTANCE }}/api/trigger-build?project=${{ env.HYDRA_PROJECT }}&jobset=${{ env.HYDRA_JOBSET }}"
 
       - name: Wait for Hydra build
+        if: steps.git-check.outputs.CHANGED == 'true'
         id: wait-for-build
         run: |
           # Poll Hydra build status
