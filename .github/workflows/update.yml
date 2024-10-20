@@ -137,11 +137,17 @@ jobs:
               ((attempt++))
               continue
             fi
+
+            echo "here"
             
             nrscheduled=$(echo "$jobset" | jq -r '.nrscheduled')
+            echo "nrscheduled passed"
             nrfailed=$(echo "$jobset" | jq -r '.nrfailed')
+            echo "nrfailed passed"
             nrsucceeded=$(echo "$jobset" | jq -r '.nrsucceeded')
+            echo "nrsucceeded passed"
             nrtotal=$(echo "$jobset" | jq -r '.nrtotal')
+            echo "nrtotal passed"
             
             echo "Attempt $((attempt+1))/$max_attempts: nrscheduled=$nrscheduled, nrfailed=$nrfailed, nrsucceeded=$nrsucceeded, nrtotal=$nrtotal"
             
