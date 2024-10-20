@@ -51,6 +51,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           nix flake update --accept-flake-config
+          ./packages/zen-browser-unwrapped/update.sh
           git diff
           if [[ -n $(git status -s) ]]; then
             echo "CHANGED=true" >> $GITHUB_OUTPUT
@@ -226,6 +227,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           nix flake update --accept-flake-config
+          ./packages/zen-browser-unwrapped/update.sh
           git diff
           if [[ -n $(git status -s) ]]; then
             echo "CHANGED=true" >> $GITHUB_OUTPUT
