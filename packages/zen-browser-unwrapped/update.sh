@@ -3,7 +3,7 @@
 
 set -eou pipefail
 
-PACKAGE_PATH=./pkgs/by-name/ze/zen-browser-unwrapped
+PACKAGE_PATH=.
 PACKAGE_NIX="$PACKAGE_PATH"/package.nix
 
 version="$(curl --silent 'https://api.github.com/repos/zen-browser/desktop/releases/latest' | jq --raw-output '.tag_name')"
