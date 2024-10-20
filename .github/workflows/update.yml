@@ -16,24 +16,30 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       pr_exists: ${{ steps.check-pr.outputs.pr_exists }}
+      pr_number: ${{ steps.check-pr.outputs.pr_number }}
     steps:
       - name: Check for existing PR
         id: check-pr
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          existing_pr=$(gh pr list --repo ${{ github.repository }} --head "auto-update-flake-" --state open --json number --jq length)
-          echo "pr_exists=$existing_pr" >> $GITHUB_OUTPUT
+          existing_pr=$(gh pr list --repo ${{ github.repository }} --head "auto-update-flake-" --state open --json number --jq '.[0].number')
+          if [ -n "$existing_pr" ]; then
+            echo "pr_exists=true" >> $GITHUB_OUTPUT
+            echo "pr_number=$existing_pr" >> $GITHUB_OUTPUT
+          else
+            echo "pr_exists=false" >> $GITHUB_OUTPUT
+          fi
 
   update-flake:
     needs: check-existing-pr
-    if: needs.check-existing-pr.outputs.pr_exists == '0'
+    if: needs.check-existing-pr.outputs.pr_exists == 'false'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Fetch all history for all branches and tags
+          fetch-depth: 0
 
       - name: Install Nix
         uses: cachix/install-nix-action@v30
@@ -47,8 +53,6 @@ jobs:
           git diff
           if [[ -n $(git status -s) ]]; then
             echo "CHANGED=true" >> $GITHUB_OUTPUT
-            echo "Changes detected:"
-            git status -s
           else
             echo "CHANGED=false" >> $GITHUB_OUTPUT
             echo "No changes detected."
@@ -64,154 +68,53 @@ jobs:
 
       - name: Create Pull Request
         if: steps.update-flake.outputs.CHANGED == 'true'
+        id: create-pr
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr create --title "Auto-update Nix flake dependencies" \
+          pr_number=$(gh pr create --title "Auto-update Nix flake dependencies" \
                        --body "This PR updates the Nix flake dependencies." \
                        --base main \
-                       --head ${{ env.BRANCH_NAME }}
-
-      - name: Get Hydra session token
-        id: hydra-session
-        run: |
-          response=$(curl -X POST -i \
-            '${{ env.HYDRA_INSTANCE }}/login' \
-            -H 'accept: application/json' \
-            -H 'Content-Type: application/json' \
-            -H 'Origin: ${{ env.HYDRA_INSTANCE }}' \
-            -d '{
-              "username": "${{ secrets.HYDRA_USERNAME }}",
-              "password": "${{ secrets.HYDRA_PASSWORD }}"
-            }')
-          session_cookie=$(echo "$response" | grep -i 'set-cookie' | sed -n 's/.*hydra_session=\([^;]*\).*/\1/p')
-          echo "SESSION_COOKIE=$session_cookie" >> $GITHUB_OUTPUT
-
-      - name: Create Hydra jobset
-        if: steps.update-flake.outputs.CHANGED == 'true'
-        env:
-          SESSION_COOKIE: ${{ steps.hydra-session.outputs.SESSION_COOKIE }}
-        run: |
-          curl -X PUT -H "Content-Type: application/json" \
-            -H "Cookie: hydra_session=$SESSION_COOKIE" \
-            -d '{
-              "enabled": 1,
-              "visible": false,
-              "keepnr": 3,
-              "schedulingshares": 100,
-              "checkinterval": 60,
-              "description": "PR #${{ github.event.pull_request.number }} - Auto-update flake dependencies",
-              "flake": "github:${{ github.repository }}/${{ env.BRANCH_NAME }}",
-              "type": 1
-            }' \
-            "${{ env.HYDRA_INSTANCE }}/jobset/${{ env.HYDRA_PROJECT }}/${{ env.HYDRA_JOBSET }}"
+                       --head ${{ env.BRANCH_NAME }} \
+                       --json number --jq .number)
+          echo "pr_number=$pr_number" >> $GITHUB_OUTPUT
 
       - name: Trigger Hydra build
         if: steps.update-flake.outputs.CHANGED == 'true'
-        env:
-          SESSION_COOKIE: ${{ steps.hydra-session.outputs.SESSION_COOKIE }}
-        run: |
-          curl -X POST -H "Content-Type: application/json" \
-            -H "Cookie: hydra_session=$SESSION_COOKIE" \
-            -H "Origin: ${{ env.HYDRA_INSTANCE }}" \
-            -d '{"jobsets": ["${{ env.HYDRA_PROJECT }}:${{ env.HYDRA_JOBSET }}"]}' \
-            "${{ env.HYDRA_INSTANCE }}/api/push"
+        uses: ./.github/actions/trigger-hydra-build
+        with:
+          hydra_instance: ${{ env.HYDRA_INSTANCE }}
+          hydra_project: ${{ env.HYDRA_PROJECT }}
+          hydra_jobset: ${{ env.HYDRA_JOBSET }}
+          hydra_username: ${{ secrets.HYDRA_USERNAME }}
+          hydra_password: ${{ secrets.HYDRA_PASSWORD }}
 
       - name: Wait for Hydra build
         if: steps.update-flake.outputs.CHANGED == 'true'
         id: wait-for-build
-        env:
-          SESSION_COOKIE: ${{ steps.hydra-session.outputs.SESSION_COOKIE }}
-        run: |
-          max_attempts=60  # 30 minutes (30 * 2 minutes)
-          attempt=0
-          build_status="unknown"
-          set -e  # Exit immediately if a command exits with a non-zero status
-          while [ $attempt -lt $max_attempts ]; do
-            echo "Attempt $((attempt + 1))/$max_attempts"
-            response=$(curl -s -H "Cookie: hydra_session=$SESSION_COOKIE" \
-              "${{ env.HYDRA_INSTANCE }}/api/jobsets?project=${{ env.HYDRA_PROJECT }}")
-            jobset=$(echo "$response" | jq -r '.[] | select(.name == "${{ env.HYDRA_JOBSET }}")')
-            
-            if [ -z "$jobset" ]; then
-              echo "Jobset ${{ env.HYDRA_JOBSET }} not found. Waiting..."
-              sleep 120
-              attempt=$((attempt + 1))
-              continue
-            fi
-
-            echo "here"
-            
-            nrscheduled=$(echo "$jobset" | jq -r '.nrscheduled')
-            echo "nrscheduled passed"
-            nrfailed=$(echo "$jobset" | jq -r '.nrfailed')
-            echo "nrfailed passed"
-            nrsucceeded=$(echo "$jobset" | jq -r '.nrsucceeded')
-            echo "nrsucceeded passed"
-            nrtotal=$(echo "$jobset" | jq -r '.nrtotal')
-            echo "nrtotal passed"
-            
-            echo "Status: nrscheduled=$nrscheduled, nrfailed=$nrfailed, nrsucceeded=$nrsucceeded, nrtotal=$nrtotal"
-            
-            if [ "$nrtotal" = "0" ]; then
-              echo "Build not started yet. Waiting..."
-            elif [ "$nrfailed" != "0" ]; then
-              build_status="failed"
-              break
-            elif [ "$nrsucceeded" = "$nrtotal" ] && [ "$nrtotal" != "0" ]; then
-              build_status="succeeded"
-              break
-            elif [ "$nrscheduled" = "0" ] && [ "$nrsucceeded" != "0" ] && [ "$nrsucceeded" = "$nrtotal" ]; then
-              build_status="succeeded"
-              break
-            else
-              echo "Build in progress. Waiting..."
-            fi
-            
-            sleep 120  # Wait for 2 minutes before checking again
-            attempt=$((attempt + 1))
-          done
-          
-          if [ "$build_status" = "unknown" ]; then
-            echo "Timeout reached. Considering build as failed."
-            build_status="failed"
-          fi
-          
-          echo "BUILD_SUCCESS=$([ "$build_status" = "succeeded" ] && echo "true" || echo "false")" >> $GITHUB_OUTPUT
-          if [ "$build_status" = "succeeded" ]; then
-            echo "Build succeeded!"
-            exit 0
-          else
-            echo "Build failed or timed out."
-            exit 1
-          fi
+        uses: ./.github/actions/wait-for-hydra-build
+        with:
+          hydra_instance: ${{ env.HYDRA_INSTANCE }}
+          hydra_project: ${{ env.HYDRA_PROJECT }}
+          hydra_jobset: ${{ env.HYDRA_JOBSET }}
+          hydra_username: ${{ secrets.HYDRA_USERNAME }}
+          hydra_password: ${{ secrets.HYDRA_PASSWORD }}
 
       - name: Merge PR if build succeeds
         if: steps.update-flake.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pr_number=$(gh pr list --head ${{ env.BRANCH_NAME }} --json number --jq '.[0].number')
-          gh pr merge $pr_number --merge
+          gh pr merge ${{ steps.create-pr.outputs.pr_number }} --merge
 
-      - name: Comment on PR if build fails
+      - name: Exit if build fails
         if: steps.update-flake.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS != 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          pr_number=$(gh pr list --head ${{ env.BRANCH_NAME }} --json number --jq '.[0].number')
-          gh pr comment $pr_number --body "The Hydra build failed. This PR will be updated and retried in 24 hours."
-
-      - name: Schedule retry
-        if: steps.update-flake.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS != 'true'
-        uses: peter-evans/repository-dispatch@v2
-        with:
-          event-type: retry-flake-update
-          client-payload: '{"pr_number": "${{ steps.create-pr.outputs.pull-request-number }}"}'
+        run: exit 1
 
   retry-update:
+    needs: check-existing-pr
+    if: needs.check-existing-pr.outputs.pr_exists == 'true'
     runs-on: ubuntu-latest
-    if: github.event.action == 'retry-flake-update'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -219,77 +122,61 @@ jobs:
           fetch-depth: 0
 
       - name: Install Nix
-        uses: cachix/install-nix-action@v22
+        uses: cachix/install-nix-action@v30
 
       - name: Checkout PR branch
         run: |
-          pr_number="${{ github.event.client_payload.pr_number }}"
+          pr_number="${{ needs.check-existing-pr.outputs.pr_number }}"
           branch_name=$(gh pr view $pr_number --json headRefName -q .headRefName)
           git checkout $branch_name
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update flake dependencies
-        run: nix flake update
-
-      - name: Commit and push changes
+        id: update-flake
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add flake.lock
-          git commit -m "Auto-update flake dependencies (retry)"
-          git push origin HEAD
+          nix flake update --accept-flake-config
+          git diff
+          if [[ -n $(git status -s) ]]; then
+            echo "CHANGED=true" >> $GITHUB_OUTPUT
+            git add .
+            git commit -m "Auto-update flake dependencies (retry)"
+            git push origin HEAD
+          else
+            echo "CHANGED=false" >> $GITHUB_OUTPUT
+            echo "No changes detected."
+          fi
 
       - name: Trigger Hydra build
-        run: |
-          AUTH_HEADER="Authorization: Basic $(echo -n '${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}' | base64)"
-          curl -X POST -H "Content-Type: application/json" \
-            -H "$AUTH_HEADER" \
-            -H "Origin: ${{ env.HYDRA_INSTANCE }}" \
-            -d '{"jobsets": ["${{ env.HYDRA_PROJECT }}:${{ env.HYDRA_JOBSET }}"]}' \
-            "${{ env.HYDRA_INSTANCE }}/api/push"
+        if: steps.update-flake.outputs.CHANGED == 'true'
+        uses: ./.github/actions/trigger-hydra-build
+        with:
+          hydra_instance: ${{ env.HYDRA_INSTANCE }}
+          hydra_project: ${{ env.HYDRA_PROJECT }}
+          hydra_jobset: ${{ env.HYDRA_JOBSET }}
+          hydra_username: ${{ secrets.HYDRA_USERNAME }}
+          hydra_password: ${{ secrets.HYDRA_PASSWORD }}
 
       - name: Wait for Hydra build
+        if: steps.update-flake.outputs.CHANGED == 'true'
         id: wait-for-build
-        run: |
-          AUTH_HEADER="Authorization: Basic $(echo -n '${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}' | base64)"
-          max_attempts=60  # 30 minutes (30 * 2 minutes)
-          attempt=0
-          while [ $attempt -lt $max_attempts ]; do
-            response=$(curl -s -H "$AUTH_HEADER" \
-              "${{ env.HYDRA_INSTANCE }}/api/jobsets?project=${{ env.HYDRA_PROJECT }}")
-            status=$(echo "$response" | jq -r '.[] | select(.name == "${{ env.HYDRA_JOBSET }}") | .nrfailed')
-            if [ "$status" = "0" ]; then
-              echo "BUILD_SUCCESS=true" >> $GITHUB_OUTPUT
-              exit 0
-            elif [ "$status" != "null" ] && [ "$status" != "0" ]; then
-              echo "BUILD_SUCCESS=false" >> $GITHUB_OUTPUT
-              exit 0
-            fi
-            sleep 120  # Wait for 2 minutes before checking again
-            ((attempt++))
-          done
-          echo "BUILD_SUCCESS=false" >> $GITHUB_OUTPUT  # Timeout, consider as failure
+        uses: ./.github/actions/wait-for-hydra-build
+        with:
+          hydra_instance: ${{ env.HYDRA_INSTANCE }}
+          hydra_project: ${{ env.HYDRA_PROJECT }}
+          hydra_jobset: ${{ env.HYDRA_JOBSET }}
+          hydra_username: ${{ secrets.HYDRA_USERNAME }}
+          hydra_password: ${{ secrets.HYDRA_PASSWORD }}
 
       - name: Merge PR if build succeeds
-        if: steps.wait-for-build.outputs.BUILD_SUCCESS == 'true'
-        run: |
-          pr_number="${{ github.event.client_payload.pr_number }}"
-          gh pr merge $pr_number --merge
+        if: steps.update-flake.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr merge ${{ needs.check-existing-pr.outputs.pr_number }} --merge
 
-      - name: Schedule another retry if build fails
-        if: steps.wait-for-build.outputs.BUILD_SUCCESS != 'true'
-        uses: peter-evans/create-or-update-comment@v3
-        with:
-          issue-number: ${{ github.event.client_payload.pr_number }}
-          body: |
-            The Hydra build failed again. This PR will be updated and retried in 24 hours.
-
-      - name: Retry update after 24 hours
-        if: steps.wait-for-build.outputs.BUILD_SUCCESS != 'true'
-        uses: peter-evans/repository-dispatch@v2
-        with:
-          event-type: retry-flake-update
-          client-payload: '{"pr_number": "${{ github.event.client_payload.pr_number }}"}'
+      - name: Exit if build fails
+        if: steps.update-flake.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS != 'true'
+        run: exit 1
