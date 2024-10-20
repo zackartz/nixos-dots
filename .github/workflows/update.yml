@@ -188,6 +188,25 @@ jobs:
             exit 1
           fi
 
+      - name: Disable Hydra jobset
+        if: steps.update-flake.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS == 'true'
+        env:
+          SESSION_COOKIE: ${{ steps.hydra-session.outputs.SESSION_COOKIE }}
+        run: |
+          curl -X PUT -H "Content-Type: application/json" \
+            -H "Cookie: hydra_session=$SESSION_COOKIE" \
+            -d '{
+              "enabled": 0,
+              "visible": false,
+              "keepnr": 3,
+              "schedulingshares": 100,
+              "checkinterval": 60,
+              "description": "PR #${{ github.event.pull_request.number }} - Auto-update flake dependencies (Disabled)",
+              "flake": "github:${{ github.repository }}/${{ env.BRANCH_NAME }}",
+              "type": 1
+            }' \
+            "${{ env.HYDRA_INSTANCE }}/jobset/${{ env.HYDRA_PROJECT }}/${{ env.HYDRA_JOBSET }}"
+
       - name: Merge PR if build succeeds
         if: steps.update-flake.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS == 'true'
         env:
@@ -351,6 +370,25 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh pr merge ${{ needs.check-existing-pr.outputs.pr_number }} --merge
+
+      - name: Disable Hydra jobset
+        if: steps.update-flake.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS == 'true'
+        env:
+          SESSION_COOKIE: ${{ steps.hydra-session.outputs.SESSION_COOKIE }}
+        run: |
+          curl -X PUT -H "Content-Type: application/json" \
+            -H "Cookie: hydra_session=$SESSION_COOKIE" \
+            -d '{
+              "enabled": 0,
+              "visible": false,
+              "keepnr": 3,
+              "schedulingshares": 100,
+              "checkinterval": 60,
+              "description": "PR #${{ github.event.pull_request.number }} - Auto-update flake dependencies (Disabled)",
+              "flake": "github:${{ github.repository }}/${{ env.BRANCH_NAME }}",
+              "type": 1
+            }' \
+            "${{ env.HYDRA_INSTANCE }}/jobset/${{ env.HYDRA_PROJECT }}/${{ env.HYDRA_JOBSET }}"
 
       - name: Exit if build fails
         if: steps.update-flake.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS != 'true'
