@@ -9,7 +9,7 @@ env:
   BRANCH_NAME: auto-update-flake-${{ github.run_number }}
   HYDRA_INSTANCE: https://hydra.zoeys.computer
   HYDRA_PROJECT: config
-  HYDRA_JOBSET: pr-${{ github.run_number }}  # Changed to use a PR-specific jobset
+  HYDRA_JOBSET: pr-${{ github.run_number }}
 
 jobs:
   check-existing-pr:
@@ -74,37 +74,38 @@ jobs:
             -u "${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}" \
             -d '{
               "enabled": 1,
-              "hidden": false,
+              "visible": true,
+              "keepnr": 3,
+              "schedulingshares": 100,
+              "checkinterval": 60,
               "description": "PR #${{ steps.create-pr.outputs.pull-request-number }} - Auto-update flake dependencies",
               "flake": "github:${{ github.repository }}/${{ env.BRANCH_NAME }}",
-              "checkinterval": 60,
-              "schedulingshares": 100,
-              "enableemail": false,
-              "emailoverride": "",
-              "keepnr": 3
+              "type": 1
             }' \
             "${{ env.HYDRA_INSTANCE }}/jobset/${{ env.HYDRA_PROJECT }}/${{ env.HYDRA_JOBSET }}"
 
       - name: Trigger Hydra build
         if: steps.git-check.outputs.CHANGED == 'true'
         run: |
-          curl -X POST -u "${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}" \
-            "${{ env.HYDRA_INSTANCE }}/api/trigger-build?project=${{ env.HYDRA_PROJECT }}&jobset=${{ env.HYDRA_JOBSET }}"
+          curl -X POST -H "Content-Type: application/json" \
+            -u "${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}" \
+            -d '{"jobsets": ["${{ env.HYDRA_PROJECT }}:${{ env.HYDRA_JOBSET }}"]}' \
+            "${{ env.HYDRA_INSTANCE }}/api/push"
 
       - name: Wait for Hydra build
         if: steps.git-check.outputs.CHANGED == 'true'
         id: wait-for-build
         run: |
-          # Poll Hydra build status
           max_attempts=60  # 30 minutes (30 * 2 minutes)
           attempt=0
           while [ $attempt -lt $max_attempts ]; do
-            status=$(curl -s -u "${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}" \
-              "${{ env.HYDRA_INSTANCE }}/api/job/${{ env.HYDRA_PROJECT }}/${{ env.HYDRA_JOBSET }}/latest" | jq -r '.buildstatus')
+            response=$(curl -s -u "${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}" \
+              "${{ env.HYDRA_INSTANCE }}/api/jobsets?project=${{ env.HYDRA_PROJECT }}")
+            status=$(echo "$response" | jq -r '.[] | select(.name == "${{ env.HYDRA_JOBSET }}") | .nrfailed')
             if [ "$status" = "0" ]; then
               echo "BUILD_SUCCESS=true" >> $GITHUB_OUTPUT
               exit 0
-            elif [ "$status" = "1" ] || [ "$status" = "2" ] || [ "$status" = "3" ]; then
+            elif [ "$status" != "null" ] && [ "$status" != "0" ]; then
               echo "BUILD_SUCCESS=false" >> $GITHUB_OUTPUT
               exit 0
             fi
@@ -168,22 +169,24 @@ jobs:
 
       - name: Trigger Hydra build
         run: |
-          curl -X POST -u "${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}" \
-            "${{ env.HYDRA_INSTANCE }}/api/trigger-build?project=${{ env.HYDRA_PROJECT }}&jobset=${{ env.HYDRA_JOBSET }}"
+          curl -X POST -H "Content-Type: application/json" \
+            -u "${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}" \
+            -d '{"jobsets": ["${{ env.HYDRA_PROJECT }}:${{ env.HYDRA_JOBSET }}"]}' \
+            "${{ env.HYDRA_INSTANCE }}/api/push"
 
       - name: Wait for Hydra build
         id: wait-for-build
         run: |
-          # Poll Hydra build status (same as in update-flake job)
           max_attempts=60  # 30 minutes (30 * 2 minutes)
           attempt=0
           while [ $attempt -lt $max_attempts ]; do
-            status=$(curl -s -u "${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}" \
-              "${{ env.HYDRA_INSTANCE }}/api/job/${{ env.HYDRA_PROJECT }}/${{ env.HYDRA_JOBSET }}/latest" | jq -r '.buildstatus')
+            response=$(curl -s -u "${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}" \
+              "${{ env.HYDRA_INSTANCE }}/api/jobsets?project=${{ env.HYDRA_PROJECT }}")
+            status=$(echo "$response" | jq -r '.[] | select(.name == "${{ env.HYDRA_JOBSET }}") | .nrfailed')
             if [ "$status" = "0" ]; then
               echo "BUILD_SUCCESS=true" >> $GITHUB_OUTPUT
               exit 0
-            elif [ "$status" = "1" ] || [ "$status" = "2" ] || [ "$status" = "3" ]; then
+            elif [ "$status" != "null" ] && [ "$status" != "0" ]; then
               echo "BUILD_SUCCESS=false" >> $GITHUB_OUTPUT
               exit 0
             fi
