@@ -32,33 +32,39 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Fetch all history for all branches and tags
 
       - name: Install Nix
         uses: cachix/install-nix-action@v30
 
-      - name: Create update branch
+      - name: Update flake dependencies
+        id: update-flake
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
+          nix flake update --accept-flake-config
+          if [[ -n $(git status -s) ]]; then
+            echo "CHANGED=true" >> $GITHUB_OUTPUT
+            echo "Changes detected:"
+            git status -s
+            git diff
+          else
+            echo "CHANGED=false" >> $GITHUB_OUTPUT
+            echo "No changes detected."
+          fi
+
+      - name: Create branch and commit changes
+        if: steps.update-flake.outputs.CHANGED == 'true'
+        run: |
           git checkout -b ${{ env.BRANCH_NAME }}
-
-      - name: Update flake dependencies
-        run: nix flake update --accept-flake-config
-
-      - name: Check for changes
-        id: git-check
-        run: |
-          git diff --exit-code flake.lock || echo "CHANGED=true" >> $GITHUB_OUTPUT
-
-      - name: Commit changes
-        if: steps.git-check.outputs.CHANGED == 'true'
-        run: |
-          git add flake.lock
-          git commit -m "chore: update flake"
+          git add .
+          git commit -m "chore: update flake dependencies"
           git push origin ${{ env.BRANCH_NAME }}
+          echo "Branch created and changes pushed."
 
       - name: Create Pull Request
-        if: steps.git-check.outputs.CHANGED == 'true'
+        if: steps.update-flake.outputs.CHANGED == 'true'
         id: create-pr
         uses: peter-evans/create-pull-request@v5
         with:
@@ -66,6 +72,17 @@ jobs:
           body: 'This PR updates the Nix flake dependencies.'
           branch: ${{ env.BRANCH_NAME }}
           base: main
+
+      - name: PR Creation Result
+        if: steps.update-flake.outputs.CHANGED == 'true'
+        run: |
+          echo "PR Creation Output:"
+          echo "${{ toJson(steps.create-pr.outputs) }}"
+
+      - name: No changes detected
+        if: steps.update-flake.outputs.CHANGED != 'true'
+        run: |
+          echo "No changes were detected in the flake.lock file. No PR created."
 
       - name: Create Hydra jobset
         if: steps.git-check.outputs.CHANGED == 'true' && steps.create-pr.outputs.pull-request-number
