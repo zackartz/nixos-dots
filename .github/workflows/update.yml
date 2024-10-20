@@ -187,13 +187,6 @@ jobs:
             exit 1
           fi
 
-      - name: Approve PR
-        if: steps.update-flake.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh pr review ${{ steps.create-pr.outputs.pr_number }} --approve --body "Automated approval: Hydra build succeeded"
-
       - name: Merge PR if build succeeds
         if: steps.update-flake.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS == 'true'
         env:
@@ -350,13 +343,6 @@ jobs:
             echo "Build failed or timed out."
             exit 1
           fi
-
-      - name: Approve PR
-        if: steps.update-flake.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh pr review ${{ needs.check-existing-pr.outputs.pr_number }} --approve --body "Automated approval: Hydra build succeeded"
 
       - name: Merge PR if build succeeds
         if: steps.update-flake.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS == 'true'
