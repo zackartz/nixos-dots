@@ -96,7 +96,7 @@ jobs:
             -H "Cookie: hydra_session=$SESSION_COOKIE" \
             -d '{
               "enabled": 1,
-              "visible": true,
+              "visible": false,
               "keepnr": 3,
               "schedulingshares": 100,
               "checkinterval": 60,
@@ -125,21 +125,33 @@ jobs:
         run: |
           max_attempts=60  # 30 minutes (30 * 2 minutes)
           attempt=0
+          build_success="unknown"
           while [ $attempt -lt $max_attempts ]; do
             response=$(curl -s -H "Cookie: hydra_session=$SESSION_COOKIE" \
               "${{ env.HYDRA_INSTANCE }}/api/jobsets?project=${{ env.HYDRA_PROJECT }}")
             status=$(echo "$response" | jq -r '.[] | select(.name == "${{ env.HYDRA_JOBSET }}") | .nrfailed')
             if [ "$status" = "0" ]; then
-              echo "BUILD_SUCCESS=true" >> $GITHUB_OUTPUT
-              exit 0
+              build_success="true"
+              break
             elif [ "$status" != "null" ] && [ "$status" != "0" ]; then
-              echo "BUILD_SUCCESS=false" >> $GITHUB_OUTPUT
-              exit 0
+              build_success="false"
+              break
             fi
+            echo "Attempt $((attempt+1))/$max_attempts: Build still in progress or not started. Waiting 2 minutes..."
             sleep 120  # Wait for 2 minutes before checking again
             ((attempt++))
           done
-          echo "BUILD_SUCCESS=false" >> $GITHUB_OUTPUT  # Timeout, consider as failure
+          if [ "$build_success" = "unknown" ]; then
+            echo "Timeout reached. Considering build as failed."
+            build_success="false"
+          fi
+          echo "BUILD_SUCCESS=$build_success" >> $GITHUB_OUTPUT
+          if [ "$build_success" = "true" ]; then
+            echo "Build succeeded!"
+          else
+            echo "Build failed or timed out."
+            exit 1
+          fi
 
       - name: Merge PR if build succeeds
         if: steps.update-flake.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS == 'true'
