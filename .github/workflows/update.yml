@@ -125,28 +125,39 @@ jobs:
         run: |
           max_attempts=60  # 30 minutes (30 * 2 minutes)
           attempt=0
-          build_success="unknown"
+          build_status="unknown"
           while [ $attempt -lt $max_attempts ]; do
             response=$(curl -s -H "Cookie: hydra_session=$SESSION_COOKIE" \
               "${{ env.HYDRA_INSTANCE }}/api/jobsets?project=${{ env.HYDRA_PROJECT }}")
-            status=$(echo "$response" | jq -r '.[] | select(.name == "${{ env.HYDRA_JOBSET }}") | .nrfailed')
-            if [ "$status" = "0" ]; then
-              build_success="true"
+            nrscheduled=$(echo "$response" | jq -r '.[] | select(.name == "${{ env.HYDRA_JOBSET }}") | .nrscheduled')
+            nrfailed=$(echo "$response" | jq -r '.[] | select(.name == "${{ env.HYDRA_JOBSET }}") | .nrfailed')
+            nrtotal=$(echo "$response" | jq -r '.[] | select(.name == "${{ env.HYDRA_JOBSET }}") | .nrtotal')
+            
+            echo "Attempt $((attempt+1))/$max_attempts: nrscheduled=$nrscheduled, nrfailed=$nrfailed, nrtotal=$nrtotal"
+            
+            if [ "$nrtotal" = "0" ] || [ "$nrscheduled" = "0" -a "$nrfailed" = "0" ]; then
+              echo "Build not started yet. Waiting..."
+            elif [ "$nrfailed" != "0" ]; then
+              build_status="failed"
               break
-            elif [ "$status" != "null" ] && [ "$status" != "0" ]; then
-              build_success="false"
+            elif [ "$nrscheduled" = "0" ]; then
+              build_status="succeeded"
               break
+            else
+              echo "Build in progress. Waiting..."
             fi
-            echo "Attempt $((attempt+1))/$max_attempts: Build still in progress or not started. Waiting 2 minutes..."
+            
             sleep 120  # Wait for 2 minutes before checking again
             ((attempt++))
           done
-          if [ "$build_success" = "unknown" ]; then
+          
+          if [ "$build_status" = "unknown" ]; then
             echo "Timeout reached. Considering build as failed."
-            build_success="false"
+            build_status="failed"
           fi
-          echo "BUILD_SUCCESS=$build_success" >> $GITHUB_OUTPUT
-          if [ "$build_success" = "true" ]; then
+          
+          echo "BUILD_SUCCESS=$([ "$build_status" = "succeeded" ] && echo "true" || echo "false")" >> $GITHUB_OUTPUT
+          if [ "$build_status" = "succeeded" ]; then
             echo "Build succeeded!"
           else
             echo "Build failed or timed out."
