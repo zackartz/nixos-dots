@@ -24,6 +24,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           existing_pr=$(gh pr list --repo ${{ github.repository }} --head "auto-update-flake-" --state open --json number --jq '.[0].number')
+          echo "$existing_pr"
           if [ -n "$existing_pr" ]; then
             echo "pr_exists=true" >> $GITHUB_OUTPUT
             echo "pr_number=$existing_pr" >> $GITHUB_OUTPUT
