@@ -39,7 +39,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # Fetch all history for all branches and tags
 
       - name: Install Nix
         uses: cachix/install-nix-action@v30
@@ -53,6 +53,8 @@ jobs:
           git diff
           if [[ -n $(git status -s) ]]; then
             echo "CHANGED=true" >> $GITHUB_OUTPUT
+            echo "Changes detected:"
+            git status -s
           else
             echo "CHANGED=false" >> $GITHUB_OUTPUT
             echo "No changes detected."
@@ -68,7 +70,6 @@ jobs:
 
       - name: Create Pull Request
         if: steps.update-flake.outputs.CHANGED == 'true'
-        id: create-pr
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -77,38 +78,114 @@ jobs:
                        --base main \
                        --head ${{ env.BRANCH_NAME }}
 
+      - name: Get Hydra session token
+        id: hydra-session
+        run: |
+          response=$(curl -X POST -i \
+            '${{ env.HYDRA_INSTANCE }}/login' \
+            -H 'accept: application/json' \
+            -H 'Content-Type: application/json' \
+            -H 'Origin: ${{ env.HYDRA_INSTANCE }}' \
+            -d '{
+              "username": "${{ secrets.HYDRA_USERNAME }}",
+              "password": "${{ secrets.HYDRA_PASSWORD }}"
+            }')
+          session_cookie=$(echo "$response" | grep -i 'set-cookie' | sed -n 's/.*hydra_session=\([^;]*\).*/\1/p')
+          echo "SESSION_COOKIE=$session_cookie" >> $GITHUB_OUTPUT
+
       - name: Create Hydra jobset
         if: steps.update-flake.outputs.CHANGED == 'true'
-        uses: ./.github/actions/create-hydra-jobset
-        with:
-          hydra_instance: ${{ env.HYDRA_INSTANCE }}
-          hydra_project: ${{ env.HYDRA_PROJECT }}
-          hydra_jobset: ${{ env.HYDRA_JOBSET }}
-          hydra_username: ${{ secrets.HYDRA_USERNAME }}
-          hydra_password: ${{ secrets.HYDRA_PASSWORD }}
-          flake_uri: "github:${{ github.repository }}/${{ env.BRANCH_NAME }}"
-          description: "PR #${{ steps.create-pr.outputs.pr_number }} - Auto-update flake dependencies"
+        env:
+          SESSION_COOKIE: ${{ steps.hydra-session.outputs.SESSION_COOKIE }}
+        run: |
+          curl -X PUT -H "Content-Type: application/json" \
+            -H "Cookie: hydra_session=$SESSION_COOKIE" \
+            -d '{
+              "enabled": 1,
+              "visible": false,
+              "keepnr": 3,
+              "schedulingshares": 100,
+              "checkinterval": 60,
+              "description": "PR #${{ github.event.pull_request.number }} - Auto-update flake dependencies",
+              "flake": "github:${{ github.repository }}/${{ env.BRANCH_NAME }}",
+              "type": 1
+            }' \
+            "${{ env.HYDRA_INSTANCE }}/jobset/${{ env.HYDRA_PROJECT }}/${{ env.HYDRA_JOBSET }}"
 
       - name: Trigger Hydra build
         if: steps.update-flake.outputs.CHANGED == 'true'
-        uses: ./.github/actions/trigger-hydra-build
-        with:
-          hydra_instance: ${{ env.HYDRA_INSTANCE }}
-          hydra_project: ${{ env.HYDRA_PROJECT }}
-          hydra_jobset: ${{ env.HYDRA_JOBSET }}
-          hydra_username: ${{ secrets.HYDRA_USERNAME }}
-          hydra_password: ${{ secrets.HYDRA_PASSWORD }}
+        env:
+          SESSION_COOKIE: ${{ steps.hydra-session.outputs.SESSION_COOKIE }}
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+            -H "Cookie: hydra_session=$SESSION_COOKIE" \
+            -H "Origin: ${{ env.HYDRA_INSTANCE }}" \
+            -d '{"jobsets": ["${{ env.HYDRA_PROJECT }}:${{ env.HYDRA_JOBSET }}"]}' \
+            "${{ env.HYDRA_INSTANCE }}/api/push"
 
       - name: Wait for Hydra build
         if: steps.update-flake.outputs.CHANGED == 'true'
         id: wait-for-build
-        uses: ./.github/actions/wait-for-hydra-build
-        with:
-          hydra_instance: ${{ env.HYDRA_INSTANCE }}
-          hydra_project: ${{ env.HYDRA_PROJECT }}
-          hydra_jobset: ${{ env.HYDRA_JOBSET }}
-          hydra_username: ${{ secrets.HYDRA_USERNAME }}
-          hydra_password: ${{ secrets.HYDRA_PASSWORD }}
+        env:
+          SESSION_COOKIE: ${{ steps.hydra-session.outputs.SESSION_COOKIE }}
+        run: |
+          max_attempts=60  # 30 minutes (30 * 2 minutes)
+          attempt=0
+          build_status="unknown"
+          set -e  # Exit immediately if a command exits with a non-zero status
+          while [ $attempt -lt $max_attempts ]; do
+            echo "Attempt $((attempt + 1))/$max_attempts"
+            response=$(curl -s -H "Cookie: hydra_session=$SESSION_COOKIE" \
+              "${{ env.HYDRA_INSTANCE }}/api/jobsets?project=${{ env.HYDRA_PROJECT }}")
+            jobset=$(echo "$response" | jq -r '.[] | select(.name == "${{ env.HYDRA_JOBSET }}")')
+            
+            if [ -z "$jobset" ]; then
+              echo "Jobset ${{ env.HYDRA_JOBSET }} not found. Waiting..."
+              sleep 120
+              attempt=$((attempt + 1))
+              continue
+            fi
+
+            
+            nrscheduled=$(echo "$jobset" | jq -r '.nrscheduled')
+            nrfailed=$(echo "$jobset" | jq -r '.nrfailed')
+            nrsucceeded=$(echo "$jobset" | jq -r '.nrsucceeded')
+            nrtotal=$(echo "$jobset" | jq -r '.nrtotal')
+            
+            echo "Status: nrscheduled=$nrscheduled, nrfailed=$nrfailed, nrsucceeded=$nrsucceeded, nrtotal=$nrtotal"
+            
+            if [ "$nrtotal" = "0" ]; then
+              echo "Build not started yet. Waiting..."
+            elif [ "$nrfailed" != "0" ]; then
+              build_status="failed"
+              break
+            elif [ "$nrsucceeded" = "$nrtotal" ] && [ "$nrtotal" != "0" ]; then
+              build_status="succeeded"
+              break
+            elif [ "$nrscheduled" = "0" ] && [ "$nrsucceeded" != "0" ] && [ "$nrsucceeded" = "$nrtotal" ]; then
+              build_status="succeeded"
+              break
+            else
+              echo "Build in progress. Waiting..."
+            fi
+            
+            sleep 120  # Wait for 2 minutes before checking again
+            attempt=$((attempt + 1))
+          done
+          
+          if [ "$build_status" = "unknown" ]; then
+            echo "Timeout reached. Considering build as failed."
+            build_status="failed"
+          fi
+          
+          echo "BUILD_SUCCESS=$([ "$build_status" = "succeeded" ] && echo "true" || echo "false")" >> $GITHUB_OUTPUT
+          if [ "$build_status" = "succeeded" ]; then
+            echo "Build succeeded!"
+            exit 0
+          else
+            echo "Build failed or timed out."
+            exit 1
+          fi
 
       - name: Approve PR
         if: steps.update-flake.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS == 'true'
@@ -166,26 +243,113 @@ jobs:
             echo "No changes detected."
           fi
 
+      - name: Get Hydra session token
+        id: hydra-session
+        run: |
+          response=$(curl -X POST -i \
+            '${{ env.HYDRA_INSTANCE }}/login' \
+            -H 'accept: application/json' \
+            -H 'Content-Type: application/json' \
+            -H 'Origin: ${{ env.HYDRA_INSTANCE }}' \
+            -d '{
+              "username": "${{ secrets.HYDRA_USERNAME }}",
+              "password": "${{ secrets.HYDRA_PASSWORD }}"
+            }')
+          session_cookie=$(echo "$response" | grep -i 'set-cookie' | sed -n 's/.*hydra_session=\([^;]*\).*/\1/p')
+          echo "SESSION_COOKIE=$session_cookie" >> $GITHUB_OUTPUT
+
+      - name: Create Hydra jobset
+        if: steps.update-flake.outputs.CHANGED == 'true'
+        env:
+          SESSION_COOKIE: ${{ steps.hydra-session.outputs.SESSION_COOKIE }}
+        run: |
+          curl -X PUT -H "Content-Type: application/json" \
+            -H "Cookie: hydra_session=$SESSION_COOKIE" \
+            -d '{
+              "enabled": 1,
+              "visible": false,
+              "keepnr": 3,
+              "schedulingshares": 100,
+              "checkinterval": 60,
+              "description": "PR #${{ github.event.pull_request.number }} - Auto-update flake dependencies",
+              "flake": "github:${{ github.repository }}/${{ env.BRANCH_NAME }}",
+              "type": 1
+            }' \
+            "${{ env.HYDRA_INSTANCE }}/jobset/${{ env.HYDRA_PROJECT }}/${{ env.HYDRA_JOBSET }}"
+
       - name: Trigger Hydra build
         if: steps.update-flake.outputs.CHANGED == 'true'
-        uses: ./.github/actions/trigger-hydra-build
-        with:
-          hydra_instance: ${{ env.HYDRA_INSTANCE }}
-          hydra_project: ${{ env.HYDRA_PROJECT }}
-          hydra_jobset: ${{ env.HYDRA_JOBSET }}
-          hydra_username: ${{ secrets.HYDRA_USERNAME }}
-          hydra_password: ${{ secrets.HYDRA_PASSWORD }}
+        env:
+          SESSION_COOKIE: ${{ steps.hydra-session.outputs.SESSION_COOKIE }}
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+            -H "Cookie: hydra_session=$SESSION_COOKIE" \
+            -H "Origin: ${{ env.HYDRA_INSTANCE }}" \
+            -d '{"jobsets": ["${{ env.HYDRA_PROJECT }}:${{ env.HYDRA_JOBSET }}"]}' \
+            "${{ env.HYDRA_INSTANCE }}/api/push"
 
       - name: Wait for Hydra build
         if: steps.update-flake.outputs.CHANGED == 'true'
         id: wait-for-build
-        uses: ./.github/actions/wait-for-hydra-build
-        with:
-          hydra_instance: ${{ env.HYDRA_INSTANCE }}
-          hydra_project: ${{ env.HYDRA_PROJECT }}
-          hydra_jobset: ${{ env.HYDRA_JOBSET }}
-          hydra_username: ${{ secrets.HYDRA_USERNAME }}
-          hydra_password: ${{ secrets.HYDRA_PASSWORD }}
+        env:
+          SESSION_COOKIE: ${{ steps.hydra-session.outputs.SESSION_COOKIE }}
+        run: |
+          max_attempts=60  # 30 minutes (30 * 2 minutes)
+          attempt=0
+          build_status="unknown"
+          set -e  # Exit immediately if a command exits with a non-zero status
+          while [ $attempt -lt $max_attempts ]; do
+            echo "Attempt $((attempt + 1))/$max_attempts"
+            response=$(curl -s -H "Cookie: hydra_session=$SESSION_COOKIE" \
+              "${{ env.HYDRA_INSTANCE }}/api/jobsets?project=${{ env.HYDRA_PROJECT }}")
+            jobset=$(echo "$response" | jq -r '.[] | select(.name == "${{ env.HYDRA_JOBSET }}")')
+            
+            if [ -z "$jobset" ]; then
+              echo "Jobset ${{ env.HYDRA_JOBSET }} not found. Waiting..."
+              sleep 120
+              attempt=$((attempt + 1))
+              continue
+            fi
+
+            nrscheduled=$(echo "$jobset" | jq -r '.nrscheduled')
+            nrfailed=$(echo "$jobset" | jq -r '.nrfailed')
+            nrsucceeded=$(echo "$jobset" | jq -r '.nrsucceeded')
+            nrtotal=$(echo "$jobset" | jq -r '.nrtotal')
+            
+            echo "Status: nrscheduled=$nrscheduled, nrfailed=$nrfailed, nrsucceeded=$nrsucceeded, nrtotal=$nrtotal"
+            
+            if [ "$nrtotal" = "0" ]; then
+              echo "Build not started yet. Waiting..."
+            elif [ "$nrfailed" != "0" ]; then
+              build_status="failed"
+              break
+            elif [ "$nrsucceeded" = "$nrtotal" ] && [ "$nrtotal" != "0" ]; then
+              build_status="succeeded"
+              break
+            elif [ "$nrscheduled" = "0" ] && [ "$nrsucceeded" != "0" ] && [ "$nrsucceeded" = "$nrtotal" ]; then
+              build_status="succeeded"
+              break
+            else
+              echo "Build in progress. Waiting..."
+            fi
+            
+            sleep 120  # Wait for 2 minutes before checking again
+            attempt=$((attempt + 1))
+          done
+          
+          if [ "$build_status" = "unknown" ]; then
+            echo "Timeout reached. Considering build as failed."
+            build_status="failed"
+          fi
+          
+          echo "BUILD_SUCCESS=$([ "$build_status" = "succeeded" ] && echo "true" || echo "false")" >> $GITHUB_OUTPUT
+          if [ "$build_status" = "succeeded" ]; then
+            echo "Build succeeded!"
+            exit 0
+          else
+            echo "Build failed or timed out."
+            exit 1
+          fi
 
       - name: Approve PR
         if: steps.update-flake.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS == 'true'
