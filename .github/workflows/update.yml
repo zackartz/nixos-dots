@@ -68,10 +68,11 @@ jobs:
           base: main
 
       - name: Create Hydra jobset
-        if: steps.git-check.outputs.CHANGED == 'true'
+        if: steps.git-check.outputs.CHANGED == 'true' && steps.create-pr.outputs.pull-request-number
         run: |
+          AUTH_HEADER="Authorization: Basic $(echo -n '${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}' | base64)"
           curl -X PUT -H "Content-Type: application/json" \
-            -u "${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}" \
+            -H "$AUTH_HEADER" \
             -d '{
               "enabled": 1,
               "visible": true,
@@ -85,21 +86,24 @@ jobs:
             "${{ env.HYDRA_INSTANCE }}/jobset/${{ env.HYDRA_PROJECT }}/${{ env.HYDRA_JOBSET }}"
 
       - name: Trigger Hydra build
-        if: steps.git-check.outputs.CHANGED == 'true'
+        if: steps.git-check.outputs.CHANGED == 'true' && steps.create-pr.outputs.pull-request-number
         run: |
+          AUTH_HEADER="Authorization: Basic $(echo -n '${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}' | base64)"
           curl -X POST -H "Content-Type: application/json" \
-            -u "${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}" \
+            -H "$AUTH_HEADER" \
+            -H "Origin: ${{ env.HYDRA_INSTANCE }}" \
             -d '{"jobsets": ["${{ env.HYDRA_PROJECT }}:${{ env.HYDRA_JOBSET }}"]}' \
             "${{ env.HYDRA_INSTANCE }}/api/push"
 
       - name: Wait for Hydra build
-        if: steps.git-check.outputs.CHANGED == 'true'
+        if: steps.git-check.outputs.CHANGED == 'true' && steps.create-pr.outputs.pull-request-number
         id: wait-for-build
         run: |
+          AUTH_HEADER="Authorization: Basic $(echo -n '${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}' | base64)"
           max_attempts=60  # 30 minutes (30 * 2 minutes)
           attempt=0
           while [ $attempt -lt $max_attempts ]; do
-            response=$(curl -s -u "${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}" \
+            response=$(curl -s -H "$AUTH_HEADER" \
               "${{ env.HYDRA_INSTANCE }}/api/jobsets?project=${{ env.HYDRA_PROJECT }}")
             status=$(echo "$response" | jq -r '.[] | select(.name == "${{ env.HYDRA_JOBSET }}") | .nrfailed')
             if [ "$status" = "0" ]; then
@@ -115,14 +119,14 @@ jobs:
           echo "BUILD_SUCCESS=false" >> $GITHUB_OUTPUT  # Timeout, consider as failure
 
       - name: Merge PR if build succeeds
-        if: steps.git-check.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS == 'true'
+        if: steps.git-check.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS == 'true' && steps.create-pr.outputs.pull-request-number
         run: |
           gh pr merge ${{ steps.create-pr.outputs.pull-request-number }} --merge
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Schedule retry if build fails
-        if: steps.git-check.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS != 'true'
+        if: steps.git-check.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS != 'true' && steps.create-pr.outputs.pull-request-number
         uses: peter-evans/create-or-update-comment@v3
         with:
           issue-number: ${{ steps.create-pr.outputs.pull-request-number }}
@@ -130,7 +134,7 @@ jobs:
             The Hydra build failed. This PR will be updated and retried in 24 hours.
 
       - name: Retry update after 24 hours
-        if: steps.git-check.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS != 'true'
+        if: steps.git-check.outputs.CHANGED == 'true' && steps.wait-for-build.outputs.BUILD_SUCCESS != 'true' && steps.create-pr.outputs.pull-request-number
         uses: peter-evans/repository-dispatch@v2
         with:
           event-type: retry-flake-update
@@ -169,18 +173,21 @@ jobs:
 
       - name: Trigger Hydra build
         run: |
+          AUTH_HEADER="Authorization: Basic $(echo -n '${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}' | base64)"
           curl -X POST -H "Content-Type: application/json" \
-            -u "${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}" \
+            -H "$AUTH_HEADER" \
+            -H "Origin: ${{ env.HYDRA_INSTANCE }}" \
             -d '{"jobsets": ["${{ env.HYDRA_PROJECT }}:${{ env.HYDRA_JOBSET }}"]}' \
             "${{ env.HYDRA_INSTANCE }}/api/push"
 
       - name: Wait for Hydra build
         id: wait-for-build
         run: |
+          AUTH_HEADER="Authorization: Basic $(echo -n '${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}' | base64)"
           max_attempts=60  # 30 minutes (30 * 2 minutes)
           attempt=0
           while [ $attempt -lt $max_attempts ]; do
-            response=$(curl -s -u "${{ secrets.HYDRA_USERNAME }}:${{ secrets.HYDRA_PASSWORD }}" \
+            response=$(curl -s -H "$AUTH_HEADER" \
               "${{ env.HYDRA_INSTANCE }}/api/jobsets?project=${{ env.HYDRA_PROJECT }}")
             status=$(echo "$response" | jq -r '.[] | select(.name == "${{ env.HYDRA_JOBSET }}") | .nrfailed')
             if [ "$status" = "0" ]; then
