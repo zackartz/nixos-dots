@@ -101,6 +101,8 @@
 
     zen-browser.url = "github:MarceColl/zen-browser-flake";
 
+    zoeycomputer.url = "git+https://git.zoeys.computer/zoey/zoeys.computer";
+
     systems.url = "github:nix-systems/default";
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
@@ -146,6 +148,7 @@
         blog.nixosModule
         agenix.nixosModules.default
         solaar.nixosModules.default
+        zoeycomputer.nixosModules.default
       ];
     };
   in

@@ -48,6 +48,7 @@
     map.enable = true;
     hydra.enable = true;
     cache.enable = true;
+    zoeycomputer.enable = true;
   };
 
   zmio.blog.enable = true;
