@@ -41,6 +41,7 @@
   services.lock.enable = true;
   services.music.enable = true;
   services.pm-bridge.enable = true;
+  services.pm-bridge.nonInteractive = true;
   services.udiskie.enable = true;
 
   xdg.enable = true;

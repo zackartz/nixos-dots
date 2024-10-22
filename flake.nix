@@ -101,7 +101,10 @@
 
     zen-browser.url = "github:MarceColl/zen-browser-flake";
 
-    zoeycomputer.url = "git+https://git.zoeys.computer/zoey/zoeys.computer";
+    zoeycomputer = {
+      url = "git+https://git.zoeys.computer/zoey/zoeys.computer";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     systems.url = "github:nix-systems/default";
     spicetify-nix = {

@@ -4,6 +4,7 @@
 {
   pkgs,
   inputs,
+  config,
   ...
 }: {
   imports = [
@@ -38,6 +39,19 @@
   services.gh.enable = true;
   services.fail2ban.enable = true;
 
+  age.secrets = {
+    zc_key = {
+      owner = "zoeyscomputer-phx";
+      group = "zoeyscomputer-phx";
+      file = ./sec/zc_key.age;
+    };
+    zc_db_pass = {
+      owner = "zoeyscomputer-phx";
+      group = "zoeyscomputer-phx";
+      file = ./sec/zc_db_pass.age;
+    };
+  };
+
   sites = {
     cv.enable = true;
     gitlab.enable = true;
@@ -48,7 +62,20 @@
     map.enable = true;
     hydra.enable = true;
     cache.enable = true;
-    zoeycomputer.enable = true;
+    minio.enable = true;
+    zoeycomputer = {
+      enable = true;
+      domain = "zoeys.computer";
+      phx = {
+        database = {
+          name = "zoeyscomputer";
+          user = "zoeyscomputer";
+          passwordFile = config.age.secrets.zc_db_pass.path; # Optional
+          host = "localhost"; # Optional, defaults to localhost
+        };
+        secret_key_file = config.age.secrets.zc_key.path;
+      };
+    };
   };
 
   zmio.blog.enable = true;
