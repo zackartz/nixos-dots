@@ -172,11 +172,11 @@
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
-        "lastModified": 1729789881,
-        "narHash": "sha256-z5EYOPtIMRTCYqTuk1SxGCTMH5nJMfEWMJT8c+Iy7/w=",
+        "lastModified": 1729876525,
+        "narHash": "sha256-ufgsc4MzPk+EuWE8Z9wtcvwdaLc4RcgN/peMhrjMF+g=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "185ee299bf80de2cfb21517cdff7d9f1a1f0dd9b",
+        "rev": "921c961c4b0754122a3897bb1d68a40f3f925ef0",
         "type": "github"
       },
       "original": {
@@ -811,11 +811,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1729716953,
-        "narHash": "sha256-FbRKGRRd0amsk/WS/UV9ukJ8jT1dZ2pJBISxkX+uq6A=",
+        "lastModified": 1729894599,
+        "narHash": "sha256-nL9nzNE5/re/P+zOv7NX6bRm5e+DeS1HIufQUJ01w20=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "a4353cc43d1b4dd6bdeacea90eb92a8b7b78a9d7",
+        "rev": "93435d27d250fa986bfec6b2ff263161ff8288cb",
         "type": "github"
       },
       "original": {
@@ -891,11 +891,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1729781453,
-        "narHash": "sha256-vSZSNXXNEPN5JJcUobCBl6FaDvXjmLHhAJWoX3ZmHUQ=",
+        "lastModified": 1729888739,
+        "narHash": "sha256-8R147aQIXbTDzC7S7LLAY2y1bJt8Py2lN40frWS+iGA=",
         "ref": "refs/heads/main",
-        "rev": "3cec45d82113051d35e846e5d80719d8ea0f7002",
-        "revCount": 5372,
+        "rev": "e5384774a8258e44cc7f7b690ce4f6ad1f92b562",
+        "revCount": 5374,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -1343,11 +1343,11 @@
     },
     "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1729449015,
-        "narHash": "sha256-Gf04dXB0n4q0A9G5nTGH3zuMGr6jtJppqdeljxua1fo=",
+        "lastModified": 1729691686,
+        "narHash": "sha256-BAuPWW+9fa1moZTU+jFh+1cUtmsuF8asgzFwejM4wac=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "89172919243df199fe237ba0f776c3e3e3d72367",
+        "rev": "32e940c7c420600ef0d1ef396dc63b04ee9cad37",
         "type": "github"
       },
       "original": {
@@ -1391,11 +1391,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1729755165,
-        "narHash": "sha256-6IpnOHWsaSSjT3yvqlrWfHW6HVCT+wOAlUpcooGJ+FQ=",
+        "lastModified": 1729850857,
+        "narHash": "sha256-WvLXzNNnnw+qpFOmgaM3JUlNEH+T4s22b5i2oyyCpXE=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "cabaf14d3e69c9921d7acedf5d7d60bb2b90be02",
+        "rev": "41dea55321e5a999b17033296ac05fe8a8b5a257",
         "type": "github"
       },
       "original": {
@@ -1413,11 +1413,11 @@
         "nixpkgs": "nixpkgs_10"
       },
       "locked": {
-        "lastModified": 1729792524,
-        "narHash": "sha256-9WnwiocjPZKAFgU1L4FUwoO6vt1kozx/gna8yfVH4oU=",
+        "lastModified": 1729873538,
+        "narHash": "sha256-YVrUQAhfckIxv6Fkxnc7czMzFv76a08k3PlJuDowwdY=",
         "owner": "nix-community",
         "repo": "nixpkgs-wayland",
-        "rev": "6adff0618f449800751559f7c330eaa286818a68",
+        "rev": "0cb5a93b3b291764805dde473f0792b040680b47",
         "type": "github"
       },
       "original": {
@@ -1739,11 +1739,11 @@
         "systems": "systems_12"
       },
       "locked": {
-        "lastModified": 1729310074,
-        "narHash": "sha256-grg1FnAwR110QRnhxKvsQt5Z/KdvTZhV+Evx3PzENFc=",
+        "lastModified": 1729835932,
+        "narHash": "sha256-PPTo15rUsfY0sokY0YQJnTxAWF/oz2+SuQgK2pc0HC8=",
         "ref": "refs/heads/main",
-        "rev": "1826ef8f6765ae9080f743b7b5c0fd319caf7c6e",
-        "revCount": 19,
+        "rev": "8a737fbb37d096ac822bea361bf762542aef4983",
+        "revCount": 27,
         "type": "git",
         "url": "https://git.zoeys.computer/zoey/resume"
       },
@@ -1762,11 +1762,11 @@
         "systems": "systems_13"
       },
       "locked": {
-        "lastModified": 1729806512,
-        "narHash": "sha256-gMaNLE3BgFLdPa/s1HXlQQs+fh1Y7zgN7FdHsiTH4m0=",
+        "lastModified": 1729894780,
+        "narHash": "sha256-HPEenClN+7gGwVcDBQQJrTqtHsfF3H4CjuSSP+fP4CE=",
         "owner": "raphamorim",
         "repo": "rio",
-        "rev": "04f3de1d368bc30071d26ee1e238f8a6ab1fea83",
+        "rev": "9cb7fbfb23b046a3bcc9094f5f620655823b058a",
         "type": "github"
       },
       "original": {
@@ -1874,11 +1874,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1729736953,
-        "narHash": "sha256-Rb6JUop7NRklg0uzcre+A+Ebrn/ZiQPkm4QdKg6/3pw=",
+        "lastModified": 1729823394,
+        "narHash": "sha256-RiinJqorqSLKh1oSpiMHnBe6nQdJzE45lX6fSnAuDnI=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "29b1275740d9283467b8117499ec8cbb35250584",
+        "rev": "7e52e80f5faa374ad4c607d62c6d362589cb523f",
         "type": "github"
       },
       "original": {
@@ -1964,11 +1964,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1729743437,
-        "narHash": "sha256-MvidoEC3xJA7wp6Fjs15CuJ81uXzRHJK0VRSzNsfzcM=",
+        "lastModified": 1729890230,
+        "narHash": "sha256-r3VJy1tkkTf+lDo8cvdrILDjpPTqYhoybpwM0ME8STA=",
         "owner": "Gerg-L",
         "repo": "spicetify-nix",
-        "rev": "933469d5d0bc50bcc3918aa0f425d68fdd7c0736",
+        "rev": "ebbc0161954fbba0c3b5873f9b63f51f58f59a83",
         "type": "github"
       },
       "original": {
@@ -2278,11 +2278,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1729515514,
-        "narHash": "sha256-rgLDuJImNQWVxCj2yR0bZ26f5be/tCT5wYZloMAgK3A=",
+        "lastModified": 1729839164,
+        "narHash": "sha256-kA+oY+B/0shEGVpEZxmMOOjJv8JB6ZifQn21V/tM5o8=",
         "owner": "Alexays",
         "repo": "Waybar",
-        "rev": "dacecb9b265c1c7c36ee43d17526fa95f4e6596f",
+        "rev": "5f260516af9a3e5791c26c7fc18a85a47da5b23f",
         "type": "github"
       },
       "original": {
@@ -2359,11 +2359,11 @@
         "systems": "systems_18"
       },
       "locked": {
-        "lastModified": 1729632182,
-        "narHash": "sha256-1+2Zfng/XTMhmULRzCGIYJukheCyesjolEUC51ppEYY=",
+        "lastModified": 1729901390,
+        "narHash": "sha256-Eg3Pju2MepJZtF7rpEj6b9OF2rb4R9Pus3ViZ8Bf3e4=",
         "ref": "refs/heads/main",
-        "rev": "b925726977da7cc50a377dd09543bc251b5e5698",
-        "revCount": 46,
+        "rev": "6ae835dbb3ac553fca820b743e1ad315684e7fc9",
+        "revCount": 56,
         "type": "git",
         "url": "https://git.zoeys.computer/zoey/zoeys.computer"
       },
