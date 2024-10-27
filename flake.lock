@@ -119,11 +119,11 @@
     },
     "catppuccin": {
       "locked": {
-        "lastModified": 1728407414,
-        "narHash": "sha256-B8LaxUP93eh+it8RW1pGq4SsU2kj7f0ipzFuhBvpON8=",
+        "lastModified": 1729948644,
+        "narHash": "sha256-o91SqI7aFZZHMoqv99WfYcxu9czFV/nqWXV4v9WGFDg=",
         "owner": "catppuccin",
         "repo": "nix",
-        "rev": "96cf8b4a05fb23a53c027621b1147b5cf9e5439f",
+        "rev": "f99984a7f4e2a7f92893443dc1d1971d0ff1fe23",
         "type": "github"
       },
       "original": {
@@ -172,11 +172,11 @@
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
-        "lastModified": 1729876525,
-        "narHash": "sha256-ufgsc4MzPk+EuWE8Z9wtcvwdaLc4RcgN/peMhrjMF+g=",
+        "lastModified": 1729964113,
+        "narHash": "sha256-ZDST68C0+5+PbTDPVzErW5zxYiZzOwdHqb+E472qGQo=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "921c961c4b0754122a3897bb1d68a40f3f925ef0",
+        "rev": "5f83b15a9fe67d4dd1edcd281194d4d30925125a",
         "type": "github"
       },
       "original": {
@@ -891,11 +891,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1729888739,
-        "narHash": "sha256-8R147aQIXbTDzC7S7LLAY2y1bJt8Py2lN40frWS+iGA=",
+        "lastModified": 1729972140,
+        "narHash": "sha256-GvHNgGtiD5Vk21BrVyitWaxsicbegKPdkhSNhcykXSM=",
         "ref": "refs/heads/main",
-        "rev": "e5384774a8258e44cc7f7b690ce4f6ad1f92b562",
-        "revCount": 5374,
+        "rev": "f3f7d3629a632682b1b3acf800f0b5fb10cd48f4",
+        "revCount": 5379,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -1413,11 +1413,11 @@
         "nixpkgs": "nixpkgs_10"
       },
       "locked": {
-        "lastModified": 1729873538,
-        "narHash": "sha256-YVrUQAhfckIxv6Fkxnc7czMzFv76a08k3PlJuDowwdY=",
+        "lastModified": 1729952181,
+        "narHash": "sha256-v1bdvAwO39bOSd230I6ORn62M704eJVpmhleyTHLW3k=",
         "owner": "nix-community",
         "repo": "nixpkgs-wayland",
-        "rev": "0cb5a93b3b291764805dde473f0792b040680b47",
+        "rev": "cc20c845e41873992fbb2484778bdcf656b54c6f",
         "type": "github"
       },
       "original": {
@@ -1762,11 +1762,11 @@
         "systems": "systems_13"
       },
       "locked": {
-        "lastModified": 1729894780,
-        "narHash": "sha256-HPEenClN+7gGwVcDBQQJrTqtHsfF3H4CjuSSP+fP4CE=",
+        "lastModified": 1729936553,
+        "narHash": "sha256-tAie27J8YOn7cYmkZXQ+ZODeiufGX0l3gv3Q2L5NV4I=",
         "owner": "raphamorim",
         "repo": "rio",
-        "rev": "9cb7fbfb23b046a3bcc9094f5f620655823b058a",
+        "rev": "41656874bb41590b0f117f18e7e1b28a05b0a464",
         "type": "github"
       },
       "original": {
@@ -1874,11 +1874,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1729823394,
-        "narHash": "sha256-RiinJqorqSLKh1oSpiMHnBe6nQdJzE45lX6fSnAuDnI=",
+        "lastModified": 1729909612,
+        "narHash": "sha256-eXqxxbOagphPfjPptSlv0pQONB3fH15CQ4G8uCu1BW4=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "7e52e80f5faa374ad4c607d62c6d362589cb523f",
+        "rev": "17cadbc36da05e75197d082decb382a5f4208e30",
         "type": "github"
       },
       "original": {
@@ -1964,11 +1964,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1729890230,
-        "narHash": "sha256-r3VJy1tkkTf+lDo8cvdrILDjpPTqYhoybpwM0ME8STA=",
+        "lastModified": 1729916250,
+        "narHash": "sha256-a+rWl/o2FaJnjm5iM6sFPriybHx3c7NsMsnlW+vYPHI=",
         "owner": "Gerg-L",
         "repo": "spicetify-nix",
-        "rev": "ebbc0161954fbba0c3b5873f9b63f51f58f59a83",
+        "rev": "2562a5819140581377530077888b37137d2d05fc",
         "type": "github"
       },
       "original": {
@@ -2359,11 +2359,11 @@
         "systems": "systems_18"
       },
       "locked": {
-        "lastModified": 1729901390,
-        "narHash": "sha256-Eg3Pju2MepJZtF7rpEj6b9OF2rb4R9Pus3ViZ8Bf3e4=",
+        "lastModified": 1729911848,
+        "narHash": "sha256-LYd0aC4XmIGCZMR/Ph3NmB70iljfYVzrJiRbmMoTTns=",
         "ref": "refs/heads/main",
-        "rev": "6ae835dbb3ac553fca820b743e1ad315684e7fc9",
-        "revCount": 56,
+        "rev": "79a17290d518b13ad286a26b9e08660175ade371",
+        "revCount": 64,
         "type": "git",
         "url": "https://git.zoeys.computer/zoey/zoeys.computer"
       },
