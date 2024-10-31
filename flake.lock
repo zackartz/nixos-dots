@@ -172,11 +172,11 @@
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
-        "lastModified": 1730219031,
-        "narHash": "sha256-WhzEm1a/kZw9jUrXzlAWnDI6PlwjdJYv+O4+e0cI4wI=",
+        "lastModified": 1730308411,
+        "narHash": "sha256-KFg9mr+LiJlkOyELdZt31S0cH2wQv1fiIlfe8py/lck=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "ab38e5767457fd7bc0ef00962feeb4c4e5ddfeb8",
+        "rev": "e380fa7ec3666a347d3d5bbcacbdd53dd9f89157",
         "type": "github"
       },
       "original": {
@@ -891,11 +891,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1730143527,
-        "narHash": "sha256-3uRuQHxAd/+8PptDpIZZlC588O0eTV1mTa+z8v4cWPU=",
+        "lastModified": 1730330432,
+        "narHash": "sha256-IfwPXZNjQlToqV37RjUhm9dofHaqZD3BTB4J111OmGQ=",
         "ref": "refs/heads/main",
-        "rev": "d679d200299ed4670f0d0f138c793d5f507b7cec",
-        "revCount": 5390,
+        "rev": "7c7a84ff60f8c1e00c6a0de3f7656f0bbd933d56",
+        "revCount": 5395,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -1391,11 +1391,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1730045389,
-        "narHash": "sha256-4spSNTZ6h8Xmvrr9oqfuxc9jarasGj1QOcsgw8BfNd8=",
+        "lastModified": 1730170245,
+        "narHash": "sha256-PRq4vJjDa+m1mNwkV9H7zVzMhuMqsHJrTGx0iJZ0e0w=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "0fcb98acb6633445764dafe180e6833eb0f95208",
+        "rev": "30c9efeef01e2ad4880bff6a01a61dd99536b3c9",
         "type": "github"
       },
       "original": {
@@ -1413,11 +1413,11 @@
         "nixpkgs": "nixpkgs_10"
       },
       "locked": {
-        "lastModified": 1730229503,
-        "narHash": "sha256-SYFUfTXsDeIK3q7fy6SrZ1v+lVQrEmZaKc1fpp4wuBQ=",
+        "lastModified": 1730331494,
+        "narHash": "sha256-5S164/tHLVSCdW3QKv76HU8TiRovFOqcWJAHvve2TfE=",
         "owner": "nix-community",
         "repo": "nixpkgs-wayland",
-        "rev": "d3bb51e62dd4a31c7cfea0f1ad511e53774a79fe",
+        "rev": "4f52e2218ba79781aeb9f44b94142c6973664cf2",
         "type": "github"
       },
       "original": {
@@ -1762,11 +1762,11 @@
         "systems": "systems_13"
       },
       "locked": {
-        "lastModified": 1730192437,
-        "narHash": "sha256-V4QWuc0ULK0rFGXzNH9lt25po19C8r99UaXn9kqtPFo=",
+        "lastModified": 1730323624,
+        "narHash": "sha256-5tfe+ncDMnc51rvoqCUajHyUGYw0CaER+iKj+bUJDLA=",
         "owner": "raphamorim",
         "repo": "rio",
-        "rev": "8f4e5568504a26ec167d0816543e6c6fd987d46f",
+        "rev": "b53acf9c37428e87fdca1b537567c07063ca0965",
         "type": "github"
       },
       "original": {
@@ -1874,11 +1874,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1730169013,
-        "narHash": "sha256-rvgF03ODu1uEYbdEsloN4fQrJ+k1NOv/7MJvCpHHnBk=",
+        "lastModified": 1730255392,
+        "narHash": "sha256-9pydem8OVxa0TwjUai1PJe0yHAJw556CWCEwyoAq8Ik=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "92eb1268cc19609f2fe24311b871f37bf3dc5afd",
+        "rev": "7509d76ce2b3d22b40bd25368b45c0a9f7f36c89",
         "type": "github"
       },
       "original": {
@@ -1964,11 +1964,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1730175473,
-        "narHash": "sha256-JASnF3cFrQ1k6KsitR2yylpeWdPNb2xJeIaMeipe3BA=",
+        "lastModified": 1730261837,
+        "narHash": "sha256-syeN2dLFxJ9bhsG1YnwWpwMgCttBY1S60KUrqLIrmMo=",
         "owner": "Gerg-L",
         "repo": "spicetify-nix",
-        "rev": "446351c37e053a0098aa19d8c61448bbcfd8f0cc",
+        "rev": "1c482c8baffd494119b7f61735d35c62a0a22244",
         "type": "github"
       },
       "original": {
@@ -2359,11 +2359,11 @@
         "systems": "systems_18"
       },
       "locked": {
-        "lastModified": 1730060630,
-        "narHash": "sha256-WJFmASgDfeX1d3Bqm7kx/MlXpbau02Wzb4JQUGEB+QE=",
+        "lastModified": 1730322983,
+        "narHash": "sha256-zsKDqUT18EG9ceR1ieYzRwrU/J7cVdocyFoXvQ4QMDM=",
         "ref": "refs/heads/main",
-        "rev": "8ad91faceb3631c19f397b0db90cab6be1492310",
-        "revCount": 73,
+        "rev": "e3da619b0a04a0f02d437a784318f142807a1e94",
+        "revCount": 74,
         "type": "git",
         "url": "https://git.zoeys.computer/zoey/zoeys.computer"
       },
