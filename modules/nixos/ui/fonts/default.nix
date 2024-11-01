@@ -40,11 +40,11 @@ in {
             exportGlyphNames = true
 
               [buildPlans.IosevkaCustom.variants]
-              inherits = "ss16"
+              inherits = "ss01"
           '';
         })
         noto-fonts
-        noto-fonts-cjk
+        noto-fonts-cjk-sans
         noto-fonts-emoji
         jetbrains-mono
         (nerdfonts.override {fonts = ["Iosevka" "JetBrainsMono"];})

@@ -20,6 +20,7 @@
     "lazyvim.plugins.extras.lang.tailwind",
     "lazyvim.plugins.extras.lang.elixir",
     "lazyvim.plugins.extras.lang.tex",
+    "lazyvim.plugins.extras.lang.go",
     "lazyvim.plugins.extras.lang.typescript",
     "lazyvim.plugins.extras.test.core",
     "lazyvim.plugins.extras.util.dot",

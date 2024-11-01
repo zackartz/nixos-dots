@@ -1,3 +1,9 @@
+function confirm(opts)
+  local cmp = require("blink.cmp")
+  opts = vim.tbl_extend("force", { select = true }, opts or {})
+  return function(fallback) end
+end
+
 return {
   {
     "LazyVim/LazyVim",
@@ -5,6 +11,8 @@ return {
       colorscheme = "catppuccin",
     },
   },
+  { "nvim-lualine/lualine.nvim", enabled = false },
+  { "echasnovski/mini.statusline", opts = {} },
   {
     "L3MON4D3/LuaSnip",
     dependencies = {
@@ -30,6 +38,18 @@ return {
   },
   { "hrsh7th/nvim-cmp", enabled = false },
   {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    tag = "v3.8.2",
+    ---@module "ibl"
+    ---@type ibl.config
+    -- opts = {
+    --   debounce = 100,
+    --   indent = { char = "|" },
+    --   whitespace = { highlight = "Whitespace", "NonText" },
+    -- },
+  },
+  {
     "jake-stewart/force-cul.nvim",
     config = function()
       require("force-cul").setup()
@@ -39,19 +59,49 @@ return {
     "saghen/blink.cmp",
     lazy = false, -- lazy loading handled internally
     -- optional: provides snippets for the snippet source
-    dependencies = "rafamadriz/friendly-snippets",
+    dependencies = { "rafamadriz/friendly-snippets", "saghen/blink.compat" },
 
     build = "cargo build --release",
 
+    sources = {
+      completion = {
+        enabled_providers = { "lsp", "path", "snippets", "buffer", "dadbod", "crates" },
+      },
+
+      providers = {
+        dadbod = {
+          name = "vim-dadbod-completion",
+          module = "blink.compat",
+          opts = {},
+        },
+        crates = {
+          name = "crates",
+          module = "blink.compat",
+          opts = {},
+        },
+      },
+    },
+
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
     opts = {
       keymap = {
-        show = "<C-S-space>",
-        accept = "<Enter>",
-        select_prev = { "<S-Tab>", "<C-j>", "<C-p>" },
-        select_next = { "<C-Tab>", "<C-k>", "<C-n>" },
-
-        snippet_forward = "<Tab>",
-        snippet_backward = "<C-S-Tab>",
+        ["<C-b>"] = { "scroll_documentation_down", "fallback" },
+        ["<C-f>"] = { "scroll_documentation_up", "fallback" },
+        ["<C-p>"] = { "select_prev", "fallback" },
+        ["<C-n>"] = { "select_next", "fallback" },
+        ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+        ["<CR>"] = {
+          function(cmp)
+            if cmp.is_in_snippet() then
+              return cmp.accept()
+            else
+              return cmp.select_and_accept()
+            end
+          end,
+          "snippet_forward",
+          "fallback",
+        },
       },
 
       windows = {

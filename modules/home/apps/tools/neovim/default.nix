@@ -70,6 +70,7 @@ in {
         markdownlint-cli2
         shfmt
         sqlfluff
+        go
 
         tailwindcss-language-server
         clang

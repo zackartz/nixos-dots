@@ -39,6 +39,8 @@
   services.gh.enable = true;
   services.fail2ban.enable = true;
 
+  ui.fonts.enable = true;
+
   age.secrets = {
     zc_key = {
       owner = "zoeyscomputer-phx";

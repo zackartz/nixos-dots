@@ -151,7 +151,7 @@
 in
   buildStdenv.mkDerivation rec {
     pname = "zen-browser-unwrapped";
-    version = "1.0.1-a.12";
+    version = "1.0.1-a.13";
 
     src = fetchFromGitHub {
       owner = "zen-browser";
@@ -159,7 +159,7 @@ in
       rev = "${version}";
       leaveDotGit = true;
       fetchSubmodules = true;
-      hash = "sha256-O5S468G+2fF11mnjR8lMSVBOTRe/X5VxfBLAEVh2mA0=";
+      hash = "sha256-z1YIdulvzkbSa266RZwBbYbeHqY22RvdHAdboR9uqig=";
     };
 
     firefoxVersion = (lib.importJSON "${src}/surfer.json").version.version;
