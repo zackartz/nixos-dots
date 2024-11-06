@@ -21,6 +21,7 @@ writeShellScriptBin "enc" ''
 
   # Create recipient arguments for gpg
   recipients=()
+  recipients+=("-r" "0x5F873416BCF59F35")
   for recipient in "$@"; do
       recipients+=("-r" "$recipient")
   done
@@ -39,14 +40,17 @@ writeShellScriptBin "enc" ''
               --armor \
               --trust-model always \
               "''${recipients[@]}" \
-              "$temp_file" | ${wl-clipboard}/bin/wl-copy
+              "$temp_file"
+
+          cat "$temp_file".asc | ${wl-clipboard}/bin/wl-copy --type text/plain
           echo "Encrypted content copied to Wayland clipboard"
       elif [[ -n "$DISPLAY" ]]; then
           ${gnupg}/bin/gpg --encrypt \
               --armor \
               --trust-model always \
               "''${recipients[@]}" \
-              "$temp_file" | ${xclip}/bin/xclip -selection clipboard
+              "$temp_file"
+          cat "$temp_file.asc" | ${xclip}/bin/xclip -selection clipboard
           echo "Encrypted content copied to X11 clipboard"
       else
           echo "No display detected, cannot copy to clipboard"
