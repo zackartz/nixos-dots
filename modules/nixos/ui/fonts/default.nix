@@ -40,7 +40,7 @@ in {
             exportGlyphNames = true
 
               [buildPlans.IosevkaCustom.variants]
-              inherits = "ss01"
+              inherits = "ss14"
           '';
         })
         noto-fonts

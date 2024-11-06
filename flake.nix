@@ -24,7 +24,7 @@
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
 
     resume.url = "git+https://git.zoeys.computer/zoey/resume";
-    anyrun.url = "github:Kirottu/anyrun";
+    anyrun.url = "github:anyrun-org/anyrun/a808e6d801d9e216a0c077a003fba22cfc3a1990";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
     ags.url = "github:Aylur/ags";
     agenix.url = "github:ryantm/agenix";

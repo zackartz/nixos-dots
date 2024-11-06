@@ -1,3 +1,20 @@
+# pname = "zen-browser-unwrapped";
+# version = "715b6df2fb8171336adc8712668a5e8458f7749b";
+#
+# src = fetchFromGitHub {
+#   owner = "zen-browser";
+#   repo = "desktop";
+#   rev = "${version}";
+#   leaveDotGit = true;
+#   fetchSubmodules = true;
+#   hash = "sha256-0+x2XoZyMdzP1beJvUSeM/QnFyQ+FSuGIatHh1mtBaw=";
+# };
+#
+# firefoxVersion = (lib.importJSON "${src}/surfer.json").version.version;
+# firefoxSrc = fetchurl {
+#   url = "mirror://mozilla/firefox/releases/${firefoxVersion}/source/firefox-${firefoxVersion}.source.tar.xz";
+#   hash = "sha256-XAMbVywdpyZnfi/5e2rVp+OyM4em/DljORy1YvgKXkg=";
+# };
 {
   buildNpmPackage,
   buildPackages,
@@ -100,13 +117,13 @@
 }: let
   surfer = buildNpmPackage {
     pname = "surfer";
-    version = "1.4.21";
+    version = "1.5.0";
 
     src = fetchFromGitHub {
       owner = "zen-browser";
       repo = "surfer";
-      rev = "7f6da82ec44d210875b9a9c40b2169df0c88ff44";
-      hash = "sha256-QfckIXxg5gUNvoofM39ZEiKkYV62ZJduHKVd171HQBw=";
+      rev = "50af7094ede6e9f0910f010c531f8447876a6464";
+      hash = "sha256-wmAWg6hoICNHfoXJifYFHmyFQS6H22u3GSuRW4alexw=";
     };
 
     patches = [./surfer-dont-check-update.patch];
@@ -135,9 +152,11 @@
     llvmPackages.stdenv.cc.override {bintools = buildPackages.rustc.llvmPackages.bintools;}
   );
 
+  inherit (pkgsCross) wasi32;
+
   wasiSysRoot = runCommand "wasi-sysroot" {} ''
     mkdir -p "$out"/lib/wasm32-wasi
-    for lib in ${pkgsCross.wasi32.llvmPackages.libcxx}/lib/*; do
+    for lib in ${wasi32.llvmPackages.libcxx}/lib/*; do
       ln -s "$lib" "$out"/lib/wasm32-wasi
     done
   '';
@@ -145,27 +164,32 @@
   firefox-l10n = fetchFromGitHub {
     owner = "mozilla-l10n";
     repo = "firefox-l10n";
-    rev = "cb528e0849a41c961f7c1ecb9e9604fc3167e03e";
-    hash = "sha256-KQtSLDDPo6ffQwNs937cwccMasUJ/bnBFjY4LxrNGFg=";
+    rev = "9d639cd79d6b73081fadb3474dd7d73b89732e7b";
+    hash = "sha256-+2JCaPp+c2BRM60xFCeY0pixIyo2a3rpTPaSt1kTfDw=";
   };
 in
-  buildStdenv.mkDerivation rec {
+  buildStdenv.mkDerivation (finalAttrs: {
     pname = "zen-browser-unwrapped";
-    version = "1.0.1-a.13";
+    version = "1.0.1-t.17";
 
     src = fetchFromGitHub {
       owner = "zen-browser";
       repo = "desktop";
-      rev = "${version}";
-      leaveDotGit = true;
+      rev = "715b6df2fb8171336adc8712668a5e8458f7749b";
+      hash = "sha256-0+x2XoZyMdzP1beJvUSeM/QnFyQ+FSuGIatHh1mtBaw=";
       fetchSubmodules = true;
-      hash = "sha256-z1YIdulvzkbSa266RZwBbYbeHqY22RvdHAdboR9uqig=";
     };
 
-    firefoxVersion = (lib.importJSON "${src}/surfer.json").version.version;
+    # DO NOT UPDATE THE FIREFOX VERSION MANUALLY!
+    #
+    # Both `firefoxVersion` and `firefoxSrc` are managed by the `update.sh` script.
+    # The Firefox version is specified by `zen-browser` in the `surfer.json` file.
+    #
+    # We need to manually set the version here to avoid IFD.
+    firefoxVersion = "132.0.1";
     firefoxSrc = fetchurl {
-      url = "mirror://mozilla/firefox/releases/${firefoxVersion}/source/firefox-${firefoxVersion}.source.tar.xz";
-      hash = "sha256-en3z+Xc3RT76okPKnbr5XQ8PgzxdyK+stXBO4W7wYNA=";
+      url = "mirror://mozilla/firefox/releases/${finalAttrs.firefoxVersion}/source/firefox-${finalAttrs.firefoxVersion}.source.tar.xz";
+      hash = "sha256-XAMbVywdpyZnfi/5e2rVp+OyM4em/DljORy1YvgKXkg=";
     };
 
     SURFER_COMPAT = generic;
@@ -189,7 +213,7 @@ in
         surfer
         unzip
         wrapGAppsHook3
-        lib.custom.pkgs-unstable.xorg.xvfb
+        xorg.xvfb
       ]
       ++ lib.optionals crashreporterSupport [
         dump_syms
@@ -260,12 +284,6 @@ in
         libxkbcommon
       ];
 
-    configureScript = writeShellScript "configureMozconfig" ''
-      for flag in $@; do
-        echo "ac_add_options $flag" >> mozconfig
-      done
-    '';
-
     configureFlags =
       [
         "--disable-bootstrap"
@@ -304,17 +322,49 @@ in
         (lib.enableFeature enableDebugSymbols "debug-symbols")
       ];
 
+    configureScript = writeShellScript "configureMozconfig" ''
+      for flag in $@; do
+        echo "ac_add_options $flag" >> mozconfig
+      done
+    '';
+
+    # To the person reading this wondering what is going on here, this is what
+    # happens when a build process relies on Git. Normally you would use `fetchgit`
+    # with `leaveDotGit = true`, however that leads to reproducibility issues, so
+    # instead we create our own Git repo with a single commit.
+    #
+    # `surfer` (the build tool made for zen-browser) uses git to read the latest
+    # HEAD commit, `git apply`, and likely a few other operations.
     preConfigure = ''
-      export LLVM_PROFDATA=llvm-profdata
-      export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
-      export WASM_CC=${pkgsCross.wasi32.stdenv.cc}/bin/${pkgsCross.wasi32.stdenv.cc.targetPrefix}cc
-      export WASM_CXX=${pkgsCross.wasi32.stdenv.cc}/bin/${pkgsCross.wasi32.stdenv.cc.targetPrefix}c++
-      export ZEN_RELEASE=1
-      surfer ci --brand alpha --display-version ${version}
       export HOME="$TMPDIR"
       git config --global user.email "nixbld@localhost"
       git config --global user.name "nixbld"
-      install -D ${firefoxSrc} .surfer/engine/firefox-${firefoxVersion}.source.tar.xz
+
+      # Initialize git repo and handle submodules properly
+      git init
+      git config --global init.defaultBranch main
+
+      # Force add all files including submodules
+      git add -A -f
+
+      # Initialize and update submodules if they exist
+      if [ -f .gitmodules ]; then
+        git submodule init
+        git submodule update --init --recursive
+      fi
+
+      # Commit all changes including submodule state
+      git commit -m 'nixpkgs' -a --allow-empty
+
+      export LLVM_PROFDATA=llvm-profdata
+      export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
+      export WASM_CC=${wasi32.stdenv.cc}/bin/${wasi32.stdenv.cc.targetPrefix}cc
+      export WASM_CXX=${wasi32.stdenv.cc}/bin/${wasi32.stdenv.cc.targetPrefix}c++
+
+      export ZEN_RELEASE=1
+      surfer ci --brand alpha --display-version ${finalAttrs.version}
+
+      install -D ${finalAttrs.firefoxSrc} .surfer/engine/firefox-${finalAttrs.firefoxVersion}.source.tar.xz
       surfer download
       surfer import
       patchShebangs engine/mach engine/build engine/tools
@@ -322,20 +372,26 @@ in
 
     preBuild = ''
       cp -r ${firefox-l10n} l10n/firefox-l10n
+
       for lang in $(cat ./l10n/supported-languages); do
         rsync -av --progress l10n/firefox-l10n/"$lang"/ l10n/"$lang" --exclude .git
       done
+
       sh scripts/copy-language-pack.sh en-US
+
       for lang in $(cat ./l10n/supported-languages); do
         sh scripts/copy-language-pack.sh "$lang"
       done
+
       Xvfb :2 -screen 0 1024x768x24 &
       export DISPLAY=:2
     '';
 
     buildPhase = ''
       runHook preBuild
+
       surfer build
+
       runHook postBuild
     '';
 
@@ -348,15 +404,22 @@ in
       description = "Firefox based browser with a focus on privacy and customization";
       homepage = "https://www.zen-browser.app/";
       license = lib.licenses.mpl20;
-      maintainers = with lib.maintainers; [matthewpi];
-      platforms = lib.platforms.unix;
+      maintainers = with lib.maintainers; [
+        matthewpi
+        titaniumtown
+      ];
+      platforms = ["x86_64-linux"];
     };
 
     enableParallelBuilding = true;
     requiredSystemFeatures = ["big-parallel"];
 
     passthru = {
-      binaryName = meta.mainProgram;
+      updateScript = ./update.sh;
+
+      # These values are used by `wrapFirefox`.
+      # ref; `pkgs/applications/networking/browsers/firefox/wrapper.nix'
+      binaryName = finalAttrs.meta.mainProgram;
       inherit alsaSupport;
       inherit jackSupport;
       inherit pipewireSupport;
@@ -367,4 +430,4 @@ in
       inherit gtk3;
       inherit wasiSysRoot;
     };
-  }
+  })

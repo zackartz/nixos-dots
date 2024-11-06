@@ -86,6 +86,8 @@
 
     pkgs.thunderbird
 
+    pkgs.custom.enc
+
     pkgs.mongodb-compass
     pkgs.postman
     pkgs.mosh

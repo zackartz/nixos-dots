@@ -12,14 +12,14 @@ in {
     enable = mkBoolOpt false "Enable Kitty Term";
 
     fonts = {
-      normal = mkStringOpt "JetBrainsMonoNL Nerd Font Mono Bold" "Normal Font";
-      bold = mkStringOpt "JetBrainsMonoNL Nerd Font Mono ExtraBold" "Bold Font";
-      italic = mkStringOpt "JetBrainsMonoNL Nerd Font Mono Bold Italic" "Italic Font";
-      bold_italic = mkStringOpt "JetBrainsMonoNL Nerd Font Mono ExtraBold Italic" "Bold Italic Font";
-      # normal = mkStringOpt "Iosevka Bold" "Normal Font";
-      # bold = mkStringOpt "Iosevka ExtraBold" "Bold Font";
-      # italic = mkStringOpt "Iosevka Bold Italic" "Italic Font";
-      # bold_italic = mkStringOpt "Iosevka ExtraBold Italic" "Bold Italic Font";
+      # normal = mkStringOpt "ZedMono Nerd Font Mono Bold" "Normal Font";
+      # bold = mkStringOpt "ZedMono Nerd Font Mono ExtraBold" "Bold Font";
+      # italic = mkStringOpt "ZedMono Nerd Font Mono Bold Italic" "Italic Font";
+      # bold_italic = mkStringOpt "ZedMono Nerd Font Mono ExtraBold Italic" "Bold Italic Font";
+      normal = mkStringOpt "Iosevka Bold" "Normal Font";
+      bold = mkStringOpt "Iosevka ExtraBold" "Bold Font";
+      italic = mkStringOpt "Iosevka Bold Italic" "Italic Font";
+      bold_italic = mkStringOpt "Iosevka ExtraBold Italic" "Bold Italic Font";
     };
   };
 
