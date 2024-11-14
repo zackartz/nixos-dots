@@ -17,7 +17,7 @@ writeShellScriptBin "enc" ''
 
   # Create a temporary file
   temp_file=$(${coreutils}/bin/mktemp)
-  trap "${coreutils}/bin/rm -f $temp_file" EXIT
+  trap "${coreutils}/bin/rm -f $temp_file $temp_file.asc" EXIT
 
   # Create recipient arguments for gpg
   recipients=()

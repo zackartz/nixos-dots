@@ -39,6 +39,21 @@
   services.gh.enable = true;
   services.fail2ban.enable = true;
 
+  services.atproto-pds = {
+    enable = true;
+    nginx = {
+      enable = true;
+      domain = "zoeys.computer";
+      subdomainPrefix = "pds";
+      useACME = true;
+    };
+    blobStorage = {
+      type = "disk";
+      diskPath = "/pds/blocks"; # or your preferred path
+    };
+    port = 3525; # or any other port you want to use
+  };
+
   ui.fonts.enable = true;
 
   age.secrets = {

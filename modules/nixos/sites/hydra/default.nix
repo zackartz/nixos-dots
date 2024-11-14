@@ -40,6 +40,7 @@ in {
         "git+ssh://github.com/"
         "git+https://git.zoeys.computer/"
         "git+ssh://git.zoeys.computer/"
+        "path:"
       ];
       trustedUsers = ["hydra"]; # Ensure hydra user is trusted for nix
       buildMachines = [

@@ -170,13 +170,13 @@
 in
   buildStdenv.mkDerivation (finalAttrs: {
     pname = "zen-browser-unwrapped";
-    version = "1.0.1-t.17";
+    version = "1.0.1-a.19";
 
     src = fetchFromGitHub {
       owner = "zen-browser";
       repo = "desktop";
-      rev = "715b6df2fb8171336adc8712668a5e8458f7749b";
-      hash = "sha256-0+x2XoZyMdzP1beJvUSeM/QnFyQ+FSuGIatHh1mtBaw=";
+      rev = "0e02cb14ecd72f5bc90a0e1093731409ab043578";
+      hash = "sha256-+eehLsnQoWapkSKo3zWFxaz6N68BryK1XsmSk48zbbk=";
       fetchSubmodules = true;
     };
 

@@ -18,6 +18,7 @@ with pkgs; {
   MANPAGER = "sh -c 'col -bx | bat -l man -p'";
   du = getExe du-dust;
   ps = getExe procs;
+  lb = "pw-loopback -C \"alsa_input.pci-0000_0d_00.4.analog-stereo\" -P \"Scarlett Solo (3rd Gen.) Headphones / Line 1-2\"";
   deploy = "nixos-rebuild switch --flake ~/nixos#pluto --target-host zoeys.computer --use-remote-sudo";
   m = "mkdir -p";
   fcd = "cd $(find -type d | fzf)";

@@ -37,7 +37,7 @@ in {
 
       Service = {
         Restart = "always";
-        ExecStart = "${pkgs.protonmail-bridge}/bin/protonmail-bridge --no-window --log-level ${cfg.logLevel}" + optionalString (cfg.nonInteractive) " --noninteractive";
+        ExecStart = "${lib.getExe pkgs.hydroxide} serve";
       };
 
       Install = {

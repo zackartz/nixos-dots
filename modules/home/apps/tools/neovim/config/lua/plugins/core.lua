@@ -1,37 +1,34 @@
-function confirm(opts)
-  local cmp = require("blink.cmp")
-  opts = vim.tbl_extend("force", { select = true }, opts or {})
-  return function(fallback) end
-end
-
 return {
   {
     "LazyVim/LazyVim",
     opts = {
       colorscheme = "catppuccin",
+      news = { lazyvim = false },
     },
   },
+  "f-person/git-blame.nvim",
   { "nvim-lualine/lualine.nvim", enabled = false },
+  -- {
+  --   "nvim-neorg/neorg",
+  --   lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
+  --   version = "*", -- Pin Neorg to the latest stable release
+  --   config = true,
+  --   opts = {
+  --     load = {
+  --       ["core.defaults"] = {},
+  --       ["core.concealer"] = {},
+  --     },
+  --   },
+  -- },
   { "echasnovski/mini.statusline", opts = {} },
-  {
-    "L3MON4D3/LuaSnip",
-    dependencies = {
-      "rafamadriz/friendly-snippets",
-    },
-    config = function()
-      require("luasnip.loaders.from_vscode").lazy_load()
-      require("luasnip.loaders.from_vscode").lazy_load({
-        paths = vim.fn.stdpath("config") .. "/snippets/",
-      })
-    end,
-  },
-  "direnv/direnv.vim",
   {
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = {
         nix = { "alejandra" },
         typescript = { "prettierd" },
+        typescriptreact = { "prettierd" },
+        javascriptreact = { "prettierd" },
         javascript = { "prettierd" },
       },
     },
@@ -48,6 +45,13 @@ return {
     --   indent = { char = "|" },
     --   whitespace = { highlight = "Whitespace", "NonText" },
     -- },
+  },
+  -- lua with lazy.nvim
+  {
+    "max397574/better-escape.nvim",
+    config = function()
+      require("better_escape").setup()
+    end,
   },
   {
     "jake-stewart/force-cul.nvim",
