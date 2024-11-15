@@ -2395,11 +2395,11 @@
         "systems": "systems_18"
       },
       "locked": {
-        "lastModified": 1730322983,
-        "narHash": "sha256-zsKDqUT18EG9ceR1ieYzRwrU/J7cVdocyFoXvQ4QMDM=",
+        "lastModified": 1731607548,
+        "narHash": "sha256-a0xLkdgQ4TIJVtY8fXnidtmsqlg63V9YYM7Hf32m7pk=",
         "ref": "refs/heads/main",
-        "rev": "e3da619b0a04a0f02d437a784318f142807a1e94",
-        "revCount": 74,
+        "rev": "49677f2d9b2cb94c36fe7a9df2bd5e9a8c00b94f",
+        "revCount": 75,
         "type": "git",
         "url": "https://git.zoeys.computer/zoey/zoeys.computer"
       },

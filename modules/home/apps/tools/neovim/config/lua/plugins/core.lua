@@ -7,6 +7,84 @@ return {
     },
   },
   "f-person/git-blame.nvim",
+  {
+    "3rd/image.nvim",
+    build = false,
+    lazy = false,
+    config = function()
+      require("image").setup({
+        backend = "kitty",
+        kitty_method = "normal",
+        processor = "magick_cli",
+        integrations = {
+          markdown = {
+            enabled = true,
+          },
+        },
+      })
+    end,
+  },
+  {
+    "nvimdev/dashboard-nvim",
+    event = "VimEnter",
+    lazy = true,
+    opts = function()
+      local logo = ""
+      logo = string.rep("\n", 12) .. logo .. "\n\n"
+      local opts = {
+        theme = "hyper",
+        hide = {
+          statusline = true,
+        },
+        config = {
+          header = vim.split(logo, "\n"),
+          shortcut = {
+            {
+              desc = "Find File",
+              action = "lua LazyVim.pick()()",
+              key = "f",
+            },
+            {
+              desc = "New File",
+              action = "ene | startinsert",
+              key = "n",
+            },
+            {
+              desc = "Lazy",
+              action = "Lazy",
+              icon = "󰒲 ",
+              key = "l",
+            },
+            {
+              desc = "Quit",
+              action = function()
+                vim.api.nvim_input("<cmd>qa<cr>")
+              end,
+              key = "q",
+            },
+          },
+          packages = { enable = true }, -- show how many plugins neovim loaded
+          project = { enable = true, limit = 8 },
+          mru = { limit = 10 },
+        },
+      }
+
+      -- Handle reopening dashboard after closing lazy
+      if vim.o.filetype == "lazy" then
+        vim.api.nvim_create_autocmd("WinClosed", {
+          pattern = tostring(vim.api.nvim_get_current_win()),
+          once = true,
+          callback = function()
+            vim.schedule(function()
+              vim.api.nvim_exec_autocmds("UIEnter", { group = "dashboard" })
+            end)
+          end,
+        })
+      end
+
+      return opts
+    end,
+  },
   { "nvim-lualine/lualine.nvim", enabled = false },
   -- {
   --   "nvim-neorg/neorg",

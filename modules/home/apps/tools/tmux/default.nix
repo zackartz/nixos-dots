@@ -38,6 +38,7 @@ in {
         set -g @catppuccin_flavor "mocha"
         set -g @catppuccin_window_status_style "basic"
         set -g default-terminal "tmux-256color"
+        set -g allow-passthrough on
 
         set -g status-right-length 100
         set -g status-left-length 100
