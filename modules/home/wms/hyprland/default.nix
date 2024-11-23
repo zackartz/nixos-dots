@@ -46,6 +46,7 @@ in {
     wayland.windowManager.hyprland = {
       enable = true;
       xwayland.enable = true;
+      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
 
       # systemd = {
       #   enable = true;
@@ -150,11 +151,13 @@ in {
           brightness = 1;
         };
 
-        # shadow config
-        drop_shadow = "yes";
-        shadow_range = 60;
-        shadow_render_power = 5;
-        "col.shadow" = "rgba(07061f29)";
+        shadow = {
+          # shadow config
+          enabled = true;
+          range = 60;
+          render_power = 5;
+          color = "rgba(07061f29)";
+        };
       };
 
       misc = {

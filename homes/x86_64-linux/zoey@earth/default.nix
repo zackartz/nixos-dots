@@ -30,7 +30,7 @@
 
     helpers = {
       anyrun.enable = true;
-      ags.enable = true;
+      waybar.enable = true;
     };
   };
 
@@ -142,10 +142,10 @@
     options = ["--cmd cd"];
   };
 
-  programs.cava = {
-    enable = true;
-    catppuccin.enable = true;
-  };
+  # programs.cava = {
+  #   enable = true;
+  #   catppuccin.enable = true;
+  # };
 
   programs.btop = {
     enable = true;

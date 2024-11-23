@@ -17,6 +17,8 @@
     dates = ["03:45"];
   };
 
+  nix.package = inputs.lix-module.packages.${pkgs.system}.default;
+
   nix.gc = {
     automatic = true;
     dates = "weekly";

@@ -119,3 +119,4 @@ end
 
 -- Set up the keybinding (you can modify this to your preferred key combination)
 vim.keymap.set("n", "<leader>zc", create_gist, { noremap = true, silent = true, expr = true })
+vim.keymap.set("n", "<leader>T", "<cmd>TimerlyToggle<CR>", { noremap = true })

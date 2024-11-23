@@ -23,10 +23,11 @@
 
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
 
-    resume.url = "git+https://git.zoeys.computer/zoey/resume";
+    resume.url = "git+https://git.zoeys.cloud/zoey/resume";
     anyrun.url = "github:anyrun-org/anyrun/a808e6d801d9e216a0c077a003fba22cfc3a1990";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
-    ags.url = "github:Aylur/ags";
+    ags.url = "github:Aylur/ags/v1";
+    ags.inputs.nixpkgs.follows = "nixpkgs";
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
     agenix.inputs.darwin.follows = "";
@@ -45,7 +46,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    blog.url = "git+https://git.zoeys.computer/zoey/web";
+    blog.url = "git+https://git.zoeys.cloud/zoey/web";
 
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.3.0";
@@ -104,8 +105,13 @@
     zen-browser.url = "github:MarceColl/zen-browser-flake";
 
     zoeycomputer = {
-      url = "git+https://git.zoeys.computer/zoey/zoeys.computer";
+      url = "git+https://git.zoeys.cloud/zoey/zoeys.computer";
       # inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     systems.url = "github:nix-systems/default";
@@ -154,6 +160,7 @@
         agenix.nixosModules.default
         solaar.nixosModules.default
         zoeycomputer.nixosModules.default
+        lix-module.nixosModules.default
       ];
     };
   in
