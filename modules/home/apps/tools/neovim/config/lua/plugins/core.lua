@@ -29,6 +29,16 @@ return {
     },
   },
   {
+    "karb94/neoscroll.nvim",
+    config = function()
+      require("neoscroll").setup({})
+    end,
+  },
+  {
+    "sphamba/smear-cursor.nvim",
+    opts = {},
+  },
+  {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     tag = "v3.8.2",

@@ -135,7 +135,7 @@
       inherit inputs;
       src = ./.;
 
-      overlays = [inputs.nixpkgs-wayland.overlay inputs.rust-overlay.overlays.default];
+      overlays = [inputs.rust-overlay.overlays.default];
 
       snowfall = {
         namespace = "custom";

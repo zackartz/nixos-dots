@@ -30,7 +30,7 @@
 
     helpers = {
       anyrun.enable = true;
-      waybar.enable = true;
+      ags.enable = true;
     };
   };
 
@@ -108,7 +108,6 @@
     pkgs.nix-output-monitor
     pkgs.fastfetch
 
-    pkgs.libreoffice-qt6-fresh
     pkgs.signal-desktop
 
     pkgs.nh

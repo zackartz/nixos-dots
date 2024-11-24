@@ -170,13 +170,13 @@
 in
   buildStdenv.mkDerivation (finalAttrs: {
     pname = "zen-browser-unwrapped";
-    version = "1.0.1-a.19";
+    version = "1.0.1-t.20";
 
     src = fetchFromGitHub {
       owner = "zen-browser";
       repo = "desktop";
-      rev = "0e02cb14ecd72f5bc90a0e1093731409ab043578";
-      hash = "sha256-+eehLsnQoWapkSKo3zWFxaz6N68BryK1XsmSk48zbbk=";
+      rev = "113a349b56e039a9a98e53a29f38b70c3a6a3ff6";
+      hash = "sha256-XBncRNX28hiq953yr7j6seD/HLluzmqbtTncE6fDa30=";
       fetchSubmodules = true;
     };
 
@@ -186,10 +186,10 @@ in
     # The Firefox version is specified by `zen-browser` in the `surfer.json` file.
     #
     # We need to manually set the version here to avoid IFD.
-    firefoxVersion = "132.0.1";
+    firefoxVersion = "132.0.2";
     firefoxSrc = fetchurl {
       url = "mirror://mozilla/firefox/releases/${finalAttrs.firefoxVersion}/source/firefox-${finalAttrs.firefoxVersion}.source.tar.xz";
-      hash = "sha256-XAMbVywdpyZnfi/5e2rVp+OyM4em/DljORy1YvgKXkg=";
+      hash = "sha256-Mp4XZPS04T8R3PH9ezxtj4DlEui37Vv2X75EdJwmEOk=";
     };
 
     SURFER_COMPAT = generic;

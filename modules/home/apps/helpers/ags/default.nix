@@ -34,7 +34,6 @@ with lib.custom; let
 
   guiDeps = with pkgs; [
     gnome.gnome-control-center
-    mission-center
     overskride
     wlogout
   ];
