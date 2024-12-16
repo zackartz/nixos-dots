@@ -1,20 +1,3 @@
-# pname = "zen-browser-unwrapped";
-# version = "715b6df2fb8171336adc8712668a5e8458f7749b";
-#
-# src = fetchFromGitHub {
-#   owner = "zen-browser";
-#   repo = "desktop";
-#   rev = "${version}";
-#   leaveDotGit = true;
-#   fetchSubmodules = true;
-#   hash = "sha256-0+x2XoZyMdzP1beJvUSeM/QnFyQ+FSuGIatHh1mtBaw=";
-# };
-#
-# firefoxVersion = (lib.importJSON "${src}/surfer.json").version.version;
-# firefoxSrc = fetchurl {
-#   url = "mirror://mozilla/firefox/releases/${firefoxVersion}/source/firefox-${firefoxVersion}.source.tar.xz";
-#   hash = "sha256-XAMbVywdpyZnfi/5e2rVp+OyM4em/DljORy1YvgKXkg=";
-# };
 {
   buildNpmPackage,
   buildPackages,
@@ -170,13 +153,13 @@
 in
   buildStdenv.mkDerivation (finalAttrs: {
     pname = "zen-browser-unwrapped";
-    version = "1.0.1-t.20";
+    version = "1.0.2-b.0";
 
     src = fetchFromGitHub {
       owner = "zen-browser";
       repo = "desktop";
-      rev = "113a349b56e039a9a98e53a29f38b70c3a6a3ff6";
-      hash = "sha256-XBncRNX28hiq953yr7j6seD/HLluzmqbtTncE6fDa30=";
+      rev = "df4ea8794f957c8e409adef9b2c3325be710c626";
+      hash = "sha256-vPe/hTJozJdCbq5GK87MGBh+Nybs8et+6ukm0Fdz3uA=";
       fetchSubmodules = true;
     };
 
@@ -186,10 +169,10 @@ in
     # The Firefox version is specified by `zen-browser` in the `surfer.json` file.
     #
     # We need to manually set the version here to avoid IFD.
-    firefoxVersion = "132.0.2";
+    firefoxVersion = "133.0.3";
     firefoxSrc = fetchurl {
       url = "mirror://mozilla/firefox/releases/${finalAttrs.firefoxVersion}/source/firefox-${finalAttrs.firefoxVersion}.source.tar.xz";
-      hash = "sha256-Mp4XZPS04T8R3PH9ezxtj4DlEui37Vv2X75EdJwmEOk=";
+      hash = "sha256-8TSlQgIAuwOrRg+dKGdQfA7bIiznP69AZM2+oCoKyhs=";
     };
 
     SURFER_COMPAT = generic;
@@ -305,8 +288,6 @@ in
         "--with-wasi-sysroot=${wasiSysRoot}"
         "--host=${buildStdenv.buildPlatform.config}"
         "--target=${buildStdenv.hostPlatform.config}"
-      ]
-      ++ [
         (lib.enableFeature alsaSupport "alsa")
         (lib.enableFeature ffmpegSupport "ffmpeg")
         (lib.enableFeature geolocationSupport "necko-wifi")
@@ -320,13 +301,39 @@ in
         # of RAM, and the 32-bit memory space cannot handle that linking
         (lib.enableFeature (!debugBuild && !stdenv.hostPlatform.is32bit) "release")
         (lib.enableFeature enableDebugSymbols "debug-symbols")
-      ];
+      ]
+      ++ lib.optional stdenv.hostPlatform.isAarch "--disable-wasm-avx";
 
-    configureScript = writeShellScript "configureMozconfig" ''
-      for flag in $@; do
-        echo "ac_add_options $flag" >> mozconfig
-      done
-    '';
+    configureScript = writeShellScript "configureMozconfig" (
+      (lib.optionalString stdenv.hostPlatform.isAarch ''
+        echo "ac_add_options --with-libclang-path=/usr/lib64" >> ./configs/linux/mozconfig
+
+        # linux mozconfig
+        sed -i 's/x86-\(64\|64-v3\)/native/g' ./configs/linux/mozconfig
+        sed -i 's/x86_64-pc-linux/aarch64-linux-gnu/g' ./configs/linux/mozconfig
+
+        # eme/widevine must be disabled on arm64 (thx google)
+        sed -i '/--enable-eme/s/^/# /' ./configs/common/mozconfig
+        sed -i 's/-msse3//g' ./configs/linux/mozconfig
+        sed -i 's/-mssse3//g' ./configs/linux/mozconfig
+        sed -i 's/-msse4.1//g' ./configs/linux/mozconfig
+        sed -i 's/-msse4.2//g' ./configs/linux/mozconfig
+        sed -i 's/-mavx2//g' ./configs/linux/mozconfig
+        sed -i 's/-mavx//g' ./configs/linux/mozconfig
+        sed -i 's/-mfma//g' ./configs/linux/mozconfig
+        sed -i 's/-maes//g' ./configs/linux/mozconfig
+        sed -i 's/-mpopcnt//g' ./configs/linux/mozconfig
+        sed -i 's/-mpclmul//g' ./configs/linux/mozconfig
+        sed -i 's/+avx2//g' ./configs/linux/mozconfig
+        sed -i 's/+sse4.1//g' ./configs/linux/mozconfig
+
+      '')
+      + ''
+        for flag in $@; do
+          echo "ac_add_options $flag" >> mozconfig
+        done
+      ''
+    );
 
     # To the person reading this wondering what is going on here, this is what
     # happens when a build process relies on Git. Normally you would use `fetchgit`
@@ -339,22 +346,9 @@ in
       export HOME="$TMPDIR"
       git config --global user.email "nixbld@localhost"
       git config --global user.name "nixbld"
-
-      # Initialize git repo and handle submodules properly
       git init
-      git config --global init.defaultBranch main
-
-      # Force add all files including submodules
-      git add -A -f
-
-      # Initialize and update submodules if they exist
-      if [ -f .gitmodules ]; then
-        git submodule init
-        git submodule update --init --recursive
-      fi
-
-      # Commit all changes including submodule state
-      git commit -m 'nixpkgs' -a --allow-empty
+      git add --all
+      git commit -m 'nixpkgs'
 
       export LLVM_PROFDATA=llvm-profdata
       export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
@@ -362,7 +356,7 @@ in
       export WASM_CXX=${wasi32.stdenv.cc}/bin/${wasi32.stdenv.cc.targetPrefix}c++
 
       export ZEN_RELEASE=1
-      surfer ci --brand alpha --display-version ${finalAttrs.version}
+      surfer ci --brand beta --display-version ${finalAttrs.version}
 
       install -D ${finalAttrs.firefoxSrc} .surfer/engine/firefox-${finalAttrs.firefoxVersion}.source.tar.xz
       surfer download
@@ -408,7 +402,10 @@ in
         matthewpi
         titaniumtown
       ];
-      platforms = ["x86_64-linux"];
+      platforms = [
+        "aarch64-linux"
+        "x86_64-linux"
+      ];
     };
 
     enableParallelBuilding = true;

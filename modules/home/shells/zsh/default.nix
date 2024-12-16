@@ -24,7 +24,7 @@ in {
         SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
         FLAKE = "/home/zoey/nixos/";
       };
-      enableAutosuggestions = true;
+      # zprof.enable = true;
       history = {
         save = 2137;
         size = 2137;
@@ -39,10 +39,9 @@ in {
           "${zsh-history}/share/zsh/init.zsh"
           "${zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh"
           "${zsh-f-sy-h}/share/zsh/site-functions/F-Sy-H.plugin.zsh"
-          # "${zsh-autocomplete}/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
           "${zsh-you-should-use}/share/zsh/plugins/you-should-use/you-should-use.plugin.zsh"
           "${zsh-navigation-tools}/share/zsh/site-functions/zsh-navigation-tools.plugin.zsh"
-          "${oh-my-zsh}/share/oh-my-zsh/plugins/colored-man-pages/colored-man-pages.plugin.zsh"
+          "${zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
         ];
 
         source = map (source: "source ${source}") sources;
@@ -52,6 +51,7 @@ in {
           ]
           ++ source);
       in ''
+
         ${plugins}
 
         export NIX_LD=$(nix eval --impure --raw --expr 'let pkgs = import <nixpkgs> {}; NIX_LD = pkgs.lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker"; in NIX_LD')
@@ -60,28 +60,13 @@ in {
         bindkey "^[[1;5D" backward-word
       '';
 
-      plugins = [
-        {
-          name = "zsh-tmux";
-          file = "zsh-tmux.plugin.zsh";
-          src = pkgs.fetchFromGitHub {
-            owner = "laggardkernel";
-            repo = "zsh-tmux";
-            rev = "v1.1.0";
-            sha256 = "sha256-BB9L84HjUnV1OUIp2U2lHYHEg5q4p/TgqLcsCvInkC8=";
-          };
-        }
-        {
-          name = "zsh-autocomplete";
-          file = "zsh-autocomplete.plugin.zsh";
-          src = pkgs.fetchFromGitHub {
-            owner = "marlonrichert";
-            repo = "zsh-autocomplete";
-            rev = "008caaea55780dd2b55f119d6880c5b89e5e4bb2";
-            sha256 = "sha256-jibIHwT/oVQUSxVrT0SGFSMu1N05szPyHZ4Qc7v6Ntc=";
-          };
-        }
-      ];
+      # oh my zsh
+      oh-my-zsh = {
+        enable = true;
+        plugins = [
+          "colored-man-pages"
+        ];
+      };
 
       dirHashes = {
         music = "$HOME/Music";

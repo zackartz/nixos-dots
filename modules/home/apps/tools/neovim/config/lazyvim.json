@@ -13,6 +13,7 @@
     "lazyvim.plugins.extras.lang.java",
     "lazyvim.plugins.extras.lang.toml",
     "lazyvim.plugins.extras.lang.json",
+    "lazyvim.plugins.extras.lang.clangd",
     "lazyvim.plugins.extras.lang.markdown",
     "lazyvim.plugins.extras.lang.nix",
     "lazyvim.plugins.extras.lang.sql",
@@ -26,8 +27,7 @@
     "lazyvim.plugins.extras.util.dot",
     "lazyvim.plugins.extras.util.mini-hipatterns",
     "lazyvim.plugins.extras.coding.luasnip",
-    "lazyvim.plugins.extras.coding.blink",
-    "lazyvim.plugins.extras.ai.supermaven"
+    "lazyvim.plugins.extras.coding.blink"
   ],
   "news": {
     "NEWS.md": "6520"

@@ -56,7 +56,7 @@ in {
         lua-language-server
         nixd
         (pkgs.rust-bin.selectLatestNightlyWith
-          (toolchain: toolchain.minimal))
+          (toolchain: toolchain.default))
         rust-analyzer
         vscode-langservers-extracted
         nodePackages.vscode-json-languageserver

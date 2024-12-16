@@ -48,7 +48,9 @@ in {
         noto-fonts-cjk-sans
         noto-fonts-emoji
         jetbrains-mono
-        (nerdfonts.override {fonts = ["Iosevka" "JetBrainsMono"];})
+        nerd-fonts.iosevka
+        nerd-fonts.zed-mono
+        # (nerdfonts.override {fonts = ["ZedMono" "Iosevka"];})
       ];
 
       enableDefaultPackages = false;
@@ -57,11 +59,12 @@ in {
       fontconfig = {
         defaultFonts = {
           monospace = [
-            "Iosevka Font Mono"
+            # "ZedMono Nerd Font Mono"
+            "Iosevka Nerd Font Mono"
             "Iosevka"
             "Noto Color Emoji"
           ];
-          sansSerif = ["Iosevka" "Noto Color Emoji"];
+          sansSerif = ["Inter" "Noto Color Emoji"];
           serif = ["Noto Serif" "Noto Color Emoji"];
           emoji = ["Noto Color Emoji"];
         };

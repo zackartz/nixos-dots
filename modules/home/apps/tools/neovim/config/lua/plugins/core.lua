@@ -6,6 +6,12 @@ return {
       news = { lazyvim = false },
     },
   },
+  {
+    "catppuccin",
+    opts = { transparent_background = true, integrations = {
+      blink_cmp = true,
+    } },
+  },
   "f-person/git-blame.nvim",
   { "nvim-lualine/lualine.nvim", enabled = false },
   { "echasnovski/mini.statusline", opts = {} },
@@ -25,7 +31,7 @@ return {
   {
     "saghen/blink.cmp",
     opts = {
-      nerd_font_variant = "normal",
+      nerd_font_variant = "mono",
     },
   },
   {
@@ -37,6 +43,20 @@ return {
   {
     "sphamba/smear-cursor.nvim",
     opts = {},
+  },
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    keys = {
+      {
+        "<leader>z",
+        function()
+          Snacks.zen()
+        end,
+        desc = "Toggle Zen Mode",
+      },
+    },
   },
   {
     "lukas-reineke/indent-blankline.nvim",

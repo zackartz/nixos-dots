@@ -21,19 +21,19 @@ with lib.custom; let
     ripgrep
     util-linux
     gtksourceview
-    webkitgtk
+    webkitgtk_4_1
     brightnessctl
     gvfs
     accountsservice
     swww
-    gnome.gnome-control-center
-    gnome.nautilus
-    gnome.totem
+    gnome-control-center
+    nautilus
+    totem
     loupe
   ];
 
   guiDeps = with pkgs; [
-    gnome.gnome-control-center
+    gnome-control-center
     overskride
     wlogout
   ];

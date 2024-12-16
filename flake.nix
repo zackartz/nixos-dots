@@ -21,10 +21,10 @@
 
     emacs-overlay.url = "github:nix-community/emacs-overlay";
 
-    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
+    awsvpnclient.url = "github:ymatsiuk/awsvpnclient";
 
     resume.url = "git+https://git.zoeys.cloud/zoey/resume";
-    anyrun.url = "github:anyrun-org/anyrun/a808e6d801d9e216a0c077a003fba22cfc3a1990";
+    anyrun.url = "github:anyrun-org/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
     ags.url = "github:Aylur/ags/v1";
     ags.inputs.nixpkgs.follows = "nixpkgs";
@@ -49,7 +49,7 @@
     blog.url = "git+https://git.zoeys.cloud/zoey/web";
 
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.3.0";
+      url = "github:nix-community/lanzaboote/v0.4.1";
 
       # Optional but recommended to limit the size of your system closure.
       inputs.nixpkgs.follows = "nixpkgs";
@@ -120,6 +120,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    g2claude.url = "git+https://git.zoeys.cloud/zoey/g2claude.git";
+
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -135,7 +137,17 @@
       inherit inputs;
       src = ./.;
 
-      overlays = [inputs.rust-overlay.overlays.default];
+      overlays = [
+        inputs.rust-overlay.overlays.default
+        (final: prev: {
+          awsvpnclient =
+            inputs
+            .awsvpnclient
+            .packages
+            ."x86_64-linux"
+            .awsvpnclient;
+        })
+      ];
 
       snowfall = {
         namespace = "custom";

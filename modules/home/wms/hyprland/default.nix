@@ -99,7 +99,7 @@ in {
 
           "${mod},X,exec, ags --toggle-window \"dashboard\""
           "${mod},Print,exec,${lib.getExe pkgs.custom.sc}"
-          "${mod},Shift&Print,exec,${lib.getExe pkgs.wf-recorder} -g \"$(${lib.getExe pkgs.slurp})\" -f out.mp4"
+          "${mod},Shift&Print,exec,\"${lib.getExe pkgs.grim} -g ${lib.getExe pkgs.slurp} | wl-copy\""
           "${modshift},O,exec,wl-ocr"
 
           "${mod},Period,exec, tofi-emoji"

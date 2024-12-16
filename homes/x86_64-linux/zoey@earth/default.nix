@@ -83,10 +83,14 @@
     pkgs.obs-studio
 
     pkgs.ungoogled-chromium
+    pkgs.uutils-coreutils-noprefix
+    pkgs.yazi
 
     pkgs.thunderbird
 
     pkgs.custom.enc
+
+    pkgs.nix-tree
 
     pkgs.mongodb-compass
     pkgs.postman
@@ -108,6 +112,8 @@
     pkgs.nix-output-monitor
     pkgs.fastfetch
 
+    # inputs.g2claude.packages.${pkgs.system}.default
+
     pkgs.signal-desktop
 
     pkgs.nh
@@ -125,7 +131,6 @@
     lib.custom.pkgs-unstable.rmpc
 
     pkgs.custom.zen-browser
-
     pkgs.mpc-cli
 
     pkgs.openvpn
@@ -196,7 +201,7 @@
       WantedBy = ["default.target"];
     };
     Service = {
-      ExecStart = "${inputs.kb-gui.packages.${pkgs.system}.kb}/bin/kb";
+      ExecStart = "${inputs.kb-gui.packages.${pkgs.system}.default}/bin/kb";
     };
   };
 }
