@@ -29,27 +29,26 @@ in {
         lexend
         jost
         dejavu_fonts
-        iosevka
-        # (pkgs-unstable.iosevka.override {
-        #   set = "Custom";
-        #   privateBuildPlan = ''
-        #     [buildPlans.IosevkaCustom]
-        #     family = "Iosevka"
-        #     spacing = "normal"
-        #     serifs = "sans"
-        #     noCvSs = true
-        #     exportGlyphNames = true
-        #
-        #       [buildPlans.IosevkaCustom.variants]
-        #       inherits = "ss14"
-        #   '';
-        # })
+        # iosevka
+        (iosevka.override {
+          set = "Custom";
+          privateBuildPlan = ''
+            [buildPlans.IosevkaCustom]
+            family = "Iosevka"
+            spacing = "normal"
+            serifs = "sans"
+            noCvSs = true
+            exportGlyphNames = true
+
+              [buildPlans.IosevkaCustom.variants]
+              inherits = "ss03"
+          '';
+        })
         noto-fonts
         noto-fonts-cjk-sans
         noto-fonts-emoji
         jetbrains-mono
         nerd-fonts.iosevka
-        nerd-fonts.zed-mono
         # (nerdfonts.override {fonts = ["ZedMono" "Iosevka"];})
       ];
 

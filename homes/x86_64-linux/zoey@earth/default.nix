@@ -29,12 +29,12 @@
     music.spotify.enable = true;
 
     helpers = {
-      anyrun.enable = true;
-      ags.enable = true;
+      rofi.enable = true;
+      waybar.enable = true;
     };
   };
 
-  shells.zsh.enable = true;
+  shells.fish.enable = true;
 
   rice.gtk.enable = true;
 
@@ -86,6 +86,8 @@
     pkgs.uutils-coreutils-noprefix
     pkgs.yazi
 
+    pkgs.ghostty
+
     pkgs.thunderbird
 
     pkgs.custom.enc
@@ -127,8 +129,8 @@
 
     pkgs.parsec-bin
     pkgs.filezilla
-    lib.custom.pkgs-unstable.zed-editor
-    lib.custom.pkgs-unstable.rmpc
+    pkgs.zed-editor
+    pkgs.rmpc
 
     pkgs.custom.zen-browser
     pkgs.mpc-cli
@@ -142,7 +144,6 @@
 
   programs.zoxide = {
     enable = true;
-    enableZshIntegration = true;
     options = ["--cmd cd"];
   };
 

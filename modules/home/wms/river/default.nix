@@ -19,13 +19,13 @@ in {
       enable = true;
       settings = {
         spawn = [
-          "firefox"
-          "kitty"
+          "zen"
+          "ghostty"
         ];
 
         map = {
           normal = {
-            "${super} Return" = "spawn kitty";
+            "${super} Return" = "spawn ghostty";
             "${super} Q" = "close";
             "${super} M" = "exit";
             "${super} D" = "spawn anyrun";

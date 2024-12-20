@@ -38,8 +38,8 @@ in {
         "https://github.com"
         "git+https://github.com/"
         "git+ssh://github.com/"
-        "git+https://git.zoeys.computer/"
-        "git+ssh://git.zoeys.computer/"
+        "git+https://git.zoeys.cloud/"
+        "git+ssh://git.zoeys.cloud/"
         "path:"
       ];
       trustedUsers = ["hydra"]; # Ensure hydra user is trusted for nix

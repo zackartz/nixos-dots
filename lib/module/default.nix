@@ -15,7 +15,7 @@ with lib; rec {
 
   mkBoolOpt' = mkOpt' types.bool;
 
-  pkgs-unstable = import inputs.nixpkgs-unstable {
+  pkgs-stable = import inputs.nixpkgs-stable {
     system = "x86_64-linux";
     config.allowUnfree = true;
   };

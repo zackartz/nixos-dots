@@ -7,6 +7,24 @@ return {
     },
   },
   {
+    "snacks.nvim",
+    opts = {
+      scroll = {
+        enabled = false,
+      },
+      dashboard = {
+        preset = {
+          header = [[
+          ／l、             
+      （ﾟ､ ｡ ７         
+     l  ~ヽ       
+  じしf_,)ノ
+        ]],
+        },
+      },
+    },
+  },
+  {
     "catppuccin",
     opts = { transparent_background = true, integrations = {
       blink_cmp = true,
@@ -33,16 +51,6 @@ return {
     opts = {
       nerd_font_variant = "mono",
     },
-  },
-  {
-    "karb94/neoscroll.nvim",
-    config = function()
-      require("neoscroll").setup({})
-    end,
-  },
-  {
-    "sphamba/smear-cursor.nvim",
-    opts = {},
   },
   {
     "folke/snacks.nvim",

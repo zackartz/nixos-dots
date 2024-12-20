@@ -48,22 +48,21 @@ in {
       xwayland.enable = true;
       package = inputs.hyprland.packages.${pkgs.system}.hyprland;
 
-      # systemd = {
-      #   enable = true;
-      #   enableXdgAutostart = true;
-      #   variables = ["-all"];
-      # };
+      systemd = {
+        enable = true;
+        #   enableXdgAutostart = true;
+        variables = ["-all"];
+      };
     };
 
     wayland.windowManager.hyprland.settings = with colors; {
       exec-once = [
         "pw-loopback -C \"alsa_input.pci-0000_0d_00.4.analog-stereo\" -P \"Scarlett Solo (3rd Gen.) Headphones / Line 1-2\""
-        # "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        # "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        # "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "zen"
-        "sleep 6;telegram-desktop"
-        "sleep 10;thunderbird"
+        "telegram-desktop"
+        "thunderbird"
         "vesktop"
         "spotify"
         "slack"
@@ -77,9 +76,9 @@ in {
 
       bind =
         [
-          ''${mod},RETURN,exec,${pkgs.kitty}/bin/kitty''
+          ''${mod},RETURN,exec,${pkgs.ghostty}/bin/ghostty''
 
-          "${mod},D,exec,killall anyrun || anyrun"
+          "${mod},D,exec,rofi -show drun"
           "${mod},Q,killactive"
           "${mod},M,exit"
           "${mod},P,pseudo"
@@ -139,13 +138,12 @@ in {
 
       decoration = {
         # fancy corners
-        rounding = 10;
+        rounding = 4;
         # blur
         blur = {
           enabled = true;
-          size = 2;
-          passes = 5;
-          ignore_opacity = false;
+          size = 6;
+          passes = 2;
           new_optimizations = 1;
           contrast = 1;
           brightness = 1;
@@ -153,10 +151,10 @@ in {
 
         shadow = {
           # shadow config
-          enabled = true;
-          range = 60;
-          render_power = 5;
-          color = "rgba(07061f29)";
+          enabled = false;
+          # range = 60;
+          # render_power = 5;
+          # color = "rgba(07061f29)";
         };
       };
 
@@ -166,11 +164,11 @@ in {
         force_default_wallpaper = 0;
         disable_hyprland_logo = true;
 
-        vfr = false;
+        vfr = true;
 
         # dpms
-        mouse_move_enables_dpms = true; # enable dpms on mouse/touchpad action
-        key_press_enables_dpms = true; # enable dpms on keyboard action
+        # mouse_move_enables_dpms = true; # enable dpms on mouse/touchpad action
+        # key_press_enables_dpms = true; # enable dpms on keyboard action
         disable_autoreload = true; # autoreload is unnecessary on nixos, because the config is readonly anyway
       };
 
@@ -218,6 +216,7 @@ in {
         "workspace special silent, title:^(Firefox — Sharing Indicator)$"
         "workspace special silent, title:^(.*is sharing (your screen|a window)\.)$"
 
+        "opacity 0.9 override,class:^(zen)"
         "workspace 5, class:^(thunderbird)$"
         "workspace 4, title:^(.*(Disc|WebC)ord.*)$"
         "workspace 4, class:^(.*Slack.*)$"
@@ -233,12 +232,12 @@ in {
 
     # # fake a tray to let apps start
     # # https://github.com/nix-community/home-manager/issues/2064
-    # systemd.user.targets.tray = {
-    #   Unit = {
-    #     Description = "Home Manager System Tray";
-    #     Requires = ["graphical-session-pre.target"];
-    #   };
-    # };
+    systemd.user.targets.tray = {
+      Unit = {
+        Description = "Home Manager System Tray";
+        Requires = ["graphical-session-pre.target"];
+      };
+    };
 
     systemd.user.services = {
       swaybg = mkService {

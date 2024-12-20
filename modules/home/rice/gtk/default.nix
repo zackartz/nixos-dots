@@ -17,6 +17,11 @@ in {
   config = mkIf cfg.enable {
     catppuccin.pointerCursor.enable = true;
 
+    home.pointerCursor = {
+      gtk.enable = true;
+      x11.enable = true;
+    };
+
     gtk = {
       enable = true;
 
@@ -27,12 +32,12 @@ in {
 
       theme = {
         name = "Tokyonight-Dark";
-        package = pkgs-unstable.tokyonight-gtk-theme;
+        package = pkgs.tokyonight-gtk-theme;
       };
 
       iconTheme = {
         name = "Papirus-Dark";
-        package = pkgs-unstable.catppuccin-papirus-folders.override {
+        package = pkgs.catppuccin-papirus-folders.override {
           accent = ctp.accent;
           flavor = ctp.flavor;
         };

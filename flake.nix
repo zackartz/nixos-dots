@@ -12,16 +12,21 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/release-24.11";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    ghostty.url = "path:/home/zoey/dev/ghostty";
+
     emacs-overlay.url = "github:nix-community/emacs-overlay";
 
-    awsvpnclient.url = "github:ymatsiuk/awsvpnclient";
+    awsvpnclient = {
+      url = "github:ymatsiuk/awsvpnclient/56ca114e3f7fe4db9d745a0ab8ed70c6bd803a8f";
+      inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    };
 
     resume.url = "git+https://git.zoeys.cloud/zoey/resume";
     anyrun.url = "github:anyrun-org/anyrun";
@@ -35,8 +40,6 @@
     pnpm2nix.url = "github:nzbr/pnpm2nix-nzbr";
 
     solaar = {
-      #url = "https://flakehub.com/f/Svenum/Solaar-Flake/*.tar.gz" # For latest stable version
-      #url = "https://flakehub.com/f/Svenum/Solaar-Flake/0.1.1.tar.gz" # uncomment line for solaar version 1.1.13
       url = "github:Svenum/Solaar-Flake/main"; # Uncomment line for latest unstable version
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -92,16 +95,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # lix = {
-    #   url = "git+https://git.lix.systems/lix-project/lix?ref=refs/tags/2.90-beta.1";
-    #   flake = false;
-    # };
-    # lix-module = {
-    #   url = "git+https://git.lix.systems/lix-project/nixos-module";
-    #   inputs.lix.follows = "lix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     zen-browser.url = "github:MarceColl/zen-browser-flake";
 
     zoeycomputer = {
@@ -128,11 +121,7 @@
     };
   };
 
-  outputs = inputs @ {
-    self,
-    nixpkgs-unstable,
-    ...
-  }: let
+  outputs = inputs @ {self, ...}: let
     snowfallConfig = inputs.snowfall-lib.mkFlake {
       inherit inputs;
       src = ./.;
@@ -140,12 +129,7 @@
       overlays = [
         inputs.rust-overlay.overlays.default
         (final: prev: {
-          awsvpnclient =
-            inputs
-            .awsvpnclient
-            .packages
-            ."x86_64-linux"
-            .awsvpnclient;
+          ghostty = inputs.ghostty.packages."x86_64-linux".default;
         })
       ];
 

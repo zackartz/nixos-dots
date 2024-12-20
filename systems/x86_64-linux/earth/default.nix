@@ -21,8 +21,8 @@
 
   nix.gc = {
     automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 14d";
+    dates = "daily";
+    options = "--delete-older-than 1d";
   };
 
   hardware.audio.enable = true;
@@ -37,6 +37,8 @@
   ui.fonts.enable = true;
 
   protocols.wayland.enable = true;
+
+  programs.openvpn3.enable = true;
 
   services.udev.extraRules = ''
     KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0664", GROUP="plugdev"
@@ -81,7 +83,7 @@
     # insertNameservers = ["1.1.1.1" "1.0.0.1"];
   };
 
-  boot.kernelPackages = lib.custom.pkgs-unstable.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.supportedFilesystems = ["ntfs"];
 
   services.dlna.enable = false;
@@ -98,14 +100,15 @@
     pkgs.mangohud
     pkgs.transmission_4
     inputs.agenix.packages.${system}.agenix
+    inputs.awsvpnclient.packages."${pkgs.system}".awsvpnclient
   ];
 
-  programs.zsh.enable = true;
+  programs.fish.enable = true;
   users.users.zoey = {
     isNormalUser = true;
     description = "zoey";
     extraGroups = ["networkmanager" "wheel" "docker" "libvirtd" "plugdev"];
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
     initialHashedPassword = "$6$rounds=2000000$rFBJH7LwdEHvv.0i$HdHorWqp8REPdWPk5fEgZXX1TujRJkMxumGK0f0elFN0KRPlBjJMW2.35A.ID/o3eC/hGTwbSJAcJcwVN2zyV/";
   };
 
