@@ -46,6 +46,29 @@
 
   xdg.enable = true;
 
+  home.persistence."/persist/home" = {
+    directories = [
+      "Downloads"
+      "Music"
+      "Pictures"
+      "Documents"
+      "Videos"
+      ".gnupg"
+      ".ssh"
+      ".nixops"
+      ".local/share/keyrings"
+      ".local/share/direnv"
+      {
+        directory = ".local/share/Steam";
+        method = "symlink";
+      }
+    ];
+    files = [
+      ".screenrc"
+    ];
+    allowOther = true;
+  };
+
   programs = {
     gpg.enable = true;
     man.enable = true;
@@ -132,7 +155,7 @@
     pkgs.zed-editor
     pkgs.rmpc
 
-    pkgs.custom.zen-browser
+    inputs.zen-browser.packages.${pkgs.system}.twilight
     pkgs.mpc-cli
 
     pkgs.openvpn

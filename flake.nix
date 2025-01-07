@@ -19,7 +19,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ghostty.url = "path:/home/zoey/dev/ghostty";
+    ghostty.url = "github:ghostty-org/ghostty";
 
     emacs-overlay.url = "github:nix-community/emacs-overlay";
 
@@ -95,7 +95,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    zen-browser.url = "github:MarceColl/zen-browser-flake";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
 
     zoeycomputer = {
       url = "git+https://git.zoeys.cloud/zoey/zoeys.computer";
@@ -111,6 +111,15 @@
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    impermanence = {
+      url = "github:nix-community/impermanence";
     };
 
     g2claude.url = "git+https://git.zoeys.cloud/zoey/g2claude.git";
@@ -146,6 +155,7 @@
         catppuccin.homeManagerModules.catppuccin
         anyrun.homeManagerModules.default
         ags.homeManagerModules.default
+        impermanence.nixosModules.home-manager.impermanence
       ];
 
       systems.modules.nixos = with inputs; [
@@ -157,6 +167,8 @@
         solaar.nixosModules.default
         zoeycomputer.nixosModules.default
         lix-module.nixosModules.default
+        disko.nixosModules.default
+        impermanence.nixosModules.impermanence
       ];
     };
   in
