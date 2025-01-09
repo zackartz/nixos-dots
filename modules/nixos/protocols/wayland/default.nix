@@ -21,7 +21,7 @@ in {
 
     services = {
       greetd = {
-        enable = true;
+        enable = false;
         settings = rec {
           initial_session = {
             # command = "sway --unsupported-gpu";
@@ -33,7 +33,12 @@ in {
       };
     };
 
+    services.xserver.displayManager.gdm.enable = true;
+
+    programs.uwsm.enable = true;
+
     programs.hyprland = {
+      withUWSM = true;
       enable = true;
     };
 
@@ -69,15 +74,14 @@ in {
 
     hardware.pulseaudio.support32Bit = true;
 
-    # xdg.portal = {
-    #   enable = true;
-    #   wlr.enable = false;
-    #   config.common.default = "*";
-    #   extraPortals = [
-    #     pkgs.xdg-desktop-portal-gtk
-    #     # pkgs.xdg-desktop-portal-wlr
-    #     pkgs.xwaylandvideobridge
-    #   ];
-    # };
+    xdg.portal = {
+      enable = true;
+      wlr.enable = false;
+      config.common.default = "*";
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+        pkgs.xwaylandvideobridge
+      ];
+    };
   };
 }

@@ -13,7 +13,7 @@ in {
     enable = mkBoolOpt false "Enable Git Integration";
 
     signByDefault = mkBoolOpt true "Sign by default";
-    signingKey = mkStringOpt "5F873416BCF59F35" "The KeyID of your GPG signingKey";
+    signingKey = mkStringOpt "EE8A2B709E2401D1" "The KeyID of your GPG signingKey";
   };
 
   config = mkIf cfg.enable {

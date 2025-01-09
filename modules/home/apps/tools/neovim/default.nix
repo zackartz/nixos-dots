@@ -38,7 +38,7 @@ in {
       catppuccin.enable = false;
       enable = true;
       defaultEditor = true;
-      package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
+      # package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
       extraLuaPackages = ps: [ps.magick];
       extraPackages = with pkgs; [
         # Formatters

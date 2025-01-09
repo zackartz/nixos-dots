@@ -26,7 +26,7 @@ return {
   },
   {
     "catppuccin",
-    opts = { transparent_background = true, integrations = {
+    opts = { integrations = {
       blink_cmp = true,
     } },
   },
@@ -44,12 +44,6 @@ return {
         javascript = { "prettierd" },
         htmlangular = { "prettierd" },
       },
-    },
-  },
-  {
-    "saghen/blink.cmp",
-    opts = {
-      nerd_font_variant = "mono",
     },
   },
   {

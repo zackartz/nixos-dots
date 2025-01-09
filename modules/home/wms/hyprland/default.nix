@@ -12,9 +12,9 @@ with lib.custom; let
   cfg = config.wms.hyprland;
 
   mkService = recursiveUpdate {
-    Unit.PartOf = ["hyprland-session.target"];
-    Unit.After = ["hyprland-session.target"];
-    Install.WantedBy = ["hyprland-session.target"];
+    Unit.PartOf = ["graphical-session.target"];
+    Unit.After = ["graphical-session.target"];
+    Install.WantedBy = ["graphical-session.target"];
   };
 
   mod = "SUPER";
@@ -46,12 +46,10 @@ in {
     wayland.windowManager.hyprland = {
       enable = true;
       xwayland.enable = true;
-      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
 
       systemd = {
-        enable = true;
-        #   enableXdgAutostart = true;
-        variables = ["-all"];
+        enable = false;
+        enableXdgAutostart = true;
       };
     };
 
@@ -61,7 +59,6 @@ in {
         # "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         # "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "zen"
-        "telegram-desktop"
         "thunderbird"
         "vesktop"
         "spotify"
@@ -76,7 +73,7 @@ in {
 
       bind =
         [
-          ''${mod},RETURN,exec,${pkgs.ghostty}/bin/ghostty''
+          ''${mod},RETURN,exec,${lib.getExe pkgs.kitty}''
 
           "${mod},D,exec,rofi -show drun"
           "${mod},Q,killactive"
@@ -216,7 +213,6 @@ in {
         "workspace special silent, title:^(Firefox — Sharing Indicator)$"
         "workspace special silent, title:^(.*is sharing (your screen|a window)\.)$"
 
-        "opacity 0.9 override,class:^(zen)"
         "workspace 5, class:^(thunderbird)$"
         "workspace 4, title:^(.*(Disc|WebC)ord.*)$"
         "workspace 4, class:^(.*Slack.*)$"
@@ -232,12 +228,12 @@ in {
 
     # # fake a tray to let apps start
     # # https://github.com/nix-community/home-manager/issues/2064
-    systemd.user.targets.tray = {
-      Unit = {
-        Description = "Home Manager System Tray";
-        Requires = ["graphical-session-pre.target"];
-      };
-    };
+    # systemd.user.targets.tray = {
+    #   Unit = {
+    #     Description = "Home Manager System Tray";
+    #     Requires = ["graphical-session-pre.target"];
+    #   };
+    # };
 
     systemd.user.services = {
       swaybg = mkService {

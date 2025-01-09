@@ -34,7 +34,7 @@
     };
   };
 
-  shells.fish.enable = true;
+  shells.zsh.enable = true;
 
   rice.gtk.enable = true;
 
@@ -45,30 +45,6 @@
   services.udiskie.enable = true;
 
   xdg.enable = true;
-
-  home.persistence."/persist/home" = {
-    directories = [
-      "Downloads"
-      "Music"
-      "Pictures"
-      "Documents"
-      "Videos"
-      ".gnupg"
-      ".ssh"
-      ".nixops"
-      ".local/share/keyrings"
-      ".local/share/direnv"
-      {
-        directory = ".local/share/Steam";
-        method = "symlink";
-      }
-    ];
-    files = [
-      ".screenrc"
-    ];
-    allowOther = true;
-  };
-
   programs = {
     gpg.enable = true;
     man.enable = true;
@@ -83,11 +59,11 @@
     enable = true;
 
     defaultApplications = {
-      "text/html" = "zen.desktop";
-      "x-scheme-handler/http" = "zen.desktop";
-      "x-scheme-handler/https" = "zen.desktop";
-      "x-scheme-handler/about" = "zen.desktop";
-      "x-scheme-handler/unknown" = "zen.desktop";
+      "text/html" = "zen_twilight.desktop";
+      "x-scheme-handler/http" = "zen_twilight.desktop";
+      "x-scheme-handler/https" = "zen_twilight.desktop";
+      "x-scheme-handler/about" = "zen_twilight.desktop";
+      "x-scheme-handler/unknown" = "zen_twilight.desktop";
     };
   };
 

@@ -8,4 +8,4 @@ if vim.g.neovide then
 end
 
 -- in this case.
--- vim.g.lazyvim_blink_main = true
+vim.g.lazyvim_blink_main = true

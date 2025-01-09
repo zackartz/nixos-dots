@@ -17,6 +17,8 @@ in {
   config = mkIf cfg.enable {
     programs.waybar = {
       enable = true;
+      systemd.enable = true;
+      systemd.target = "graphical-session.target";
       style = ''
         * {
           min-height: 0;
