@@ -169,7 +169,7 @@
 
   snowfallorg.users.zoey = {
     create = true;
-    admin = false;
+    admin = true;
 
     home = {
       enable = true;

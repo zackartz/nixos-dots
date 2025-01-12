@@ -152,10 +152,9 @@
     description = "zoey";
     extraGroups = ["networkmanager" "wheel" "docker"];
     shell = pkgs.zsh;
-    packages = with pkgs; [];
     hashedPassword = "$6$rounds=2000000$673Iz4rM8Dr9yz7C$Xq5JXxE7ioUrpZmMf3uTrPN2ODrEu3Sph6EhWyPoM5Ty./FhgB9hU0mz1yYo8sUj7wdUMWfR98haVJ24Wv3BK/";
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILOThndTuZC0H+aHfTr2FrFr4KaYfvZ4MCA/W+POUHtW zoey@earth"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFuw7D+qDzzxBKsfKEmMd7odc98m3ZEnqWYFtuKwvC9k zoey@earth"
     ];
   };
 

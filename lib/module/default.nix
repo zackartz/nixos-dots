@@ -15,11 +15,6 @@ with lib; rec {
 
   mkBoolOpt' = mkOpt' types.bool;
 
-  pkgs-stable = import inputs.nixpkgs-stable {
-    system = "x86_64-linux";
-    config.allowUnfree = true;
-  };
-
   enabled = {enable = true;};
 
   disabled = {enable = false;};
