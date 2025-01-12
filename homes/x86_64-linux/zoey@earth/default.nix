@@ -25,6 +25,7 @@
     term.foot.enable = true;
     # term.rio.enable = true;
     term.alacritty.enable = true;
+    term.ghostty.enable = true;
 
     music.spotify.enable = true;
 
@@ -64,6 +65,31 @@
       "x-scheme-handler/https" = "zen_twilight.desktop";
       "x-scheme-handler/about" = "zen_twilight.desktop";
       "x-scheme-handler/unknown" = "zen_twilight.desktop";
+
+      "inode/directory" = ["org.gnome.Nautilus.desktop"];
+
+      "image/jpeg" = ["org.gnome.Loupe.desktop"];
+      "image/png" = ["org.gnome.Loupe.desktop"];
+      "image/gif" = ["org.gnome.Loupe.desktop"];
+      "image/webp" = ["org.gnome.Loupe.desktop"];
+      "image/tiff" = ["org.gnome.Loupe.desktop"];
+      "image/bmp" = ["org.gnome.Loupe.desktop"];
+      "image/x-icon" = ["org.gnome.Loupe.desktop"];
+      "image/svg+xml" = ["org.gnome.Loupe.desktop"];
+    };
+  };
+
+  dconf.settings = {
+    "org/gnome/nautilus/preferences" = {
+      "default-folder-viewer" = "list-view";
+      "search-filter-time-type" = "last_modified";
+    };
+    "org/gnome/terminal/legacy/profiles:" = {
+      "default" = "kitty";
+    };
+    "org/gnome/Loupe" = {
+      "interpolation-quality" = "high"; # Set image scaling quality
+      "zoom-gesture" = true; # Enable zoom gesture
     };
   };
 
@@ -85,9 +111,9 @@
     pkgs.uutils-coreutils-noprefix
     pkgs.yazi
 
-    pkgs.ghostty
-
     pkgs.thunderbird
+
+    pkgs.custom.nvidia-nsight
 
     pkgs.custom.enc
 
@@ -107,8 +133,6 @@
 
     pkgs.neovide
 
-    pkgs.xfce.thunar
-    pkgs.feh
     pkgs.nitch
     pkgs.nix-output-monitor
     pkgs.fastfetch
@@ -131,8 +155,12 @@
     pkgs.zed-editor
     pkgs.rmpc
 
-    inputs.zen-browser.packages.${pkgs.system}.twilight
+    inputs.zen-browser.packages.${pkgs.system}.beta
     pkgs.mpc-cli
+
+    pkgs.nautilus
+    pkgs.nautilus-python
+    pkgs.loupe
 
     pkgs.openvpn
     pkgs.telegram-desktop
@@ -146,10 +174,10 @@
     options = ["--cmd cd"];
   };
 
-  # programs.cava = {
-  #   enable = true;
-  #   catppuccin.enable = true;
-  # };
+  programs.cava = {
+    enable = true;
+    catppuccin.enable = true;
+  };
 
   programs.btop = {
     enable = true;

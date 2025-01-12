@@ -45,6 +45,7 @@ in {
 
     wayland.windowManager.hyprland = {
       enable = true;
+      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
       xwayland.enable = true;
 
       systemd = {
@@ -161,7 +162,8 @@ in {
         force_default_wallpaper = 0;
         disable_hyprland_logo = true;
 
-        vfr = true;
+        vfr = false;
+        vrr = 2;
 
         # dpms
         # mouse_move_enables_dpms = true; # enable dpms on mouse/touchpad action
@@ -171,6 +173,11 @@ in {
 
       xwayland = {
         force_zero_scaling = true;
+      };
+
+      experimental = {
+        hdr = false;
+        xx_color_management_v4 = true;
       };
 
       cursor = {

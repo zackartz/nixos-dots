@@ -28,6 +28,20 @@
     options = ["fmask=0077" "dmask=0077"];
   };
 
+  fileSystems."/mnt/lul" = {
+    device = "/dev/disk/by-partuuid/2b7f6948-57a6-4fef-a931-b3aa962faee3";
+    fsType = "ntfs";
+    options = [
+      "uid=1000" # Replace with your user's UID if different
+      "gid=100" # Replace with your user's GID if different
+      "rw" # Read-write access
+      "user" # Allow users to mount
+      "exec" # Allow execution of binaries
+      "auto" # Mount at boot
+      "noatime" # Don't update access time (better performance)
+    ];
+  };
+
   swapDevices = [
     {device = "/dev/disk/by-uuid/5c74e955-26c7-4f71-9b48-975a89b1d5ec";}
   ];

@@ -46,7 +46,7 @@
   services.fstrim.enable = true;
   services.vpn.enable = true;
   services.xserver.enable = true;
-  services.vpn.mullvad = false;
+  services.vpn.mullvad = true;
   services.lorri.enable = true;
   services.udisks2.enable = true;
   services.transmission = {
@@ -106,6 +106,51 @@
     pkgs.transmission_4
     inputs.agenix.packages.${system}.agenix
     inputs.awsvpnclient.packages."${pkgs.system}".awsvpnclient
+
+    pkgs.nautilus-python
+    (pkgs.writeTextFile {
+      name = "nautilus-open-kitty-here";
+      destination = "/share/nautilus-python/extensions/open-kitty-here.py";
+      text = ''
+        import os
+        import gi
+        gi.require_version('Nautilus', '3.0')
+        from gi.repository import Nautilus, GObject
+
+        class OpenKittyTerminalExtension(GObject.GObject, Nautilus.MenuProvider):
+            def __init__(self):
+                pass
+
+            def menu_activate_cb(self, menu, file):
+                if file.is_directory():
+                    path = file.get_location().get_path()
+                else:
+                    path = file.get_parent_location().get_path()
+                os.system(f'kitty --directory "{path}" &')
+
+            def get_file_items(self, window, files):
+                if len(files) != 1:
+                    return
+
+                file = files[0]
+                item = Nautilus.MenuItem(
+                    name='OpenKittyTerminalExtension::OpenKitty',
+                    label='Open in Kitty',
+                    tip='Opens Kitty terminal in this location'
+                )
+                item.connect('activate', self.menu_activate_cb, file)
+                return [item]
+
+            def get_background_items(self, window, file):
+                item = Nautilus.MenuItem(
+                    name='OpenKittyTerminalExtension::OpenKitty',
+                    label='Open in Kitty',
+                    tip='Opens Kitty terminal in this location'
+                )
+                item.connect('activate', self.menu_activate_cb, file)
+                return [item]
+      '';
+    })
   ];
 
   programs.zsh.enable = true;
@@ -117,6 +162,8 @@
     shell = pkgs.zsh;
     initialHashedPassword = "$6$rounds=2000000$rFBJH7LwdEHvv.0i$HdHorWqp8REPdWPk5fEgZXX1TujRJkMxumGK0f0elFN0KRPlBjJMW2.35A.ID/o3eC/hGTwbSJAcJcwVN2zyV/";
   };
+
+  services.gnome.core-utilities.enable = true; # Enable core GNOME utilities
 
   users.groups.plugdev = {};
 

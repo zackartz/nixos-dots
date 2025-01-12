@@ -30,6 +30,7 @@ in {
         jost
         dejavu_fonts
         iosevka
+        cantarell-fonts
         # (iosevka.override {
         #   set = "Custom";
         #   privateBuildPlan = ''
@@ -59,11 +60,10 @@ in {
         defaultFonts = {
           monospace = [
             # "ZedMono Nerd Font Mono"
-            "Iosevka Nerd Font Mono"
             "Iosevka"
             "Noto Color Emoji"
           ];
-          sansSerif = ["Inter" "Noto Color Emoji"];
+          sansSerif = ["Cantarell" "Noto Color Emoji"];
           serif = ["Noto Serif" "Noto Color Emoji"];
           emoji = ["Noto Color Emoji"];
         };

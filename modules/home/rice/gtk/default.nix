@@ -26,7 +26,7 @@ in {
       enable = true;
 
       font = {
-        name = "Iosevka";
+        name = "Cantarell";
         size = 11;
       };
 
