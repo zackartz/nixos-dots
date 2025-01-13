@@ -18,8 +18,8 @@ in {
       package = pkgs.rofi;
 
       # Basic configuration
-      terminal = "ghostty";
-      font = "Lexend Medium 16px";
+      terminal = "kitty";
+      font = "Cantarell";
 
       extraConfig = {
         modi = "drun";
@@ -138,7 +138,7 @@ in {
           cursor = mkLiteral "inherit";
           "vertical-align" = mkLiteral "0.5";
           "horizontal-align" = mkLiteral "0.0";
-          font = mkLiteral ''"Lexend Medium 16px"'';
+          font = mkLiteral ''"Cantarell 16px"'';
         };
       };
     };

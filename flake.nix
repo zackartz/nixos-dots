@@ -118,10 +118,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    impermanence = {
-      url = "github:nix-community/impermanence";
-    };
-
     g2claude.url = "git+https://git.zoeys.cloud/zoey/g2claude.git";
 
     rust-overlay = {
@@ -155,7 +151,6 @@
         catppuccin.homeManagerModules.catppuccin
         anyrun.homeManagerModules.default
         ags.homeManagerModules.default
-        impermanence.nixosModules.home-manager.impermanence
       ];
 
       systems.modules.nixos = with inputs; [
@@ -168,7 +163,6 @@
         zoeycomputer.nixosModules.default
         lix-module.nixosModules.default
         disko.nixosModules.default
-        impermanence.nixosModules.impermanence
       ];
     };
   in

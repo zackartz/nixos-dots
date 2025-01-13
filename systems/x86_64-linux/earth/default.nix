@@ -187,7 +187,7 @@
     dockerCompat = true;
     defaultNetwork.settings.dns_enabled = true;
   };
-  virtualisation.libvirtd.enable = true;
+  hardware.gpu-passthru.enable = true;
 
   system.stateVersion = "24.05";
 }

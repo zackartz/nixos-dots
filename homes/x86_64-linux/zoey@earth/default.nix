@@ -60,11 +60,11 @@
     enable = true;
 
     defaultApplications = {
-      "text/html" = "zen_twilight.desktop";
-      "x-scheme-handler/http" = "zen_twilight.desktop";
-      "x-scheme-handler/https" = "zen_twilight.desktop";
-      "x-scheme-handler/about" = "zen_twilight.desktop";
-      "x-scheme-handler/unknown" = "zen_twilight.desktop";
+      "text/html" = "zen_beta.desktop";
+      "x-scheme-handler/http" = "zen_beta.desktop";
+      "x-scheme-handler/https" = "zen_beta.desktop";
+      "x-scheme-handler/about" = "zen_beta.desktop";
+      "x-scheme-handler/unknown" = "zen_beta.desktop";
 
       "inode/directory" = ["org.gnome.Nautilus.desktop"];
 
@@ -118,6 +118,7 @@
     pkgs.custom.enc
 
     pkgs.nix-tree
+    inputs.g2claude.packages.${pkgs.system}.default
 
     pkgs.mongodb-compass
     pkgs.postman
@@ -174,6 +175,9 @@
     options = ["--cmd cd"];
   };
 
+  catppuccin.helix.enable = true;
+  programs.helix.enable = true;
+
   programs.cava = {
     enable = true;
     catppuccin.enable = true;
@@ -190,7 +194,6 @@
 
   programs.lazygit = {
     enable = true;
-    catppuccin.enable = true;
   };
 
   programs.fzf = {
