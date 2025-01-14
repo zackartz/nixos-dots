@@ -31,8 +31,8 @@ in {
       };
 
       theme = {
-        name = "Tokyonight-Dark";
-        package = pkgs.tokyonight-gtk-theme;
+        name = "Catppuccin-GTK-Dark";
+        package = pkgs.magnetic-catppuccin-gtk;
       };
 
       iconTheme = {

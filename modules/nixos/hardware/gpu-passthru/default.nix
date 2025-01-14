@@ -21,8 +21,21 @@ in {
       enable = true;
       onBoot = "ignore";
       onShutdown = "shutdown";
-      qemuOvmf = true;
-      qemuRunAsRoot = true;
+      qemu = {
+        package = pkgs.qemu_kvm;
+        runAsRoot = true;
+        swtpm.enable = true;
+        ovmf = {
+          enable = true;
+          packages = [
+            (pkgs.OVMF.override {
+              secureBoot = true;
+              tpmSupport = true;
+            })
+            .fd
+          ];
+        };
+      };
     };
 
     systemd.services.libvirtd = {
@@ -35,6 +48,7 @@ in {
             kmod
             systemd
             ripgrep
+            mullvad
             sd
           ];
         };
@@ -45,11 +59,9 @@ in {
       ln -Tfs /etc/libvirt/hooks /var/lib/libvirt/hooks
     '';
 
-    # environment.systemPackages = with pkgs; [
-    #   virt-manager
-    #   gnome3.dconf
-    #   libguestfs
-    # ];
+    environment.systemPackages = with pkgs; [
+      libguestfs-with-appliance
+    ];
 
     environment.etc = {
       "/libvirt/hooks/qemu" = {
@@ -118,6 +130,9 @@ in {
           systemctl set-property --runtime -- user.slice AllowedCPUs=0-6
           systemctl set-property --runtime -- system.slice AllowedCPUs=0-6
           systemctl set-property --runtime -- init.scope AllowedCPUs=0-6
+
+          # disable vpn
+          mullvad disconnect -w
 
           # Logout
           # source "/home/owner/Desktop/Sync/Files/Tools/logout.sh"

@@ -60,11 +60,11 @@
     enable = true;
 
     defaultApplications = {
-      "text/html" = "zen_beta.desktop";
-      "x-scheme-handler/http" = "zen_beta.desktop";
-      "x-scheme-handler/https" = "zen_beta.desktop";
-      "x-scheme-handler/about" = "zen_beta.desktop";
-      "x-scheme-handler/unknown" = "zen_beta.desktop";
+      "text/html" = "zen.desktop";
+      "x-scheme-handler/http" = "zen.desktop";
+      "x-scheme-handler/https" = "zen.desktop";
+      "x-scheme-handler/about" = "zen.desktop";
+      "x-scheme-handler/unknown" = "zen.desktop";
 
       "inode/directory" = ["org.gnome.Nautilus.desktop"];
 

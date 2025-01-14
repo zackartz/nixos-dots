@@ -28,17 +28,11 @@
     options = ["fmask=0077" "dmask=0077"];
   };
 
-  fileSystems."/mnt/lul" = {
-    device = "/dev/disk/by-partuuid/2b7f6948-57a6-4fef-a931-b3aa962faee3";
-    fsType = "ntfs";
+  fileSystems."/mnt/bk" = {
+    device = "/dev/disk/by-partuuid/f352c9b5-2207-4313-bcb4-ba0491de72fe";
+    fsType = "ext4";
     options = [
-      "uid=1000" # Replace with your user's UID if different
-      "gid=100" # Replace with your user's GID if different
-      "rw" # Read-write access
-      "user" # Allow users to mount
-      "exec" # Allow execution of binaries
       "auto" # Mount at boot
-      "noatime" # Don't update access time (better performance)
     ];
   };
 

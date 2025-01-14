@@ -104,6 +104,7 @@
     pkgs.docker-compose
     pkgs.podman-compose
     pkgs.transmission_4
+    pkgs.restic
     inputs.agenix.packages.${system}.agenix
     inputs.awsvpnclient.packages."${pkgs.system}".awsvpnclient
 
