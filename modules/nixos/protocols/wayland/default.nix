@@ -40,6 +40,7 @@ in {
     programs.hyprland = {
       withUWSM = true;
       enable = true;
+      xwayland.enable = true;
       package = inputs.hyprland.packages.${pkgs.system}.hyprland;
       portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
     };
@@ -84,7 +85,7 @@ in {
       config.common.default = "*";
       extraPortals = [
         pkgs.xdg-desktop-portal-gtk
-        pkgs.xwaylandvideobridge
+        # pkgs.xwaylandvideobridge
       ];
     };
   };

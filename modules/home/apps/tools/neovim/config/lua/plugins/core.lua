@@ -16,8 +16,8 @@ return {
         preset = {
           header = [[
           ／l、             
-      （ﾟ､ ｡ ７         
-     l  ~ヽ       
+        （ﾟ､ ｡ ７         
+      l  ~ヽ       
   じしf_,)ノ
         ]],
         },
@@ -26,9 +26,12 @@ return {
   },
   {
     "catppuccin",
-    opts = { integrations = {
-      blink_cmp = true,
-    } },
+    opts = {
+      transparent_background = true,
+      integrations = {
+        blink_cmp = true,
+      },
+    },
   },
   "f-person/git-blame.nvim",
   { "nvim-lualine/lualine.nvim", enabled = false },

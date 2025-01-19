@@ -38,6 +38,7 @@
   shells.zsh.enable = true;
 
   rice.gtk.enable = true;
+  rice.qt.enable = true;
 
   services.lock.enable = true;
   services.music.enable = true;
@@ -60,11 +61,11 @@
     enable = true;
 
     defaultApplications = {
-      "text/html" = "zen.desktop";
-      "x-scheme-handler/http" = "zen.desktop";
-      "x-scheme-handler/https" = "zen.desktop";
-      "x-scheme-handler/about" = "zen.desktop";
-      "x-scheme-handler/unknown" = "zen.desktop";
+      "text/html" = "zen_twilight.desktop";
+      "x-scheme-handler/http" = "zen_twilight.desktop";
+      "x-scheme-handler/https" = "zen_twilight.desktop";
+      "x-scheme-handler/about" = "zen_twilight.desktop";
+      "x-scheme-handler/unknown" = "zen_twilight.desktop";
 
       "inode/directory" = ["org.gnome.Nautilus.desktop"];
 
@@ -76,6 +77,9 @@
       "image/bmp" = ["org.gnome.Loupe.desktop"];
       "image/x-icon" = ["org.gnome.Loupe.desktop"];
       "image/svg+xml" = ["org.gnome.Loupe.desktop"];
+
+      "application/x-compressed-tar" = "org.gnome.FileRoller.desktop";
+      "application/x-archive" = "org.gnome.FileRoller.desktop";
     };
   };
 
@@ -138,8 +142,6 @@
     pkgs.nix-output-monitor
     pkgs.fastfetch
 
-    # inputs.g2claude.packages.${pkgs.system}.default
-
     pkgs.signal-desktop
 
     pkgs.nh
@@ -156,8 +158,10 @@
     pkgs.zed-editor
     pkgs.rmpc
 
-    inputs.zen-browser.packages.${pkgs.system}.beta
+    inputs.zen-browser.packages.${pkgs.system}.twilight
+
     pkgs.mpc-cli
+    pkgs.zathura
 
     pkgs.nautilus
     pkgs.nautilus-python
@@ -170,13 +174,19 @@
     pkgs.man-pages-posix
   ];
 
+  programs.mpv = {
+    enable = true;
+    extraInput = ''
+      background-color='#000000"
+    '';
+  };
+
+  catppuccin.mpv.enable = true;
+
   programs.zoxide = {
     enable = true;
     options = ["--cmd cd"];
   };
-
-  catppuccin.helix.enable = true;
-  programs.helix.enable = true;
 
   programs.cava = {
     enable = true;
@@ -201,19 +211,19 @@
     catppuccin.enable = true;
   };
 
-  systemd.user.services.xwaylandvideobridge = {
-    Unit = {
-      Description = "Tool to make it easy to stream wayland windows and screens to exisiting applications running under Xwayland";
-    };
-    Service = {
-      Type = "simple";
-      ExecStart = lib.getExe pkgs.xwaylandvideobridge;
-      Restart = "on-failure";
-    };
-    Install = {
-      WantedBy = ["default.target"];
-    };
-  };
+  # systemd.user.services.xwaylandvideobridge = {
+  #   Unit = {
+  #     Description = "Tool to make it easy to stream wayland windows and screens to exisiting applications running under Xwayland";
+  #   };
+  #   Service = {
+  #     Type = "simple";
+  #     ExecStart = lib.getExe pkgs.xwaylandvideobridge;
+  #     Restart = "on-failure";
+  #   };
+  #   Install = {
+  #     WantedBy = ["default.target"];
+  #   };
+  # };
 
   services = {
     gpg-agent = {

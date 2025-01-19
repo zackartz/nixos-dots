@@ -15,7 +15,7 @@ in {
   config = mkIf cfg.enable {
     programs.rofi = {
       enable = true;
-      package = pkgs.rofi;
+      package = pkgs.rofi-wayland;
 
       # Basic configuration
       terminal = "kitty";

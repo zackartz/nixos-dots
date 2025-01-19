@@ -50,11 +50,15 @@
   services.lorri.enable = true;
   services.udisks2.enable = true;
   services.transmission = {
-    enable = false;
+    enable = true;
     package = pkgs.transmission_4;
     settings = {
-      download-dir = "/home/zoey/dl";
+      download-dir = "/home/zoey/Downloads";
+      incomplete-dir = "/home/zoey/Downloads/.incomplete";
+      incomplete-dir-enabled = true;
     };
+    user = "zoey";
+    group = "users";
   };
   services.gnome.gnome-keyring.enable = true;
   services.solaar = {
@@ -94,19 +98,35 @@
 
   time.timeZone = "America/Detroit";
 
+  services.gvfs.enable = true;
+  services.gnome.sushi.enable = true;
+
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+
+  services.blueman.enable = true;
+
   environment.systemPackages = [
     pkgs.sbctl
     pkgs.vesktop
     pkgs.mangohud
     pkgs.lutris
+    pkgs.bottles
+    pkgs.file-roller
     pkgs.podman-tui
     pkgs.dive
     pkgs.docker-compose
     pkgs.podman-compose
     pkgs.transmission_4
+    pkgs.protonup-qt
     pkgs.restic
+    (inputs.umu.packages.${system}.umu.override {
+      version = inputs.umu.shortRev;
+      truststore = true;
+      cbor2 = true;
+    })
     inputs.agenix.packages.${system}.agenix
-    inputs.awsvpnclient.packages."${pkgs.system}".awsvpnclient
+    inputs.awsvpnclient.packages.${system}.awsvpnclient
 
     pkgs.nautilus-python
     (pkgs.writeTextFile {
@@ -168,12 +188,37 @@
 
   users.groups.plugdev = {};
 
+  home-manager.backupFileExtension = "bk";
+
   snowfallorg.users.zoey = {
     create = true;
     admin = true;
 
     home = {
       enable = true;
+    };
+  };
+
+  services.openssh = {
+    enable = true;
+    ports = [22];
+  };
+
+  networking.firewall.allowedTCPPorts = [22];
+
+  services.samba = {
+    enable = true;
+    openFirewall = true;
+    shares = {
+      "SteamLibrary" = {
+        path = "/mnt/bk"; # Update this path to your drive's mount point
+        browseable = true;
+        writable = true;
+        guestOk = true; # Allow access without authentication
+        public = true;
+        createMask = "0775"; # File permissions
+        directoryMask = "0775"; # Directory permissions
+      };
     };
   };
 

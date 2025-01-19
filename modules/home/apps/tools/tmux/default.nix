@@ -35,7 +35,6 @@ in {
         set-window-option -g pane-base-index 1
         set-option -g renumber-windows on
 
-        set -g @catppuccin_flavor "mocha"
         set -g @catppuccin_window_status_style "basic"
         set -g default-terminal "tmux-256color"
         set -g allow-passthrough on
@@ -61,6 +60,22 @@ in {
 
         bind -n M-H previous-window
         bind -n M-L next-window
+
+
+        bind-key C-j display-popup -E "\
+            tmux list-sessions -F '#{session_name}' |\
+            fzf --reverse --header 'Switch sessions' |\
+            xargs tmux switch-client -t"
+
+
+        set-option -g destroy-unattached on
+        set-option -g exit-empty on
+        set-option -g exit-unattached on
+
+        set-hook -g after-new-session 'run-shell "tmux rename-session \"#{b:pane_current_path}\""'
+        set-hook -g after-new-window 'run-shell "tmux rename-session \"#{b:pane_current_path}\""'
+        set-hook -g after-kill-pane 'run-shell "tmux rename-session \"#{b:pane_current_path}\""'
+        set-hook -g pane-focus-in 'run-shell "tmux rename-session \"#{b:pane_current_path}\""'
       '';
     };
   };

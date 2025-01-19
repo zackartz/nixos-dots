@@ -95,7 +95,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    umu.url = "github:Open-Wine-Components/umu-launcher?dir=packaging/nix";
+    umu.inputs.nixpkgs.follows = "nixpkgs";
+
+    # zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    zen-browser.url = "github:zackartz/zen-browser-flake";
 
     zoeycomputer = {
       url = "git+https://git.zoeys.cloud/zoey/zoeys.computer";
