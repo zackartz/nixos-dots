@@ -193,11 +193,11 @@
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
-        "lastModified": 1740932314,
-        "narHash": "sha256-htNmp0ZAoijeKWbIqTFCEYlz+i2db6g28IVg9AjyKHM=",
+        "lastModified": 1741022982,
+        "narHash": "sha256-RKsvU8WZX7lxQedHfgoqxThNgfVXULccwYerbhmghlQ=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "d9492638daa77fca7bf84e5b218cd95598ac3f72",
+        "rev": "a3bf20522b1fa7295ca05ea4a8d37546915e598e",
         "type": "github"
       },
       "original": {
@@ -936,11 +936,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1740932677,
-        "narHash": "sha256-1jyWgb/ft7nksSXZBProUg1SbJigbJ6Fa6eZ9AWt+Fw=",
+        "lastModified": 1741035361,
+        "narHash": "sha256-K5mLlTW55w4WuysD1oR9a37PDl2vrYxtw8TxVCA4sDA=",
         "ref": "refs/heads/main",
-        "rev": "474bfcbccd2180a1f8157efec093fc28792234b7",
-        "revCount": 5859,
+        "rev": "d7e7a292613a4f20218074ff8299dff099a80098",
+        "revCount": 5861,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -1542,11 +1542,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1740791350,
-        "narHash": "sha256-igS2Z4tVw5W/x3lCZeeadt0vcU9fxtetZ/RyrqsCRQ0=",
+        "lastModified": 1741006840,
+        "narHash": "sha256-/PLl/bBq+fdNR0mLFeIdEgh0O4URobH0R9+InbpdGhU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "199169a2135e6b864a888e89a2ace345703c025d",
+        "rev": "95eacfb6d1accf8d59a9e570d26d04ad693d2ec3",
         "type": "github"
       },
       "original": {
@@ -1563,11 +1563,11 @@
         "nixpkgs": "nixpkgs_10"
       },
       "locked": {
-        "lastModified": 1740940604,
-        "narHash": "sha256-Q6URiTEMaNESSc6AzxtgINJ91mtoF3kquwBIbDHpva4=",
+        "lastModified": 1741007696,
+        "narHash": "sha256-T3wq2TjozsWo+7iYwdTeoPpVXbWwjA61PHGW8eUHUHw=",
         "owner": "nix-community",
         "repo": "nixpkgs-wayland",
-        "rev": "ce16222e04e3581d13a4e2cf99f18dbf7a16137b",
+        "rev": "95f64a6aaf756228bd873d5126e4b6661504bc0c",
         "type": "github"
       },
       "original": {
@@ -1796,11 +1796,11 @@
     },
     "nixpkgs_9": {
       "locked": {
-        "lastModified": 1740828860,
-        "narHash": "sha256-cjbHI+zUzK5CPsQZqMhE3npTyYFt9tJ3+ohcfaOF/WM=",
+        "lastModified": 1741010256,
+        "narHash": "sha256-WZNlK/KX7Sni0RyqLSqLPbK8k08Kq7H7RijPJbq9KHM=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "303bd8071377433a2d8f76e684ec773d70c5b642",
+        "rev": "ba487dbc9d04e0634c64e3b1f0d25839a0a68246",
         "type": "github"
       },
       "original": {
@@ -1923,11 +1923,11 @@
         "systems": "systems_13"
       },
       "locked": {
-        "lastModified": 1738822577,
-        "narHash": "sha256-zO+n90U2BZI92QW0Uav4ymk8tLbsUIQ0Xo2IGBfYKfw=",
+        "lastModified": 1741033401,
+        "narHash": "sha256-VXEG88hZcNnWXkC9k9OHnYR20b0w8WnnhNVHhXfUtTs=",
         "ref": "refs/heads/main",
-        "rev": "17f427298c21e8f0e08d2b06f3972cb0ac444f80",
-        "revCount": 30,
+        "rev": "e2efd198fd0cb9202e1f034b71e26af20284ac8c",
+        "revCount": 31,
         "type": "git",
         "url": "https://git.zoeys.cloud/zoey/resume"
       },
@@ -2059,11 +2059,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1740882709,
-        "narHash": "sha256-VC+8GxWK4p08jjIbmsNfeFQajW2lsiOR/XQiOOvqgvs=",
+        "lastModified": 1740969088,
+        "narHash": "sha256-BajboqzFnDhxVT0SXTDKVJCKtFP96lZXccBlT/43mao=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "f4d5a693c18b389f0d58f55b6f7be6ef85af186f",
+        "rev": "20fdb02098fdda9a25a2939b975abdd7bc03f62d",
         "type": "github"
       },
       "original": {
