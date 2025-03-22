@@ -58,8 +58,6 @@ in {
         (pkgs.rust-bin.selectLatestNightlyWith
           (toolchain: toolchain.default))
         rust-analyzer
-        vscode-langservers-extracted
-        nodePackages.vscode-json-languageserver
         nodePackages.typescript-language-server
         #nodePackages.astro-language-server
         nodePackages.bash-language-server
@@ -92,7 +90,7 @@ in {
         postgresql
         mongosh
         gerbera
-        vscode-extensions.vadimcn.vscode-lldb.adapter
+        # vscode-extensions.vadimcn.vscode-lldb.adapter
       ];
       plugins = with pkgs.vimPlugins; [
         lazy-nix-helper-nvim

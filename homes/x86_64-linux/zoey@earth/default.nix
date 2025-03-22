@@ -8,6 +8,7 @@
   wms.hyprland.enable = true;
   apps = {
     web.librewolf.enable = true;
+    web.librewolf.setDefault = true;
 
     tools.git.enable = true;
     tools.tmux.enable = true;
@@ -17,7 +18,7 @@
     tools.direnv.enable = true;
     tools.tealdeer.enable = true;
     tools.bat.enable = true;
-    tools.emacs.enable = true;
+    tools.emacs.enable = false;
 
     tools.gh.enable = true;
 
@@ -28,6 +29,9 @@
     term.ghostty.enable = true;
 
     music.spotify.enable = true;
+    video.mpv.enable = true;
+
+    mail.aerc.enable = true;
 
     helpers = {
       rofi.enable = true;
@@ -42,8 +46,6 @@
 
   services.lock.enable = true;
   services.music.enable = true;
-  services.pm-bridge.enable = true;
-  services.pm-bridge.nonInteractive = true;
   services.udiskie.enable = true;
 
   xdg.enable = true;
@@ -57,16 +59,12 @@
     };
   };
 
+  # programs.pywal2.enable = true;
+
   xdg.mimeApps = {
     enable = true;
 
     defaultApplications = {
-      "text/html" = "zen_twilight.desktop";
-      "x-scheme-handler/http" = "zen_twilight.desktop";
-      "x-scheme-handler/https" = "zen_twilight.desktop";
-      "x-scheme-handler/about" = "zen_twilight.desktop";
-      "x-scheme-handler/unknown" = "zen_twilight.desktop";
-
       "inode/directory" = ["org.gnome.Nautilus.desktop"];
 
       "image/jpeg" = ["org.gnome.Loupe.desktop"];
@@ -79,6 +77,7 @@
       "image/svg+xml" = ["org.gnome.Loupe.desktop"];
 
       "application/x-compressed-tar" = "org.gnome.FileRoller.desktop";
+      "application/x-compressed-zip" = "org.gnome.FileRoller.desktop";
       "application/x-archive" = "org.gnome.FileRoller.desktop";
     };
   };
@@ -98,15 +97,21 @@
   };
 
   catppuccin.enable = true;
-  catppuccin.flavor = "macchiato";
-  catppuccin.accent = "pink";
+  catppuccin.flavor = "mocha";
+  catppuccin.accent = "red";
+
+  catppuccin.aerc.enable = true;
+
+  work.vpn.enable = true;
 
   home.packages = [
     pkgs.gimp
     pkgs.slack
 
+    pkgs.monero-cli
+
     pkgs.zoom-us
-    pkgs.elisa
+    pkgs.pandoc
 
     pkgs.prismlauncher
     pkgs.obs-studio
@@ -115,6 +120,15 @@
     pkgs.uutils-coreutils-noprefix
     pkgs.yazi
 
+    pkgs.fragments
+    inputs.posting.packages.${pkgs.system}.default
+
+    pkgs.heroic
+    pkgs.cartridges
+    pkgs.discord-canary
+
+    pkgs.darktable
+
     pkgs.thunderbird
 
     pkgs.custom.nvidia-nsight
@@ -122,7 +136,7 @@
     pkgs.custom.enc
 
     pkgs.nix-tree
-    inputs.g2claude.packages.${pkgs.system}.default
+    # inputs.g2claude.packages.${pkgs.system}.default
 
     pkgs.mongodb-compass
     pkgs.postman
@@ -130,11 +144,16 @@
 
     pkgs.dconf
     pkgs.wl-clipboard
-    pkgs.pavucontrol
+    pkgs.pwvucontrol
     pkgs.wlogout
     pkgs.sway-audio-idle-inhibit
     pkgs.grim
     pkgs.slurp
+
+    pkgs.pods
+
+    pkgs.polari
+    pkgs.flare-signal
 
     pkgs.neovide
 
@@ -155,13 +174,28 @@
 
     pkgs.parsec-bin
     pkgs.filezilla
-    pkgs.zed-editor
+    lib.custom.nixos-stable.zed-editor
     pkgs.rmpc
 
-    inputs.zen-browser.packages.${pkgs.system}.twilight
+    # (inputs.zen-browser.packages.${pkgs.system}.twilight.overrideAttrs {
+    #   version = "1.7.7t";
+    #   src = builtins.fetchTarball {
+    #     url = "https://github.com/zen-browser/desktop/releases/download/twilight/zen.linux-x86_64.tar.xz";
+    #     sha256 = "sha256:1wgkqdfny6bqwmpka6knrjzsidpm3v5kiijkmszg7wiisl47lgal";
+    #   };
+    # })
+
+    inputs.zen-browser.packages.${pkgs.system}.beta
+
+    pkgs.starfetch
+    lib.custom.nixos-stable.kiwix
 
     pkgs.mpc-cli
     pkgs.zathura
+    pkgs.gpgme.dev
+
+    pkgs.rofimoji
+    pkgs.renderdoc
 
     pkgs.nautilus
     pkgs.nautilus-python
@@ -172,25 +206,47 @@
     pkgs.linux-manual
     pkgs.man-pages
     pkgs.man-pages-posix
+
+    pkgs.ardour
+
+    pkgs.shadps4
+
+    pkgs.audacity
   ];
-
-  programs.mpv = {
-    enable = true;
-    extraInput = ''
-      background-color='#000000"
-    '';
-  };
-
-  catppuccin.mpv.enable = true;
 
   programs.zoxide = {
     enable = true;
     options = ["--cmd cd"];
   };
 
+  home.file.".mozilla/native-messaging-hosts/gpgmejson.json".text = builtins.toJSON {
+    name = "gpgmejson";
+    description = "JavaScript binding for GnuPG";
+    path = "${pkgs.gpgme.dev}/bin/gpgme-json";
+    type = "stdio";
+    allowed_extensions = ["jid1-AQqSMBYb0a8ADg@jetpack"];
+  };
+
   programs.cava = {
     enable = true;
     catppuccin.enable = true;
+    # settings = {
+    #   general = {
+    #     bars = 2;
+    #     channels = 2;
+    #     mono = "no";
+    #
+    #     # smoothing = 0;
+    #     # falloff = 0.0;
+    #   };
+    #   input = {
+    #     method = "pipewire";
+    #     source = "alsa_input.pci-0000_0d_00.4.analog-stereo";
+    #   };
+    #   # output = {
+    #   #   method = "ncurses";
+    #   # };
+    # };
   };
 
   programs.btop = {

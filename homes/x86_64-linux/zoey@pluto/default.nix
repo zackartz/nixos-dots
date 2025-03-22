@@ -7,7 +7,7 @@
 }: {
   apps = {
     tools.git.enable = true;
-    tools.tmux.enable = true;
+    tools.tmux.enable = false;
     tools.neovim.enable = true;
     tools.starship.enable = true;
     tools.skim.enable = true;

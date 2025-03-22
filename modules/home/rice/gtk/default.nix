@@ -26,7 +26,7 @@ in {
       enable = true;
 
       font = {
-        name = "Cantarell";
+        name = "Adwaita Sans";
         size = 11;
       };
 

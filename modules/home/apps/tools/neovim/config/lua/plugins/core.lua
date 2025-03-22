@@ -2,9 +2,19 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin-macchiato",
+      colorscheme = "catppuccin-mocha",
       news = { lazyvim = false },
     },
+  },
+  {
+    "drewxs/ash.nvim",
+    lazy = false,
+    priority = 1000,
+  },
+  {
+    "dgox16/oldworld.nvim",
+    lazy = false,
+    priority = 1000,
   },
   {
     "snacks.nvim",
@@ -16,7 +26,7 @@ return {
         preset = {
           header = [[
           ／l、             
-        （ﾟ､ ｡ ７         
+       （ﾟ､ ｡ ７         
       l  ~ヽ       
   じしf_,)ノ
         ]],
@@ -24,6 +34,14 @@ return {
       },
     },
   },
+  -- {
+  --   "uZer/pywal16.nvim",
+  --   -- for local dev replace with:
+  --   -- dir = '~/your/path/pywal16.nvim',
+  --   config = function()
+  --     vim.cmd.colorscheme("pywal16")
+  --   end,
+  -- },
   {
     "catppuccin",
     opts = {
@@ -31,6 +49,13 @@ return {
       integrations = {
         blink_cmp = true,
       },
+      -- color_overrides = {
+      --   mocha = {
+      --     base = "#000000",
+      --     mantle = "#000000",
+      --     crust = "#000000",
+      --   },
+      -- },
     },
   },
   "f-person/git-blame.nvim",
@@ -46,6 +71,7 @@ return {
         javascriptreact = { "prettierd" },
         javascript = { "prettierd" },
         htmlangular = { "prettierd" },
+        python = { "black" },
       },
     },
   },
@@ -74,6 +100,37 @@ return {
     --   indent = { char = "|" },
     --   whitespace = { highlight = "Whitespace", "NonText" },
     -- },
+  },
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        emmet_ls = {},
+        slang = {
+          inlayHints = {
+            deducedTypes = true,
+            paramaterNames = true,
+          },
+        },
+        nil_ls = {
+          settings = {
+            ["nil"] = {
+              nix = {
+                flake = {
+                  autoEvalInputs = true,
+                  nixpkgsInputName = "nixpkgs",
+                  autoArchive = true,
+                },
+                maxMemoryMB = 4096,
+              },
+              formatting = {
+                command = { "nixfmt" },
+              },
+            },
+          },
+        },
+      },
+    },
   },
   -- lua with lazy.nvim
   {

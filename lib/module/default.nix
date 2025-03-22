@@ -18,4 +18,10 @@ with lib; rec {
   enabled = {enable = true;};
 
   disabled = {enable = false;};
+
+  nixos-stable = import inputs.nixos-stable {
+    system = "x86_64-linux";
+    config = {};
+    overlays = [];
+  };
 }

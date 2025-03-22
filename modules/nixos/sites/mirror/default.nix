@@ -39,6 +39,18 @@ in {
       locations."/".extraConfig = ''
         autoindex on;
       '';
+
+      locations."~* \.iso$".extraConfig = ''
+        limit_req zone=iso_ratelimit burst=20 nodelay;
+        limit_conn iso_connlimit 5;
+        limit_rate_after 10m;
+        limit_rate 500k;
+
+        if ($http_user_agent ~* "Transmission") {
+          access_log /var/log/nginx/blocked_transmission.log combined;
+          return 403;
+        }
+      '';
     };
   };
 }

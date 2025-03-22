@@ -44,6 +44,8 @@ in {
       package = inputs.hyprland.packages.${pkgs.system}.hyprland;
       xwayland.enable = true;
 
+      # plugins = with pkgs.hyprlandPlugins; [hypr-dynamic-cursors];
+
       systemd = {
         enable = false;
         enableXdgAutostart = true;
@@ -52,14 +54,15 @@ in {
 
     wayland.windowManager.hyprland.settings = with colors; {
       exec-once = [
-        "pw-loopback -C \"alsa_input.pci-0000_0d_00.4.analog-stereo\" -P \"Scarlett Solo (3rd Gen.) Headphones / Line 1-2\""
+        # "pw-loopback -C \"alsa_input.pci-0000_0d_00.4.analog-stereo\" -P \"Scarlett Solo (3rd Gen.) Headphones / Line 1-2\""
         # "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         # "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "zen"
+        "librewolf"
         "thunderbird"
         "vesktop"
         "spotify"
-        "slack"
+        "${lib.getExe pkgs.bash} -c '(( $(date +%u) < 6 )) && ${lib.getExe pkgs.slack}'"
+        "signal-desktop"
       ];
 
       env = [
@@ -92,10 +95,11 @@ in {
 
           "${mod},X,exec, ags --toggle-window \"dashboard\""
           "${mod},Print,exec,${lib.getExe pkgs.custom.sc}"
-          "${mod},Shift&Print,exec,\"${lib.getExe pkgs.grim} -g ${lib.getExe pkgs.slurp} | wl-copy\""
+          "${mod},S,exec,${lib.getExe pkgs.grim} -g \"$(${lib.getExe pkgs.slurp})\" - | ${pkgs.wl-clipboard}/bin/wl-copy -t image/png"
+          # grim -g "$(slurp)" | wl-copy
           "${modshift},O,exec,wl-ocr"
 
-          "${mod},Period,exec, tofi-emoji"
+          "${mod},Period,exec,rofimoji"
 
           "${modshift},L,exec,swaylock --grace 0" # lock screen
         ]
@@ -113,6 +117,8 @@ in {
 
         # border thiccness
         border_size = 2;
+
+        allow_tearing = true;
 
         # active border color
         "col.active_border" = "rgb(${rose})";
@@ -171,8 +177,12 @@ in {
         force_zero_scaling = true;
       };
 
+      ecosystem = {
+        no_update_news = true;
+        no_donation_nag = true;
+      };
+
       experimental = {
-        hdr = false;
         xx_color_management_v4 = true;
       };
 
@@ -180,7 +190,8 @@ in {
         no_hardware_cursors = true;
       };
 
-      monitor = ["DP-1,2560x1440@240,0x0,1" "HDMI-A-1,disable" "DP-2,disable"];
+      # for 10 bit color: DP-3,2560x1440@240,0x0,1,bitdepth,10,cm,hdr,sdrbrightness,1.2,sdrsaturation,1.0
+      monitor = ["DP-3,2560x1440@240,0x0,1" "HDMI-A-1,disable" "DP-1,disable"];
 
       layerrule = [
         "blur, ^(gtk-layer-shell)$"
@@ -220,7 +231,7 @@ in {
         "workspace 4, title:^(.*(Disc|WebC)ord.*)$"
         "workspace 4, class:^(.*Slack.*)$"
         "workspace 3, title:^(Spotify Premium)$"
-        "workspace 2, class:^(zen)$"
+        "workspace 2, class:^(librewolf)$"
         "opacity 0.0 override,class:^(xwaylandvideobridge)$"
         "noanim,class:^(xwaylandvideobridge)$"
         "noinitialfocus,class:^(xwaylandvideobridge)$"

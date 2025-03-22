@@ -35,7 +35,20 @@ in {
 
     services.xserver.displayManager.gdm.enable = true;
 
-    programs.uwsm.enable = true;
+    programs.uwsm = {
+      enable = true;
+      # waylandCompositors = {
+      #   "mwc" = {
+      #     prettyName = "MWC";
+      #     binPath = "/run/current-system/sw/bin/mwc";
+      #     comment = "previously owl";
+      #   };
+      # };
+    };
+
+    # environment.systemPackages = [
+    #   pkgs.custom.mwc
+    # ];
 
     programs.hyprland = {
       withUWSM = true;

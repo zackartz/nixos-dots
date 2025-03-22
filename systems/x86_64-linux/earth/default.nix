@@ -30,7 +30,37 @@
   hardware.keyboard.qmk.enable = true;
   programs.nix-ld.enable = true;
 
-  programs.steam.enable = true;
+  # services.monero.mining.enable = true;
+  # services.monero.enable = true;
+  # services.monero.mining.address = "485XKPKG38bSJBUa4SPenAEFt8Wgj2hWC97PNBpFHniwNXnDNZ9xar5hHb6qLQeyK2Kk3Fw2cxxPSLjgyqr5CxXAUkUsDDx";
+  # services.monero.mining.threads = 4;
+
+  hardware.march = {
+    arch = "znver3";
+    enableNativeOptimizations = true;
+    cpu.vcores = 32;
+    memory.total = 32;
+  };
+
+  specialisation = {
+    plasma6 = {
+      configuration = {
+        services.xserver.desktopManager.plasma6.enable = true;
+
+        programs.seahorse.enable = lib.mkForce false;
+      };
+    };
+  };
+
+  programs.steam = {
+    enable = true;
+    extraPackages = with pkgs; [
+      qt5.qtwayland
+    ];
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
 
@@ -50,7 +80,7 @@
   services.lorri.enable = true;
   services.udisks2.enable = true;
   services.transmission = {
-    enable = true;
+    enable = false;
     package = pkgs.transmission_4;
     settings = {
       download-dir = "/home/zoey/Downloads";
@@ -61,9 +91,9 @@
     group = "users";
   };
   services.gnome.gnome-keyring.enable = true;
-  services.solaar = {
-    enable = true;
-  };
+  # services.solaar = {
+  #   enable = true;
+  # };
   services._1password = {
     enable = true;
     polkitPolicyOwnerUsername = "zoey";
@@ -88,6 +118,15 @@
   };
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPatches = [
+    {
+      name = "bsb-patches";
+      patch = pkgs.fetchpatch {
+        url = "https://gist.githubusercontent.com/galister/08cddf10ac18929647d5fb6308df3e4b/raw/0f6417b6cb069f19d6c28b730499c07de06ec413/combined-bsb-6-10.patch";
+        hash = "sha256-u8O4foBHhU+T3yYkguBZ14EyCKujPzHh1TwFRg6GMsA=";
+      };
+    }
+  ];
   boot.supportedFilesystems = ["ntfs"];
 
   services.dlna.enable = false;
@@ -105,10 +144,13 @@
   hardware.bluetooth.powerOnBoot = true;
 
   services.blueman.enable = true;
+  services.wg.enable = true;
+
+  # home-manager.useGlobalPkgs = false;
 
   environment.systemPackages = [
     pkgs.sbctl
-    pkgs.vesktop
+    lib.custom.nixos-stable.vesktop
     pkgs.mangohud
     pkgs.lutris
     pkgs.bottles
@@ -120,6 +162,8 @@
     pkgs.transmission_4
     pkgs.protonup-qt
     pkgs.restic
+    inputs.opnix.packages.${system}.default
+    pkgs.qt5.qtwayland
     (inputs.umu.packages.${system}.umu.override {
       version = inputs.umu.shortRev;
       truststore = true;
@@ -226,6 +270,7 @@
   programs.virt-manager.enable = true;
 
   sites.jellyfin.enable = true;
+  sites.mealie.enable = false;
 
   virtualisation.containers.enable = true;
   virtualisation.podman = {
@@ -233,6 +278,7 @@
     dockerCompat = true;
     defaultNetwork.settings.dns_enabled = true;
   };
+  virtualisation.waydroid.enable = true;
   hardware.gpu-passthru.enable = true;
 
   system.stateVersion = "24.05";

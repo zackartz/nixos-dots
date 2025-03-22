@@ -12,10 +12,10 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/release-24.11";
+    nixos-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -63,11 +63,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
+
     catppuccin.url = "github:catppuccin/nix";
 
     hyprland = {
       url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     kb-gui = {
@@ -96,15 +98,16 @@
     };
 
     umu.url = "github:Open-Wine-Components/umu-launcher?dir=packaging/nix";
-    umu.inputs.nixpkgs.follows = "nixpkgs";
+    # umu.inputs.nixpkgs.follows = "nixpkgs";
 
-    # zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    zen-browser.url = "github:zackartz/zen-browser-flake";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
 
     zoeycomputer = {
       url = "git+https://git.zoeys.cloud/zoey/zoeys.computer";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    posting.url = "github:jorikvanveen/posting-flake";
 
     lix-module = {
       url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz";
@@ -117,17 +120,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    g2claude.url = "git+https://git.zoeys.cloud/zoey/g2claude.git";
-
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
+
+    opnix.url = "github:brizzbuzz/opnix";
+
+    mc-honeypot.url = "github:Duckulus/mc-honeypot";
+    mc-honeypot.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {self, ...}: let
@@ -140,6 +144,18 @@
         (final: prev: {
           ghostty = inputs.ghostty.packages."x86_64-linux".default;
         })
+        (final: prev: {
+          shadps4 = prev.shadps4.overrideAttrs {
+            src = prev.fetchFromGitHub {
+              owner = "shadps4-emu";
+              repo = "shadPS4";
+              rev = "41b39428335025e65f9e707ed8d5a9a1b09ba942";
+              hash = "sha256-5oe2By8TjJJIVubkp5lzqx2slBR7hxIHV4wZLgRYKl8=";
+              fetchSubmodules = true;
+            };
+            patches = [];
+          };
+        })
       ];
 
       snowfall = {
@@ -148,6 +164,9 @@
 
       channels-config = {
         allowUnfree = true;
+
+        gcc.arch = "znver3";
+        gcc.tune = "znver3";
       };
 
       homes.modules = with inputs; [
@@ -155,6 +174,7 @@
         catppuccin.homeManagerModules.catppuccin
         anyrun.homeManagerModules.default
         ags.homeManagerModules.default
+        opnix.homeManagerModules.default
       ];
 
       systems.modules.nixos = with inputs; [
@@ -166,7 +186,10 @@
         solaar.nixosModules.default
         zoeycomputer.nixosModules.default
         lix-module.nixosModules.default
-        disko.nixosModules.default
+        mailserver.nixosModule
+        disko.nixosModules.disko
+        mc-honeypot.nixosModules.default
+        opnix.nixosModules.default
       ];
     };
   in

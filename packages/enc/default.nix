@@ -21,7 +21,7 @@ writeShellScriptBin "enc" ''
 
   # Create recipient arguments for gpg
   recipients=()
-  recipients+=("-r" "0x5F873416BCF59F35")
+  recipients+=("-r" "0xEE8A2B709E2401D1")
   for recipient in "$@"; do
       recipients+=("-r" "$recipient")
   done

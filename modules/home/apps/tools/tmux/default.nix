@@ -14,10 +14,17 @@ in {
   };
 
   config = mkIf cfg.enable {
+    catppuccin.tmux = {
+      enable = true;
+      # extraConfig = ''
+      #   set -g @catppuccin_window_status_style "basic"
+      #   set -g @catppuccin_status_background "#000000"
+      # '';
+    };
+
     programs.tmux = {
       enable = true;
       shell = "${pkgs.zsh}/bin/zsh";
-      catppuccin.enable = true;
       historyLimit = 100000;
       plugins = with pkgs; [
         tmuxPlugins.sensible
@@ -35,7 +42,6 @@ in {
         set-window-option -g pane-base-index 1
         set-option -g renumber-windows on
 
-        set -g @catppuccin_window_status_style "basic"
         set -g default-terminal "tmux-256color"
         set -g allow-passthrough on
 

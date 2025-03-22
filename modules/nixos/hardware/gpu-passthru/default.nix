@@ -48,7 +48,7 @@ in {
             kmod
             systemd
             ripgrep
-            mullvad
+            nixos-stable.mullvad
             killall
             sd
           ];

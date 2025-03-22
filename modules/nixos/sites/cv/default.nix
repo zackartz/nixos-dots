@@ -27,7 +27,7 @@ in {
         root = "${inputs.resume.packages.${pkgs.system}.default}";
       };
       extraConfig = ''
-        index resume.pdf;
+        index ZacharyMyersResume.pdf;
       '';
     };
   };

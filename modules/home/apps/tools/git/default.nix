@@ -58,6 +58,12 @@ in {
           autoupdate = true;
           enabled = true;
         };
+        sendemail = {
+          smtpserver = "mail.zoeys.cloud";
+          smtpuser = "hi@zoeys.computer";
+          smtpencryption = "ssl";
+          smtpserverport = 465;
+        };
       };
       lfs.enable = true;
       delta.enable = true;

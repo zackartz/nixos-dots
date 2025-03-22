@@ -37,7 +37,22 @@
 
   services.web.nginx.enable = true;
   services.gh.enable = true;
-  services.fail2ban.enable = true;
+  services.fail2ban = {
+    enable = true;
+    jails.DDOS = ''
+      filter = nginx-limit-req
+      action = iptables-allports[name=HTTP, protocol=all]
+      logpath = /var/log/nginx/blocked.log
+      findtime = 600
+      maxretry = 20
+      bantime = 3600
+    '';
+  };
+
+  services.nginx.virtualHosts."node.nyc.zackmyers.io" = {
+    forceSSL = true;
+    enableACME = true;
+  };
 
   services.atproto-pds = {
     enable = true;
@@ -77,9 +92,11 @@
     pterodactyl.enable = true;
     search.enable = true;
     map.enable = true;
-    hydra.enable = true;
+    hydra.enable = false;
     cache.enable = true;
     minio.enable = true;
+    immich.enable = true;
+    polaris.enable = false;
     zoeycomputer = {
       enable = true;
       domain = "zoeys.computer";
@@ -238,6 +255,23 @@
     passwordAuthentication = false;
     permitRootLogin = "no";
   };
+
+  networking.firewall.enable = true;
+  networking.firewall.extraPackages = [pkgs.ipset];
+  networking.firewall.extraCommands = ''
+    ipset create blocked_ips hash:ip
+    while IFS= read -r ip; do
+      ipset add blocked_ips "$ip"
+    done < ${./blocked.txt}
+    iptables -A INPUT -m set --set blocked_ips src -j DROP
+    iptables -A INPUT -m set --set blocked_ips src -j LOG --log-prefix "INPUT:DROP:" --log-level 6
+  '';
+
+  networking.firewall.extraStopCommands = ''
+    iptables -D INPUT -m set --set blocked_ips src -j DROP || true
+    iptables -A INPUT -m set --set blocked_ips src -j LOG --log-prefix "INPUT:DROP:" --log-level 6 || true
+    ipset destroy blocked_ips || true
+  '';
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [80 443 6969 2022 16262];

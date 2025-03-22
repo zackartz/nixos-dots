@@ -17,11 +17,11 @@ in {
   config = mkIf cfg.enable {
     services.swaync = {
       enable = true;
-      style = ''
+      style = lib.mkForce ''
         * {
           all: unset;
           font-size: 14px;
-          font-family: "Cantarell";
+          font-family: "Adwaita Sans", "JetBrains Mono Nerd Font";
           transition: 200ms;
         }
 
@@ -290,16 +290,16 @@ in {
           border: 1px solid #6e738d;
         }
 
-        .widget-mpris .widget-mpris-player {
+        .widget-mpris .widget-mpris-player .widget-mpd {
           background: #363a4f;
           padding: 7px;
         }
 
-        .widget-mpris .widget-mpris-title {
+        .widget-mpris .widget-mpris-title .widget-mpd .widget-mpd-title {
           font-size: 1.2rem;
         }
 
-        .widget-mpris .widget-mpris-subtitle {
+        .widget-mpris .widget-mpris-subtitle .widget-mpd .widget-mpd-subtitle {
           font-size: 0.8rem;
         }
 
@@ -419,6 +419,7 @@ in {
         #tray,
         #memory,
         #window,
+        #mpd
         #mpris {
           padding: 0.3rem 0.6rem;
           margin: 0.4rem 0.25rem;
@@ -516,6 +517,32 @@ in {
             "on-click-right" = "spotifatius toggle-liked";
             "on-click-middle" = "playerctl -p spotify next";
             exec = "spotifatius monitor";
+          };
+
+          mpd = {
+            format = "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title}";
+            "format-disconnected" = "Disconnected ";
+            "format-stopped" = "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ";
+            "interval" = 10;
+            "consume-icons" = {
+              "on" = " ";
+            };
+            "random-icons" = {
+              "off" = "<span color=\"#f53c3c\"></span> ";
+              "on" = " ";
+            };
+            "repeat-icons" = {
+              "on" = " ";
+            };
+            "single-icons" = {
+              "on" = "1 ";
+            };
+            "state-icons" = {
+              "paused" = "";
+              "playing" = "";
+            };
+            "tooltip-format" = "MPD (connected)";
+            "tooltip-format-disconnected" = "";
           };
 
           mpris = {
