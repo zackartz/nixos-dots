@@ -218,6 +218,36 @@
     })
   ];
 
+  # Create a custom monitors.xml for GDM
+  environment.etc."gdm/monitors.xml" = {
+    mode = "0644";
+    text = ''
+      <monitors version="2">
+        <configuration>
+          <logicalmonitor>
+            <x>0</x>
+            <y>0</y>
+            <primary>yes</primary>
+            <scale>1</scale>
+            <monitor>
+              <monitorspec>
+                <connector>DP-3</connector>  <!-- Change to your actual connector -->
+                <vendor>YOUR_VENDOR</vendor> <!-- Optional, can be left as is -->
+                <product>YOUR_PRODUCT</product> <!-- Optional, can be left as is -->
+                <serial>YOUR_SERIAL</serial> <!-- Optional, can be left as is -->
+              </monitorspec>
+              <mode>
+                <width>2560</width>
+                <height>1440</height>
+                <rate>240</rate> <!-- 240Hz refresh rate -->
+              </mode>
+            </monitor>
+          </logicalmonitor>
+        </configuration>
+      </monitors>
+    '';
+  };
+
   programs.zsh.enable = true;
   programs.fuse.userAllowOther = true;
   users.users.zoey = {
