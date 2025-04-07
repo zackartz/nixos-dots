@@ -246,8 +246,8 @@
         # falloff = 0.0;
       };
       input = {
-        method = "pipewire";
-        source = "497";
+        method = "pulse";
+        source = "alsa_output.usb-MOTU_M4_M4MA03F7DV-00.HiFi__Line1__sink.monitor";
       };
       # output = {
       #   method = "ncurses";

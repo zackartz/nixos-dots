@@ -1,0 +1,194 @@
+* {
+  font-family: Iosevka Nerd Font;
+  min-height: 14px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  padding: 4px;
+  margin: 0;
+  box-shadow: none;
+  text-shadow: none;
+  background-color: transparent;
+}
+
+window#waybar {
+  padding: 8px;
+  background-color: @crust;
+}
+
+#custom-cava-system, #custom-cava-tt {
+  color: #cba6f7;
+  border-left: 0px;
+  border-right: 0px;
+  padding: 6px;
+  font-family: 'bargraph';
+  background: @base;
+  margin: 0px 2px;
+}
+
+#window {
+  padding: 0px 8px 0px 8px;
+  background-color: @base;
+}
+
+#cpu {
+  color: @green;
+  padding: 0px 12px;
+  background: @base;
+  margin-left: 1px;
+  border-radius: 6px 0 0 6px;
+}
+
+#memory {
+  color: @green;
+  padding: 0px 12px;
+  background: @base;
+  margin: 0;
+  border-radius: 0;
+}
+
+#temperature {
+  color: @green;
+  padding: 0px 12px;
+  background: @base;
+  margin-right: 1px;
+  border-radius: 0 6px 6px 0;
+}
+
+#custom-gpu-temp {
+  padding: 0px 12px;
+  margin-right: 2px;
+  color: @blue;
+  background: @base;
+  border-radius: 0 6px 6px 0;
+}
+
+#custom-gpu-mem {
+  padding: 0px 12px;
+  margin: 0;
+  color: @blue;
+  background: @base;
+  border-radius: 0;
+}
+
+#custom-gpu-usage {
+  padding: 0px 12px;
+  margin-left: 1px;
+  color: @blue;
+  background: @base;
+  border-radius: 6px 0 0 6px;
+}
+
+#tray {
+  background: @base;
+  padding: 4px;
+}
+
+/* General Styling */
+tooltip,
+menu,
+#workspaces,
+#clock,
+#pulseaudio,
+#backlight,
+#bluetooth,
+#network,
+#battery,
+#custom-notification, #custom-power,
+#custom-weather {
+  background: @base;
+  padding: 8px 8px;
+  min-width: 28px;
+  margin-left: 1px;
+  margin-right: 1px;
+  border-radius: 6px;
+}
+
+#custom-power {
+  color: @red;
+}
+
+#workspaces {
+  background: @base;
+  margin: 0;
+  margin-left: 3px;
+  padding: 0;
+  font-weight: bold;
+  font-style: normal;
+  opacity: 1;
+  font-size: 16px;
+  color: #1e1;
+  border-radius: 6px;
+}
+
+#workspaces button {
+  padding: 0px 5px;
+  margin: 3px;
+  border-radius: 6px;
+  border: none;
+  color: #f5e0dc;
+  /* background-color: #1e1e2e; */
+  transition: all 0.3s ease-in-out;
+  opacity: 0.4;
+}
+
+#workspaces button.active {
+  color: #1e1e2e;
+  background: #cba6f7;
+  min-width: 20px;
+  opacity: 1;
+}
+
+#workspaces button:hover {
+  color: #c3dee5;
+  background: #1e1e2e;
+  opacity: 1;
+  animation: none;
+}
+
+#clock {
+  padding: 0 15px;
+  color: @lavender;
+  border-radius: 6px;
+}
+
+#custom-launcher {
+  font-size: 18px;
+  transition: none;
+  padding: 0px 10px;
+  margin-right: 2px;
+  background: @base;
+  color: rgba(137, 220, 235, 1);
+  border-radius: 0 6px 6px 0;
+}
+
+#pulseaudio {
+  padding: 0 8px;
+  margin-right: 1px;
+  color: @beige;
+  border-radius: 6px 6px;
+}
+
+#bluetooth,
+#network {
+  color: #cba6f7;
+  border-radius: 6px;
+  margin: 0 1px;
+}
+
+#network.speed {
+  background: @base;
+  padding: 0px 6px;
+  min-width: 10px;
+  color: @teal;
+  border-radius: 6px;
+}
+
+#network {
+  min-width: 30px;
+  padding: 0 7px 0 2px;
+  /* margin: 0 2px; */
+  border-radius: 6px;
+  /* border-radius: 0 6px 6px 0; */
+}
+

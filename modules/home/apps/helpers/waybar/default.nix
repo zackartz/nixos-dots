@@ -368,126 +368,11 @@ in {
       systemd.enable = true;
       systemd.target = "graphical-session.target";
       style = ''
-        * {
-          min-height: 0;
-          min-width: 0;
-          font-family: Cantarell;
-          font-size: 16px;
-          font-weight: 600;
-        }
-
-        window#waybar {
-          transition-property: background-color;
-          transition-duration: 0.5s;
-          /* background-color: #1e1e2e; */
-          /* background-color: #181825; */
-          background-color: #11111b;
-          /* background-color: rgba(24, 24, 37, 0.6); */
-        }
-
-        #workspaces button {
-          padding: 0.3rem 0.6rem;
-          margin: 0.4rem 0.25rem;
-          border-radius: 6px;
-          /* background-color: #181825; */
-          background-color: #1e1e2e;
-          color: #cdd6f4;
-        }
-
-        #workspaces button:hover {
-          color: #1e1e2e;
-          background-color: #cdd6f4;
-        }
-
-        #workspaces button.active {
-          background-color: #1e1e2e;
-          color: #89b4fa;
-        }
-
-        #workspaces button.urgent {
-          background-color: #1e1e2e;
-          color: #f38ba8;
-        }
-
-        #clock,
-        #pulseaudio,
-        #custom-logo,
-        #custom-power,
-        #custom-spotify,
-        #custom-notification,
-        #cpu,
-        #tray,
-        #memory,
-        #window,
-        #mpd
-        #mpris {
-          padding: 0.3rem 0.6rem;
-          margin: 0.4rem 0.25rem;
-          border-radius: 6px;
-          /* background-color: #181825; */
-          background-color: #1e1e2e;
-        }
-
-        #mpris.playing {
-          color: #a6e3a1;
-        }
-
-        #mpris.paused {
-          color: #9399b2;
-        }
-
-        #custom-sep {
-          padding: 0px;
-          color: #585b70;
-        }
-
-        window#waybar.empty #window {
-          background-color: transparent;
-        }
-
-        #cpu {
-          color: #94e2d5;
-        }
-
-        #memory {
-          color: #cba6f7;
-        }
-
-        #clock {
-          color: #74c7ec;
-        }
-
-        #clock.simpleclock {
-          color: #89b4fa;
-        }
-
-        #window {
-          color: #cdd6f4;
-        }
-
-        #pulseaudio {
-          color: #b4befe;
-        }
-
-        #pulseaudio.muted {
-          color: #a6adc8;
-        }
-
-        #custom-logo {
-          color: #89b4fa;
-        }
-
-        #custom-power {
-          color: #f38ba8;
-        }
-
-        tooltip {
-          background-color: #181825;
-          border: 2px solid #89b4fa;
-        }
+        ${builtins.readFile ./style.css}
       '';
-
-      settings = {
+      settings = let
+        cava = pkgs.writeShellScriptBin "cava" "${builtins.readFile ./bar.sh}";
+      in {
         mainBar = {
           layer = "bottom";
           position = "top";
@@ -497,12 +382,17 @@ in {
           "gtk-layer-shell" = true;
           passthrough = false;
           "fixed-center" = true;
-          "modules-left" = ["hyprland/workspaces" "hyprland/window" "niri/workspaces" "niri/window"];
+          "modules-left" = ["hyprland/workspaces" "hyprland/window" "niri/workspaces" "niri/window" "network#speed" "custom/cava-system" "custom/cava-tt"];
           "modules-center" = ["mpris"];
           "modules-right" = [
             "cpu"
             "memory"
+            "temperature"
+            "custom/gpu-usage"
+            "custom/gpu-mem"
+            "custom/gpu-temp"
             "pulseaudio"
+            "custom/weather"
             "clock"
             "clock#simpleclock"
             "tray"
@@ -511,7 +401,7 @@ in {
           ];
 
           "custom/spotify" = {
-            format = "  {}";
+            format = "{}";
             "return-type" = "json";
             "on-click" = "playerctl -p spotify play-pause";
             "on-click-right" = "spotifatius toggle-liked";
@@ -558,6 +448,60 @@ in {
             };
           };
 
+          "custom/cava-system" = {
+            format = "{}";
+            exec = "${cava}/bin/cava alsa_output.usb-MOTU_M4_M4MA03F7DV-00.HiFi__Line1__sink.monitor";
+          };
+
+          "custom/cava-tt" = {
+            format = "{}";
+            exec = "${cava}/bin/cava cava-line-in.monitor";
+          };
+
+          "custom/weather" = {
+            "format" = "{}°F";
+            interval = 3600;
+            exec = "${lib.getExe pkgs.wttrbar} --location 'Holland,MI' --fahrenheit --mph";
+            return-type = "json";
+          };
+
+          "custom/gpu-temp" = {
+            interval = 10;
+            exec = "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits";
+            format = "{}°C ";
+            tooltip = false;
+          };
+
+          "custom/gpu-mem" = {
+            interval = 10;
+            exec = "nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits | awk '{printf \"%.1f\", $1/1024}'";
+            format = "{}Gi";
+            tooltip = false;
+          };
+
+          "custom/gpu-usage" = {
+            interval = 2;
+            exec = "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits";
+            format = "{}%";
+            tooltip = false;
+          };
+
+          "network#speed" = {
+            interval = 1;
+            format = "{ifname}%%";
+            format-wifi = " {bandwidthDownBytes}  {bandwidthUpBytes}";
+            format-ethernet = " {bandwidthDownBytes}  {bandwidthUpBytes} ";
+            format-disconnected = "󰌙";
+            tooltip-format = "{ipaddr}";
+            format-linked = "󰈁 {ifname} (No IP)";
+            tooltip-format-wifi = "{essid} {icon} {signalStrength}%";
+            tooltip-format-ethernet = "{ifname} 󰌘";
+            tooltip-format-disconnected = "󰌙 Disconnected";
+            max-length = 22;
+            min-length = 20;
+            format-icons = ["󰤯" "󰤟" "󰤢" "󰤥" "󰤨"];
+          };
+
           "hyprland/workspaces" = {
             "on-click" = "activate";
             format = "{id}";
@@ -577,11 +521,19 @@ in {
 
           "clock#simpleclock" = {
             tooltip = false;
-            format = " {:%H:%M}";
+            format = "{:%H:%M}";
+          };
+
+          "temperature" = {
+            hwmon-path-abs = "/sys/devices/platform/asus-ec-sensors/hwmon/hwmon3";
+            input_filename = "temp2_input";
+            critical-threshold = 70;
+            format = "{temperatureC}°C ";
+            format-critical = "󰸁 {temperatureC}°C";
           };
 
           clock = {
-            format = " {:L%a %d %b}";
+            format = "{:L%a %d %b}";
             calendar = {
               format = {
                 days = "<span weight='normal'>{}</span>";
@@ -598,21 +550,22 @@ in {
           };
 
           cpu = {
-            format = " {usage}%";
+            format = "{usage}%";
             tooltip = true;
             interval = 1;
           };
 
           memory = {
-            format = " {used:0.1f}Gi";
+            interval = 1;
+            format = "{used:0.1f}Gi";
           };
 
           pulseaudio = {
-            format = "{icon} {volume}%";
-            "format-muted" = "  muted";
+            format = "{icon}  {volume}%";
+            "format-muted" = "";
             "format-icons" = {
-              headphone = "";
-              default = [" " " " " "];
+              headphone = "";
+              default = ["" ""];
             };
             "on-click" = "pavucontrol";
           };
