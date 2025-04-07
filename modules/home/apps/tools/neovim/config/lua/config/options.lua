@@ -9,3 +9,5 @@ end
 
 -- in this case.
 vim.g.lazyvim_blink_main = true
+
+vim.o.termguicolors = true

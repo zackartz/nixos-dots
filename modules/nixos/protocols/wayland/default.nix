@@ -36,14 +36,19 @@ in {
     services.xserver.displayManager.gdm.enable = true;
 
     programs.uwsm = {
-      enable = true;
-      # waylandCompositors = {
-      #   "mwc" = {
-      #     prettyName = "MWC";
-      #     binPath = "/run/current-system/sw/bin/mwc";
-      #     comment = "previously owl";
-      #   };
-      # };
+      enable = false;
+      waylandCompositors = {
+        # "mwc" = {
+        #   prettyName = "MWC";
+        #   binPath = "/run/current-system/sw/bin/mwc";
+        #   comment = "previously owl";
+        # };
+        # niri = {
+        #   prettyName = "niri";
+        #   binPath = "/run/current-system/sw/bin/niri";
+        #   comment = "niri";
+        # };
+      };
     };
 
     # environment.systemPackages = [
@@ -52,13 +57,14 @@ in {
 
     programs.hyprland = {
       withUWSM = true;
-      enable = true;
+      enable = false;
       xwayland.enable = true;
       package = inputs.hyprland.packages.${pkgs.system}.hyprland;
       portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
     };
 
-    programs.niri.enable = false;
+    programs.niri.enable = true;
+    programs.niri.package = pkgs.niri-unstable;
 
     environment = {
       variables = {
@@ -78,26 +84,18 @@ in {
         WLR_BACKEND = "wayland";
         WLR_RENDERER = "wayland";
         XDG_SESSION_TYPE = "wayland";
-        SDL_VIDEODRIVER = "wayland";
+        SDL_VIDEODRIVER = "wayland,x11";
         XDG_CACHE_HOME = "/home/zoey/.cache";
         CLUTTER_BACKEND = "wayland";
         DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
       };
-      loginShellInit = ''
-        dbus-update-activation-environment --systemd DISPLAY
-        eval $(gnome-keyring-daemon --start --components=ssh,secrets)
-        eval $(ssh-agent)
-      '';
     };
 
     hardware.pulseaudio.support32Bit = true;
 
     xdg.portal = {
       enable = true;
-      wlr.enable = false;
-      config.common.default = "*";
       extraPortals = [
-        pkgs.xdg-desktop-portal-gtk
         # pkgs.xwaylandvideobridge
       ];
     };

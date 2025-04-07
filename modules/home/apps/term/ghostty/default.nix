@@ -16,10 +16,15 @@ in {
       # bold = mkStringOpt "JetBrainsMonoNL Nerd Font Mono ExtraBold" "Bold Font";
       # italic = mkStringOpt "JetBrainsMonoNL Nerd Font Mono Bold Italic" "Italic Font";
       # bold_italic = mkStringOpt "JetBrainsMonoNL Nerd Font Mono ExtraBold Italic" "Bold Italic Font";
-      normal = mkStringOpt "Pragmata Pro Mono" "Normal Font";
-      bold = mkStringOpt "Iosevka ExtraBold" "Bold Font";
-      italic = mkStringOpt "Iosevka Bold Italic" "Italic Font";
-      bold_italic = mkStringOpt "Iosevka ExtraBold Italic" "Bold Italic Font";
+      # normal = mkStringOpt "Pragmata Pro Mono" "Normal Font";
+      # bold = mkStringOpt "Pragmata Pro Mono" "Bold Font";
+      # italic = mkStringOpt "Iosevka Bold Italic" "Italic Font";
+      # bold_italic = mkStringOpt "Iosevka ExtraBold Italic" "Bold Italic Font";
+
+      normal = mkStringOpt "Iosevka" "Normal Font";
+      bold = mkStringOpt "Iosevka" "Bold Font";
+      italic = mkStringOpt "Iosevka" "Italic Font";
+      bold_italic = mkStringOpt "Iosevka" "Bold Italic Font";
     };
   };
 

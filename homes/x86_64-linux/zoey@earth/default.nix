@@ -5,10 +5,11 @@
   lib,
   ...
 }: {
-  wms.hyprland.enable = true;
+  # wms.hyprland.enable = true;
+  wms.niri.enable = true;
   apps = {
     web.librewolf.enable = true;
-    web.librewolf.setDefault = true;
+    web.zen.setDefault = true;
 
     tools.git.enable = true;
     tools.tmux.enable = true;
@@ -24,7 +25,7 @@
 
     term.kitty.enable = true;
     term.foot.enable = true;
-    # term.rio.enable = true;
+    term.rio.enable = true;
     term.alacritty.enable = true;
     term.ghostty.enable = true;
 
@@ -104,7 +105,7 @@
 
   work.vpn.enable = true;
 
-  home.packages = [
+  home.packages = with pkgs; [
     pkgs.gimp
     pkgs.slack
 
@@ -119,6 +120,7 @@
     pkgs.ungoogled-chromium
     pkgs.uutils-coreutils-noprefix
     pkgs.yazi
+    pkgs.reaper
 
     pkgs.fragments
     inputs.posting.packages.${pkgs.system}.default
@@ -134,6 +136,8 @@
     pkgs.custom.nvidia-nsight
 
     pkgs.custom.enc
+
+    pkgs.neural-amp-modeler-lv2
 
     pkgs.nix-tree
     # inputs.g2claude.packages.${pkgs.system}.default
@@ -197,6 +201,8 @@
     pkgs.rofimoji
     pkgs.renderdoc
 
+    pkgs.xwayland-satellite
+
     pkgs.nautilus
     pkgs.nautilus-python
     pkgs.loupe
@@ -230,24 +236,28 @@
   programs.cava = {
     enable = true;
     catppuccin.enable = true;
-    # settings = {
-    #   general = {
-    #     bars = 2;
-    #     channels = 2;
-    #     mono = "no";
-    #
-    #     # smoothing = 0;
-    #     # falloff = 0.0;
-    #   };
-    #   input = {
-    #     method = "pipewire";
-    #     source = "alsa_input.pci-0000_0d_00.4.analog-stereo";
-    #   };
-    #   # output = {
-    #   #   method = "ncurses";
-    #   # };
-    # };
+    settings = {
+      general = {
+        # bars = 2;
+        # channels = 2;
+        # mono = "no";
+
+        # smoothing = 0;
+        # falloff = 0.0;
+      };
+      input = {
+        method = "pipewire";
+        source = "497";
+      };
+      # output = {
+      #   method = "ncurses";
+      # };
+    };
   };
+
+  catppuccin.fuzzel.enable = true;
+
+  programs.fuzzel.enable = true;
 
   programs.btop = {
     enable = true;

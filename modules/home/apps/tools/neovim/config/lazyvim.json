@@ -14,6 +14,7 @@
     "lazyvim.plugins.extras.lang.toml",
     "lazyvim.plugins.extras.lang.json",
     "lazyvim.plugins.extras.lang.clangd",
+    "lazyvim.plugins.extras.lang.rust",
     "lazyvim.plugins.extras.lang.markdown",
     "lazyvim.plugins.extras.lang.nix",
     "lazyvim.plugins.extras.lang.sql",
@@ -32,8 +33,9 @@
     "lazyvim.plugins.extras.coding.luasnip",
     "lazyvim.plugins.extras.coding.blink"
   ],
+  "install_version": 8,
   "news": {
-    "NEWS.md": "6520"
+    "NEWS.md": "10960"
   },
   "version": 8
 }

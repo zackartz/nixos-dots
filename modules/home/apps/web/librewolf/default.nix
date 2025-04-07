@@ -61,7 +61,7 @@ in {
                 }
               ];
 
-              iconUpdateURL = "https://www.openstreetmap.org/favicon.ico";
+              icon = "https://www.openstreetmap.org/favicon.ico";
               definedAliases = ["@openstreetmap" "@osm"];
             };
 
@@ -72,7 +72,7 @@ in {
                 }
               ];
 
-              iconUpdateURL = "https://search.zoeys.computer/searx/static/themes/simple/img/favicon.svg";
+              icon = "https://search.zoeys.computer/searx/static/themes/simple/img/favicon.svg";
               definedAliases = ["@searx"];
             };
 
@@ -83,7 +83,7 @@ in {
                 }
               ];
 
-              iconUpdateURL = "https://docs.rs/-/static/favicon.ico";
+              icon = "https://docs.rs/-/static/favicon.ico";
               definedAliases = ["@docs"];
             };
 
@@ -94,7 +94,7 @@ in {
                 }
               ];
 
-              iconUpdateURL = "https://crates.io/assets/cargo.png";
+              icon = "https://crates.io/assets/cargo.png";
               definedAliases = ["@crates"];
             };
           };

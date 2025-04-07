@@ -12,14 +12,18 @@ in {
     enable = mkBoolOpt false "Enable Kitty Term";
 
     fonts = {
-      normal = mkStringOpt "JetBrainsMonoNL Nerd Font Mono Bold" "Normal Font";
-      bold = mkStringOpt "JetBrainsMonoNL Nerd Font Mono ExtraBold" "Bold Font";
-      italic = mkStringOpt "JetBrainsMonoNL Nerd Font Mono Bold Italic" "Italic Font";
-      bold_italic = mkStringOpt "JetBrainsMonoNL Nerd Font Mono ExtraBold Italic" "Bold Italic Font";
-      # normal = mkStringOpt "Iosevka Bold" "Normal Font";
-      # bold = mkStringOpt "Iosevka ExtraBold" "Bold Font";
-      # italic = mkStringOpt "Iosevka Bold Italic" "Italic Font";
-      # bold_italic = mkStringOpt "Iosevka ExtraBold Italic" "Bold Italic Font";
+      # normal = mkStringOpt "JetBrainsMonoNL Nerd Font Mono Bold" "Normal Font";
+      # bold = mkStringOpt "JetBrainsMonoNL Nerd Font Mono ExtraBold" "Bold Font";
+      # italic = mkStringOpt "JetBrainsMonoNL Nerd Font Mono Bold Italic" "Italic Font";
+      # bold_italic = mkStringOpt "JetBrainsMoIosevka ExtraBold ItalicnoNL Nerd Font Mono ExtraBold Italic" "Bold Italic Font";
+      # normal = mkStringOpt "Kirsch Nerd Font Mono" "Normal Font";
+      # bold = mkStringOpt "Kirsch Nerd Font Mono" "BBoldold Font";
+      # italic = mkStringOpt "Kirsch Nerd Font Mono" "Italic Font";
+      # bold_italic = mkStringOpt "Kirsch Nerd Font Mono" "Bold Italic Font";
+      normal = mkStringOpt "CozetteVector" "Normal Font";
+      bold = mkStringOpt "CozetteVector" "Bold Font";
+      italic = mkStringOpt "CozetteVector" "Italic Font";
+      bold_italic = mkStringOpt "CozetteVector" "Bold Italic Font";
     };
   };
 
@@ -28,7 +32,7 @@ in {
       enable = true;
       font = {
         name = cfg.fonts.normal;
-        size = 14;
+        size = 16;
       };
 
       extraConfig = ''
@@ -41,7 +45,7 @@ in {
 
       settings = {
         window_padding_width = 12;
-        background_opacity = "0.9";
+        # background_opacity = "0.9";
         # background = "#000000";
       };
     };

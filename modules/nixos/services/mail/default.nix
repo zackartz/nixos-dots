@@ -27,6 +27,8 @@ in {
       };
       zach-pw.file = ./sec/zach-pw.age;
       emily-pw.file = ./sec/emily-piccat.age;
+
+      gitlab-email-pw-hashed.file = ./sec/gitlab-email-pw-hashed.age;
     };
 
     mailserver = {
@@ -50,6 +52,10 @@ in {
         "gf@zackmyers.io" = {
           hashedPasswordFile = sec.emily-pw.path;
           aliases = ["emily@pictureofcat.com"];
+        };
+        "gitlab@zoeys.cloud" = {
+          hashedPasswordFile = sec.gitlab-email-pw-hashed.path;
+          aliases = ["noreply@zoeys.cloud"];
         };
       };
 

@@ -7,60 +7,50 @@ return {
     },
   },
   {
-    "drewxs/ash.nvim",
-    lazy = false,
-    priority = 1000,
-  },
-  {
-    "dgox16/oldworld.nvim",
-    lazy = false,
-    priority = 1000,
-  },
-  {
-    "snacks.nvim",
-    opts = {
-      scroll = {
-        enabled = false,
-      },
-      dashboard = {
-        preset = {
-          header = [[
-          ／l、             
-       （ﾟ､ ｡ ７         
-      l  ~ヽ       
-  じしf_,)ノ
-        ]],
-        },
-      },
-    },
-  },
-  -- {
-  --   "uZer/pywal16.nvim",
-  --   -- for local dev replace with:
-  --   -- dir = '~/your/path/pywal16.nvim',
-  --   config = function()
-  --     vim.cmd.colorscheme("pywal16")
-  --   end,
-  -- },
-  {
     "catppuccin",
-    opts = {
-      transparent_background = true,
-      integrations = {
-        blink_cmp = true,
-      },
-      -- color_overrides = {
-      --   mocha = {
-      --     base = "#000000",
-      --     mantle = "#000000",
-      --     crust = "#000000",
-      --   },
-      -- },
-    },
+    config = function()
+      require("catppuccin").setup({
+        transparent_background = false,
+        integrations = {
+          blink_cmp = true,
+          nvimtree = true,
+        },
+        custom_highlights = function(colors)
+          return {
+            Normal = { bg = colors.crust },
+            NormalFloat = { bg = colors.crust },
+
+            -- Completion menu (nvim-cmp)
+            Pmenu = { bg = colors.crust },
+            PmenuSel = { bg = colors.surface0 },
+            CmpItemAbbr = { bg = colors.crust },
+            CmpItemAbbrMatch = { bg = colors.crust },
+
+            -- Tabs
+            TabLine = { bg = colors.crust },
+            TabLineFill = { bg = colors.crust },
+            TabLineSel = { bg = colors.crust },
+
+            -- Status line
+            StatusLine = { bg = colors.crust },
+            StatusLineNC = { bg = colors.crust },
+
+            -- Line numbers
+            LineNr = { bg = colors.crust },
+            SignColumn = { bg = colors.crust },
+          }
+        end,
+        color_overrides = {
+          mocha = {
+            base = "#11111b",
+            mantle = "#11111b",
+            crust = "#11111b",
+          },
+        },
+      })
+    end,
   },
   "f-person/git-blame.nvim",
-  { "nvim-lualine/lualine.nvim", enabled = false },
-  { "echasnovski/mini.statusline", opts = {} },
   {
     "stevearc/conform.nvim",
     opts = {
@@ -76,40 +66,19 @@ return {
     },
   },
   {
-    "folke/snacks.nvim",
-    priority = 1000,
-    lazy = false,
-    keys = {
-      {
-        "<leader>z",
-        function()
-          Snacks.zen()
-        end,
-        desc = "Toggle Zen Mode",
-      },
-    },
-  },
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    tag = "v3.8.2",
-    ---@module "ibl"
-    ---@type ibl.config
-    -- opts = {
-    --   debounce = 100,
-    --   indent = { char = "|" },
-    --   whitespace = { highlight = "Whitespace", "NonText" },
-    -- },
-  },
-  {
     "neovim/nvim-lspconfig",
+    ---@class PluginLspOpts
     opts = {
       servers = {
         emmet_ls = {},
-        slang = {
-          inlayHints = {
-            deducedTypes = true,
-            paramaterNames = true,
+        slangd = {
+          settings = {
+            slangd = {
+              inlayHints = {
+                deducedTypes = true,
+                paramaterNames = true,
+              },
+            },
           },
         },
         nil_ls = {
@@ -145,10 +114,4 @@ return {
       require("force-cul").setup()
     end,
   },
-  -- {
-  --   "supermaven-inc/supermaven-nvim",
-  --   config = function()
-  --     require("supermaven-nvim").setup({})
-  --   end,
-  -- },
 }

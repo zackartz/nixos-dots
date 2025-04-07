@@ -16,10 +16,10 @@ in {
   config = mkIf cfg.enable {
     catppuccin.tmux = {
       enable = true;
-      # extraConfig = ''
-      #   set -g @catppuccin_window_status_style "basic"
-      #   set -g @catppuccin_status_background "#000000"
-      # '';
+      extraConfig = ''
+        set -g @catppuccin_window_status_style "basic"
+        set -g @catppuccin_status_background "#11111b"
+      '';
     };
 
     programs.tmux = {
@@ -42,7 +42,8 @@ in {
         set-window-option -g pane-base-index 1
         set-option -g renumber-windows on
 
-        set -g default-terminal "tmux-256color"
+        set -g default-terminal "$TERM"
+        set -ag terminal-overrides ",$TERM:Tc"
         set -g allow-passthrough on
 
         set -g status-right-length 100

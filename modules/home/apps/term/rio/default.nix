@@ -16,7 +16,7 @@ in {
   config = mkIf cfg.enable {
     programs.rio = {
       enable = true;
-      package = inputs.rio-term.packages.${pkgs.system}.default;
+      # package = inputs.rio-term.packages.${pkgs.system}.default;
       settings = {
         window = {
           opacity = 0.9;

@@ -162,7 +162,6 @@
     pkgs.transmission_4
     pkgs.protonup-qt
     pkgs.restic
-    inputs.opnix.packages.${system}.default
     pkgs.qt5.qtwayland
     (inputs.umu.packages.${system}.umu.override {
       version = inputs.umu.shortRev;

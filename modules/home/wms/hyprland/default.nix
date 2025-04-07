@@ -54,10 +54,7 @@ in {
 
     wayland.windowManager.hyprland.settings = with colors; {
       exec-once = [
-        # "pw-loopback -C \"alsa_input.pci-0000_0d_00.4.analog-stereo\" -P \"Scarlett Solo (3rd Gen.) Headphones / Line 1-2\""
-        # "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        # "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "librewolf"
+        "zen"
         "thunderbird"
         "vesktop"
         "spotify"
@@ -65,20 +62,31 @@ in {
         "signal-desktop"
       ];
 
-      env = [
-        "XDG_SESSION_TYPE,wayland"
-        "XDG_SESSION_DESKTOP,Hyprland"
-        "XDG_CURRENT_DESKTOP,Hyprland"
-      ];
+      # env = [
+      #   "XDG_SESSION_TYPE,wayland"
+      #   "XDG_SESSION_DESKTOP,Hyprland"
+      #   "XDG_CURRENT_DESKTOP,Hyprland"
+      # ];
 
       bind =
         [
-          ''${mod},RETURN,exec,${lib.getExe pkgs.kitty}''
+          "${mod},RETURN,exec,${lib.getExe pkgs.alacritty}"
 
           "${mod},D,exec,rofi -show drun"
           "${mod},Q,killactive"
           "${mod},M,exit"
           "${mod},P,pseudo"
+          "${mod},Z,exec,${pkgs.writeShellScriptBin "zen-launcher" ''
+            ZEN_RESULT=$(${inputs.hyprland.packages.${pkgs.system}.default}/bin/hyprctl clients -j | ${lib.getExe pkgs.jq} '.[] | select(.class | contains("zen"))')
+
+            if [ -z "$ZEN_RESULT" ]; then
+              ${lib.getExe inputs.zen-browser.packages.${pkgs.system}.beta} &
+              disown
+            else
+              ZEN_WORKSPACE=$(echo "$ZEN_RESULT" | ${lib.getExe pkgs.jq} '.workspace.id')
+              ${pkgs.hyprland}/bin/hyprctl dispatch workspace "$ZEN_WORKSPACE"
+            fi
+          ''}/bin/zen-launcher"
 
           "${mod},J,togglesplit,"
 
@@ -116,13 +124,13 @@ in {
         gaps_out = 8;
 
         # border thiccness
-        border_size = 2;
+        border_size = 4;
 
         allow_tearing = true;
 
         # active border color
-        "col.active_border" = "rgb(${rose})";
-        "col.inactive_border" = "rgb(${muted})";
+        "col.active_border" = "rgb(${base})";
+        "col.inactive_border" = "rgb(${base})";
       };
 
       input = {
@@ -138,7 +146,7 @@ in {
 
       decoration = {
         # fancy corners
-        rounding = 4;
+        rounding = 0;
         # blur
         blur = {
           enabled = true;

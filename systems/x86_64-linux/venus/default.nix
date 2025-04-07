@@ -64,16 +64,6 @@
     };
   };
 
-  services.mc-honeypot = {
-    enable = true;
-
-    openFirewall = true;
-
-    settings = {
-      "webhook-url" = "https://discord.com/api/webhooks/1348850542398410834/1fqV4QLh4uTTuwZ0DjOczZa6gkDjsYECSlmWBwTXHWcYTHhwsE1ZLTP17z5v-vh6nn7H";
-    };
-  };
-
   networking.firewall.allowedTCPPorts = [80 443];
 
   system.stateVersion = "24.05";

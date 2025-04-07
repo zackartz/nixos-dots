@@ -42,13 +42,31 @@ in {
         #       noCvSs = true
         #       exportGlyphNames = true
         #
-        #       [buildPlans.IosevkaCustom.variants]
-        #       inherits = "ss08"
+        #         [buildPlans.IosevkaCustom.variants]
+        #         inherits = "ss05"
+        #
+        #           [buildPlans.IosevkaCustom.variants.design]
+        #           l = "hooky"
         #
         #       [buildPlans.IosevkaCustom.widths.Normal]
         #       shape = 500
         #       menu = 5
         #       css = "normal"
+        #
+        #       [buildPlans.IosevkaCustom.widths.Extended]
+        #       shape = 600
+        #       menu = 7
+        #       css = "expanded"
+        #
+        #       [buildPlans.IosevkaCustom.widths.SemiCondensed]
+        #       shape = 456
+        #       menu = 4
+        #       css = "semi-condensed"
+        #
+        #       [buildPlans.IosevkaCustom.widths.SemiExtended]
+        #       shape = 548
+        #       menu = 6
+        #       css = "semi-expanded"
         #     '';
         #   })
         noto-fonts
@@ -58,6 +76,8 @@ in {
         nerd-fonts.iosevka
         nerd-fonts.zed-mono
         adwaita-fonts
+        cozette
+        scientifica
         # (nerdfonts.override {fonts = ["ZedMono" "Iosevka"];})
       ];
 

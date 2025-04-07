@@ -497,7 +497,7 @@ in {
           "gtk-layer-shell" = true;
           passthrough = false;
           "fixed-center" = true;
-          "modules-left" = ["hyprland/workspaces" "hyprland/window"];
+          "modules-left" = ["hyprland/workspaces" "hyprland/window" "niri/workspaces" "niri/window"];
           "modules-center" = ["mpris"];
           "modules-right" = [
             "cpu"

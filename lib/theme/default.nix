@@ -28,5 +28,5 @@
     };
   };
 
-  wallpaper = ./favs-98.png;
+  wallpaper = ./wall4p.jpg;
 }

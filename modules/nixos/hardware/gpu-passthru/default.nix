@@ -141,6 +141,8 @@ in {
           # Stop display manager
           systemctl stop display-manager.service
           killall gdm-wayland-session
+          killall niri
+          killall niri-session
 
           # Unbind VTconsoles
           echo 0 > /sys/class/vtconsole/vtcon0/bind

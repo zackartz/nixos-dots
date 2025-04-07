@@ -48,6 +48,11 @@ in {
       gitlab_runner = {
         file = ./sec/gitlab_runner.age;
       };
+      gitlab_email_pw = {
+        file = ./sec/gitlab-email-pw.age;
+        owner = user;
+        group = group;
+      };
     };
 
     boot.kernel.sysctl."net.ipv4.ip_forward" = true; # 1
@@ -97,6 +102,15 @@ in {
       port = 443;
       https = true;
       host = cfg.domain;
+
+      smtp = {
+        enable = true;
+        address = "mail.zoeys.cloud";
+        username = "gitlab@zoeys.cloud";
+        passwordFile = sec.gitlab_email_pw.path;
+        port = 465;
+      };
+
       secrets = {
         secretFile = sec.gitlab_sec.path;
         otpFile = sec.gitlab_otp.path;

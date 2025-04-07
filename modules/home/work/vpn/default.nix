@@ -16,8 +16,6 @@ in {
   config = mkIf cfg.enable {
     xdg.configFile."vpn/work.ovpn" = {
       text = ''
-        conifg /home/zoey/cvpn-client.ovpn
-
         up ${pkgs.update-resolv-conf}/libexec/openvpn/update-resolv-conf
         down ${pkgs.update-resolv-conf}/libexec/openvpn/update-resolv-conf
       '';

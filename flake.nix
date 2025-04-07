@@ -37,6 +37,9 @@
     agenix.inputs.nixpkgs.follows = "nixpkgs";
     agenix.inputs.darwin.follows = "";
 
+    # to replace with sops-nix
+    sops-nix.url = "github:Mic92/sops-nix";
+
     pnpm2nix.url = "github:nzbr/pnpm2nix-nzbr";
 
     solaar = {
@@ -128,10 +131,7 @@
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
-    opnix.url = "github:brizzbuzz/opnix";
-
-    mc-honeypot.url = "github:Duckulus/mc-honeypot";
-    mc-honeypot.inputs.nixpkgs.follows = "nixpkgs";
+    niri.url = "github:sodiboo/niri-flake";
   };
 
   outputs = inputs @ {self, ...}: let
@@ -139,10 +139,10 @@
       inherit inputs;
       src = ./.;
 
-      overlays = [
-        inputs.rust-overlay.overlays.default
+      overlays = with inputs; [
+        rust-overlay.overlays.default
         (final: prev: {
-          ghostty = inputs.ghostty.packages."x86_64-linux".default;
+          ghostty = ghostty.packages."x86_64-linux".default;
         })
         (final: prev: {
           shadps4 = prev.shadps4.overrideAttrs {
@@ -156,6 +156,7 @@
             patches = [];
           };
         })
+        niri.overlays.niri
       ];
 
       snowfall = {
@@ -171,10 +172,9 @@
 
       homes.modules = with inputs; [
         spicetify-nix.homeManagerModules.default
-        catppuccin.homeManagerModules.catppuccin
+        catppuccin.homeModules.catppuccin
         anyrun.homeManagerModules.default
         ags.homeManagerModules.default
-        opnix.homeManagerModules.default
       ];
 
       systems.modules.nixos = with inputs; [
@@ -183,13 +183,13 @@
         catppuccin.nixosModules.catppuccin
         blog.nixosModule
         agenix.nixosModules.default
+        sops-nix.nixosModules.sops
         solaar.nixosModules.default
         zoeycomputer.nixosModules.default
         lix-module.nixosModules.default
         mailserver.nixosModule
         disko.nixosModules.disko
-        mc-honeypot.nixosModules.default
-        opnix.nixosModules.default
+        niri.nixosModules.niri
       ];
     };
   in
