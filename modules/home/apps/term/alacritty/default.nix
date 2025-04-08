@@ -31,19 +31,19 @@ in {
 
       normal = {
         family = mkStringOpt "Iosevka Nerd Font Mono" "The Family of the font";
-        style = mkStringOpt "SemiBold SemiExtended" "The Style of the font";
+        style = mkStringOpt "SemiBold" "The Style of the font";
       };
       bold = {
         family = mkStringOpt "Iosevka Nerd Font Mono" "The Family of the font";
-        style = mkStringOpt "Bold SemiExtended" "The Style of the font";
+        style = mkStringOpt "Bold" "The Style of the font";
       };
       italic = {
         family = mkStringOpt "Iosevka Nerd Font Mono" "The Family of the font";
-        style = mkStringOpt "SemiBold Italic SemiExtended" "The Style of the font";
+        style = mkStringOpt "SemiBold Italic" "The Style of the font";
       };
       bold_italic = {
         family = mkStringOpt "Iosevka Nerd Font Mono" "The Family of the font";
-        style = mkStringOpt "Bold Italic SemiExtended" "The Style of the font";
+        style = mkStringOpt "Bold Italic" "The Style of the font";
       };
 
       # normal = {
@@ -98,6 +98,11 @@ in {
           bold = cfg.fonts.bold;
           italic = cfg.fonts.italic;
           bold_italic = cfg.fonts.bold_italic;
+
+          offset = {
+            x = 0;
+            y = 0;
+          };
         };
       };
     };

@@ -50,6 +50,7 @@ done
 printf '%s\n' "
 [general]
 bars = $num_bars
+sleep_timer = 10
 
 [input]
 method = pulse
@@ -62,6 +63,9 @@ data_format = ascii
 channels = mono
 mono_option = average
 ascii_max_range = $ascii_max_range
+
+[smoothing]
+noise_reduction = 25
 " >"$config_file" || {
   echo "Error: Failed to write Cava config." >&2
   exit 1

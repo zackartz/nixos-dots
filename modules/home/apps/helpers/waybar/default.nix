@@ -490,7 +490,7 @@ in {
             interval = 1;
             format = "{ifname}%%";
             format-wifi = " {bandwidthDownBytes}  {bandwidthUpBytes}";
-            format-ethernet = " {bandwidthDownBytes}  {bandwidthUpBytes} ";
+            format-ethernet = " {bandwidthDownBytes}  {bandwidthUpBytes}";
             format-disconnected = "󰌙";
             tooltip-format = "{ipaddr}";
             format-linked = "󰈁 {ifname} (No IP)";

@@ -94,18 +94,24 @@ menu,
 #bluetooth,
 #network,
 #battery,
-#custom-notification, #custom-power,
+#custom-power, #custom-notification,
 #custom-weather {
   background: @base;
   padding: 8px 8px;
-  min-width: 28px;
   margin-left: 1px;
   margin-right: 1px;
   border-radius: 6px;
 }
 
+#custom-notification {
+  padding-left: 12px;
+  padding-right: 18px;
+}
+
 #custom-power {
   color: @red;
+  padding-left: 12px;
+  padding-right: 18px;
 }
 
 #workspaces {
