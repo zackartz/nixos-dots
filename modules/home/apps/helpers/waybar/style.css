@@ -17,7 +17,7 @@ window#waybar {
 }
 
 #custom-cava-system, #custom-cava-tt {
-  color: #cba6f7;
+  color: @mauve;
   border-left: 0px;
   border-right: 0px;
   padding: 6px;
@@ -94,7 +94,9 @@ menu,
 #bluetooth,
 #network,
 #battery,
-#custom-power, #custom-notification,
+#custom-power,
+#custom-notification,
+#custom-mullvad,
 #custom-weather {
   background: @base;
   padding: 8px 8px;
@@ -103,6 +105,7 @@ menu,
   border-radius: 6px;
 }
 
+#custom-mullvad,
 #custom-notification {
   padding-left: 12px;
   padding-right: 18px;
@@ -123,7 +126,7 @@ menu,
   font-style: normal;
   opacity: 1;
   font-size: 16px;
-  color: #1e1;
+  color: @surface0;
   border-radius: 6px;
 }
 
@@ -132,22 +135,20 @@ menu,
   margin: 3px;
   border-radius: 6px;
   border: none;
-  color: #f5e0dc;
-  /* background-color: #1e1e2e; */
   transition: all 0.3s ease-in-out;
   opacity: 0.4;
 }
 
 #workspaces button.active {
-  color: #1e1e2e;
-  background: #cba6f7;
+  color: @base;
+  background: @mauve;
   min-width: 20px;
   opacity: 1;
 }
 
 #workspaces button:hover {
-  color: #c3dee5;
-  background: #1e1e2e;
+  color: @text;
+  background: @mantle;
   opacity: 1;
   animation: none;
 }
@@ -164,20 +165,20 @@ menu,
   padding: 0px 10px;
   margin-right: 2px;
   background: @base;
-  color: rgba(137, 220, 235, 1);
+  color: @sky;
   border-radius: 0 6px 6px 0;
 }
 
 #pulseaudio {
   padding: 0 8px;
   margin-right: 1px;
-  color: @beige;
+  color: @yellow;
   border-radius: 6px 6px;
 }
 
 #bluetooth,
 #network {
-  color: #cba6f7;
+  color: @mauve;
   border-radius: 6px;
   margin: 0 1px;
 }
@@ -193,8 +194,6 @@ menu,
 #network {
   min-width: 30px;
   padding: 0 7px 0 2px;
-  /* margin: 0 2px; */
   border-radius: 6px;
-  /* border-radius: 0 6px 6px 0; */
 }
 

@@ -11,3 +11,5 @@ end
 vim.g.lazyvim_blink_main = true
 
 vim.o.termguicolors = true
+
+vim.g.lazyvim_python_lsp = "basedpyright"

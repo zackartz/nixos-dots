@@ -2,15 +2,20 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
+  lib,
   pkgs,
   inputs,
   config,
+  specialArgs,
+  system,
   ...
 }: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
+
+  # nixpkgs.pkgs = lib.mkForce inputs.nixos-stable.legacyPackages.${system};
 
   nix.settings = {
     trusted-users = ["zoey"];
@@ -97,6 +102,8 @@
     minio.enable = true;
     immich.enable = true;
     polaris.enable = false;
+    sourcehut.enable = false;
+    forgejo.enable = true;
     zoeycomputer = {
       enable = true;
       domain = "zoeys.computer";
@@ -111,6 +118,8 @@
       };
     };
   };
+
+  catppuccin.flavor = "mocha";
 
   zmio.blog.enable = true;
   zmio.blog.domain = "zackmyers.io";

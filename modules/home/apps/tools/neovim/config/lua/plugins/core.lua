@@ -70,7 +70,11 @@ return {
     ---@class PluginLspOpts
     opts = {
       servers = {
-        emmet_ls = {},
+        jinja_lsp = {},
+        emmet_ls = {
+          filetypes = { "html", "jinja" },
+        },
+        somesass_ls = {},
         slangd = {
           settings = {
             slangd = {

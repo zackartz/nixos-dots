@@ -1,8 +1,6 @@
 {
-  options,
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib;
@@ -18,6 +16,12 @@ in {
       direnv = {
         enable = true;
         nix-direnv.enable = true;
+        config = {
+          global = {
+            log_format = "-";
+            log_filter = "^$";
+          };
+        };
       };
     };
     home.sessionVariables = {

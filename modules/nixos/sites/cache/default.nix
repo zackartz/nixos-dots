@@ -24,6 +24,7 @@ in {
     services.nix-serve = {
       enable = true;
       secretKeyFile = sec.cache_key.path;
+      port = 12024;
     };
 
     services.nginx.virtualHosts."cache.zoeys.computer" = {

@@ -28,6 +28,8 @@ in {
       zach-pw.file = ./sec/zach-pw.age;
       emily-pw.file = ./sec/emily-piccat.age;
 
+      smtp-password.file = ./sec/smtpPassword.age;
+
       gitlab-email-pw-hashed.file = ./sec/gitlab-email-pw-hashed.age;
     };
 
@@ -39,7 +41,7 @@ in {
       loginAccounts = {
         "zoey@zoeys.email" = {
           hashedPasswordFile = sec.webmaster-pw.path;
-          aliases = ["zoey@zoeys.cloud" "postmaster@zoeys.email" "abuse@zoeys.email"];
+          aliases = ["zoey@zoeys.cloud" "errors@zoeys.cloud" "admin@zoeys.cloud" "postmaster@zoeys.email" "abuse@zoeys.email"];
         };
         "hi@zoeys.computer" = {
           hashedPasswordFile = sec.zoeycomputer-pw.path;
@@ -56,6 +58,9 @@ in {
         "gitlab@zoeys.cloud" = {
           hashedPasswordFile = sec.gitlab-email-pw-hashed.path;
           aliases = ["noreply@zoeys.cloud"];
+        };
+        "no-reply@code.zoeys.cloud" = {
+          hashedPasswordFile = sec.smtp-password.path;
         };
       };
 

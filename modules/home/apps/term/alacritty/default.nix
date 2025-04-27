@@ -72,7 +72,7 @@ in {
 
       settings = {
         colors = {
-          primary.background = "#11111b";
+          primary.background = colors.crust.hex;
         };
         env = {
           term = "xterm-256color";

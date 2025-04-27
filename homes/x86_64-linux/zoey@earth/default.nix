@@ -10,6 +10,7 @@
   apps = {
     web.librewolf.enable = true;
     web.zen.setDefault = true;
+    web.zen.enable = true;
 
     tools.git.enable = true;
     tools.tmux.enable = true;
@@ -35,8 +36,8 @@
     mail.aerc.enable = true;
 
     helpers = {
-      rofi.enable = true;
       waybar.enable = true;
+      swaync.enable = true;
     };
   };
 
@@ -127,7 +128,6 @@
 
     pkgs.heroic
     pkgs.cartridges
-    pkgs.discord-canary
 
     pkgs.darktable
 
@@ -178,16 +178,8 @@
 
     pkgs.parsec-bin
     pkgs.filezilla
-    lib.custom.nixos-stable.zed-editor
+    pkgs.zed-editor
     pkgs.rmpc
-
-    # (inputs.zen-browser.packages.${pkgs.system}.twilight.overrideAttrs {
-    #   version = "1.7.7t";
-    #   src = builtins.fetchTarball {
-    #     url = "https://github.com/zen-browser/desktop/releases/download/twilight/zen.linux-x86_64.tar.xz";
-    #     sha256 = "sha256:1wgkqdfny6bqwmpka6knrjzsidpm3v5kiijkmszg7wiisl47lgal";
-    #   };
-    # })
 
     inputs.zen-browser.packages.${pkgs.system}.beta
 
@@ -276,20 +268,6 @@
     enable = true;
     catppuccin.enable = true;
   };
-
-  # systemd.user.services.xwaylandvideobridge = {
-  #   Unit = {
-  #     Description = "Tool to make it easy to stream wayland windows and screens to exisiting applications running under Xwayland";
-  #   };
-  #   Service = {
-  #     Type = "simple";
-  #     ExecStart = lib.getExe pkgs.xwaylandvideobridge;
-  #     Restart = "on-failure";
-  #   };
-  #   Install = {
-  #     WantedBy = ["default.target"];
-  #   };
-  # };
 
   services = {
     gpg-agent = {

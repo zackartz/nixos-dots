@@ -25,6 +25,20 @@ with lib.custom; let
   }: {
     gradient = {inherit from to angle relative-to in';};
   };
+
+  spawnSlackOnWeekday = pkgs.writeShellScriptBin "spawn-slack-on-weekday" ''
+    # Get the day of the week (1=Monday, ..., 7=Sunday)
+    DAY_OF_WEEK=$(${pkgs.coreutils}/bin/date +%u)
+
+    # Check if it's a weekday (between 1 and 5 inclusive)
+    if [ "$DAY_OF_WEEK" -ge 1 ] && [ "$DAY_OF_WEEK" -le 5 ]; then
+      # Execute Slack. Use the full path for robustness.
+      # Ensure pkgs.slack is available (e.g., via environment.systemPackages)
+      exec ${pkgs.slack}/bin/slack
+    fi
+    # Exit successfully if not a weekday or after exec replaces the process
+    exit 0
+  '';
 in {
   options.wms.niri = with types; {
     enable = mkBoolOpt false "Enable niri";
@@ -108,7 +122,11 @@ in {
 
         # Environment variables
         environment = {
-          DISPLAY = ":0";
+          DISPLAY = ":0"; # for applications using xwayland-satillite
+        };
+
+        hotkey-overlay = {
+          skip-at-startup = true;
         };
 
         # Layout settings
@@ -131,9 +149,9 @@ in {
           focus-ring = {
             enable = true; # Not explicitly 'off'
             width = 4;
-            active = mkGradient "#89b4fa" "#74c7ec" {angle = 45;};
+            active = mkGradient colors.blue.hex colors.sky.hex {angle = 45;};
             # active = mkColor "#7fc8ff"; # Alternative solid color from KDL
-            inactive = mkGradient "#505050" "#808080" {
+            inactive = mkGradient colors.surface1.hex colors.surface2.hex {
               angle = 45;
               relative-to = "workspace-view";
             };
@@ -143,8 +161,8 @@ in {
           border = {
             enable = true; # Explicitly 'off' in KDL
             width = 0;
-            active = mkColor "#89b4fa";
-            inactive = mkColor "#1e1e2e";
+            active = mkColor colors.blue.hex;
+            inactive = mkColor colors.base.hex;
             # active-gradient = ... # Commented out in KDL
             # inactive-gradient = ... # Commented out in KDL
           };
@@ -160,13 +178,12 @@ in {
         # Spawn processes at startup
         spawn-at-startup = [
           {command = ["xwayland-satellite"];}
-          {command = ["thunderbird"];}
-          {command = ["zen"];}
-          {
-            command = [
-              "${lib.getExe pkgs.bash} -c '(( $(date +%u) < 6 )) && ${lib.getExe pkgs.slack}'"
-            ];
-          }
+          {command = ["${pkgs.writeShellScriptBin "thunderbird-delayed" ''sleep 5; thunderbird''}/bin/thunderbird-delayed"];}
+          {command = ["${pkgs.writeShellScriptBin "zen-delayed" ''sleep 5; zen''}/bin/zen-delayed"];}
+          {command = ["vesktop"];}
+          {command = ["spotify"];}
+
+          {command = ["${spawnSlackOnWeekday}/bin/spawn-slack-on-weekday"];}
         ];
 
         # Prefer server-side decorations
@@ -187,6 +204,16 @@ in {
           wait-for-frame-completion-in-pipewire = [];
         };
 
+        layer-rules = [
+          {
+            matches = [
+              {namespace = "notifications$";}
+            ];
+
+            block-out-from = "screen-capture";
+          }
+        ];
+
         # Window rules
         window-rules = [
           # Password manager rule (example from KDL comments)
@@ -194,12 +221,13 @@ in {
             matches = [
               {app-id = "^org\\.keepassxc\\.KeePassXC$";}
               {app-id = "^org\\.gnome\\.World\\.Secrets$";}
+              {app-id = "^1Password$";}
               {app-id = "^thunderbird$";}
               {app-id = "^signal$";}
               {app-id = "^vesktop$";}
+              {app-id = "^slack$";}
             ];
             block-out-from = "screen-capture";
-            # block-out-from = "screencast"; # Alternative
           }
           # Rounded corners rule (example from KDL comments)
           {
@@ -216,22 +244,16 @@ in {
           {
             matches = [{is-window-cast-target = true;}];
             focus-ring = {
-              active = mkColor "#f38ba8";
-              inactive = mkColor "#7d0d2d";
-            };
-            border = {
-              # Only inactive is specified in KDL rule
-              active = mkColor "#f38ba8";
-              width = 4;
-              inactive = mkColor "#7d0d2d";
+              active = mkColor colors.red.hex;
+              inactive = mkColor (lerpColor colors.red.hex colors.base.hex 0.5);
             };
             shadow = {
               # Only color is specified in KDL rule
               color = "#7d0d2d70";
             };
             tab-indicator = {
-              active = mkColor "#f38ba8";
-              inactive = mkColor "#7d0d2d";
+              active = mkColor colors.red.hex;
+              inactive = mkColor (lerpColor colors.red.hex colors.base.hex 0.5);
             };
           }
 
@@ -253,16 +275,76 @@ in {
               y = 16;
             };
           }
+
+          {
+            matches = [
+              {
+                at-startup = true;
+                app-id = "^zen$";
+              }
+            ];
+
+            open-maximized = true;
+
+            open-on-workspace = "browser";
+          }
+          {
+            matches = [
+              {
+                at-startup = true;
+                app-id = "^spotify$";
+              }
+              {
+                at-startup = true;
+                app-id = "^vesktop$";
+              }
+            ];
+
+            open-on-workspace = "chat";
+          }
+          {
+            matches = [
+              {
+                at-startup = true;
+                app-id = "^Slack$";
+              }
+              {
+                at-startup = true;
+                app-id = "^thunderbird$";
+              }
+            ];
+
+            open-on-workspace = "work";
+          }
         ];
+
+        workspaces."01-browser" = {
+          name = "browser";
+        };
+        workspaces."02-code" = {
+          name = "code";
+        };
+        workspaces."03-chat" = {
+          name = "chat";
+        };
+        workspaces."04-work" = {
+          name = "work";
+        };
 
         # Keybindings
         binds = {
           "Mod+Shift+Slash" = {action = actions.show-hotkey-overlay;};
 
-          "Mod+Return" = {action = actions.spawn "alacritty";};
+          "Mod+Return" = {action = actions.spawn "kitty";};
           "Mod+D" = {action = actions.spawn "fuzzel";};
           "Super+Alt+L" = {action = actions.spawn "swaylock";};
           # "Mod+T" = { action = actions.spawn "bash" "-c" "notify-send hello && exec alacritty"; };
+
+          "Mod+S" = {action = actions.set-dynamic-cast-window;};
+
+          "Mod+Shift+S" = {action = actions.set-dynamic-cast-monitor;};
+
+          "Mod+Z" = {action = actions.clear-dynamic-cast-target;};
 
           "XF86AudioRaiseVolume" = {
             allow-when-locked = true;
@@ -321,6 +403,8 @@ in {
           "Mod+Shift+J" = {action = actions.focus-workspace-down;};
           "Mod+Shift+K" = {action = actions.focus-workspace-up;};
           "Mod+Shift+L" = {action = actions.focus-monitor-right;};
+
+          "Mod+Ctrl+Shift+F" = {action = actions.toggle-windowed-fullscreen;};
 
           "Mod+Shift+Ctrl+Left" = {action = actions.move-column-to-monitor-left;};
           "Mod+Shift+Ctrl+Down" = {action = actions.move-column-to-monitor-down;};

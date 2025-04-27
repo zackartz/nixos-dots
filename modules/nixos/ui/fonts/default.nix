@@ -29,46 +29,85 @@ in {
         lexend
         jost
         dejavu_fonts
-        iosevka
+        # iosevka
         cantarell-fonts
-        # (iosevka.override
-        #   {
-        #     set = "Custom";
-        #     privateBuildPlan = ''
-        #       [buildPlans.IosevkaCustom]
-        #       family = "Iosevka"
-        #       spacing = "normal"
-        #       serifs = "sans"
-        #       noCvSs = true
-        #       exportGlyphNames = true
-        #
-        #         [buildPlans.IosevkaCustom.variants]
-        #         inherits = "ss05"
-        #
-        #           [buildPlans.IosevkaCustom.variants.design]
-        #           l = "hooky"
-        #
-        #       [buildPlans.IosevkaCustom.widths.Normal]
-        #       shape = 500
-        #       menu = 5
-        #       css = "normal"
-        #
-        #       [buildPlans.IosevkaCustom.widths.Extended]
-        #       shape = 600
-        #       menu = 7
-        #       css = "expanded"
-        #
-        #       [buildPlans.IosevkaCustom.widths.SemiCondensed]
-        #       shape = 456
-        #       menu = 4
-        #       css = "semi-condensed"
-        #
-        #       [buildPlans.IosevkaCustom.widths.SemiExtended]
-        #       shape = 548
-        #       menu = 6
-        #       css = "semi-expanded"
-        #     '';
-        #   })
+        (iosevka.override
+          {
+            set = "Custom";
+            privateBuildPlan = ''
+              # [buildPlans.IosevkaCustom]
+              # family = "Iosevka"
+              # spacing = "fontconfig-mono"
+              # serifs = "sans"
+              # noCvSs = true
+              # exportGlyphNames = true
+              #
+              #   [buildPlans.IosevkaCustom.variants]
+              #   inherits = "ss08"
+              #
+              # [buildPlans.IosevkaCustom.widths.Normal]
+              # shape = 500
+              # menu = 5
+              # css = "normal"
+              #
+              # [buildPlans.IosevkaCustom.widths.Extended]
+              # shape = 600
+              # menu = 7
+              # css = "expanded"
+
+              [buildPlans.IosevkaCustom]
+              family = "Iosevka"
+              spacing = "normal"
+              serifs = "sans"
+              noCvSs = true
+              exportGlyphNames = true
+
+                [buildPlans.IosevkaCustom.variants]
+                inherits = "ss17"
+
+                  [buildPlans.IosevkaCustom.variants.design]
+                  capital-e = "top-left-serifed"
+                  capital-u = "toothed-bottom-right-serifed"
+                  f = "tailed"
+                  m = "short-leg-top-left-and-bottom-right-serifed"
+                  paren = "flat-arc"
+
+                [buildPlans.IosevkaCustom.ligations]
+                inherits = "dlig"
+
+                [buildPlans.IosevkaCustom.weights.Regular]
+                shape = 400
+                menu = 400
+                css = 400
+
+                [buildPlans.IosevkaCustom.weights.Medium]
+                shape = 500
+                menu = 500
+                css = 500
+
+                [buildPlans.IosevkaCustom.weights.SemiBold]
+                shape = 600
+                menu = 600
+                css = 600
+
+                [buildPlans.IosevkaCustom.weights.Bold]
+                shape = 700
+                menu = 700
+                css = 700
+
+                [buildPlans.IosevkaCustom.slopes.Upright]
+                angle = 0
+                shape = "upright"
+                menu = "upright"
+                css = "normal"
+
+                [buildPlans.IosevkaCustom.slopes.Italic]
+                angle = 9.4
+                shape = "italic"
+                menu = "italic"
+                css = "italic"
+            '';
+          })
         noto-fonts
         noto-fonts-cjk-sans
         noto-fonts-emoji

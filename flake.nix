@@ -28,14 +28,11 @@
       inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     };
 
-    resume.url = "git+https://git.zoeys.cloud/zoey/resume";
-    anyrun.url = "github:anyrun-org/anyrun";
-    anyrun.inputs.nixpkgs.follows = "nixpkgs";
+    resume.url = "path:/home/zoey/dev/resume";
     ags.url = "github:Aylur/ags/v1";
     ags.inputs.nixpkgs.follows = "nixpkgs";
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
-    agenix.inputs.darwin.follows = "";
 
     # to replace with sops-nix
     sops-nix.url = "github:Mic92/sops-nix";
@@ -52,7 +49,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    blog.url = "git+https://git.zoeys.cloud/zoey/web";
+    blog.url = "path:/home/zoey/dev/web";
 
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.4.1";
@@ -101,12 +98,11 @@
     };
 
     umu.url = "github:Open-Wine-Components/umu-launcher?dir=packaging/nix";
-    # umu.inputs.nixpkgs.follows = "nixpkgs";
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
 
     zoeycomputer = {
-      url = "git+https://git.zoeys.cloud/zoey/zoeys.computer";
+      url = "path:/home/zoey/dev/zoeys.computer";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -173,7 +169,6 @@
       homes.modules = with inputs; [
         spicetify-nix.homeManagerModules.default
         catppuccin.homeModules.catppuccin
-        anyrun.homeManagerModules.default
         ags.homeManagerModules.default
       ];
 

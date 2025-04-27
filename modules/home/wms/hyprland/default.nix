@@ -129,8 +129,8 @@ in {
         allow_tearing = true;
 
         # active border color
-        "col.active_border" = "rgb(${base})";
-        "col.inactive_border" = "rgb(${base})";
+        "col.active_border" = "rgb(${colors.lavender.hex})";
+        "col.inactive_border" = "rgb(${colors.base.hex})";
       };
 
       input = {

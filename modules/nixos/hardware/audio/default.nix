@@ -43,18 +43,17 @@ in {
         # Command to execute. Use full paths for robustness.
         # We use sh -c to run multiple commands sequentially.
         # pactl is provided by the pulseaudio package.
-        ExecStart = ''
-          ${pkgs.runtimeShell} -c '
-            echo "Attempting to load Cava combine modules..."
-            # Load null sink (returns non-zero if it fails AND module doesn't exist)
-            ${pkgs.pulseaudio}/bin/pactl load-module module-null-sink sink_name=cava-line-in sink_properties=device.description="Cava_Combined_LineIn"
-            # Load loopbacks (returns non-zero on failure)
-            ${pkgs.pulseaudio}/bin/pactl load-module module-loopback source="alsa_input.usb-MOTU_M4_M4MA03F7DV-00.HiFi__Line3__source" sink=cava-line-in latency_msec=10
-            ${pkgs.pulseaudio}/bin/pactl load-module module-loopback source="alsa_input.usb-MOTU_M4_M4MA03F7DV-00.HiFi__Line4__source" sink=cava-line-in latency_msec=10
-            echo "Finished loading Cava combine modules (ignore errors if already loaded)."
-            # Exit successfully even if modules were already loaded (pactl might return 0)
-            exit 0
-        '';
+        ExecStart = "${pkgs.writeShellScriptBin "cava-start" ''
+          echo "Attempting to load Cava combine modules..."
+          # Load null sink (returns non-zero if it fails AND module doesn't exist)
+          ${pkgs.pulseaudio}/bin/pactl load-module module-null-sink sink_name=cava-line-in sink_properties=device.description="Cava_Combined_LineIn"
+          # Load loopbacks (returns non-zero on failure)
+          ${pkgs.pulseaudio}/bin/pactl load-module module-loopback source="alsa_input.usb-MOTU_M4_M4MA03F7DV-00.HiFi__Line3__source" sink=cava-line-in latency_msec=10
+          ${pkgs.pulseaudio}/bin/pactl load-module module-loopback source="alsa_input.usb-MOTU_M4_M4MA03F7DV-00.HiFi__Line4__source" sink=cava-line-in latency_msec=10
+          echo "Finished loading Cava combine modules (ignore errors if already loaded)."
+          # Exit successfully even if modules were already loaded (pactl might return 0)
+          exit 0
+        ''}/bin/cava-start";
 
         # Prevent service from restarting automatically
         Restart = "no";

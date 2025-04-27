@@ -21,10 +21,15 @@ in {
       # italic = mkStringOpt "Iosevka Bold Italic" "Italic Font";
       # bold_italic = mkStringOpt "Iosevka ExtraBold Italic" "Bold Italic Font";
 
-      normal = mkStringOpt "Iosevka" "Normal Font";
-      bold = mkStringOpt "Iosevka" "Bold Font";
-      italic = mkStringOpt "Iosevka" "Italic Font";
-      bold_italic = mkStringOpt "Iosevka" "Bold Italic Font";
+      normal = mkStringOpt "Cozette" "Normal";
+      bold = mkStringOpt "Cozette" "Bold";
+      italic = mkStringOpt "Cozette" "Italic";
+      bold_italic = mkStringOpt "Cozette" "Bold Italic";
+
+      # normal = mkStringOpt "Iosevka Nerd Font Mono" "Normal Font";
+      # bold = mkStringOpt "Iosevka Nerd Font Mono" "Bold Font";
+      # italic = mkStringOpt "Iosevka Nerd Font Mono" "Italic Font";
+      # bold_italic = mkStringOpt "Iosevka Nerd Font Mono" "Bold Italic Font";
     };
   };
 
@@ -36,6 +41,16 @@ in {
         font-family = cfg.fonts.normal;
         gtk-single-instance = true;
         gtk-titlebar = false;
+
+        background = colors.crust.hex;
+
+        window-padding-x = 20;
+        window-padding-y = 20;
+        window-padding-balance = true;
+        font-style = "SemiBold";
+        font-style-bold = "Bold";
+        font-style-italic = "SemiBold Italic";
+        font-style-bold-italic = "Bold Italic";
       };
     };
   };

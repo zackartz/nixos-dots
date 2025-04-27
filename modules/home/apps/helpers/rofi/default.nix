@@ -51,12 +51,12 @@ in {
         inherit (config.lib.formats.rasi) mkLiteral;
       in {
         "*" = {
-          background = "#181825";
-          prompt = "#1e1e2e";
-          border = "#313244";
-          text = "#cdd6f4";
-          stext = "#45475a";
-          select = "#1e1e2e";
+          background = colors.mantle.hex;
+          prompt = colors.base.hex;
+          border = colors.surface0.hex;
+          text = colors.text.hex;
+          stext = colors.surface1.hex;
+          select = colors.base.hex;
           "background-color" = mkLiteral "transparent";
           "text-color" = mkLiteral "@text";
           margin = 0;
@@ -143,15 +143,42 @@ in {
       };
     };
 
-    # Create the colors.rasi file
+    # Create the colors.rasi file with our theme colors
     xdg.configFile."rofi/colors.rasi".text = ''
       * {
-        background: #181825;
-        prompt: #1e1e2e;
-        border: #313244;
-        text: #cdd6f4;
-        stext: #45475a;
-        select: #1e1e2e;
+        background: ${colors.mantle.hex};
+        prompt: ${colors.base.hex};
+        border: ${colors.surface0.hex};
+        text: ${colors.text.hex};
+        stext: ${colors.surface1.hex};
+        select: ${colors.base.hex};
+
+        /* Full color palette */
+        rosewater: ${colors.rosewater.hex};
+        flamingo: ${colors.flamingo.hex};
+        pink: ${colors.pink.hex};
+        mauve: ${colors.mauve.hex};
+        red: ${colors.red.hex};
+        maroon: ${colors.maroon.hex};
+        peach: ${colors.peach.hex};
+        yellow: ${colors.yellow.hex};
+        green: ${colors.green.hex};
+        teal: ${colors.teal.hex};
+        sky: ${colors.sky.hex};
+        sapphire: ${colors.sapphire.hex};
+        blue: ${colors.blue.hex};
+        lavender: ${colors.lavender.hex};
+        subtext0: ${colors.subtext0.hex};
+        subtext1: ${colors.subtext1.hex};
+        overlay0: ${colors.overlay0.hex};
+        overlay1: ${colors.overlay1.hex};
+        overlay2: ${colors.overlay2.hex};
+        surface0: ${colors.surface0.hex};
+        surface1: ${colors.surface1.hex};
+        surface2: ${colors.surface2.hex};
+        base: ${colors.base.hex};
+        mantle: ${colors.mantle.hex};
+        crust: ${colors.crust.hex};
       }
     '';
 

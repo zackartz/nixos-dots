@@ -30,11 +30,6 @@
   hardware.keyboard.qmk.enable = true;
   programs.nix-ld.enable = true;
 
-  # services.monero.mining.enable = true;
-  # services.monero.enable = true;
-  # services.monero.mining.address = "485XKPKG38bSJBUa4SPenAEFt8Wgj2hWC97PNBpFHniwNXnDNZ9xar5hHb6qLQeyK2Kk3Fw2cxxPSLjgyqr5CxXAUkUsDDx";
-  # services.monero.mining.threads = 4;
-
   hardware.march = {
     arch = "znver3";
     enableNativeOptimizations = true;
