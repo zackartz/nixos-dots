@@ -28,6 +28,8 @@
       inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     };
 
+    walker.url = "github:abenz1267/walker";
+
     resume.url = "path:/home/zoey/dev/resume";
     ags.url = "github:Aylur/ags/v1";
     ags.inputs.nixpkgs.follows = "nixpkgs";
@@ -127,7 +129,9 @@
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
-    niri.url = "github:sodiboo/niri-flake";
+    niri.url = "github:sodiboo/niri-flake/bc29338ba733e4c1b94c3ed134baabfea587627e";
+
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
   };
 
   outputs = inputs @ {self, ...}: let
@@ -168,8 +172,9 @@
 
       homes.modules = with inputs; [
         spicetify-nix.homeManagerModules.default
-        catppuccin.homeModules.catppuccin
+        catppuccin.homeModules.default
         ags.homeManagerModules.default
+        walker.homeManagerModules.default
       ];
 
       systems.modules.nixos = with inputs; [
@@ -185,6 +190,7 @@
         mailserver.nixosModule
         disko.nixosModules.disko
         niri.nixosModules.niri
+        chaotic.nixosModules.default
       ];
     };
   in

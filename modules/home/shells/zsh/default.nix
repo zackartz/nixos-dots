@@ -22,7 +22,7 @@ in {
         LC_ALL = "en_US.UTF-8";
         ZSH_AUTOSUGGEST_USE_ASYNC = "true";
         SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
-        FLAKE = "/home/zoey/nixos/";
+        NH_FLAKE = "/home/zoey/nixos/";
       };
       # zprof.enable = true;
       history = {
@@ -33,7 +33,7 @@ in {
         ignoreSpace = true;
       };
 
-      initExtra = let
+      initContent = let
         sources = with pkgs; [
           "${zsh-nix-shell}/share/zsh-nix-shell/nix-shell.plugin.zsh"
           "${zsh-history}/share/zsh/init.zsh"

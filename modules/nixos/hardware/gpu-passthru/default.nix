@@ -112,8 +112,27 @@ in {
   };
 
   config = mkIf cfg.enable {
-    boot.kernelParams = ["intel_iommu=on" "iommu=pt"];
+    boot.kernelParams = ["intel_iommu=on" "iommu=pt" "transparent_hugepage=always"];
     boot.kernelModules = ["vfio-pci"];
+
+    # CachyOS-inspired system performance tweaks
+    boot.kernel.sysctl = {
+      # Virtual memory tweaks
+      "vm.swappiness" = 10;
+      "vm.dirty_background_ratio" = 5;
+      "vm.dirty_ratio" = 10;
+      "vm.vfs_cache_pressure" = 50;
+      "vm.max_map_count" = 16777216;
+
+      # Network optimizations
+      "net.core.netdev_max_backlog" = 16384;
+      "net.ipv4.tcp_fastopen" = 3;
+      "net.ipv4.tcp_max_syn_backlog" = 8192;
+      "net.core.somaxconn" = 8192;
+
+      # IO scheduler optimizations
+      "kernel.sched_autogroup_enabled" = 0;
+    };
 
     virtualisation.libvirtd = {
       enable = true;
@@ -216,16 +235,6 @@ in {
       };
 
       "libvirt/hooks/qemu.d/win10/release/end/stop.sh" = {
-        text = stopScript;
-        mode = "0755";
-      };
-
-      "libvirt/hooks/qemu.d/bazzite/prepare/begin/start.sh" = {
-        text = startScript;
-        mode = "0755";
-      };
-
-      "libvirt/hooks/qemu.d/bazzite/release/end/stop.sh" = {
         text = stopScript;
         mode = "0755";
       };

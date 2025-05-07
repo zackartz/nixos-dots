@@ -26,8 +26,8 @@ in {
       enable = true;
 
       font = {
-        name = "Adwaita Sans";
-        size = 11;
+        name = fonts.ui;
+        size = 12;
       };
 
       theme = {

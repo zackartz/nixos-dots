@@ -37,14 +37,49 @@ in {
       # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
       # Only available from driver 515.43.04+
       # Currently alpha-quality/buggy, so false is currently the recommended setting.
-      open = false;
+      open = true;
 
       # Enable the Nvidia settings menu,
       # accessible via `nvidia-settings`.
       nvidiaSettings = false;
 
       # Optionally, you may need to select the appropriate driver version for your specific GPU.
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      package = config.boot.kernelPackages.nvidiaPackages.beta.overrideAttrs {
+        patchesOpen = with pkgs; [
+          (fetchpatch {
+            url = "https://raw.githubusercontent.com/CachyOS/kernel-patches/master/6.14/misc/nvidia/0001-Enable-atomic-kernel-modesetting-by-default.patch";
+            hash = "sha256-tvdm8nxxXslPUun33zj1kkYZOiWKK3F4nwcCkdzPW9s=";
+          })
+          (fetchpatch {
+            url = "https://raw.githubusercontent.com/CachyOS/kernel-patches/master/6.14/misc/nvidia/0002-Add-IBT-support.patch";
+            hash = "sha256-JUT8FwBhyRhOWxwET7Zw/xkIl8g6UCLMXSTofr0OuSg=";
+          })
+          (fetchpatch {
+            url = "https://raw.githubusercontent.com/CachyOS/kernel-patches/master/6.14/misc/nvidia/0003-Kbuild-Convert-EXTRA_CFLAGS-to-ccflags-y.patch";
+            hash = "sha256-W+yyiK6TpEs9IACMr/0V7EIP++u7MPOfa9ko3w8Gqtc=";
+          })
+          (fetchpatch {
+            url = "https://raw.githubusercontent.com/CachyOS/kernel-patches/master/6.14/misc/nvidia/0004-kernel-open-nvidia-Use-new-timer-functions-for-6.15.patch";
+            hash = "sha256-T3SY2O6Pmc8BA0oana5xGGDhBxCizwmRqMyPvgF3j8A=";
+          })
+          (fetchpatch {
+            url = "https://raw.githubusercontent.com/CachyOS/kernel-patches/master/6.14/misc/nvidia/0005-nvidia-uvm-Use-__iowrite64_hi_lo.patch";
+            hash = "sha256-T8BNr1H1vgEQoKB0S5cqcbq6fSQxiDK9bb/MCvMtzTI";
+          })
+          (fetchpatch {
+            url = "https://raw.githubusercontent.com/CachyOS/kernel-patches/master/6.14/misc/nvidia/0006-nvidia-uvm-Use-page_pgmap.patch";
+            hash = "sha256-YucFZ2Z7YSgUiah82uLOmd4Z/c5YLOXxzEZNO6ZvQQg=";
+          })
+          (fetchpatch {
+            url = "https://raw.githubusercontent.com/CachyOS/kernel-patches/master/6.14/misc/nvidia/0007-nvidia-uvm-Convert-make_device_exclusive_range-to-ma.patch";
+            hash = "sha256-AehV7D+yYBmE8FWsUiagnjB8V7S8RJSTNcVMwZIgw/I=";
+          })
+          (fetchpatch {
+            url = "https://raw.githubusercontent.com/CachyOS/kernel-patches/master/6.14/misc/nvidia/0008-kbuild-Add-workaround-for-GCC-15-Compilation.patch";
+            hash = "sha256-HrYBiAFy62Jll+ceVnGuJKGKDoaRObjAGIYa+yrAogA=";
+          })
+        ];
+      };
     };
 
     environment.variables = {

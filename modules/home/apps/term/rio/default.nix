@@ -16,7 +16,6 @@ in {
   config = mkIf cfg.enable {
     programs.rio = {
       enable = true;
-      # package = inputs.rio-term.packages.${pkgs.system}.default;
       settings = {
         window = {
           opacity = 0.9;
@@ -32,27 +31,27 @@ in {
 
         fonts = {
           regular = {
-            family = "Iosevka";
+            family = fonts.mono;
             style = "Normal";
-            weight = 700;
+            weight = 400;
           };
 
           bold = {
-            family = "Iosevka";
+            family = fonts.mono;
             style = "Normal";
-            weight = 800;
-          };
-
-          italic = {
-            family = "Iosevka";
-            style = "Italic";
             weight = 700;
           };
 
-          bold-italic = {
-            family = "Iosevka";
+          italic = {
+            family = fonts.mono;
             style = "Italic";
-            weight = 800;
+            weight = 400;
+          };
+
+          bold-italic = {
+            family = fonts.mono;
+            style = "Italic";
+            weight = 700;
           };
         };
       };

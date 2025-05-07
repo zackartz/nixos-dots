@@ -67,7 +67,16 @@
 in {
   x = c: "#${c}";
 
-  colors = {
+  fonts = {
+    mono = "Iosevka";
+    ui = "SF Pro Display";
+  };
+
+  colors = rec {
+    bg = crust;
+    fg = text;
+    primary = red;
+
     rosewater = {
       hex = "#f5e0dc";
       rgb = "rgb(245, 224, 220)";
@@ -197,15 +206,6 @@ in {
       hex = "#11111b";
       rgb = "rgb(17, 17, 27)";
       hsl = "hsl(240, 23%, 9%)";
-    };
-  };
-
-  fonts = {
-    mono = {
-      normal = "Iosevka Bold";
-      bold = "Iosevka ExtraBold";
-      italic = "Iosevka Bold Italic";
-      bold_italic = "Iosevka ExtraBold Italic";
     };
   };
 

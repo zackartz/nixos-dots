@@ -37,10 +37,23 @@
     memory.total = 32;
   };
 
+  # CachyOS-inspired additional native optimizations
+  nixpkgs.config.packageOverrides = pkgs: {
+    # Override performance-critical packages with native optimizations
+    steam = pkgs.steam.override {
+      extraPkgs = pkgs:
+        with pkgs; [
+          libva
+          mesa
+          vulkan-loader
+        ];
+    };
+  };
+
   specialisation = {
     plasma6 = {
       configuration = {
-        services.xserver.desktopManager.plasma6.enable = true;
+        services.desktopManager.plasma6.enable = true;
 
         programs.seahorse.enable = lib.mkForce false;
       };
@@ -57,7 +70,29 @@
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
   programs.steam.gamescopeSession.enable = true;
-  programs.gamemode.enable = true;
+  # programs.gamemode = {
+  #   enable = true;
+  #   settings = {
+  #     general = {
+  #       renice = 10; # Higher process priority for games
+  #       ioprio = 0; # Highest I/O priority
+  #       inhibit_screensaver = 1; # Prevent screensaver
+  #     };
+  #
+  #     gpu = {
+  #       gpu_device = 0; # GPU device index to use
+  #       apply_gpu_optimisations = 1; # Apply GPU optimizations
+  #       gpu_core_clock_mhz = 0; # Don't override core clock
+  #       gpu_mem_clock_mhz = 0; # Don't override memory clock
+  #       gpu_powermizer_mode = 1; # Maximum performance mode
+  #     };
+  #
+  #     custom = {
+  #       start = "${pkgs.libnotify}/bin/notify-send 'GameMode enabled' 'System optimizations activated'";
+  #       end = "${pkgs.libnotify}/bin/notify-send 'GameMode disabled' 'System returned to normal'";
+  #     };
+  #   };
+  # };
 
   ui.fonts.enable = true;
 
@@ -112,15 +147,23 @@
     # insertNameservers = ["1.1.1.1" "1.0.0.1"];
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.kernelPatches = [
-    {
-      name = "bsb-patches";
-      patch = pkgs.fetchpatch {
-        url = "https://gist.githubusercontent.com/galister/08cddf10ac18929647d5fb6308df3e4b/raw/0f6417b6cb069f19d6c28b730499c07de06ec413/combined-bsb-6-10.patch";
-        hash = "sha256-u8O4foBHhU+T3yYkguBZ14EyCKujPzHh1TwFRg6GMsA=";
-      };
-    }
+  services.scx.enable = true;
+  services.scx.scheduler = "scx_rusty";
+  services.scx.package = pkgs.scx_git.full;
+
+  boot.kernelPackages = pkgs.linuxPackages_cachyos-lto;
+  # CachyOS-inspired kernel parameters for better desktop responsiveness and gaming
+  boot.kernelParams = [
+    "nowatchdog"
+    "preempt=full"
+    "threadirqs"
+    "tsc=reliable"
+    "clocksource=tsc"
+    "futex.futex2_interface=1" # Better Wine/Proton compatibility
+    "NVreg_UsePageAttributeTable=1" # Improved GPU memory management
+    "io_uring.sqpoll=2" # Modern I/O scheduler polling
+    "transparent_hugepage=madvise" # Better memory management
+    "elevator=bfq" # Better I/O scheduling for gaming
   ];
   boot.supportedFilesystems = ["ntfs"];
 
@@ -145,9 +188,13 @@
 
   environment.systemPackages = [
     pkgs.sbctl
-    lib.custom.nixos-stable.vesktop
     pkgs.mangohud
-    pkgs.lutris
+    (pkgs.lutris.override {
+      extraPkgs = pkgs: [
+        pkgs.wineWowPackages.stagingFull
+        pkgs.winetricks
+      ];
+    })
     pkgs.bottles
     pkgs.file-roller
     pkgs.podman-tui
@@ -158,89 +205,17 @@
     pkgs.protonup-qt
     pkgs.restic
     pkgs.qt5.qtwayland
-    (inputs.umu.packages.${system}.umu.override {
-      version = inputs.umu.shortRev;
-      truststore = true;
-      cbor2 = true;
+    pkgs.vkBasalt # Vulkan post-processing layer for better visuals
+    pkgs.goverlay # MangoHud and vkBasalt GUI configurator
+    pkgs.cpupower-gui # CPU frequency control GUI
+    pkgs.ananicy-cpp # Process priority daemon
+    (inputs.umu.packages.${system}.umu-launcher.override {
+      withTruststore = true;
+      withDeltaUpdates = true;
     })
     inputs.agenix.packages.${system}.agenix
     inputs.awsvpnclient.packages.${system}.awsvpnclient
-
-    pkgs.nautilus-python
-    (pkgs.writeTextFile {
-      name = "nautilus-open-kitty-here";
-      destination = "/share/nautilus-python/extensions/open-kitty-here.py";
-      text = ''
-        import os
-        import gi
-        gi.require_version('Nautilus', '3.0')
-        from gi.repository import Nautilus, GObject
-
-        class OpenKittyTerminalExtension(GObject.GObject, Nautilus.MenuProvider):
-            def __init__(self):
-                pass
-
-            def menu_activate_cb(self, menu, file):
-                if file.is_directory():
-                    path = file.get_location().get_path()
-                else:
-                    path = file.get_parent_location().get_path()
-                os.system(f'kitty --directory "{path}" &')
-
-            def get_file_items(self, window, files):
-                if len(files) != 1:
-                    return
-
-                file = files[0]
-                item = Nautilus.MenuItem(
-                    name='OpenKittyTerminalExtension::OpenKitty',
-                    label='Open in Kitty',
-                    tip='Opens Kitty terminal in this location'
-                )
-                item.connect('activate', self.menu_activate_cb, file)
-                return [item]
-
-            def get_background_items(self, window, file):
-                item = Nautilus.MenuItem(
-                    name='OpenKittyTerminalExtension::OpenKitty',
-                    label='Open in Kitty',
-                    tip='Opens Kitty terminal in this location'
-                )
-                item.connect('activate', self.menu_activate_cb, file)
-                return [item]
-      '';
-    })
   ];
-
-  # Create a custom monitors.xml for GDM
-  environment.etc."gdm/monitors.xml" = {
-    mode = "0644";
-    text = ''
-      <monitors version="2">
-        <configuration>
-          <logicalmonitor>
-            <x>0</x>
-            <y>0</y>
-            <primary>yes</primary>
-            <scale>1</scale>
-            <monitor>
-              <monitorspec>
-                <connector>DP-3</connector>  <!-- Change to your actual connector -->
-                <vendor>YOUR_VENDOR</vendor> <!-- Optional, can be left as is -->
-                <product>YOUR_PRODUCT</product> <!-- Optional, can be left as is -->
-                <serial>YOUR_SERIAL</serial> <!-- Optional, can be left as is -->
-              </monitorspec>
-              <mode>
-                <width>2560</width>
-                <height>1440</height>
-                <rate>240</rate> <!-- 240Hz refresh rate -->
-              </mode>
-            </monitor>
-          </logicalmonitor>
-        </configuration>
-      </monitors>
-    '';
-  };
 
   programs.zsh.enable = true;
   programs.fuse.userAllowOther = true;
@@ -277,7 +252,7 @@
   services.samba = {
     enable = true;
     openFirewall = true;
-    shares = {
+    settings = {
       "SteamLibrary" = {
         path = "/mnt/bk"; # Update this path to your drive's mount point
         browseable = true;
@@ -293,6 +268,18 @@
   catppuccin.enable = true;
   programs.virt-manager.enable = true;
 
+  # Enable Ananicy for automatic process priority management
+  services.ananicy = {
+    enable = true;
+    package = pkgs.ananicy-cpp;
+    rulesProvider = pkgs.ananicy-rules-cachyos;
+  };
+
+  # CPU frequency governor always set to performance for desktop
+  powerManagement.cpuFreqGovernor = "performance";
+
+  systemd.services.NetworkManager-wait-online.enable = false;
+
   sites.jellyfin.enable = true;
   sites.mealie.enable = false;
 
@@ -302,7 +289,6 @@
     dockerCompat = true;
     defaultNetwork.settings.dns_enabled = true;
   };
-  virtualisation.waydroid.enable = true;
   hardware.gpu-passthru.enable = true;
 
   system.stateVersion = "24.05";

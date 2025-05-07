@@ -10,27 +10,6 @@ with lib.custom; let
 in {
   options.apps.term.ghostty = with types; {
     enable = mkBoolOpt false "Enable Ghostty Term";
-
-    fonts = {
-      # normal = mkStringOpt "JetBrainsMonoNL Nerd Font Mono Bold" "Normal Font";
-      # bold = mkStringOpt "JetBrainsMonoNL Nerd Font Mono ExtraBold" "Bold Font";
-      # italic = mkStringOpt "JetBrainsMonoNL Nerd Font Mono Bold Italic" "Italic Font";
-      # bold_italic = mkStringOpt "JetBrainsMonoNL Nerd Font Mono ExtraBold Italic" "Bold Italic Font";
-      # normal = mkStringOpt "Pragmata Pro Mono" "Normal Font";
-      # bold = mkStringOpt "Pragmata Pro Mono" "Bold Font";
-      # italic = mkStringOpt "Iosevka Bold Italic" "Italic Font";
-      # bold_italic = mkStringOpt "Iosevka ExtraBold Italic" "Bold Italic Font";
-
-      normal = mkStringOpt "Cozette" "Normal";
-      bold = mkStringOpt "Cozette" "Bold";
-      italic = mkStringOpt "Cozette" "Italic";
-      bold_italic = mkStringOpt "Cozette" "Bold Italic";
-
-      # normal = mkStringOpt "Iosevka Nerd Font Mono" "Normal Font";
-      # bold = mkStringOpt "Iosevka Nerd Font Mono" "Bold Font";
-      # italic = mkStringOpt "Iosevka Nerd Font Mono" "Italic Font";
-      # bold_italic = mkStringOpt "Iosevka Nerd Font Mono" "Bold Italic Font";
-    };
   };
 
   config = mkIf cfg.enable {
@@ -38,7 +17,7 @@ in {
       enable = true;
 
       settings = {
-        font-family = cfg.fonts.normal;
+        font-family = fonts.mono;
         gtk-single-instance = true;
         gtk-titlebar = false;
 

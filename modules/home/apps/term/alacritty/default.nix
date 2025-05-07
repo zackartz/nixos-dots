@@ -94,10 +94,10 @@ in {
         };
         font = {
           size = 16.0;
-          normal = cfg.fonts.normal;
-          bold = cfg.fonts.bold;
-          italic = cfg.fonts.italic;
-          bold_italic = cfg.fonts.bold_italic;
+          normal = fonts.mono;
+          bold = "${fonts.mono} Bold";
+          italic = "${fonts.mono} Italic";
+          bold_italic = "${fonts.mono} Bold Italic";
 
           offset = {
             x = 0;

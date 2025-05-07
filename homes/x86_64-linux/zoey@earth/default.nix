@@ -61,6 +61,18 @@
     };
   };
 
+  programs.distrobox = {
+    enable = true;
+    containers = {
+      proton-tkg = {
+        image = "archlinux";
+        additional_packages = "build-essential git";
+      };
+    };
+  };
+
+  catppuccin.mako.enable = false;
+
   # programs.pywal2.enable = true;
 
   xdg.mimeApps = {
@@ -104,113 +116,120 @@
 
   catppuccin.aerc.enable = true;
 
+  catppuccin.cava.enable = true;
+  catppuccin.fuzzel.enable = true;
+  catppuccin.fzf.enable = true;
+
   work.vpn.enable = true;
 
   home.packages = with pkgs; [
-    pkgs.gimp
-    pkgs.slack
+    gimp3
+    slack
 
-    pkgs.monero-cli
+    monero-cli
 
-    pkgs.zoom-us
-    pkgs.pandoc
+    zoom-us
+    pandoc
 
-    pkgs.prismlauncher
-    pkgs.obs-studio
+    nexusmods-app-unfree
 
-    pkgs.ungoogled-chromium
-    pkgs.uutils-coreutils-noprefix
-    pkgs.yazi
-    pkgs.reaper
+    prismlauncher
+    obs-studio
 
-    pkgs.fragments
+    distrobox
+
+    ungoogled-chromium
+    uutils-coreutils-noprefix
+    yazi
+    reaper
+
+    fragments
     inputs.posting.packages.${pkgs.system}.default
 
-    pkgs.heroic
-    pkgs.cartridges
+    heroic
+    cartridges
 
-    pkgs.darktable
+    darktable
 
-    pkgs.thunderbird
+    thunderbird
 
-    pkgs.custom.nvidia-nsight
+    custom.nvidia-nsight
 
-    pkgs.custom.enc
+    custom.enc
 
-    pkgs.neural-amp-modeler-lv2
+    neural-amp-modeler-lv2
 
-    pkgs.nix-tree
+    nix-tree
     # inputs.g2claude.packages.${pkgs.system}.default
 
-    pkgs.mongodb-compass
-    pkgs.postman
-    pkgs.mosh
+    mongodb-compass
+    postman
+    mosh
 
-    pkgs.dconf
-    pkgs.wl-clipboard
-    pkgs.pwvucontrol
-    pkgs.wlogout
-    pkgs.sway-audio-idle-inhibit
-    pkgs.grim
-    pkgs.slurp
+    dconf
+    wl-clipboard
+    pwvucontrol
+    wlogout
+    sway-audio-idle-inhibit
+    grim
+    slurp
 
-    pkgs.pods
+    pods
 
-    pkgs.polari
-    pkgs.flare-signal
+    polari
 
-    pkgs.neovide
+    neovide
 
-    pkgs.nitch
-    pkgs.nix-output-monitor
-    pkgs.fastfetch
+    nitch
+    nix-output-monitor
+    fastfetch
 
-    pkgs.signal-desktop
+    signal-desktop
+    flare-signal
 
-    pkgs.nh
-    pkgs.dwl
+    nh
+    dwl
 
-    pkgs.foliate
+    foliate
 
-    pkgs.killall
-    pkgs.custom.rebuild
-    pkgs.custom.powermenu
+    killall
+    custom.rebuild
+    custom.powermenu
 
-    pkgs.parsec-bin
-    pkgs.filezilla
-    pkgs.zed-editor
-    pkgs.rmpc
+    parsec-bin
+    filezilla
+    zed-editor
+    rmpc
 
     inputs.zen-browser.packages.${pkgs.system}.beta
 
-    pkgs.starfetch
+    starfetch
     lib.custom.nixos-stable.kiwix
 
-    pkgs.mpc-cli
-    pkgs.zathura
-    pkgs.gpgme.dev
+    mpc-cli
+    zathura
+    gpgme.dev
 
-    pkgs.rofimoji
-    pkgs.renderdoc
+    rofimoji
+    renderdoc
 
-    pkgs.xwayland-satellite
+    xwayland-satellite
 
-    pkgs.nautilus
-    pkgs.nautilus-python
-    pkgs.loupe
+    nautilus
+    nautilus-python
+    loupe
 
-    pkgs.openvpn
-    pkgs.telegram-desktop
-    pkgs.linux-manual
-    pkgs.man-pages
-    pkgs.man-pages-posix
+    openvpn
+    linux-manual
+    man-pages
+    man-pages-posix
 
-    pkgs.ardour
-
-    pkgs.shadps4
-
-    pkgs.audacity
+    ardour
   ];
+
+  programs.vesktop = {
+    enable = true;
+  };
 
   programs.zoxide = {
     enable = true;
@@ -227,7 +246,6 @@
 
   programs.cava = {
     enable = true;
-    catppuccin.enable = true;
     settings = {
       general = {
         # bars = 2;
@@ -247,13 +265,10 @@
     };
   };
 
-  catppuccin.fuzzel.enable = true;
-
   programs.fuzzel.enable = true;
 
   programs.btop = {
     enable = true;
-    catppuccin.enable = true;
     extraConfig = ''
       update_ms = 100
       vim_keys = true
@@ -266,7 +281,6 @@
 
   programs.fzf = {
     enable = true;
-    catppuccin.enable = true;
   };
 
   services = {

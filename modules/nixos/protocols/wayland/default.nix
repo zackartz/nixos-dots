@@ -19,21 +19,15 @@ in {
       sway
     '';
 
-    services = {
-      greetd = {
-        enable = false;
-        settings = rec {
-          initial_session = {
-            # command = "sway --unsupported-gpu";
-            command = "Hyprland";
-            user = "zoey";
-          };
-          default_session = initial_session;
+    services.greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          command = "niri-session";
+          user = "zoey";
         };
       };
     };
-
-    services.xserver.displayManager.gdm.enable = true;
 
     programs.uwsm = {
       enable = false;
@@ -88,10 +82,24 @@ in {
         XDG_CACHE_HOME = "/home/zoey/.cache";
         CLUTTER_BACKEND = "wayland";
         DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
+
+        # # CachyOS-inspired Nvidia optimizations for gaming
+        # __GL_THREADED_OPTIMIZATIONS = "1";
+        # __GL_SHADER_DISK_CACHE = "1";
+        # __GL_SHADER_DISK_CACHE_SIZE = "1000000000";
+        # __GL_MaxFramesAllowed = "1"; # Reduces input latency
+        # __GL_YIELD = "USLEEP"; # Better CPU usage when GPU-bound
+        # DXVK_ASYNC = "1";
+        # DXVK_FRAME_RATE = "0"; # No frame rate cap from DXVK
+        # PROTON_ENABLE_NVAPI = "1";
+        # PROTON_HIDE_NVIDIA_GPU = "0";
+        # WINE_FULLSCREEN_FSR = "1"; # Enable FSR upscaling for Wine/Proton games
+        # MANGOHUD = "1"; # Enable MangoHud by default
+        # MANGOHUD_CONFIG = "cpu_temp,gpu_temp,vram,ram,position=top-left,height=500,font_size=20";
       };
     };
 
-    hardware.pulseaudio.support32Bit = true;
+    services.pulseaudio.support32Bit = true;
 
     xdg.portal = {
       enable = true;

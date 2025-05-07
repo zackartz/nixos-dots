@@ -62,50 +62,71 @@ in {
               noCvSs = true
               exportGlyphNames = true
 
-                [buildPlans.IosevkaCustom.variants]
-                inherits = "ss17"
+              [buildPlans.IosevkaCustom.variants.design]
+              one = "base-flat-top-serif"
+              two = "straight-neck-serifless"
+              four = "closed-serifless"
+              five = "oblique-arched-serifless"
+              six = "closed-contour"
+              seven = "bend-serifless"
+              eight = "crossing-asymmetric"
+              nine = "closed-contour"
+              zero = "oval-dotted"
+              capital-d = "more-rounded-serifless"
+              capital-g = "toothless-corner-serifless-hooked"
+              a = "double-storey-serifless"
+              g = "double-storey"
+              i = "hooky"
+              l = "serifed-semi-tailed"
+              r = "hookless-serifless"
+              t = "bent-hook-short-neck"
+              w = "straight-flat-top-serifless"
+              y = "straight-turn-serifless"
+              capital-eszet = "rounded-serifless"
+              long-s = "bent-hook-middle-serifed"
+              eszet = "longs-s-lig-serifless"
+              lower-lambda = "straight-turn"
+              lower-tau = "short-tailed"
+              lower-phi = "straight"
+              partial-derivative = "closed-contour"
+              cyrl-capital-u = "straight-turn-serifless"
+              cyrl-u = "straight-turn-serifless"
+              cyrl-ef = "split-serifless"
+              asterisk = "penta-low"
+              caret = "high"
+              guillemet = "straight"
+              number-sign = "slanted"
+              dollar = "open"
+              cent = "through-cap"
+              bar = "force-upright"
+              micro-sign = "tailed-serifless"
+              lig-ltgteq = "slanted"
+              lig-neq = "more-slanted-dotted"
+              lig-equal-chain = "without-notch"
+              lig-hyphen-chain = "without-notch"
+              lig-plus-chain = "with-notch"
 
-                  [buildPlans.IosevkaCustom.variants.design]
-                  capital-e = "top-left-serifed"
-                  capital-u = "toothed-bottom-right-serifed"
-                  f = "tailed"
-                  m = "short-leg-top-left-and-bottom-right-serifed"
-                  paren = "flat-arc"
+              [buildPlans.IosevkaCustom.weights.Regular]
+              shape = 400
+              menu = 400
+              css = 400
 
-                [buildPlans.IosevkaCustom.ligations]
-                inherits = "dlig"
+              [buildPlans.IosevkaCustom.weights.Bold]
+              shape = 700
+              menu = 700
+              css = 700
 
-                [buildPlans.IosevkaCustom.weights.Regular]
-                shape = 400
-                menu = 400
-                css = 400
+              [buildPlans.IosevkaCustom.slopes.Upright]
+              angle = 0
+              shape = "upright"
+              menu = "upright"
+              css = "normal"
 
-                [buildPlans.IosevkaCustom.weights.Medium]
-                shape = 500
-                menu = 500
-                css = 500
-
-                [buildPlans.IosevkaCustom.weights.SemiBold]
-                shape = 600
-                menu = 600
-                css = 600
-
-                [buildPlans.IosevkaCustom.weights.Bold]
-                shape = 700
-                menu = 700
-                css = 700
-
-                [buildPlans.IosevkaCustom.slopes.Upright]
-                angle = 0
-                shape = "upright"
-                menu = "upright"
-                css = "normal"
-
-                [buildPlans.IosevkaCustom.slopes.Italic]
-                angle = 9.4
-                shape = "italic"
-                menu = "italic"
-                css = "italic"
+              [buildPlans.IosevkaCustom.slopes.Italic]
+              angle = 9.4
+              shape = "italic"
+              menu = "italic"
+              css = "italic"
             '';
           })
         noto-fonts
@@ -114,6 +135,8 @@ in {
         jetbrains-mono
         nerd-fonts.iosevka
         nerd-fonts.zed-mono
+        nerd-fonts.fira-code
+        nerd-fonts.jetbrains-mono
         adwaita-fonts
         cozette
         scientifica
@@ -126,12 +149,11 @@ in {
       fontconfig = {
         defaultFonts = {
           monospace = [
-            # "Pragmata Pro Mono"
-            "Iosevka"
+            fonts.mono
             "Noto Color Emoji"
           ];
-          sansSerif = ["Adwaita Sans" "Noto Color Emoji"];
-          serif = ["Noto Serif" "Noto Color Emoji"];
+          sansSerif = [fonts.ui "Noto Color Emoji"];
+          serif = [fonts.ui "Noto Color Emoji"];
           emoji = ["Noto Color Emoji"];
         };
       };

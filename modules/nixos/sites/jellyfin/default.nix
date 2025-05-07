@@ -20,17 +20,17 @@ in {
       group = "users";
     };
 
-    virtualisation.oci-containers = {
-      containers.jellyfin-vue = {
-        image = "ghcr.io/jellyfin/jellyfin-vue:unstable";
-        environment = {
-          "PUBLIC_JELLYFIN_API" = "http://localhost:8096";
-        };
-        ports = [
-          "8065:80"
-        ];
-      };
-    };
+    # virtualisation.oci-containers = {
+    #   containers.jellyfin-vue = {
+    #     image = "ghcr.io/jellyfin/jellyfin-vue:unstable";
+    #     environment = {
+    #       "PUBLIC_JELLYFIN_API" = "http://localhost:8096";
+    #     };
+    #     ports = [
+    #       "8065:80"
+    #     ];
+    #   };
+    # };
 
     networking.firewall.allowedTCPPorts = [8065];
   };
