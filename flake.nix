@@ -129,6 +129,11 @@
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
+    nix-gaming.url = "path:/home/zoey/dev/nix-gaming";
+
+    niri-src.url = "github:YaLTeR/niri/c359d248257bdb68785597d2822f9c3a5ccbfdfe";
+    niri-src.inputs.nixpkgs.follows = "nixpkgs";
+
     niri.url = "github:sodiboo/niri-flake/bc29338ba733e4c1b94c3ed134baabfea587627e";
 
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";

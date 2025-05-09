@@ -48,55 +48,14 @@ in {
         @define-color mantle ${colors.mantle.hex};
         @define-color crust ${colors.crust.hex};
 
-        /* Mullvad specific styles */
-        #custom-mullvad.connected {
-            color: @green;
-        }
-        #custom-mullvad.disconnected {
-            color: @red;
-        }
-
+        ${builtins.readFile ./mullvad-style.css}
         ${builtins.readFile ./style.css}
       '';
       settings = let
-        # Script to get Mullvad status for Waybar
-        mullvad-status = pkgs.writeShellScriptBin "mullvad-status-waybar" ''
-          #!${pkgs.runtimeShell}
-          set -euo pipefail
-          # Run mullvad status, capture output, handle potential errors
-          STATUS=$(mullvad status || echo "Disconnected")
-
-          if echo "$STATUS" | grep -q "Connected"; then
-              # Extract Relay using sed: find line starting with Relay:, remove prefix
-              SERVER=$(echo "$STATUS" | sed -n 's/^\s*Relay:\s*//p')
-              # Extract Location using sed: find line starting with Visible location:,
-              # remove prefix, keep text up to the first comma
-              LOCATION=$(echo "$STATUS" | sed -n 's/^\s*Visible location:\s*\([^,]*\).*/\1/p')
-
-              # Trim potential leading/trailing whitespace just in case sed leaves some
-              SERVER=$(echo "$SERVER" | sed 's/^[ \t]*//;s/[ \t]*$//')
-              LOCATION=$(echo "$LOCATION" | sed 's/^[ \t]*//;s/[ \t]*$//')
-
-              # Construct tooltip based on extracted info
-              if [ -n "$SERVER" ] && [ -n "$LOCATION" ]; then
-                  TOOLTIP="Mullvad: Connected via $SERVER ($LOCATION)"
-              elif [ -n "$SERVER" ]; then
-                  # Fallback if location parsing failed but server was found
-                  TOOLTIP="Mullvad: Connected via $SERVER"
-              else
-                  # Generic fallback if parsing failed
-                  TOOLTIP="Mullvad: Connected"
-              fi
-
-              # Output JSON for Waybar
-              # Using nerd font icons: nf-fa-lock (connected), nf-fa-unlock (disconnected)
-              # Ensure your font supports these glyphs:  (U+F023),  (U+F09C)
-              echo '{"text": "", "tooltip": "'"$TOOLTIP"'", "class": "connected"}'
-          else
-              # Output disconnected status
-              echo '{"text": "", "tooltip": "Mullvad: Disconnected", "class": "disconnected"}'
-          fi
-        '';
+        # Import the Mullvad scripts
+        mullvad-status = import ./mullvad-status.nix {inherit pkgs;};
+        mullvad-server-list = import ./mullvad-server-list.nix {inherit pkgs;};
+        mullvad-menu = import ./mullvad-menu.nix {inherit pkgs;};
 
         # Script to toggle Mullvad connection
         mullvad-toggle = pkgs.writeShellScriptBin "mullvad-toggle" ''
@@ -155,6 +114,7 @@ in {
             interval = 1;
             exec = "${mullvad-status}/bin/mullvad-status-waybar";
             "on-click" = "${mullvad-toggle}/bin/mullvad-toggle";
+            "on-click-right" = "${mullvad-menu}/bin/mullvad-menu";
             tooltip = true;
           };
 
@@ -217,7 +177,7 @@ in {
           "custom/gpu-temp" = {
             interval = 10;
             exec = "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits";
-            format = "{}°C ";
+            format = "{}°C ";
             tooltip = false;
           };
 
@@ -238,8 +198,8 @@ in {
           "network#speed" = {
             interval = 1;
             format = "{ifname}%%";
-            format-wifi = " {bandwidthDownBytes}  {bandwidthUpBytes}";
-            format-ethernet = " {bandwidthDownBytes}  {bandwidthUpBytes}";
+            format-wifi = " {bandwidthDownBytes}  {bandwidthUpBytes}";
+            format-ethernet = " {bandwidthDownBytes}  {bandwidthUpBytes}";
             format-disconnected = "󰌙";
             tooltip-format = "{ipaddr}";
             format-linked = "󰈁 {ifname} (No IP)";
@@ -277,7 +237,7 @@ in {
             hwmon-path-abs = "/sys/devices/platform/asus-ec-sensors/hwmon/hwmon3";
             input_filename = "temp2_input";
             critical-threshold = 70;
-            format = "{temperatureC}°C ";
+            format = "{temperatureC}°C ";
             format-critical = "󰸁 {temperatureC}°C";
           };
 
@@ -311,10 +271,10 @@ in {
 
           pulseaudio = {
             format = "{icon}  {volume}%";
-            "format-muted" = "";
+            "format-muted" = "";
             "format-icons" = {
-              headphone = "";
-              default = ["" ""];
+              headphone = "";
+              default = ["" ""];
             };
             "on-click" = "pavucontrol";
           };

@@ -1,0 +1,18 @@
+/* Mullvad specific styles */
+#custom-mullvad.connected {
+    color: @green;
+    border-bottom: 2px solid @green;
+    padding-bottom: 2px;
+}
+
+#custom-mullvad.disconnected {
+    color: @red;
+    border-bottom: 2px solid @red;
+    padding-bottom: 2px;
+}
+
+#custom-mullvad {
+    margin: 0 8px;
+    padding: 0 5px;
+    min-width: 100px;
+}

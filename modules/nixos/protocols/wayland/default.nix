@@ -30,7 +30,6 @@ in {
     };
 
     programs.uwsm = {
-      enable = false;
       waylandCompositors = {
         # "mwc" = {
         #   prettyName = "MWC";
@@ -51,14 +50,14 @@ in {
 
     programs.hyprland = {
       withUWSM = true;
-      enable = false;
+      enable = true;
       xwayland.enable = true;
       package = inputs.hyprland.packages.${pkgs.system}.hyprland;
       portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
     };
 
     programs.niri.enable = true;
-    programs.niri.package = pkgs.niri-unstable;
+    programs.niri.package = inputs.niri-src.packages.${pkgs.system}.niri;
 
     environment = {
       variables = {

@@ -51,11 +51,18 @@
   };
 
   specialisation = {
+    hyprland = {
+      configuration = {
+        services.greetd.settings.default_session.command = lib.mkForce "Hyprland";
+      };
+    };
     plasma6 = {
       configuration = {
         services.desktopManager.plasma6.enable = true;
+        services.displayManager.sddm.enable = true;
 
         programs.seahorse.enable = lib.mkForce false;
+        services.greetd.enable = lib.mkForce false;
       };
     };
   };
@@ -168,10 +175,6 @@
   boot.supportedFilesystems = ["ntfs"];
 
   services.dlna.enable = false;
-  # services.openssh = {
-  #   enable = true;
-  #   PasswordAuthentication = true;
-  # };
 
   time.timeZone = "America/Detroit";
 
@@ -191,7 +194,7 @@
     pkgs.mangohud
     (pkgs.lutris.override {
       extraPkgs = pkgs: [
-        pkgs.wineWowPackages.stagingFull
+        inputs.nix-gaming.packages.${pkgs.system}.wine-tkg-zoey
         pkgs.winetricks
       ];
     })

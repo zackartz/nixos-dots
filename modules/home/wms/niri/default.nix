@@ -340,11 +340,11 @@ in {
           "Super+Alt+L" = {action = actions.spawn "swaylock";};
           # "Mod+T" = { action = actions.spawn "bash" "-c" "notify-send hello && exec alacritty"; };
 
-          "Mod+S" = {action = actions.set-dynamic-cast-window;};
-
-          "Mod+Shift+S" = {action = actions.set-dynamic-cast-monitor;};
-
-          "Mod+Z" = {action = actions.clear-dynamic-cast-target;};
+          # "Mod+S" = {action = actions.set-dynamic-cast-window;};
+          #
+          # "Mod+Shift+S" = {action = actions.set-dynamic-cast-monitor;};
+          #
+          # "Mod+Z" = {action = actions.clear-dynamic-cast-target;};
 
           "XF86AudioRaiseVolume" = {
             allow-when-locked = true;

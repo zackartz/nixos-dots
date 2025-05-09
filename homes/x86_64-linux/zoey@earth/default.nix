@@ -5,7 +5,7 @@
   lib,
   ...
 }: {
-  # wms.hyprland.enable = true;
+  wms.hyprland.enable = false;
   wms.niri.enable = true;
   apps = {
     web.librewolf.enable = true;
