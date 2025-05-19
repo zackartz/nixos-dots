@@ -66,7 +66,7 @@ in {
         '';
       };
 
-      shellAliases = import ./aliases.nix {inherit pkgs lib config;};
+      shellAliases = import ../aliases.nix {inherit pkgs lib config;};
     };
 
     home.packages = with pkgs; [

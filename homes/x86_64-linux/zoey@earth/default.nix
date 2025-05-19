@@ -41,6 +41,7 @@
     };
   };
 
+  shells.nu.enable = true;
   shells.zsh.enable = true;
 
   rice.gtk.enable = true;
@@ -127,6 +128,7 @@
     slack
 
     monero-cli
+    devenv
 
     zoom-us
     pandoc
@@ -136,7 +138,14 @@
     prismlauncher
     obs-studio
 
+    (discord.override {
+      withOpenASAR = true;
+      withVencord = true;
+    })
+
     distrobox
+
+    legcord
 
     ungoogled-chromium
     uutils-coreutils-noprefix
@@ -289,6 +298,7 @@
       pinentryPackage = lib.mkForce pkgs.pinentry-gnome3;
       enableSshSupport = true;
       enableZshIntegration = true;
+      enableNushellIntegration = true;
     };
   };
 

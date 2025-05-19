@@ -168,6 +168,7 @@ Now, lets add a file to define your home. Create a file at `homes/x86_64-linux/<
     dircolors = {
       enable = true;
       enableZshIntegration = true;
+      enableNushellIntegration = true;
     };
   };
 

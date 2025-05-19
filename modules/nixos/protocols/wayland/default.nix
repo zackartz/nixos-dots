@@ -15,12 +15,8 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.etc."greetd/environments".text = ''
-      sway
-    '';
-
     services.greetd = {
-      enable = true;
+      enable = false;
       settings = {
         default_session = {
           command = "niri-session";
@@ -28,6 +24,12 @@ in {
         };
       };
     };
+
+    services.xserver.displayManager.gdm.enable = true;
+    services.xserver.displayManager.gdm.wayland = true;
+
+    # services.displayManager.sddm.enable = true;
+    # services.displayManager.sddm.package = lib.mkForce pkgs.kdePackages.sddm;
 
     programs.uwsm = {
       waylandCompositors = {
@@ -49,8 +51,8 @@ in {
     # ];
 
     programs.hyprland = {
-      withUWSM = true;
-      enable = true;
+      withUWSM = false;
+      enable = false;
       xwayland.enable = true;
       package = inputs.hyprland.packages.${pkgs.system}.hyprland;
       portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
@@ -80,7 +82,6 @@ in {
         SDL_VIDEODRIVER = "wayland,x11";
         XDG_CACHE_HOME = "/home/zoey/.cache";
         CLUTTER_BACKEND = "wayland";
-        DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
 
         # # CachyOS-inspired Nvidia optimizations for gaming
         # __GL_THREADED_OPTIMIZATIONS = "1";

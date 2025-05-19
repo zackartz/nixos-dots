@@ -1,5 +1,6 @@
 {
   options,
+  pkgs,
   config,
   lib,
   ...
@@ -24,6 +25,8 @@ in {
         bold_font ${fonts.mono} Bold Italic
         italic_font ${fonts.mono} Italic
         bold_italic_font ${fonts.mono} Bold Italic
+
+        shell ${lib.getExe pkgs.nushell}
       '';
 
       catppuccin.enable = true;

@@ -173,6 +173,10 @@ in {
       in [env];
     };
 
+    systemd.services.libvirtd-config = {
+      enable = lib.mkForce false;
+    };
+
     system.activationScripts.libvirt-hooks.text = ''
       ln -Tfs /etc/libvirt/hooks /var/lib/libvirt/hooks
     '';

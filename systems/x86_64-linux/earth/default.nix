@@ -50,19 +50,16 @@
     };
   };
 
+  services.gdm-monitors.enable = true;
+
   specialisation = {
-    hyprland = {
-      configuration = {
-        services.greetd.settings.default_session.command = lib.mkForce "Hyprland";
-      };
-    };
     plasma6 = {
       configuration = {
         services.desktopManager.plasma6.enable = true;
         services.displayManager.sddm.enable = true;
+        services.xserver.displayManager.gdm.enable = lib.mkForce false;
 
         programs.seahorse.enable = lib.mkForce false;
-        services.greetd.enable = lib.mkForce false;
       };
     };
   };
@@ -166,6 +163,7 @@
     "threadirqs"
     "tsc=reliable"
     "clocksource=tsc"
+    "preempt=voluntary"
     "futex.futex2_interface=1" # Better Wine/Proton compatibility
     "NVreg_UsePageAttributeTable=1" # Improved GPU memory management
     "io_uring.sqpoll=2" # Modern I/O scheduler polling

@@ -70,9 +70,9 @@ in {
 
       bind =
         [
-          "${mod},RETURN,exec,${lib.getExe pkgs.alacritty}"
+          "${mod},RETURN,exec,${lib.getExe pkgs.kitty}"
 
-          "${mod},D,exec,rofi -show drun"
+          "${mod},D,exec,fuzzel"
           "${mod},Q,killactive"
           "${mod},M,exit"
           "${mod},P,pseudo"
@@ -129,8 +129,8 @@ in {
         allow_tearing = true;
 
         # active border color
-        "col.active_border" = "rgb(${colors.lavender.hex})";
-        "col.inactive_border" = "rgb(${colors.base.hex})";
+        "col.active_border" = "${colors.lavender.rgb}";
+        "col.inactive_border" = "${colors.base.rgb}";
       };
 
       input = {
@@ -199,7 +199,7 @@ in {
       };
 
       # for 10 bit color: DP-3,2560x1440@240,0x0,1,bitdepth,10,cm,hdr,sdrbrightness,1.2,sdrsaturation,1.0
-      monitor = ["DP-3,2560x1440@240,0x0,1" "HDMI-A-1,disable" "DP-1,disable"];
+      monitor = ["DP-1,2560x1440@240,0x0,1" "HDMI-A-1,disable"];
 
       layerrule = [
         "blur, ^(gtk-layer-shell)$"
@@ -257,14 +257,14 @@ in {
     #   };
     # };
 
-    systemd.user.services = {
-      swaybg = mkService {
-        Unit.Description = "Wallpaper chooser";
-        Service = {
-          ExecStart = "${getExe pkgs.swaybg} -i ${wallpaper}";
-          Restart = "always";
-        };
-      };
-    };
+    # systemd.user.services = {
+    #   swaybg = mkService {
+    #     Unit.Description = "Wallpaper chooser";
+    #     Service = {
+    #       ExecStart = "${getExe pkgs.swaybg} -i ${wallpaper}";
+    #       Restart = "always";
+    #     };
+    #   };
+    # };
   };
 }

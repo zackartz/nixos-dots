@@ -16,6 +16,7 @@ in {
     programs.starship = {
       enable = true;
       enableZshIntegration = config.programs.zsh.enable;
+      enableNushellIntegration = config.programs.nushell.enable;
       settings = {
         add_newline = false;
         format = "$username$directory$git_branch$git_status$python$rust$nodejs$nix_shell$cmd_duration$line_break$character";
